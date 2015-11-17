@@ -1,0 +1,36 @@
+{% extends "blog/base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="col-md-9">
+{% block blog_content %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Panel title</h3>
+  </div>
+  <div class="panel-body">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+</div>
+{% endblock blog_content %}
+</div>
+{% block blog_side_panel %}
+<div class="col-md-3">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Panel title</h3>
+  </div>
+  <div class="panel-body">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+</div>  
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Panel title</h3>
+  </div>
+  <div class="panel-body">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>  
+</div>
+</div>
+{% endblock blog_side_panel %}
+{% endblock content %}
