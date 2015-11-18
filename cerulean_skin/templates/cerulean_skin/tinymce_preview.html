@@ -1,0 +1,10 @@
+{% extends "cerulean_skin/base.html" %}
+{% load tinymce_tags %}
+{% block custom_js %}
+  {% tinymce_preview "preview-content" %}
+{% endblock custom_js %}
+{% block navbar %}  
+{% endblock navbar %}
+{% block content %}
+  <div id="preview-content"></div>
+{% endblock content %}

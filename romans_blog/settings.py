@@ -113,9 +113,29 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# TinyMCE settings
+
+TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
+                          'mode': 'textareas',
+                          'plugins': 'preview,table,autoresize',
+                          'theme_advanced_disable': 'styleselect',
+                          'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
+                                                     'justifyleft,justifycenter,justifyright,justifyfull,|,'
+                                                     'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
+                                                     'sup,sub,|,hr,|,blockquote,|,help',
+                          'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
+                                                     'image,|,removeformat,cleanup,|,code,preview',
+                          'theme_advanced_buttons3': 'undo,redo,|,tablecontrols',
+                          'browser_spellcheck': True,
+                          'autoresize_min_height': 320,
+                          'theme_advanced_font_sizes': "8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt",
+                          'relative_urls': False,
+                          }
+
 # Custom settings
 
 CURRENT_SKIN = 'cerulean_skin'
+TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/{0}/'.format(CURRENT_SKIN)
 GRAPPELLI_ADMIN_TITLE = 'Roman\'s Blog'
 
 # Load production settings if any

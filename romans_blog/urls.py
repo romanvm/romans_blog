@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^tinymce-preview/(?P<skin_name>.+)/$', 'blog.views.tinymce_preview'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('blog.urls')),
 ]

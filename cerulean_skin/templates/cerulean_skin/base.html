@@ -18,6 +18,7 @@
   {% endblock custom_js %}
 </head>
 <body>
+  {% block navbar %}
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -36,6 +37,7 @@
       </form>
     </div>
   </nav>
+  {% endblock navbar %}
   <div class="container">
     {% block content %}    
     {% endblock content %}
