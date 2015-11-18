@@ -4,10 +4,12 @@
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
 from django.test import TestCase
+from ..models import Page
 
 
 class PageModelTestCase(TestCase):
     """
     Test for page model
     """
-    pass
+    def test_creating_page_objects(self):
+        self.fail('The test is not implemented!')

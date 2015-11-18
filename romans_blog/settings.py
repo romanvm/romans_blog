@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
+    'filebrowser',
+    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -113,6 +116,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Custom settings
 
 CURRENT_SKIN = 'cerulean_skin'
+GRAPPELLI_ADMIN_TITLE = 'Roman\'s Blog'
 
 # Load production settings if any
 try:
