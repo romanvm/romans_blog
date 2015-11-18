@@ -1,0 +1,44 @@
+{% load i18n %}
+{% load static from staticfiles %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" type="text/css" href="{% static "cerulean_skin/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "cerulean_skin/css/skin.css" %}">
+  {% block custom_css %}
+  {% endblock custom_css %}
+  <script type="text/javascript" src="{% static "cerulean_skin/js/jquery.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "cerulean_skin/js/bootstrap.min.js" %}"></script>
+  {% block custom_js %}        
+  {% endblock custom_js %}
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Roman's Blog</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li class="{% if path == "/" %}active{% endif %}"><a href="/">{% trans "Home" %}</a></li>        
+        </ul>
+      </div>
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="{% trans "Search blog" %}">
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+    </div>
+  </nav>
+  <div class="container">
+    {% block content %}    
+    {% endblock content %}
+  </div>
+</body>
+</html>

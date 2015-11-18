@@ -37,8 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pages',
     'blog',
+    'pages',
+    'cerulean_skin',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,9 +105,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# Media files (user images, videos, other files)
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Custom settings
+
+CURRENT_SKIN = 'cerulean_skin'
+
+# Load production settings if any
 try:
     from .local_settings import *
 except ImportError:
