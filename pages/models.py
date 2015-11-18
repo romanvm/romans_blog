@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+
+class Page(models.Model):
+    """
+    Represents a rich-text page that is not a blog post, e.g 'About me'
+    """
+    pass
