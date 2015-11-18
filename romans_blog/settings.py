@@ -130,6 +130,8 @@ TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
                           'autoresize_min_height': 320,
                           'theme_advanced_font_sizes': "8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt",
                           'relative_urls': False,
+                          'table_styles': 'Bootstap simple=table;Bootstrap striped=table table-striped;Bootstrap bordered=table table-bordered',
+                          'table_row_styles': 'Bootsrap green=success;Bootstrap red=danger;Bootstrap blue=info',
                           }
 
 # Custom settings
