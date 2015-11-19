@@ -30,7 +30,7 @@ class MenuLink(models.Model):
     Represents a link in the site navigation menu
     """
     caption = models.CharField(verbose_name=_('Caption'), max_length=200)
-    path = models.CharField(verbose_name=_('Path'), max_length=200)
+    path = models.CharField(verbose_name=_('Path'), max_length=200, unique=True)
     page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True, null=True)
 
     def __str__(self):
