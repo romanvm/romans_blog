@@ -7,6 +7,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if keywords %}
+    <meta name="keywords" content="{{ keywords }}">
+  {% endif %}
   <title>{{ title }}</title>
   <link rel="stylesheet" type="text/css" href="{% static "cerulean_skin/css/bootstrap.min.css" %}">
   <link rel="stylesheet" type="text/css" href="{% static "cerulean_skin/css/skin.css" %}">

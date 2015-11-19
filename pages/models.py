@@ -10,6 +10,7 @@ class Page(models.Model):
     Represents a rich-text page that is not a blog post, e.g 'About me'
     """
     title = models.CharField(verbose_name=_('Page Title'), max_length=200)
+    keywords = models.CharField(verbose_name=_('Keywords'), max_length=200, blank=True)
     content = tinymce.HTMLField(verbose_name=_('Page Content'))
 
     def __str__(self):
