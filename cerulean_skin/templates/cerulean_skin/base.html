@@ -2,7 +2,6 @@
 {% load static from staticfiles %}
 {% load pages_tags %}
 {% get_current_language as LANGUAGE_CODE %}
-{% get_menu_links as menu_links %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -10,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% if keywords %}
-    <meta name="keywords" content="{{ keywords }}">
+  <meta name="keywords" content="{{ keywords }}">
   {% endif %}
   <title>{{ title }}</title>
   <link rel="stylesheet" type="text/css" href="{% static "cerulean_skin/css/bootstrap.min.css" %}">
@@ -31,10 +30,11 @@
       </div>
       <div>
         <ul class="nav navbar-nav">
-          <li class="{% if path == "/blog/" %}active{% endif %}"><a href="/">{% trans "Home" %}</a></li>
+          <li class="{% if path == "/blog/" %}active{% endif %}"><a href="/blog/">{% trans "Home" %}</a></li>
+          {% get_menu_links as menu_links %}
           {% for link in menu_links %}
-            <li class="{% if path == link.path %}active{% endif %}"><a href="{{ link.path }}">{{ link.caption }}</a></li>
-          {% endfor %}        
+          <li class="{% if path == link.path %}active{% endif %}"><a href="{{ link.path }}">{{ link.caption }}</a></li>
+          {% endfor %}    
         </ul>
       </div>
       <form class="navbar-form navbar-right" role="search">
