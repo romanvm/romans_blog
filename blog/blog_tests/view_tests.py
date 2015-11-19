@@ -12,5 +12,5 @@ class IndexViewTestCase(TestCase):
         """
         Test if index view opens correctly
         """
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 302)
+        response = self.client.get('/blog/')
+        self.assertEqual(response.status_code, 200)

@@ -5,12 +5,14 @@ from django.template import RequestContext, loader
 from django.http import HttpResponse
 
 
-def index(request):
+def blog_index_view(request):
     """
     Blog index view
     """
-    context = {'title': 'Roman\'s Blog', 'path': request.path}
-    return render(request, os.path.join(settings.CURRENT_SKIN, 'posts_list.html'), context)
+    context = {'title': 'Roman\'s Blog',
+               'path': request.path}
+    template = os.path.join(settings.CURRENT_SKIN, 'posts_list.html')
+    return render(request, template, context)
 
 
 def tinymce_preview(request, skin_name):

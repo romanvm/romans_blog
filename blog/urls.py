@@ -4,8 +4,8 @@
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
 from django.conf.urls import url
-from .views import index
+from .views import blog_index_view
 
 urlpatterns = [
-    url(r'^$', index, name='blog_index')
+    url(r'^$', blog_index_view, name='blog_index')
 ]
