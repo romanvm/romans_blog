@@ -12,8 +12,11 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
+from importlib import import_module
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -118,7 +121,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
                           'mode': 'textareas',
                           'plugins': 'preview,table,autoresize',
-                          'theme_advanced_disable': 'styleselect',
                           'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
                                                      'justifyleft,justifycenter,justifyright,justifyfull,|,'
                                                      'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
@@ -128,16 +130,25 @@ TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
                           'theme_advanced_buttons3': 'undo,redo,|,tablecontrols',
                           'browser_spellcheck': True,
                           'autoresize_min_height': 320,
-                          'theme_advanced_font_sizes': "8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt",
+                          'theme_advanced_font_sizes': '8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
                           'relative_urls': False,
-                          'table_styles': 'Bootstap simple=table;Bootstrap striped=table table-striped;Bootstrap bordered=table table-bordered',
-                          'table_row_styles': 'Bootsrap green=success;Bootstrap red=danger;Bootstrap blue=info',
                           }
 
-# Custom settings
+# Skin settings
 
 CURRENT_SKIN = 'cerulean_skin'
 TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/{0}/'.format(CURRENT_SKIN)
+skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
+try:
+    table_styles = skin_settings.TABLE_STYLES
+    table_row_styles = skin_settings.TABLE_ROW_STYLES
+except AttributeError:
+    table_styles = table_row_styles = ''
+TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
+TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
+
+# Custom settings
+
 GRAPPELLI_ADMIN_TITLE = 'Roman\'s Blog'
 
 # Load production settings if any
