@@ -22,11 +22,11 @@ from filebrowser.sites import site
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
-    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^tinymce-preview/(?P<skin_name>.+)/$', 'blog.views.tinymce_preview'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('blog.urls')),
+    url(r'^[\w-]+/$', include('pages.urls')),
     url(r'^$', RedirectView.as_view(pattern_name='blog_index', permanent=False))
 
 ]
