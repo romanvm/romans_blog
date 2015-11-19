@@ -34,7 +34,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'grappelli',
     'filebrowser',
     'tinymce',
     'django.contrib.admin',
@@ -120,7 +119,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
                           'mode': 'textareas',
-                          'plugins': 'preview,table,autoresize',
+                          'width': 800,
+                          'height': 600,
+                          'plugins': 'preview,table',
                           'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
                                                      'justifyleft,justifycenter,justifyright,justifyfull,|,'
                                                      'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
@@ -129,7 +130,8 @@ TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
                                                      'image,|,removeformat,cleanup,|,code,preview',
                           'theme_advanced_buttons3': 'undo,redo,|,tablecontrols',
                           'browser_spellcheck': True,
-                          'autoresize_min_height': 320,
+                          'plugin_preview_width': 800,
+                          'plugin_preview_height': 600,
                           'theme_advanced_font_sizes': '8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
                           'relative_urls': False,
                           }
@@ -146,10 +148,6 @@ except AttributeError:
     table_styles = table_row_styles = ''
 TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
 TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
-
-# Custom settings
-
-GRAPPELLI_ADMIN_TITLE = 'Roman\'s Blog'
 
 # Load production settings if any
 try:
