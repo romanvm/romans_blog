@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load pages_tags %}
 {% get_current_language as LANGUAGE_CODE %}
+{% get_menu_links as menu_links %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -31,7 +32,6 @@
       <div>
         <ul class="nav navbar-nav">
           <li class="{% if path == "/blog/" %}active{% endif %}"><a href="/blog/">{% trans "Home" %}</a></li>
-          {% get_menu_links as menu_links %}
           {% for link in menu_links %}
           <li class="{% if path == link.path %}active{% endif %}"><a href="{{ link.path }}">{{ link.caption }}</a></li>
           {% endfor %}    
