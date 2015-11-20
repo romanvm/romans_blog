@@ -27,6 +27,14 @@ class CategoryTestCase(TestCase):
     def test_creation_with_duplicate_slugs(self):
         self.assertRaises(IntegrityError, Category.objects.create, name='Category 11', slug='category-2')
 
+    def test_populating_slug_field(self):
+        category1 = Category(name='Lorem Ipsum')
+        category1.clean()
+        self.assertEqual(category1.slug, 'lorem-ipsum')
+        category2 = Category(name='Тест')
+        category2.clean()
+        self.assertEqual(category2.slug, 'test')
+
 
 class PostTestCase(TestCase):
     """

@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils.translation import ugettext
+from django.utils.text import slugify
 from filebrowser.fields import FileBrowseField
 from tinymce.models import HTMLField
+from unidecode import unidecode
 
 _ = ugettext
 
@@ -16,6 +18,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        if not self.slug:
+            self.slug = slugify(unidecode(self.name))
 
     class Meta:
         verbose_name = _('Category')
