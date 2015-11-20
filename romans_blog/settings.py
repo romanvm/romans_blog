@@ -128,7 +128,7 @@ TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
                                                      'sup,sub,|,hr,|,blockquote,|,help',
                           'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
                                                      'image,|,removeformat,cleanup,|,code,preview',
-                          'theme_advanced_buttons3': 'undo,redo,|,tablecontrols',
+                          'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,tablecontrols',
                           'browser_spellcheck': True,
                           'plugin_preview_width': 800,
                           'plugin_preview_height': 600,
