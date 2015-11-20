@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext
 from django.utils.text import slugify
+from django.utils.timezone import now
 from filebrowser.fields import FileBrowseField
 from tinymce.models import HTMLField
 from unidecode import unidecode
@@ -20,6 +21,7 @@ class Category(models.Model):
         return self.name
 
     def clean(self):
+        # Auto-populate sluf field
         if not self.slug:
             self.slug = slugify(unidecode(self.name))
 
@@ -50,6 +52,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def clean(self):
+        # Auto-populate slug
+        if not self.slug:
+            self.slug = slugify(unidecode(self.title))
+        if self.is_published:
+            # Auto-pupulate date_published for a newly published post
+            if not self.date_published:
+                self.date_published = now()
+            # Auto-pupulate date_updated for an edited published post
+            elif self.date_published and not self.date_updated:
+                self.date_updated = now()
+
 
     class Meta:
         verbose_name = _('Post')
