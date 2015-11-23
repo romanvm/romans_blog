@@ -30,7 +30,7 @@ class MenuLink(models.Model):
     Represents a link in the site navigation menu
     """
     caption = models.CharField(verbose_name=_('Caption'), max_length=200)
-    path = models.CharField(verbose_name=_('Path'), max_length=200, unique=True)
+    slug = models.SlugField(verbose_name=_('Slug'), max_length=200, unique=True)
     page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True, null=True)
 
     def __str__(self):
@@ -38,13 +38,6 @@ class MenuLink(models.Model):
 
     def get_absolute_url(self):
         return self.path
-
-    def clean(self):
-        """
-        Check if the MenuLink path has correct format: '/<letters-dashes-or-numbers>/'
-        """
-        if re.match(r'/[\w-]+/', self.path) is None:
-            raise ValidationError('Path must include only alphanumeric chars and dashes enclosed in forward slashes: /<path>/')
 
     class Meta:
         verbose_name = _('Menu Link')

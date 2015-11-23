@@ -28,16 +28,7 @@ class MenuLinkTestCase(TestCase):
     Test for MenuLink model
     """
     def test_creating_menu_link_objects(self):
-        MenuLink.objects.create(caption='Page 2', path='/page-2/')
-        MenuLink.objects.create(caption='Page 1', path='/page-1')
+        MenuLink.objects.create(caption='Page 2', slug='page-2')
+        MenuLink.objects.create(caption='Page 1', slug='page-1')
         captions = [link.caption for link in MenuLink.objects.all()]
         self.assertEqual(captions, ['Page 2', 'Page 1'])
-
-    def test_validating_link_path_format(self):
-        link1 = MenuLink(caption='Page 1', path='/page-1/')
-        try:
-            link1.clean()
-        except ValidationError:
-            self.fail('Correct path validation failed!')
-        link2 = MenuLink(caption='Page 2', path='/page-1*?')
-        self.assertRaises(ValidationError, link2.clean)

@@ -6,7 +6,7 @@ class MenuLinkAdmin(admin.ModelAdmin):
     """
     Admin for Menu Links
     """
-    list_display = ('caption', 'path', 'page')
+    list_display = ('caption', 'slug', 'page')
     list_filter = ['page']
 
 
