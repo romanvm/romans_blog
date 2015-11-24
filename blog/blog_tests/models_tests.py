@@ -57,11 +57,7 @@ class PostTestCase(TestCase):
         post = Post(title='Lorem Ipsum', slug='lorem-ipsum', content='<p>Lorem ipsum<p>')
         post.clean()
         self.assertFalse(post.date_published)
-        self.assertFalse(post.date_updated)
         post.is_published = True
         post.clean()
         self.assertTrue(post.date_published)
-        self.assertFalse(post.date_updated)
-        post.clean()
-        self.assertTrue(post.date_published)
-        self.assertTrue(post.date_updated)
+

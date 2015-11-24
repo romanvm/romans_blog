@@ -37,8 +37,7 @@ class Post(models.Model):
     Represents a blog post
     """
     title = models.CharField(verbose_name=_('Title'), max_length=200, db_index=True)
-    date_published = models.DateField(verbose_name=_('Date Published'), blank=True, null=True)
-    date_updated = models.DateField(verbose_name=_('Date Updated'), blank=True, null=True)
+    date_published = models.DateField(verbose_name=_('Date Published'), blank=True)
     # Translators: The last part of a web-page URL, usually derives from the page title, e.g. /about-us/
     slug = models.SlugField(verbose_name=_('Slug'), max_length=200)
     categories = models.ManyToManyField(Category, verbose_name=_('Categories'), related_name='posts', blank=True)
@@ -58,10 +57,6 @@ class Post(models.Model):
             # Auto-pupulate date_published for a newly published post
             if not self.date_published:
                 self.date_published = now()
-            # Auto-pupulate date_updated for an edited published post
-            elif self.date_published and not self.date_updated:
-                self.date_updated = now()
-
 
     class Meta:
         verbose_name = _('Post')

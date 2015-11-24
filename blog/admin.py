@@ -11,12 +11,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date_published', 'date_updated', 'cover_image', 'is_published', 'is_featured',
-                    'allow_comments')
-    fields = ('title', 'slug', 'is_published', 'is_featured', 'allow_comments', 'content', 'cover_image',
-              'date_published', 'date_updated', 'categories', )
+    list_display = ('title', 'date_published', 'cover_image', 'is_published', 'is_featured', 'allow_comments')
+    fields = ('title', 'slug', 'date_published', 'is_published', 'is_featured', 'allow_comments', 'content',
+              'cover_image', 'categories')
     search_fields = ('title', 'date_published', 'categories')
-    list_filter = ('date_published', 'date_updated', 'is_published', 'is_featured', 'allow_comments')
+    list_filter = ('date_published', 'is_published', 'is_featured', 'allow_comments')
     filter_horizontal = ('categories',)
     date_hierarchy = 'date_published'
     prepopulated_fields = {'slug': ('title',)}

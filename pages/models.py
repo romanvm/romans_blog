@@ -29,7 +29,7 @@ class MenuLink(models.Model):
     """
     caption = models.CharField(verbose_name=_('Caption'), max_length=200)
     slug = models.SlugField(verbose_name=_('Slug'), max_length=200, unique=True)
-    page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True, null=True)
+    page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True)
 
     def __str__(self):
         return self.caption
