@@ -54,9 +54,6 @@ class Post(models.Model):
         return self.title
 
     def clean(self):
-        # Auto-populate slug
-        if not self.slug:
-            self.slug = slugify(unidecode(self.title))
         if self.is_published:
             # Auto-pupulate date_published for a newly published post
             if not self.date_published:

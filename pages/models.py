@@ -1,7 +1,5 @@
-import re
 from django.db import models
 from django.utils.translation import ugettext
-from django.core.exceptions import ValidationError
 from tinymce import models as tinymce
 
 _ = ugettext
@@ -35,9 +33,6 @@ class MenuLink(models.Model):
 
     def __str__(self):
         return self.caption
-
-    def get_absolute_url(self):
-        return self.path
 
     class Meta:
         verbose_name = _('Menu Link')

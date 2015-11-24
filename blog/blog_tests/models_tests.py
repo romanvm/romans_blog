@@ -53,16 +53,6 @@ class PostTestCase(TestCase):
         titles = [post.title for post in Post.objects.all()]
         self.assertEqual(titles, ['Post 1', 'Post 3', 'Post 2'])
 
-    def test_autopopulating_slug_field(self):
-        post = Post(title='Lorem Ipsum', content='<p>Lorem ipsum<p>')
-        post.clean()
-        self.assertEqual(post.slug, 'lorem-ipsum')
-        post = Post(title='Тест', content='<p>Lorem ipsum<p>')
-        post.clean()
-        self.assertEqual(post.slug, 'test')
-        post = Post(title='Test', slug='lorem-ipsum', content='<p>Lorem ipsum<p>')
-        self.assertEqual(post.slug, 'lorem-ipsum')
-
     def test_autopopulating_date_fields(self):
         post = Post(title='Lorem Ipsum', slug='lorem-ipsum', content='<p>Lorem ipsum<p>')
         post.clean()
