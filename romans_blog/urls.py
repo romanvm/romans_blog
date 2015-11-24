@@ -19,17 +19,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from filebrowser.sites import site
+from .views import tinymce_skinned_preview
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^tinymce-preview/(?P<skin_name>.+)/$', 'blog.views.tinymce_preview'),
+    url(r'^tinymce-preview/(?P<skin_name>.+)/$', tinymce_skinned_preview, name='tinymce_skinned_preview'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^blog/', include('blog.urls')),
-    url(r'^[\w-]+/$', include('pages.urls')),
-    url(r'^$', RedirectView.as_view(pattern_name='blog_index', permanent=False))
-
+    url(r'^blog/', include('blog.urls', namespace='blog')),
+    url(r'^$', RedirectView.as_view(pattern_name='blog:blog_index', permanent=False)),
+    url(r'', include('pages.urls', namespace='pages')),
 ]
-
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

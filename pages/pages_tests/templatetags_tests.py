@@ -12,12 +12,12 @@ class GetMenuLinksTestCase(TestCase):
     Test page view
     """
     def test_opening_page(self):
+        self.fail('Not implemented!')
         page = Page(title='Page', content='')
         page.save()
-        menu_link1 = MenuLink(caption='Page 1', path='/page-1/', page=page)
-        menu_link1.save()
-        menu_link2 = MenuLink(caption='Page 2', path='/page-2/', page=page)
-        menu_link2.save()
+        MenuLink.objects.create(caption='Page 1', slug='page-1', page=page)
+        MenuLink.objects.create(caption='Page 2', slig='page-2', page=page)
         response = self.client.get('/page-1/')
         self.assertIn('menu_links', response.context)
-        self.assertEqual(len(response.context['menu_links']), 2)
+        self.assertContains(response, 'Page 1')
+        self.assertContains(response, 'Page 2')
