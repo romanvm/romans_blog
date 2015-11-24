@@ -20,3 +20,4 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_published'
     prepopulated_fields = {'slug': ('title',)}
     save_on_top = True
+    list_per_page = 25
