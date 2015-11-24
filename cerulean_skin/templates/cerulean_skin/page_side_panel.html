@@ -1,0 +1,14 @@
+{% extends "cerulean_skin/base.html" %}
+{% block content %}
+  <div class="col-md-9">
+    <div class="page-header">
+      <h1>{{ title }}</h1>
+    </div>
+    {% block main_content %}
+    {% endblock main_content %}
+  </div>
+  <div class="col-md-3">
+    {% block side_panel_content %}
+    {% endblock side_panel_content %}
+  </div>
+{% endblock content %}
