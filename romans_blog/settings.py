@@ -132,7 +132,7 @@ TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
                           'browser_spellcheck': True,
                           'plugin_preview_width': 800,
                           'plugin_preview_height': 600,
-                          'theme_advanced_font_sizes': '8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
+                          'theme_advanced_font_sizes': '4pt,6pt,8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
                           'relative_urls': False,
                           }
 
