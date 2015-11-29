@@ -28,6 +28,8 @@ class BlogHomeViewTestCase(TestCase):
     def test_opening_blog_home(self):
         response = self.client.get('/blog/')
         self.assertEqual(response.status_code, 200)
+        self.assertIn('Lorem Ipsum', response.rendered_content)
+        self.assertIn('Category 1', response.rendered_content)
 
     def test_paginating_blog_home(self):
         response = self.client.get('/blog/')
