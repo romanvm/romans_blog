@@ -1,43 +1,50 @@
 {% load i18n %}
 {% load static from staticfiles %}
-{% load pages_tags %}
+{% load blog_tags %}
+{% comment %}
+  {% load pages_tags %}
+{% endcomment %}
 {% get_current_language as LANGUAGE_CODE %}
-{% get_menu_links as menu_links %}
+{% comment %}
+  {% get_menu_links as menu_links %}
+{% endcomment %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
+  {% block title %}
+  {% endblock title %}
+  {% block meta %}
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% if keywords %}
-  <meta name="keywords" content="{{ keywords }}">
-  {% endif %}
-  <title>{{ title }}</title>
+  {% endblock meta %}
+  {% block css %}
   <link rel="stylesheet" type="text/css" href="{% static "cerulean_skin/css/bootstrap.min.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "cerulean_skin/css/skin.css" %}">
-  {% block custom_css %}
-  {% endblock custom_css %}
+  <link rel="stylesheet" type="text/css" href="{% static "cerulean_skin/css/cerulean_skin.css" %}">
+  {% endblock css %}
+  {% block js %} 
   <script type="text/javascript" src="{% static "cerulean_skin/js/jquery.min.js" %}"></script>
-  <script type="text/javascript" src="{% static "cerulean_skin/js/bootstrap.min.js" %}"></script>
-  {% block custom_js %}        
-  {% endblock custom_js %}
+  <script type="text/javascript" src="{% static "cerulean_skin/js/bootstrap.min.js" %}"></script>       
+  {% endblock js %}
 </head>
 <body>
   {% block navbar %}
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">Roman's Blog</a>
+        <a class="navbar-brand" href="/">{% get_site_name %}</a>
       </div>
       <div>
         <ul class="nav navbar-nav">
-          <li class="{% if path == "/blog/" %}active{% endif %}"><a href="/blog/">{% trans "Home" %}</a></li>
+          <li><a href="{% url "blog:blog_home" %}">{% trans "Home" %}</a></li>
+          {% comment %}
           {% for link in menu_links %}
           <li class="{% if path == link.path %}active{% endif %}"><a href="{{ link.path }}">{{ link.caption }}</a></li>
           {% endfor %}    
+          {% endcomment %}
         </ul>
       </div>
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="{% trans "Search blog" %}">
         </div>

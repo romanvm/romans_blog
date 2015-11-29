@@ -10,5 +10,8 @@ register = template.Library()
 
 
 @register.assignment_tag
-def get_menu_links(*args):
-    return MenuLink.objects.filter(page__isnull=False)
+def get_menu_links():
+    """
+    Get menu links that have attached pages
+    """
+    return MenuLink.objects.exclude(page__isnull=True)

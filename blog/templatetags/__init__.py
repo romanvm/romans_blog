@@ -1,6 +1,6 @@
 # coding: utf-8
-# Module: tests
-# Created on: 23.11.2015
+# Module: __init__.py
+# Created on: 25.11.2015
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
-from .pages_tests import *
+

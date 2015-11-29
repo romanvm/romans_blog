@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'pages',
+    #'pages',
     'cerulean_skin',
 )
 
@@ -148,6 +148,12 @@ except AttributeError:
     table_styles = table_row_styles = ''
 TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
 TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
+
+# Custom settings
+
+SITE_NAME = 'Roman\'s Blog'
+POST_PREVIEW_CUT_WORDS = 50
+BLOG_POSTS_PAGINATE_BY = 5
 
 # Load production settings if any
 try:

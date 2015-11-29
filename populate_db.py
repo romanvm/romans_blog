@@ -5,7 +5,7 @@
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
 import os
-from datetime import datetime
+from datetime import date
 import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'romans_blog.settings')
@@ -39,7 +39,7 @@ for y in range(start_year, end_year + 1):
         print('Creating blog posts for {0}-{1}'.format(y, m))
         for d in range(1, 29, 5):
             post = Post(title='Lorem Ipsum',
-                        date_published=datetime(year=y, month=m, day=d),
+                        date_published=date(y, month=m, day=d),
                         slug='lorem-ipsum',
                         is_published=True,
                         content=lorem_ipsum)

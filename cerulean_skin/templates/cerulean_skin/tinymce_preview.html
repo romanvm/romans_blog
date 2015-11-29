@@ -1,8 +1,14 @@
 {% extends "cerulean_skin/base.html" %}
+{% load i18n %}
 {% load tinymce_tags %}
-{% block custom_js %}
+{% block title %}
+ {# Translators: "Preview" as a noun #}
+  <title>{% trans "Preview" %}</title>
+{% endblock title %}
+{% block js %}
+  {{ block.super }}
   {% tinymce_preview "preview-content" %}
-{% endblock custom_js %}
+{% endblock js %}
 {% block navbar %}  
 {% endblock navbar %}
 {% block content %}

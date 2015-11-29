@@ -5,7 +5,7 @@
 
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-from ..models import Page, MenuLink
+from .models import Page, MenuLink
 
 page_content = """
 <h1>Lorem ipsum</h1>

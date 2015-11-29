@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^tinymce-preview/(?P<skin_name>.+)/$', tinymce_skinned_preview, name='tinymce_skinned_preview'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('blog.urls', namespace='blog')),
-    url(r'^$', RedirectView.as_view(pattern_name='blog:blog_index', permanent=False)),
+    url(r'^$', RedirectView.as_view(pattern_name='blog:blog_home', permanent=False)),
     url(r'', include('pages.urls', namespace='pages')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

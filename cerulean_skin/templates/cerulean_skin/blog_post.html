@@ -1,0 +1,36 @@
+{% extends "cerulean_skin/blog_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load blog_tags %}
+{% block title %}
+  <title>{{ post.title }} - {% get_site_name %}</title>
+{% endblock title %}
+{% if post.categories.count %}
+  {% block meta %}
+  {{ block.super }}
+  <meta name="keywords" content="{{ post.categories.all|join:"," }}">
+  {% endblock meta %}
+{% endif %}
+{% block blog_page_body %}
+  <div class="post">
+    <div class="row">
+      <div class="page-header"><h1>{{ post.title }}</h1></div>
+      <p class="text-muted"><em>{% trans "Posted on:" %} {{ post.date_published }}</em></p>
+      {% if post.cover_image %}
+        <p><img class="img-responsive" src="{% get_media_prefix %}/{{ post.cover_image }}" alt="{% trans "Cover Image" %}"></p>
+      {% endif %}
+      {{ post.content|safe }}
+      {% if post.categories %}
+      <p>
+        <ul class="list-inline">
+          <li><b>{% trans "Categories:" %}</b></li>
+          {% for category in post.categories.all  %}
+            <li><a href="#">{{category.name}}</a></li>
+          {% endfor %}
+        </ul>
+      </p>
+      {% endif %}
+      <hr>
+    </div>
+  </div>  
+{% endblock blog_page_body %}
