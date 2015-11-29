@@ -34,7 +34,7 @@ class BlogHomeView(_PostsListView):
     queryset = Post.objects.filter(is_published=True)
 
 
-class BlogFeaturedView(_PostsListView):
+class BlogFeaturedPostsView(_PostsListView):
     """
     Displays the list of featured posts
     """
