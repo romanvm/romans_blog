@@ -32,6 +32,7 @@ class Post(models.Model):
     """
     title = models.CharField(verbose_name=_('Title'), max_length=200, db_index=True)
     date_published = models.DateField(verbose_name=_('Date Published'), blank=True, null=True)
+    last_updated = models.DateTimeField(verbose_name=_('Last Updated'), auto_now=True)
     # Translators: The last part of a web-page URL, usually derives from the page title, e.g. /about-us/
     slug = models.SlugField(verbose_name=_('Slug'), max_length=200)
     categories = models.ManyToManyField(Category, verbose_name=_('Categories'), related_name='posts', blank=True)
