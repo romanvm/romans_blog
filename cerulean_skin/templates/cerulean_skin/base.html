@@ -36,7 +36,7 @@
       </div>
       <div>
         <ul class="nav navbar-nav">
-          <li><a href="{% url "blog:blog_home" %}">{% trans "Home" %}</a></li>
+          <li class="{% if request.path == "/" %}active{% endif %}"><a href="{% url "blog:blog_home" %}">{% trans "Home" %}</a></li>
           {% comment %}
           {% for link in menu_links %}
           <li class="{% if path == link.path %}active{% endif %}"><a href="{{ link.path }}">{{ link.caption }}</a></li>
@@ -44,7 +44,7 @@
           {% endcomment %}
         </ul>
       </div>
-      <form class="navbar-form" role="search">
+      <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="{% trans "Search blog" %}">
         </div>

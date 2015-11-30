@@ -15,7 +15,9 @@ class BlogHomeViewTestCase(TestCase):
     """
     def setUp(self):
         category1 = Category.objects.create(name='Category 1', slug='category-1')
+        category1.save()
         category2 = Category.objects.create(name='Category 2', slug='category-2')
+        category2.save()
         for d in range(1, 16):
             post = Post(title='Lorem Ipsum',
                         date_published=date(2015, 4, d),
@@ -40,11 +42,11 @@ class BlogHomeViewTestCase(TestCase):
         self.assertEqual(response.context['page_obj'].paginator.num_pages, 3)
         self.assertFalse(response.context['page_obj'].has_previous())
         self.assertTrue(response.context['page_obj'].has_next())
-        response = self.client.get('/blog/?page=2')
+        response = self.client.get(reverse('blog:blog_home'), {'page': '2'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['page_obj'].has_previous())
         self.assertTrue(response.context['page_obj'].has_next())
-        response = self.client.get('/blog/?page=3')
+        response = self.client.get(reverse('blog:blog_home'), {'page': '3'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['page_obj'].has_previous())
         self.assertFalse(response.context['page_obj'].has_next())
@@ -62,3 +64,25 @@ class BlogFeaturedPostsViewTestCase(TestCase):
         response = self.client.get(reverse('blog:featured_posts'))
         self.assertEqual(response.status_code, 200)
         self.assertEquals(len(response.context['posts']), 3)
+
+
+class BlogPostViewTestCase(TestCase):
+    def test_opening_blog_post(self):
+        category = Category.objects.create(name='Category', slug='category')
+        category.save()
+        post = Post(title='Lorem Ipsum',
+                    date_published=date(2015, 4, 28),
+                    slug='lorem-ipsum',
+                    is_published=False,
+                    content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
+        post.save()
+        post.categories.add(category)
+        response = self.client.get(reverse('blog:blog_post', kwargs={'slug': post.slug, 'pk': post.pk}))
+        self.assertEquals(response.status_code, 404)
+        post.is_published = True
+        post.save()
+        response = self.client.get(reverse('blog:blog_post', kwargs={'slug': post.slug, 'pk': post.pk}))
+        self.assertEquals(response.status_code, 200)
+        self.assertIn('Lorem Ipsum', response.rendered_content)
+        self.assertIn('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>', response.rendered_content)
+        self.assertIn('Category', response.rendered_content)

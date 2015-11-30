@@ -17,7 +17,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import RedirectView
 from filebrowser.sites import site
 from .views import tinymce_skinned_preview
 
@@ -26,9 +25,7 @@ urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^tinymce-preview/(?P<skin_name>.+)/$', tinymce_skinned_preview, name='tinymce_skinned_preview'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^blog/', include('blog.urls', namespace='blog')),
-    url(r'^$', RedirectView.as_view(pattern_name='blog:blog_home', permanent=False)),
-    url(r'', include('pages.urls', namespace='pages')),
+    url(r'', include('blog.urls', namespace='blog')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
