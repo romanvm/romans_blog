@@ -10,9 +10,6 @@ from .models import Category, Post
 
 
 class BlogHomeViewTestCase(TestCase):
-    """
-    Test blog home view
-    """
     def setUp(self):
         category1 = Category.objects.create(name='Category 1', slug='category-1')
         category1.save()
@@ -86,3 +83,23 @@ class BlogPostViewTestCase(TestCase):
         self.assertIn('Lorem Ipsum', response.rendered_content)
         self.assertIn('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>', response.rendered_content)
         self.assertIn('Category', response.rendered_content)
+
+
+class BlogCategoryViewTestCase(TestCase):
+    def test_opening_posts_in_a_category(self):
+        category = Category.objects.create(name='Category', slug='category')
+        category.save()
+        for i in range(7):
+            post = Post(title='Lorem Ipsum {0}'.format(i),
+                        date_published=date(2015, 4, 28),
+                        slug='lorem-ipsum-{0}'.format(i),
+                        is_published=True,
+                        content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
+            post.save()
+            if i % 2 != 0:
+                post.categories.add(category)
+        response = self.client.get(reverse('blog:blog_category', kwargs={'slug': category.slug}))
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(len(response.context['posts']), 3)
+        response = self.client.get(reverse('blog:blog_category', kwargs={'slug': 'fail'}))
+        self.assertEquals(response.status_code, 404)
