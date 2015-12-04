@@ -19,6 +19,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('blog:blog_category', kwargs={'slug': self.slug})
+
     class Meta:
         verbose_name = _('Category')
         # Translators: General plural without a number

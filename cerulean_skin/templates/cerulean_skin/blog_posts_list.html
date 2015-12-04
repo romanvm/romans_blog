@@ -26,17 +26,19 @@
       <p>
         <ul class="list-inline">
           <li>
-            <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }">
+            <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }}">
               {% trans "Read more" %} <span class="glyphicon glyphicon-arrow-right"></span>
             </a>
-            <a class="btn btn-primary btn-sm" href="#">{% trans "Comment" %} <span class="glyphicon glyphicon-comment"></span></a>
+            <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }}#">
+              {% trans "Comment" %} <span class="glyphicon glyphicon-comment"></span>
+            </a>
           </li>
           {% if post.categories %}
             <li><b>{% trans "Categories:" %}</b></li>
             <li>
               <ul class="list-inline">
                 {% for category in post.categories.all  %}
-                  <li><a href="#">{{category.name}}</a></li>
+                  <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
                 {% endfor %}
               </ul>
           </li>
