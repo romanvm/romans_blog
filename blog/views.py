@@ -15,6 +15,12 @@ class _PostsListView(ListView):
     template_name = '{0}/blog_posts_list.html'.format(settings.CURRENT_SKIN)
     context_object_name = 'posts'
     paginate_by = settings.BLOG_POSTS_PAGINATE_BY
+
+
+class _PageTitleMixIn:
+    """
+    Adds page_title to ListView's context
+    """
     page_title = None
 
     def get_context_data(self, **kwargs):
@@ -30,7 +36,7 @@ class BlogHomeView(_PostsListView):
     queryset = Post.objects.filter(is_published=True)
 
 
-class BlogFeaturedPostsView(_PostsListView):
+class BlogFeaturedPostsView(_PageTitleMixIn, _PostsListView):
     """
     Displays the list of featured posts
     """
@@ -38,14 +44,14 @@ class BlogFeaturedPostsView(_PostsListView):
     page_title = _('Featured Posts')
 
 
-class BlogCategoryView(_PostsListView):
+class BlogCategoryView(_PageTitleMixIn, _PostsListView):
     """
     Displays the list of posts in a given category
     """
 
     def get_queryset(self):
         category = get_object_or_404(Category, slug=self.kwargs['slug'])
-        self.page_title = _('Posts in category "{0}"'.format(category.name))
+        self.page_title = _('Posts in "{0}" category'.format(category.name))
         return Post.objects.filter(is_published=True, categories__pk=category.pk)
 
 
