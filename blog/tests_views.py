@@ -103,3 +103,22 @@ class BlogCategoryViewTestCase(TestCase):
         self.assertEquals(len(response.context['posts']), 3)
         response = self.client.get(reverse('blog:blog_category', kwargs={'slug': 'fail'}))
         self.assertEquals(response.status_code, 404)
+
+
+class BlogCategoriesListViewTestCase(TestCase):
+    def test_opening_categories_list(self):
+        post = Post(title='Lorem Ipsum',
+                    date_published=date(2015, 4, 28),
+                    slug='lorem-ipsum',
+                    is_published=True,
+                    content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
+        post.save()
+        for i in range(7):
+            category = Category.objects.create(name='Category {0}'.format(i), slug='category-{0}'.format(i))
+            category.save()
+            if i % 2 != 0:
+                post.categories.add(category)
+                post.save()
+        response = self.client.get(reverse('blog:blog_categories_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['categories']), 3)

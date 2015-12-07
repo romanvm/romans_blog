@@ -55,6 +55,16 @@ class BlogCategoryView(_PageTitleMixIn, _PostsListView):
         return Post.objects.filter(is_published=True, categories__pk=category.pk)
 
 
+class BlogCategoriesListView(_PageTitleMixIn, ListView):
+    """
+    Displays the list of categories that have posts in them
+    """
+    template_name = '{0}/blog_categories_list.html'.format(settings.CURRENT_SKIN)
+    queryset = Category.objects.exclude(posts=None)
+    page_title = _('Categories')
+    context_object_name = 'categories'
+
+
 class BlogPostView(DetailView):
     """
     Displays a blog post page
