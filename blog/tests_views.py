@@ -122,3 +122,8 @@ class BlogCategoriesListViewTestCase(TestCase):
         response = self.client.get(reverse('blog:blog_categories_list'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['categories']), 3)
+
+
+class BlogArchiveViewTestCase(TestCase):
+    def test_opening_blog_archive_view(self):
+        self.fail('Not implemented!')
