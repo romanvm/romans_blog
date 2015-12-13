@@ -44,10 +44,10 @@ class PostTestCase(TestCase):
 
     def test_autopopulating_date_fields(self):
         post = Post(title='Lorem Ipsum', slug='lorem-ipsum', content='<p>Lorem ipsum<p>')
-        post.clean()
+        post.save()
         self.assertFalse(post.date_published)
         post.is_published = True
-        post.clean()
+        post.save()
         self.assertTrue(post.date_published)
 
     def test_get_absoluet_url(self):

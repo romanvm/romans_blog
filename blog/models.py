@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext
-from django.utils.timezone import now
+from django.utils import timezone
 from django.core.urlresolvers import reverse
 from filebrowser.fields import FileBrowseField
 from tinymce.models import HTMLField
@@ -49,11 +49,12 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def clean(self):
+    def save(self, *args, **kwargs):
         if self.is_published:
             # Auto-pupulate date_published for a newly published post
             if not self.date_published:
-                self.date_published = now()
+                self.date_published = timezone.now()
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('blog:blog_post', kwargs={'slug': self.slug, 'pk': self.pk})
