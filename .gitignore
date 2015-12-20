@@ -112,4 +112,4 @@ venv/
 *local_settings.py
 *.sqlite3
 media/
-static/
+/static/
