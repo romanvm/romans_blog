@@ -1,0 +1,83 @@
+{% load i18n %}
+{% load static from staticfiles %}
+{% load blog_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  {% block meta %}
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  {% endblock meta %}
+  {% block title %}
+  {% endblock title %}
+  {% block css %}
+  <link href="{% static "bootstrap_skin/favicon.ico" %}" rel="icon">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static "bootstrap_skin/css/bootstrap.css" %}" rel="stylesheet">
+  <!-- Font Awesome CSS -->
+  <link href="{% static "bootstrap_skin/css/font-awesome.min.css" %}" rel="stylesheet">
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="{% static "bootstrap_skin/css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static "bootstrap_skin/css/sticky-footer-navbar.css" %}" rel="stylesheet">
+  <link href="{% static "bootstrap_skin/css/bootstrap_skin.css" %}" rel="stylesheet">
+  {% endblock css %}
+  {% block js %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static "bootstrap_skin/js/jquery.js" %}"></script>
+  <script src="{% static "bootstrap_skin/js/bootstrap.js" %}"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="{% static "bootstrap_skin/js/ie10-viewport-bug-workaround.js" %}"></script>
+  {% endblock js %}
+</head>
+<body>
+  {% block navbar %}
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{% url "blog:blog_home" %}">{% get_site_name %}</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          {% captureas home_url %}{% url "blog:blog_home" %}{% endcaptureas %}
+          <li class="{% if request.path == home_url %}active{% endif %}">
+            <a href="{% url "blog:blog_home" %}">{% trans "Home" %}</a>
+          </li>
+        </ul>
+      </div>
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="{% trans "Search posts" %}">
+        </div>
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+    </div>
+  </nav>
+  {% endblock navbar %}
+  <div class="container">
+    <div class="row">
+    {% block content %}      
+    {% endblock content %}
+    </div>
+  </div>
+  {% block footer %}
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <span class="text-muted">Bootstrap skin for Roman's Blog. &copy; <a href="https://github.com/romanvm">Roman Miroshnychenko</a></span>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+          <a href="https://www.facebook.com/romanvm1972" class="btn btn-default btn-circle"><span class="fa fa-facebook"></span></a>
+          <a href="https://ua.linkedin.com/in/roman-miroshnychenko-3505aa12" class="btn btn-default btn-circle"><span class="fa fa-linkedin"></span></a>
+          <a href="https://github.com/romanvm" class="btn btn-default btn-circle"><span class="fa fa-github-alt"></span></a>
+        </div>
+      </div>      
+    </div>
+  </footer>
+  {% endblock footer %}
+</body>

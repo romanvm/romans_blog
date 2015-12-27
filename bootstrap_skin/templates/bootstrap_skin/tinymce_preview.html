@@ -1,0 +1,18 @@
+{% extends "bootstrap_skin/base.html" %}
+{% load i18n %}
+{% load tinymce_tags %}
+{% block title %}
+ {# Translators: "Preview" as a noun #}
+  <title>{% trans "Preview" %}</title>
+{% endblock title %}
+{% block js %}
+  {{ block.super }}
+  {% tinymce_preview "preview-content" %}
+{% endblock js %}
+{% block navbar %}  
+{% endblock navbar %}
+{% block content %}
+  <div id="preview-content"></div>
+{% endblock content %}
+{% block footer %}  
+{% endblock footer %}

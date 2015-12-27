@@ -1,0 +1,44 @@
+.text-just {
+  text-align: justify;
+}
+
+h1,h2 {
+  text-transform: uppercase;
+}
+
+.blog-sidebar {
+  margin-top: 25px
+}
+
+.blog-sidebar-module {
+  margin-bottom: 40px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+.post-body {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.page-body {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.bottom-box {
+  margin-bottom: 30px;
+}
+
+.facebook,.linked-in,.twitter,.reddit {
+  display: inline-block;
+  vertical-align: top;
+}
