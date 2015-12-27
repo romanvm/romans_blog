@@ -18,15 +18,15 @@ from blog.models import Category, Post
 with open('lorem_ipsum.html', mode='r') as file_obj:
     lorem_ipsum = file_obj.read()
 # Create pages
-print('Creating pages...')
-page = Page.objects.create(title='Lorem Ipsum',
-                           keywords='lorem, ipsum',
-                           content=lorem_ipsum)
-print('Creating menu links...')
-for i in range(1, 4):
-    MenuLink.objects.create(caption='Page {}'.format(i),
-                            slug='page-{}'.format(i),
-                            page=page)
+# print('Creating pages...')
+# page = Page.objects.create(title='Lorem Ipsum',
+#                            keywords='lorem, ipsum',
+#                            content=lorem_ipsum)
+# print('Creating menu links...')
+# for i in range(1, 4):
+#     MenuLink.objects.create(caption='Page {}'.format(i),
+#                             slug='page-{}'.format(i),
+#                             page=page)
 # Create blog posts
 print('Creating categories...')
 category1 = Category.objects.create(name='Category 1', slug='category-1')

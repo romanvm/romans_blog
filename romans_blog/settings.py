@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'blog',
     #'pages',
     'cerulean_skin',
+    'bootstrap_skin',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -138,7 +139,7 @@ TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
 
 # Skin settings
 
-CURRENT_SKIN = 'cerulean_skin'
+CURRENT_SKIN = 'bootstrap_skin'
 TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/{0}/'.format(CURRENT_SKIN)
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 try:
@@ -149,12 +150,14 @@ except AttributeError:
 TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
 TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
 
-# Custom settings
+# === Custom site settings ===
 
 SITE_NAME = 'Roman\'s Blog'
-POST_PREVIEW_CUT_WORDS = 50
 BLOG_POSTS_PAGINATE_BY = 5
+BLOG_SIDEBAR_POSTS_COUNT = 3
+DISQUS_SHORTNAME = 'romanvm'
 
+# ============================
 # Load production settings if any
 try:
     from .local_settings import *

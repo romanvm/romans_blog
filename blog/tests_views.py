@@ -23,7 +23,6 @@ class BlogHomeViewTestCase(TestCase):
                         content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
             post.save()
             post.categories.add(category1, category2)
-            print('')
 
     def test_opening_blog_home(self):
         response = self.client.get(reverse('blog:blog_home'))

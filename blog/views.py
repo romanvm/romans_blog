@@ -3,6 +3,7 @@ from django.views.generic.detail import DetailView
 from django.conf import settings
 from django.utils.translation import ugettext
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from .models import Post, Category
 
 _ = ugettext
@@ -70,6 +71,19 @@ class BlogPostView(DetailView):
     Displays a blog post page
     """
     template_name = '{0}/blog_post.html'.format(settings.CURRENT_SKIN)
-    queryset = Post.objects.filter(is_published=True)
+    model = Post
     context_object_name = 'post'
     query_pk_and_slug = True
+
+    def dispatch(self, request, *args, **kwargs):
+        self.request = request
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        """
+        Prevent non-authenticated users from viewing unpublished posts
+        """
+        post = super().get_object(queryset)
+        if not(post.is_published or self.request.user.is_authenticated()):
+            raise Http404
+        return post
