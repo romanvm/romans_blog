@@ -5,7 +5,8 @@
     {% endblock blog_page_body %}
   </div>
   <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-    {% block blog_side_panel %}      
+    {% block blog_side_panel %}
+    {% include "bootstrap_skin/blog_side_panel.html" %}
     {% endblock blog_side_panel %}
   </div>
 {% endblock content %}

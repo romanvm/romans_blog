@@ -25,10 +25,11 @@
 {% endblock navbar %}
 {% block blog_page_body %}
   {% load bootstrap_skin_tags %}
-  <div class="page-header"><h1>{{ post.title }}</h1></div>
+  <h1>{{ post.title }}</h1>
   <p class="text-muted">
     <small><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published}}</em></small>
   </p>
+  <hr>
   {% if post.cover_image %}
   <p>
     <img class="img-responsive" src="{% get_media_prefix %}/{{ post.cover_image }}" alt="{% trans "Cover Image" %}">
