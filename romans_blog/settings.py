@@ -121,11 +121,11 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'mode': 'textareas',
     'width': 800,
-    'plugins': 'preview,table,autoresize,advimage,emotions',
+    'plugins': 'preview,table,autoresize,advimage,emotions,codehighlighting',
     'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
                              'justifyleft,justifycenter,justifyright,justifyfull,|,'
                              'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
-                             'sup,sub,|,hr,|,blockquote,|,help',
+                             'sup,sub,|,hr,|,blockquote,|,codehighlighting,|,help',
     'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
                              'image,|,emotions,|,removeformat,cleanup,|,code,preview',
     'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,tablecontrols',
@@ -134,8 +134,10 @@ TINYMCE_DEFAULT_CONFIG = {
     'plugin_preview_height': 600,
     'theme_advanced_font_sizes': '4pt,6pt,8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
     'relative_urls': False,
+    'remove_linebreaks': False,
     'autoresize_min_height': 400,
-    'extended_valid_elements': 'img[!src|border:0|alt|title|width|height|style]a[name|href|target|title|onclick]',
+    'extended_valid_elements': 'img[!src|border:0|alt|title|width|height|style]a[name|href|target|title|onclick],'
+                               'pre[class|name]',
                           }
 
 # Skin settings

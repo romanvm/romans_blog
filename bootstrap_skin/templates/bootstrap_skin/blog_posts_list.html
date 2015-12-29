@@ -27,7 +27,7 @@
         <img class="img-responsive img-thumbnail" src="{% get_media_prefix %}{{ post.cover_image }}" alt="{% trans "Cover Image" %}">
       </p>
       {% endif %}
-      <p class="text-just">{{ post.content|striptags|truncatewords:40 }}</p>
+      <p class="text-just">{{ post.content|truncatewords_html:40|safe }}</p>
       <p>
         <a class="btn btn-default btn-sm" href="{{ post.get_absolute_url }}">
           {% trans "Read more" %}&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>

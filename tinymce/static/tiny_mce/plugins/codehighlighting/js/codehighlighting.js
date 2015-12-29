@@ -9,7 +9,8 @@ var codehighlighting = {
         var lang = document.getElementById("ProgrammingLanguages").value;
 
         var code =  codehighlighting.wrapCode(lang);
-        code += document.getElementById("CodeArea").value;
+        // Added .replace(/</g, "&lt;") to correctly escape xml/html
+        code += document.getElementById("CodeArea").value.replace(/</g, "&lt;");
         code += "</pre> ";
 
         if (document.getElementById("CodeArea").value == ''){
