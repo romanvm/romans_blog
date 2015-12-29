@@ -117,23 +117,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # TinyMCE settings
 
-TINYMCE_DEFAULT_CONFIG = {'theme': 'advanced',
-                          'mode': 'textareas',
-                          'width': 800,
-                          'plugins': 'preview,table,autoresize',
-                          'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
-                                                     'justifyleft,justifycenter,justifyright,justifyfull,|,'
-                                                     'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
-                                                     'sup,sub,|,hr,|,blockquote,|,help',
-                          'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
-                                                     'image,|,removeformat,cleanup,|,code,preview',
-                          'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,tablecontrols',
-                          'browser_spellcheck': True,
-                          'plugin_preview_width': 800,
-                          'plugin_preview_height': 600,
-                          'theme_advanced_font_sizes': '4pt,6pt,8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
-                          'relative_urls': False,
-                          'autoresize_min_height': 400,
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'mode': 'textareas',
+    'width': 800,
+    'plugins': 'preview,table,autoresize',
+    'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
+                             'justifyleft,justifycenter,justifyright,justifyfull,|,'
+                             'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
+                             'sup,sub,|,hr,|,blockquote,|,help',
+    'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
+                             'image,|,removeformat,cleanup,|,code,preview',
+    'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,tablecontrols',
+    'browser_spellcheck': True,
+    'plugin_preview_width': 800,
+    'plugin_preview_height': 600,
+    'theme_advanced_font_sizes': '4pt,6pt,8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
+    'relative_urls': False,
+    'autoresize_min_height': 400,
                           }
 
 # Skin settings
@@ -154,7 +155,7 @@ TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
 SITE_NAME = 'Roman\'s Blog'
 BLOG_POSTS_PAGINATE_BY = 5
 BLOG_SIDEBAR_POSTS_COUNT = 3
-BLOG_SIDEBAR_MONTHS_COUNT = 6
+BLOG_SIDEBAR_MONTHS_COUNT = 5
 DISQUS_SHORTNAME = 'romanvm'
 
 # ============================

@@ -43,10 +43,14 @@
       </div>
       <div>
         <ul class="nav navbar-nav">
-          {% captureas home_url %}{% url "blog:home" %}{% endcaptureas %}
-          <li class="{% if request.path == home_url %}active{% endif %}">
-            <a href="{% url "blog:home" %}">{% trans "Home" %}</a>
+          {# Blog menu links #}
+          {% get_blog_menu_links as blog_menu_links %}
+          {% for menu_link in blog_menu_links  %}
+          <li class="{% if request.path == menu_link.url %}active{% endif %}">
+            <a href="{{ menu_link.url }}">{{ menu_link.title }}</a>
           </li>
+          {% endfor %}
+          {# Pages menu links #}
         </ul>
       </div>
       <form class="navbar-form navbar-right" role="search">
@@ -72,9 +76,10 @@
           <span class="text-muted">Bootstrap skin for Roman's Blog. &copy; <a href="https://github.com/romanvm">Roman Miroshnychenko</a></span>
         </div>
         <div class="col-md-3 col-md-offset-1">
-          <a href="https://www.facebook.com/romanvm1972" class="btn btn-default btn-circle"><span class="fa fa-facebook"></span></a>
-          <a href="https://ua.linkedin.com/in/roman-miroshnychenko-3505aa12" class="btn btn-default btn-circle"><span class="fa fa-linkedin"></span></a>
-          <a href="https://github.com/romanvm" class="btn btn-default btn-circle"><span class="fa fa-github-alt"></span></a>
+          <a href="https://www.facebook.com/romanvm1972" target="_blank" class="btn btn-default btn-circle"><span class="fa fa-facebook"></span></a>
+          <a href="https://ua.linkedin.com/in/roman-miroshnychenko-3505aa12" target="_blank" class="btn btn-default btn-circle"><span class="fa fa-linkedin"></span></a>
+          <!-- <a href="https://twitter.com/romanvm1972" target="_blank" class="btn btn-default btn-circle"><span class="fa fa-twitter"></span></a> -->
+          <a href="https://github.com/romanvm" target="_blank" class="btn btn-default btn-circle"><span class="fa fa-github-alt"></span></a>
         </div>
       </div>      
     </div>

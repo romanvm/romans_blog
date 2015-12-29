@@ -99,7 +99,6 @@ class BlogArhiveView(_PageTitleMixIn, ListView):
     queryset = Post.objects.filter(is_published=True).dates('date_published', 'month', order='DESC')
     context_object_name = 'months'
     page_title = _('Blog Archive')
-    paginate_by = 24
 
 
 class BlogMonthArchiveView(_PageTitleMixIn, _PostsListView):

@@ -7,8 +7,10 @@ from collections import namedtuple
 from django import template
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext
 from ..models import Category, Post
 
+_ = ugettext
 register = template.Library()
 SideBarObjects = namedtuple('SideBarObjects', ['objects', 'more'])
 
@@ -36,6 +38,9 @@ def get_categories():
 
 @register.assignment_tag
 def get_posts_digest(featured=False):
+    """
+    Get the lists of the latest posts (general of featured) for the blog sidebar
+    """
     posts = Post.objects.filter(is_published=True)
     if featured:
         posts = posts.filter(is_featured=True)
@@ -48,9 +53,25 @@ def get_posts_digest(featured=False):
 
 @register.assignment_tag
 def get_archive_digest():
+    """
+    Get the list of the most recent months from the blog archive for the blog sidebar
+    """
     months = Post.objects.filter(is_published=True).dates('date_published', 'month', order='DESC')
     more = reverse('blog:archive') if months.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
     return SideBarObjects(months[:settings.BLOG_SIDEBAR_MONTHS_COUNT], more)
+
+
+@register.assignment_tag
+def get_blog_menu_links():
+    """
+    Get blog menu links for the site main menu.
+    """
+    MenuLink = namedtuple('MenuLink', ['title', 'url'])
+    return (
+        MenuLink(_('Home'), reverse('blog:home')),
+        MenuLink(_('Featured'), reverse('blog:featured_posts')),
+        MenuLink(_('Archive'), reverse('blog:archive'))
+    )
 
 
 @register.tag(name='captureas')
