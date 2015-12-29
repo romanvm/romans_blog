@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^tinymce-preview/(?P<skin_name>.+)/$', tinymce_skinned_preview, name='tinymce_skinned_preview'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^pages/', include('pages.urls', namespace='pages')),
     url(r'', include('blog.urls', namespace='blog')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

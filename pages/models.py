@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext
+from django.core.urlresolvers import reverse
 from tinymce import models as tinymce
 
 _ = ugettext
@@ -30,6 +31,10 @@ class MenuLink(models.Model):
     caption = models.CharField(verbose_name=_('Caption'), max_length=200)
     slug = models.SlugField(verbose_name=_('Slug'), max_length=200, unique=True)
     page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True, null=True)
+    show_side_panel = models.BooleanField(verbose_name=_('Show side Panel'), default=False)
+
+    def get_absolute_url(self):
+        return reverse('pages:page', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.caption

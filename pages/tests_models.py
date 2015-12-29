@@ -4,7 +4,6 @@
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
 from django.test import TestCase
-from django.core.exceptions import ValidationError
 from .models import Page, MenuLink
 
 page_content = """

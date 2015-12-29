@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load static from staticfiles %}
 {% load blog_tags %}
+{% load pages_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
@@ -39,7 +40,7 @@
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{% url "blog:home" %}">{% get_site_name %}</a>
+        <a class="navbar-brand" href="{% url "blog:home" %}"><span class="fa fa-desktop">&nbsp;</span>{% get_site_name %}</a>
       </div>
       <div>
         <ul class="nav navbar-nav">
@@ -47,18 +48,31 @@
           {% get_blog_menu_links as blog_menu_links %}
           {% for menu_link in blog_menu_links  %}
           <li class="{% if request.path == menu_link.url %}active{% endif %}">
-            <a href="{{ menu_link.url }}">{{ menu_link.title }}</a>
+            <a href="{{ menu_link.url }}">{{ menu_link.caption }}</a>
           </li>
           {% endfor %}
           {# Pages menu links #}
+          {% get_pages_menu_links as pages_menu_links %}
+          {% for menu_link in pages_menu_links %}
+          <li class="{% if request.path == menu_link.get_absolute_url %}active{% endif %}">
+            <a href="{{ menu_link.get_absolute_url }}">{{ menu_link.caption }}</a>
+          </li>
+          {% endfor %}
         </ul>
       </div>
-      <form class="navbar-form navbar-right" role="search">
+      <!--
+      <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="{% trans "Search posts" %}">
         </div>
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
       </form>
+      -->
+      {% if user.is_authenticated %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/admin"><span class="fa fa-pencil-square-o"></span>&nbsp;{% trans "Blog Admin" %}</a></li>
+      </ul>
+      {% endif %}
     </div>
   </nav>
   {% endblock navbar %}

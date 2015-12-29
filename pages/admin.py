@@ -14,5 +14,5 @@ class MenuLinkAdmin(admin.ModelAdmin):
     """
     Admin for Menu Links
     """
-    list_display = ('caption', 'slug', 'page')
+    list_display = ('caption', 'slug', 'show_side_panel', 'page')
     prepopulated_fields = {'slug': ('caption',)}

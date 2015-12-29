@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    #'pages',
+    'pages',
     'bootstrap_skin',
 )
 
@@ -121,13 +121,13 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'mode': 'textareas',
     'width': 800,
-    'plugins': 'preview,table,autoresize',
+    'plugins': 'preview,table,autoresize,advimage,emotions',
     'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
                              'justifyleft,justifycenter,justifyright,justifyfull,|,'
                              'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
                              'sup,sub,|,hr,|,blockquote,|,help',
     'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
-                             'image,|,removeformat,cleanup,|,code,preview',
+                             'image,|,emotions,|,removeformat,cleanup,|,code,preview',
     'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,tablecontrols',
     'browser_spellcheck': True,
     'plugin_preview_width': 800,
@@ -135,6 +135,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_font_sizes': '4pt,6pt,8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
     'relative_urls': False,
     'autoresize_min_height': 400,
+    'extended_valid_elements': 'img[!src|border:0|alt|title|width|height|style]a[name|href|target|title|onclick]',
                           }
 
 # Skin settings
@@ -145,10 +146,12 @@ skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 try:
     table_styles = skin_settings.TABLE_STYLES
     table_row_styles = skin_settings.TABLE_ROW_STYLES
+    theme_advanced_styles = skin_settings.IMG_STYLES
 except AttributeError:
-    table_styles = table_row_styles = ''
+    table_styles = table_row_styles = theme_advanced_styles = ''
 TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
 TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
+TINYMCE_DEFAULT_CONFIG['theme_advanced_styles'] = theme_advanced_styles
 
 # === Custom site settings ===
 

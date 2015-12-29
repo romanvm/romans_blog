@@ -66,7 +66,7 @@ def get_blog_menu_links():
     """
     Get blog menu links for the site main menu.
     """
-    MenuLink = namedtuple('MenuLink', ['title', 'url'])
+    MenuLink = namedtuple('MenuLink', ['caption', 'url'])
     return (
         MenuLink(_('Home'), reverse('blog:home')),
         MenuLink(_('Featured'), reverse('blog:featured_posts')),
