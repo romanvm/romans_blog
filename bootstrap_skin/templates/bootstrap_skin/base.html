@@ -39,13 +39,13 @@
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{% url "blog:blog_home" %}">{% get_site_name %}</a>
+        <a class="navbar-brand" href="{% url "blog:home" %}">{% get_site_name %}</a>
       </div>
       <div>
         <ul class="nav navbar-nav">
-          {% captureas home_url %}{% url "blog:blog_home" %}{% endcaptureas %}
+          {% captureas home_url %}{% url "blog:home" %}{% endcaptureas %}
           <li class="{% if request.path == home_url %}active{% endif %}">
-            <a href="{% url "blog:blog_home" %}">{% trans "Home" %}</a>
+            <a href="{% url "blog:home" %}">{% trans "Home" %}</a>
           </li>
         </ul>
       </div>

@@ -20,7 +20,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('blog:blog_category', kwargs={'slug': self.slug})
+        return reverse('blog:category', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = _('Category')
@@ -57,7 +57,7 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('blog:blog_post', kwargs={'slug': self.slug, 'pk': self.pk})
+        return reverse('blog:post', kwargs={'slug': self.slug, 'pk': self.pk})
 
     class Meta:
         verbose_name = _('Post')

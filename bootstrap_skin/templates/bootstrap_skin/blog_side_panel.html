@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load blog_tags %}
-{% captureas home_url %}{% url "blog:blog_home" %}{% endcaptureas %}
+{% captureas home_url %}{% url "blog:home" %}{% endcaptureas %}
 {% if request.path != home_url %}
   {% get_posts_digest False as latest_posts %}
   {% if latest_posts.objects %}
@@ -12,7 +12,7 @@
       <small class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small></p>
       {% endfor %}
       {% if latest_posts.more  %}
-      <p><a href="{% url "blog:blog_home" %}"><strong>{% trans "More..." %}</strong></a></p>
+      <p><a href="{{ latest_posts.more }}"><strong>{% trans "More..." %}</strong></a></p>
       {% endif %}
     </div>
   </div>
@@ -28,11 +28,23 @@
     <small class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small></p>
     {% endfor %}
     {% if featured_posts.more  %}
-    <p><a href="{% url "blog:featured_posts" %}"><strong>{% trans "More..." %}</strong></a></p>
+    <p><a href="{{ featured_posts.more }}"><strong>{% trans "More..." %}</strong></a></p>
     {% endif %}
   </div>
 </div>
 {% endif %}
+{% get_archive_digest as months %}
+<div class="panel panel-default">
+  <div class="panel-heading"><h4 class="panel-title"><span class="fa fa-archive"></span>&nbsp;{% trans "Archive" %}</h4></div>
+  <div class="panel-body">
+    {% for month in months.objects %}
+    <p><a href="{% url "blog:month_archive" year=month.year month=month.month %}">{{ month|date:"F Y" }}</a></p>
+    {% endfor %}
+    {% if months.more %}
+    <p><a href="{% url "blog:archive" %}"><strong>{% trans "More..." %}</strong></a></p>
+    {% endif %}
+  </div>
+</div>
 {% get_categories as categories %}
 {% if categories %}
 <div class="panel panel-default">

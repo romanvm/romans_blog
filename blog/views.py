@@ -1,7 +1,9 @@
+from datetime import date
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.conf import settings
 from django.utils.translation import ugettext
+from django.utils.dateformat import format as format_date
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from .models import Post, Category
@@ -87,3 +89,25 @@ class BlogPostView(DetailView):
         if not(post.is_published or self.request.user.is_authenticated()):
             raise Http404
         return post
+
+
+class BlogArhiveView(_PageTitleMixIn, ListView):
+    """
+    Displays the blog archive by years and months
+    """
+    template_name = '{0}/blog_archive.html'.format(settings.CURRENT_SKIN)
+    queryset = Post.objects.filter(is_published=True).dates('date_published', 'month', order='DESC')
+    context_object_name = 'months'
+    page_title = _('Blog Archive')
+    paginate_by = 24
+
+
+class BlogMonthArchiveView(_PageTitleMixIn, _PostsListView):
+    """
+    Displays the list of posts by year and month
+    """
+    def get_queryset(self):
+        year = int(self.kwargs['year'])
+        month = int(self.kwargs['month'])
+        self.page_title = _('Blog Archive, {0}').format(format_date(date(year=year, month=month, day=1), 'F Y'))
+        return Post.objects.filter(is_published=True, date_published__year=year, date_published__month=month)

@@ -1,0 +1,38 @@
+{% extends "bootstrap_skin/blog_base.html" %}
+{% load i18n %}
+{% load blog_tags %}
+{% block title %}
+  <title>{{ page_title }} - {% get_site_name %}</title>
+{% endblock title %}
+{% block blog_page_body %}
+  <h1>{{ page_title }}</h1>
+  <hr>
+  {% if months %}
+  {% regroup months by year as months_list %}
+  <ul>
+    {% for month in months_list %}
+      <li><h3>{{ month.grouper }}</h3>
+          {% for item in month.list %}
+            <p><a href="{% url "blog:month_archive" year=item.year month=item.month %}">{{ item|date:"F" }}</a></p>
+          {% endfor %}
+      </li>
+    {% endfor %}
+  </ul>
+  <nav>
+    <ul class="pager">
+      <li class="previous {% if not page_obj.has_next %}disabled{% endif %}">
+        <a href="{{ request.path }}{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
+          <span aria-hidden="true"><span class="glyphicon glyphicon-arrow-left"></span></span> {% trans "Older" %}
+        </a>
+      </li>
+      <li class="next {% if not page_obj.has_previous %}disabled{% endif %}">
+        <a href="{{ request.path }}{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
+          {% trans "Newer" %} <span aria-hidden="true"><span class="glyphicon glyphicon-arrow-right"></span></span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  {% else %}
+  <p class="text-danger">{% trans "This blog has no posts." %}</p>
+  {% endif %}
+{% endblock blog_page_body %}

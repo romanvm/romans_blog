@@ -25,7 +25,7 @@ class BlogHomeViewTestCase(TestCase):
             post.categories.add(category1, category2)
 
     def test_opening_blog_home(self):
-        response = self.client.get(reverse('blog:blog_home'))
+        response = self.client.get(reverse('blog:home'))
         self.assertEqual(response.status_code, 200)
         self.assertIn('Lorem Ipsum', response.rendered_content)
         self.assertIn('Lorem ipsum dolor sit amet', response.rendered_content)
@@ -33,16 +33,16 @@ class BlogHomeViewTestCase(TestCase):
         self.assertIn('Category 2', response.rendered_content)
 
     def test_paginating_blog_home(self):
-        response = self.client.get(reverse('blog:blog_home'))
+        response = self.client.get(reverse('blog:home'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['page_obj'].paginator.num_pages, 3)
         self.assertFalse(response.context['page_obj'].has_previous())
         self.assertTrue(response.context['page_obj'].has_next())
-        response = self.client.get(reverse('blog:blog_home'), {'page': '2'})
+        response = self.client.get(reverse('blog:home'), {'page': '2'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['page_obj'].has_previous())
         self.assertTrue(response.context['page_obj'].has_next())
-        response = self.client.get(reverse('blog:blog_home'), {'page': '3'})
+        response = self.client.get(reverse('blog:home'), {'page': '3'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['page_obj'].has_previous())
         self.assertFalse(response.context['page_obj'].has_next())
@@ -73,11 +73,11 @@ class BlogPostViewTestCase(TestCase):
                     content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
         post.save()
         post.categories.add(category)
-        response = self.client.get(reverse('blog:blog_post', kwargs={'slug': post.slug, 'pk': post.pk}))
+        response = self.client.get(reverse('blog:post', kwargs={'slug': post.slug, 'pk': post.pk}))
         self.assertEquals(response.status_code, 404)
         post.is_published = True
         post.save()
-        response = self.client.get(reverse('blog:blog_post', kwargs={'slug': post.slug, 'pk': post.pk}))
+        response = self.client.get(reverse('blog:post', kwargs={'slug': post.slug, 'pk': post.pk}))
         self.assertEquals(response.status_code, 200)
         self.assertIn('Lorem Ipsum', response.rendered_content)
         self.assertIn('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>', response.rendered_content)
@@ -97,10 +97,10 @@ class BlogCategoryViewTestCase(TestCase):
             post.save()
             if i % 2 != 0:
                 post.categories.add(category)
-        response = self.client.get(reverse('blog:blog_category', kwargs={'slug': category.slug}))
+        response = self.client.get(reverse('blog:category', kwargs={'slug': category.slug}))
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(response.context['posts']), 3)
-        response = self.client.get(reverse('blog:blog_category', kwargs={'slug': 'fail'}))
+        response = self.client.get(reverse('blog:category', kwargs={'slug': 'fail'}))
         self.assertEquals(response.status_code, 404)
 
 
@@ -118,11 +118,31 @@ class BlogCategoriesListViewTestCase(TestCase):
             if i % 2 != 0:
                 post.categories.add(category)
                 post.save()
-        response = self.client.get(reverse('blog:blog_categories_list'))
+        response = self.client.get(reverse('blog:categories_list'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['categories']), 3)
 
 
 class BlogArchiveViewTestCase(TestCase):
     def test_opening_blog_archive_view(self):
-        self.fail('Not implemented!')
+        for y in range(2014, 2016):
+            for m in range(1, 13):
+                Post.objects.create(title='Lorem ipsum',
+                                    date_published=date(year=y, month=m, day=1),
+                                    slug='lorem-ipsum',
+                                    content='<p>Lorem ipsum<p>',
+                                    is_published=True)
+        response = self.client.get(reverse('blog:archive'))
+        self.assertEqual(len(response.context['months']), 24)
+
+
+class BlogMonthArchiveViewTestCase(TestCase):
+    def test_opening_blog_month_archive_view(self):
+        for d in range(1, 6):
+            Post.objects.create(title='Lorem ipsum',
+                                date_published=date(year=2015, month=1, day=d),
+                                slug='lorem-ipsum',
+                                content='<p>Lorem ipsum<p>',
+                                is_published=True)
+        response = self.client.get(reverse('blog:month_archive', kwargs={'year': 2015, 'month': 1}))
+        self.assertEqual(len(response.context['posts']), 5)

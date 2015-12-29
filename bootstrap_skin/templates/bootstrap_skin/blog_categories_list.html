@@ -1,11 +1,12 @@
 {% extends "bootstrap_skin/blog_base.html" %}
 {% load i18n %}
 {% load blog_tags %}
-{% block page_title %}
+{% block title %}
   <title>{{ page_title }} - {% get_site_name %}</title>
-{% endblock page_title %}
+{% endblock title %}
 {% block blog_page_body %}
-  <div class="page-header"><h1>{{ page_title }}</h1></div>
+  <h1>{{ page_title }}</h1>
+  <br>
   {% if categories %}
     <ul>
       {% for category in categories %}

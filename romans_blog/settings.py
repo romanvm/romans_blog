@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'blog',
     #'pages',
-    'cerulean_skin',
     'bootstrap_skin',
 )
 
@@ -155,9 +154,11 @@ TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
 SITE_NAME = 'Roman\'s Blog'
 BLOG_POSTS_PAGINATE_BY = 5
 BLOG_SIDEBAR_POSTS_COUNT = 3
+BLOG_SIDEBAR_MONTHS_COUNT = 6
 DISQUS_SHORTNAME = 'romanvm'
 
 # ============================
+
 # Load production settings if any
 try:
     from .local_settings import *

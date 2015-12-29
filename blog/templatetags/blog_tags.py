@@ -39,9 +39,18 @@ def get_posts_digest(featured=False):
     posts = Post.objects.filter(is_published=True)
     if featured:
         posts = posts.filter(is_featured=True)
-    latest_posts = posts[:settings.BLOG_SIDEBAR_POSTS_COUNT]
-    more = reverse('blog:blog_home') if posts.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
-    return SideBarObjects(latest_posts, more)
+        more_link = reverse('blog:featured_posts')
+    else:
+        more_link = reverse('blog:home')
+    more = more_link if posts.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
+    return SideBarObjects(posts[:settings.BLOG_SIDEBAR_POSTS_COUNT], more)
+
+
+@register.assignment_tag
+def get_archive_digest():
+    months = Post.objects.filter(is_published=True).dates('date_published', 'month', order='DESC')
+    more = reverse('blog:archive') if months.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
+    return SideBarObjects(months[:settings.BLOG_SIDEBAR_MONTHS_COUNT], more)
 
 
 @register.tag(name='captureas')
