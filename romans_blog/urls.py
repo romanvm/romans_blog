@@ -20,15 +20,21 @@ from django.conf.urls.static import static
 from django.http import HttpResponse
 from filebrowser.sites import site
 from .views import tinymce_skinned_preview
+from blog.sitemaps import BlogPostsSiteMap
+from pages.sitemaps import PagesSiteMap
 
 robots_txt = 'User-agent: *\nDisallow: /admin'
+sitemaps = {'blog': BlogPostsSiteMap,
+            'pages': PagesSiteMap,
+            }
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^tinymce-preview/(?P<skin_name>.+)/$', tinymce_skinned_preview, name='tinymce_skinned_preview'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^robots.txt$', lambda r: HttpResponse(robots_txt, mimetype='text/plain')),
+    url(r'^robots.txt$', lambda r: HttpResponse(robots_txt, content_type='text/plain'), name='robots'),
+    url(r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='sitemap'),
     url(r'^pages/', include('pages.urls', namespace='pages')),
     url(r'', include('blog.urls', namespace='blog')),
 ]

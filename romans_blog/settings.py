@@ -46,6 +46,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'blog',
     'pages',
     'bootstrap_skin',
@@ -169,6 +171,7 @@ TINYMCE_DEFAULT_CONFIG['theme_advanced_styles'] = theme_advanced_styles
 
 # === Custom site settings ===
 
+SITE_ID = 1
 SITE_NAME = 'Roman\'s Blog'
 BLOG_POSTS_PAGINATE_BY = 5
 BLOG_SIDEBAR_POSTS_COUNT = 3
