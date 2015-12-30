@@ -11,6 +11,7 @@ page_content = """
 <p>Lorem ipsum dolor sit amet</p>
 """
 
+
 class PageModelTestCase(TestCase):
     """
     Test for Page model
