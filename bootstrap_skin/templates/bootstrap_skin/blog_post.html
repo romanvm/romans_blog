@@ -38,10 +38,10 @@
   <div class="post-body">
     {{ post.content|safe }}
   </div>
-  {% if post.categories %}
-  <p><small>
-    <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;{{ post|render_post_categories|safe }}
-  </small></p>
+  {% if post.categories.count %}
+  <p>
+    <small><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;{{ post|render_post_categories|safe }}</small>
+  </p>
   {% endif %}
   <p class="social">
     <div class="facebook">

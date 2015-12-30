@@ -1,9 +1,10 @@
 {% load static from staticfiles %}
 <!-- Code Syntax Highlighter -->
+<link type="text/css" rel="stylesheet" href="{% static "syntaxhighlighter/styles/shCoreDefault.css" %}"/>
 <script type="text/javascript" src="{% static "syntaxhighlighter/scripts/shCore.js" %}"></script>
 <script type="text/javascript" src="{% static "syntaxhighlighter/scripts/shAutoloader.js" %}"></script>
-<link type="text/css" rel="stylesheet" href="{% static "syntaxhighlighter/styles/shCoreDefault.css" %}"/>
 <script type="text/javascript">
+$(function(){
   function path()
   {
     var args = arguments,
@@ -40,4 +41,5 @@
     'xml xhtml xslt html    @shBrushXml.js'
   ));
   SyntaxHighlighter.all();
+});
 </script>

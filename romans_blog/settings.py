@@ -121,13 +121,13 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'mode': 'textareas',
     'width': 800,
-    'plugins': 'preview,table,autoresize,advimage,emotions,codehighlighting',
+    'plugins': 'preview,table,autoresize,advimage,emotions,syntaxhl,youtubeIframe',
     'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
                              'justifyleft,justifycenter,justifyright,justifyfull,|,'
                              'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
-                             'sup,sub,|,hr,|,blockquote,|,codehighlighting,|,help',
+                             'sup,sub,|,hr,|,blockquote,|,syntaxhl,|,help',
     'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
-                             'image,|,emotions,|,removeformat,cleanup,|,code,preview',
+                             'image,youtubeIframe,|,emotions,|,removeformat,cleanup,|,code,preview',
     'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,tablecontrols',
     'browser_spellcheck': True,
     'plugin_preview_width': 800,
@@ -137,7 +137,10 @@ TINYMCE_DEFAULT_CONFIG = {
     'remove_linebreaks': False,
     'autoresize_min_height': 400,
     'extended_valid_elements': 'img[!src|border:0|alt|title|width|height|style]a[name|href|target|title|onclick],'
-                               'pre[class|name]',
+                               'textarea[cols|rows|disabled|name|readonly|class]'
+                               'iframe[src|title|width|height|allowfullscreen|frameborder|class|id],'
+                               'object[classid|width|height|codebase|*],param[name|value|_value|*],'
+                               'embed[type|width|height|src|*]',
                           }
 
 # Skin settings

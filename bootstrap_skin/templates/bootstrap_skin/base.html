@@ -33,6 +33,7 @@
   <script src="{% static "bootstrap_skin/js/bootstrap.js" %}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="{% static "bootstrap_skin/js/ie10-viewport-bug-workaround.js" %}"></script>
+  {% include "tinymce/codehighlighting.html" %}
   {% endblock js %}
 </head>
 <body>
@@ -99,6 +100,5 @@
     </div>
   </footer>
   {% endblock footer %}
-{% include "tinymce/codehighlighting.html" %}
 </body>
 </html>

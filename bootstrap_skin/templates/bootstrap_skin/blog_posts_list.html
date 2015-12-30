@@ -38,9 +38,11 @@
         </a>
         <a href="{{ post.get_absolute_url }}#disqus_thread"></a>&nbsp;
         {% endif %}
+        {% if post.categories.count %}
         <small><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;
           {{ post|render_post_categories|safe }}
         </small>
+        {% endif %}
       </p>
       <hr>
     </div>
