@@ -17,14 +17,18 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
 from filebrowser.sites import site
 from .views import tinymce_skinned_preview
+
+robots_txt = 'User-agent: *\nDisallow: /admin'
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^tinymce-preview/(?P<skin_name>.+)/$', tinymce_skinned_preview, name='tinymce_skinned_preview'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^robots.txt$', lambda r: HttpResponse(robots_txt, mimetype='text/plain')),
     url(r'^pages/', include('pages.urls', namespace='pages')),
     url(r'', include('blog.urls', namespace='blog')),
 ]
