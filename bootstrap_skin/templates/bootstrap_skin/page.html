@@ -1,5 +1,11 @@
 {% extends "bootstrap_skin/base.html" %}
 {% load blog_tags %}
+{% if page.keywords %}
+  {% block meta %}
+  {{ block.super }}
+  <meta name="keywords" content="{{ page.keywords }}">
+  {% endblock meta %}
+{% endif %}
 {% block title %}
   <title>{{ menu_link.page.title }} - {% get_site_name %}</title>
 {% endblock title %}
