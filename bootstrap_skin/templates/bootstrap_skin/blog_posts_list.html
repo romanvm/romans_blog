@@ -22,11 +22,6 @@
       <p class="text-muted">
         <small><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small>
       </p>
-      {% if post.cover_image %}
-      <p>
-        <img class="img-responsive img-thumbnail" src="{% get_media_prefix %}{{ post.cover_image }}" alt="{% trans "Cover Image" %}">
-      </p>
-      {% endif %}
       <p class="text-just">{{ post.content|truncatewords_html:40|safe }}</p>
       <p>
         <a class="btn btn-default btn-sm" href="{{ post.get_absolute_url }}">
@@ -47,7 +42,7 @@
       <hr>
     </div>
     {% empty %}
-      <h3 class="text-danger">{% trans "This blog has no posts." %}</h3>
+      <h3 class="text-danger">{% trans "This section has no posts." %}</h3>
     {% endfor %}
     <nav>
       <ul class="pager">

@@ -39,8 +39,6 @@ class Post(models.Model):
     # Translators: The last part of a web-page URL, usually derives from the page title, e.g. /about-us/
     slug = models.SlugField(verbose_name=_('Slug'), max_length=200)
     categories = models.ManyToManyField(Category, verbose_name=_('Categories'), related_name='posts', blank=True)
-    # Translators: A cover picture for a blog post that represents its contents in some way.
-    cover_image = FileBrowseField(_('Cover Image'), max_length=200, extensions=['.jpg', '.png', '.gif'], blank=True)
     is_published = models.BooleanField(verbose_name=_('Published'), default=False)
     is_featured = models.BooleanField(verbose_name=_('Featured'), default=False)
     allow_comments = models.BooleanField(verbose_name=_('Allow comments'), default=True)

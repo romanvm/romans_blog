@@ -48,9 +48,11 @@
           {# Blog menu links #}
           {% get_blog_menu_links as blog_menu_links %}
           {% for menu_link in blog_menu_links  %}
+          {% if menu_link.url %}
           <li class="{% if request.path == menu_link.url %}active{% endif %}">
             <a href="{{ menu_link.url }}">{{ menu_link.caption }}</a>
           </li>
+          {% endif %}
           {% endfor %}
           {# Pages menu links #}
           {% get_pages_menu_links as pages_menu_links %}

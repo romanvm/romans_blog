@@ -67,9 +67,11 @@ def get_blog_menu_links():
     Get blog menu links for the site main menu.
     """
     MenuLink = namedtuple('MenuLink', ['caption', 'url'])
+    featured = Post.objects.filter(is_featured=True)
+    featured_link = reverse('blog:featured_posts') if featured.count() else None
     return (
         MenuLink(_('Home'), reverse('blog:home')),
-        MenuLink(_('Featured'), reverse('blog:featured_posts')),
+        MenuLink(_('Featured'), featured_link),
         MenuLink(_('Archive'), reverse('blog:archive'))
     )
 

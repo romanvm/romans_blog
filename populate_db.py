@@ -18,19 +18,19 @@ from blog.models import Category, Post
 with open('lorem_ipsum.html', mode='r') as file_obj:
     lorem_ipsum = file_obj.read()
 # Create pages
-# print('Creating pages...')
-# page = Page.objects.create(title='Lorem Ipsum',
-#                            keywords='lorem, ipsum',
-#                            content=lorem_ipsum)
-# print('Creating menu links...')
-# for i in range(1, 4):
-#     MenuLink.objects.create(caption='Page {}'.format(i),
-#                             slug='page-{}'.format(i),
-#                             page=page)
+print('Creating pages...')
+page = Page.objects.create(title='Lorem Ipsum',
+                           keywords='lorem, ipsum',
+                           content=lorem_ipsum)
+print('Creating menu links...')
+for i in range(1, 4):
+    MenuLink.objects.create(caption='Page {}'.format(i),
+                            slug='page-{}'.format(i),
+                            page=page)
 # Create blog posts
 print('Creating categories...')
-category1 = Category.objects.create(name='Category 1', slug='category-1')
-category2 = Category.objects.create(name='Category 2', slug='category-2')
+category1 = Category.objects.create(name='Python', slug='python')
+category2 = Category.objects.create(name='Django', slug='django')
 start_year = int(input('Enter the start year: '))
 end_year = int(input('Enter the end year: '))
 print('Creating blog posts...')
