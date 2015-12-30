@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load blog_tags %}
-{% captureas home_url %}{% url "blog:home" %}{% endcaptureas %}
+{% get_url "blog:home" as home_url %}
 {% get_posts_digest False as latest_posts %}
 {% if latest_posts.objects and request.path != home_url %}
   <div class="panel panel-default">
@@ -31,7 +31,7 @@
   </div>
 </div>
 {% endif %}
-{% captureas archive_url %}{% url "blog:archive" %}{% endcaptureas %}
+{% get_url "blog:archive" as archive_url %}
 {% get_archive_digest as months %}
 {% if months and request.path != archive_url %}
 <div class="panel panel-default">
