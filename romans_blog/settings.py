@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Django settings for romans_blog project.
 
@@ -14,6 +15,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import sys
 from importlib import import_module
+from django.utils.translation import ugettext_lazy
+
+_ = ugettext_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
@@ -92,6 +96,11 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
+
+LANGUAGES = [
+    ('en-us', 'US English'),
+    ('uk', 'Українська'),
+]
 
 LANGUAGE_CODE = 'en-us'
 

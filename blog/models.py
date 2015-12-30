@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-from filebrowser.fields import FileBrowseField
 from tinymce.models import HTMLField
 
 _ = ugettext
