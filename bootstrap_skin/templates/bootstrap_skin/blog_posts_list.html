@@ -21,7 +21,7 @@
       <p class="text-muted">
         <small><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small>
       </p>
-      <p class="text-just">{{ post.content|truncatewords_html:40|safe }}</p>
+      <div class="text-just">{{ post|truncate_post:40|safe }}</div>
       <p>
         <a class="btn btn-default btn-sm" href="{{ post.get_absolute_url }}">
           {% trans "Read more" %}&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>
@@ -43,6 +43,7 @@
     {% empty %}
       <h3 class="text-danger">{% trans "This section has no posts." %}</h3>
     {% endfor %}
+    {% if is_paginated %}
     <nav>
       <ul class="pager">
         <li class="previous {% if not page_obj.has_next %}disabled{% endif %}">
@@ -58,6 +59,7 @@
       </ul>
     </nav>
   </div>
+    {% endif %}
 {% endblock blog_page_body %}
 {% block footer %}
   {{ block.super }}
