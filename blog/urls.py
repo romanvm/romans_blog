@@ -6,7 +6,7 @@
 from django.conf.urls import url
 from .views import (BlogHomeView, BlogPostView, BlogFeaturedPostsView,
                     BlogCategoryView, BlogCategoriesListView,
-                    BlogArhiveView, BlogMonthArchiveView)
+                    BlogArhiveView, BlogMonthArchiveView, BlogPostSearchView)
 
 urlpatterns = [
     url(r'^post/(?P<slug>[\w-]+)-(?P<pk>\d+)/$', BlogPostView.as_view(), name='post'),
@@ -15,5 +15,6 @@ urlpatterns = [
     url(r'^categories/$', BlogCategoriesListView.as_view(), name='categories_list'),
     url(r'^archive/(?P<year>\d{4})-(?P<month>\d{1,2})/$', BlogMonthArchiveView.as_view(), name='month_archive'),
     url(r'^archive/$', BlogArhiveView.as_view(), name='archive'),
+    url(r'^search/', BlogPostSearchView.as_view(), name='search'),
     url(r'^$', BlogHomeView.as_view(), name='home'),
 ]

@@ -1,0 +1,48 @@
+{% extends "bootstrap_skin/blog_base.html" %}
+{% load i18n %}
+{% load blog_tags %}
+{% block title %}
+  <title>{% trans "Site Search" %} - {% get_site_name %}</title>
+{% endblock title %}
+{% block css %}
+  {{ block.super}}
+  <style type="text/css">
+  .search-summary em {
+    background:yellow;
+  }
+  </style>
+{% endblock css %}
+{% block blog_page_body %}
+  <h1>{% trans "Site Search" %}</h1>
+  <hr>
+{% if query %}
+  {% if object_list %}
+    <h3>{% trans "Search results for" %} "<em>{{ query }}</em>"</h3>
+    <h4>{% trans "Posts found:" %} <strong>{{ paginator.count }}</strong></h4>
+    <div class="search-results">
+      {% for result in object_list %}
+      <p>
+        <a href="{{ result.object.get_absolute_url }}"><strong>{{ result.object.title }}</strong></a>
+        {% if result.object.date_published %}
+        <br>
+        <span class="text-muted">
+          <small><span class="glyphicon glyphicon-calendar"></span>&nbsp;<i>{{ result.object.date_published }}</i></small>
+        </span>
+        {% endif %}
+      </p>  
+      <p class="search-summary">{% autoescape off %}{{ result.highlighted.text|join:"... " }}{% endautoescape %}&nbsp;
+      <a href="{{ result.object.get_absolute_url }}"><i>{% trans "Read more..." %}</i></a></p>
+      <hr>
+      {% endfor %}
+      {% if is_paginated %}
+        <div class="pages">{% paginator 3 %}</div>
+      {% endif %}
+    </div>
+  {% else %}
+    <p class="text-danger"><strong>{% trans "No results found!" %}</strong></p>
+    <p>{% trans "Please refine you search criteria and try again." %}</p>
+  {% endif %}
+{% else %}
+  <p><strong>{% trans "Please enter a search query in the field above and click the search button." %}</strong></p>
+{% endif %}
+{% endblock blog_page_body %}

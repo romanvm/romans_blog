@@ -1,0 +1,3 @@
+{{ object.title }}
+{{ object.categories.all|join:"," }}
+{{ object.content|striptags|safe }}

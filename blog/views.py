@@ -6,6 +6,7 @@ from django.utils.translation import ugettext
 from django.utils.dateformat import format as format_date
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+from haystack.generic_views import SearchView
 from .models import Post, Category
 
 _ = ugettext
@@ -110,3 +111,16 @@ class BlogMonthArchiveView(_PageTitleMixIn, _PostsListView):
         month = int(self.kwargs['month'])
         self.page_title = _('Blog Archive, {0}').format(format_date(date(year=year, month=month, day=1), 'F Y'))
         return Post.objects.filter(is_published=True, date_published__year=year, date_published__month=month)
+
+
+class BlogPostSearchView(SearchView):
+    template_name = '{0}/blog_search.html'.format(settings.CURRENT_SKIN)
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super().get_queryset().highlight()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        return context

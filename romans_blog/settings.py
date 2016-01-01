@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'haystack',
     'blog',
     'pages',
     'bootstrap_skin',
@@ -168,6 +169,16 @@ except AttributeError:
 TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
 TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
 TINYMCE_DEFAULT_CONFIG['theme_advanced_styles'] = theme_advanced_styles
+
+# Haystack search settings
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # === Custom site settings ===
 
