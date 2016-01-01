@@ -13,7 +13,7 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
     Haystack Post search index
     """
     text = indexes.CharField(document=True, use_template=True)
-    date_published = indexes.DateField(model_attr='date_published')
+    date_published = indexes.DateField(model_attr='date_published', null=True)
     is_featured = indexes.BooleanField(model_attr='is_featured')
 
     def get_model(self):
