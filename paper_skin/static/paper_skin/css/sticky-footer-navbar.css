@@ -1,0 +1,71 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 80px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  background-color: #2196f3;
+  border-color: transparent;
+  margin-top: 20px;
+  border: none;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    border-radius: 3px;
+  }
+}
+
+.footer .footer-text {
+   color: #b2dbfb;
+}
+
+.footer .footer-text a {
+  color: #b2dbfb;
+  text-decoration: underline;
+}
+
+.footer .footer-text a:hover,
+.footer .footer-text a:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 0 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-top: 15px;
+}
+
+.social-profiles {
+  padding-top: 10px;
+}
+
+/*
+code {
+  font-size: 80%;
+}
+*/
