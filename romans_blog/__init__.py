@@ -1,3 +1,3 @@
 """
-The main blog application
+The main blog CMS project
 """
