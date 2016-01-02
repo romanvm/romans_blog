@@ -15,8 +15,13 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f5f5f5;
+  border: 1px solid transparent;
 }
 
+@media (min-width: 768px) {
+  .footer {
+    border-radius: 4px;
+  }
 
 /* Custom page CSS
 -------------------------------------------------- */

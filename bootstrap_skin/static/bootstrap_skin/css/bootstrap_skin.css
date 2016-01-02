@@ -31,11 +31,11 @@ h1,h2 {
 
 .page-body {
   margin-top: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .bottom-box {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .facebook,.linked-in,.twitter,.reddit {
@@ -49,5 +49,5 @@ h1,h2 {
 }
 
 .pages {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }

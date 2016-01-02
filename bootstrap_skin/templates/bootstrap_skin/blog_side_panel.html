@@ -8,7 +8,7 @@
     <div class="panel-body">
       {% for post in latest_posts.objects  %}
       <p><a href="{{ post.get_absolute_url }}">{{ post.title }}</a><br>
-      <small class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small></p>
+      <small><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small></p>
       {% endfor %}
       {% if latest_posts.more  %}
       <p><a href="{{ latest_posts.more }}"><strong>{% trans "More..." %}</strong></a></p>
@@ -23,7 +23,7 @@
   <div class="panel-body">
     {% for post in featured_posts.objects  %}
     <p><a href="{{ post.get_absolute_url }}">{{ post.title }}</a><br>
-    <small class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small></p>
+    <small><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small></p>
     {% endfor %}
     {% if featured_posts.more  %}
     <p><a href="{{ featured_posts.more }}"><strong>{% trans "More..." %}</strong></a></p>

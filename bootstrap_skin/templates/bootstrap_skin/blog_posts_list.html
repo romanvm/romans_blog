@@ -18,7 +18,7 @@
     {% for post in posts %}
     <div class="post-summary">
       <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-      <p class="text-muted">
+      <p>
         <small><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small>
       </p>
       <div class="text-just">{{ post|truncate_post:40|safe }}</div>
