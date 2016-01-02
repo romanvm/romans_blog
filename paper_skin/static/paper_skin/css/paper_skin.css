@@ -38,12 +38,9 @@ h1,h2,.panel-title {
   margin-bottom: 15px;
 }
 
-.social {
-   vertical-align: top;
-}
-
-.social > .facebook,.linked-in,.twitter,.reddit {
+.facebook,.linked-in,.twitter,.reddit {
   display: inline-block;
+  vertical-align: top;
 }
 
 .fb-share-button > span {
@@ -52,6 +49,7 @@ h1,h2,.panel-title {
 
 .reddit > a > img {
   vertical-align: inherit !important;
+  height: 20px;
 }
 
 .search-results {

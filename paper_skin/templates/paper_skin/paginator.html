@@ -1,6 +1,6 @@
 <div class="btn-group" role="group">
-   {% if has_prefious %}
-      <a class="btn btn default" href="{{ request.path }}?q={{ query }}&page={{ previous }}"><span class="fa fa-angle-left"></span></a>
+   {% if has_previous %}
+      <a class="btn btn-primary" href="{{ request.path }}?q={{ query }}&page={{ previous }}"><span class="fa fa-angle-left"></span></a>
    {% else %}
       <button type="button" class="btn btn-primary" disabled="disabled"><span class="fa fa-angle-left"></span></button>
    {% endif %}
