@@ -23,7 +23,7 @@ from .views import tinymce_skinned_preview
 from blog.sitemaps import BlogPostsSiteMap
 from pages.sitemaps import PagesSiteMap
 
-robots_txt = 'User-agent: *\nDisallow: /admin'
+robots_txt = 'User-agent: *\nDisallow: /admin\nDisallow: /search'
 sitemaps = {'blog': BlogPostsSiteMap,
             'pages': PagesSiteMap,
             }
