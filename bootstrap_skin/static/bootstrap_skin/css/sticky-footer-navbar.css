@@ -30,7 +30,7 @@ body {
 body > .container {
   padding: 0 15px 0;
 }
-.container .text-muted {
+.footer > .container > .text-muted {
   margin: 20px 0;
 }
 
