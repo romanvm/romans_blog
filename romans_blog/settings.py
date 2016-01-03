@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'blog',
     'pages',
     'bootstrap_skin',
+    'paper_skin',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -157,7 +158,7 @@ TINYMCE_DEFAULT_CONFIG = {
 
 # Skin settings
 
-CURRENT_SKIN = 'bootstrap_skin'
+CURRENT_SKIN = 'paper_skin'
 TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/{0}/'.format(CURRENT_SKIN)
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 try:
