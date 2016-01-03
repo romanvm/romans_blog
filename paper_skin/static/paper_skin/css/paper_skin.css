@@ -2,7 +2,7 @@
   text-align: justify;
 }
 
-h1,h2,.panel-title {
+h1,h2,.panel-title,.panel-footer {
   text-transform: uppercase;
 }
 
@@ -38,19 +38,6 @@ h1,h2,.panel-title {
   margin-bottom: 15px;
 }
 
-.facebook,.linked-in,.twitter,.reddit {
-  display: inline-block;
-  vertical-align: top;
-}
-
-.fb-share-button > span {
-  vertical-align: inherit !important;
-}
-
-.reddit > a > img {
-  vertical-align: inherit !important;
-  height: 20px;
-}
 
 .search-results {
   margin-top: 40px;
@@ -64,3 +51,19 @@ h1,h2,.panel-title {
 .badge {
   background-color: #2196f3;
 }
+
+/* Needed to correctly place social bunntons in line */
+.facebook,.linked-in,.twitter,.reddit {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.fb-share-button > span {
+  vertical-align: inherit !important;
+}
+
+.reddit > a > img {
+  vertical-align: inherit !important;
+  height: 20px;
+}
+/*************/

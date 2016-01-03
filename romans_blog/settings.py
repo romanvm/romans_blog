@@ -159,7 +159,7 @@ TINYMCE_DEFAULT_CONFIG = {
 # Skin settings
 
 CURRENT_SKIN = 'paper_skin'
-#TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/{0}/'.format(CURRENT_SKIN)
+TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/{0}/'.format(CURRENT_SKIN)
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 try:
     table_styles = skin_settings.TABLE_STYLES
