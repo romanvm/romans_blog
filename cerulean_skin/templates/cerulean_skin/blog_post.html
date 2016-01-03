@@ -1,0 +1,74 @@
+{% extends "cerulean_skin/blog_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load blog_tags %}
+{% block title %}
+  <title>{{ post.title }} - {% get_site_name %}</title>
+{% endblock title %}
+{% if post.categories.count %}
+  {% block meta %}
+  {{ block.super }}
+  <meta name="keywords" content="{{ post.categories.all|join:"," }}">
+  {% endblock meta %}
+{% endif %}
+{% block navbar %}
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
+  {{ block.super }} 
+{% endblock navbar %}
+{% block blog_page_body %}
+  {% load cerulean_skin_tags %}
+  <h1>{{ post.title }}</h1>
+  <p>
+    <small class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published}}</em></small>
+  </p>
+  <hr>
+  <div class="post-body">
+    {{ post.content|safe }}
+  </div>
+  {% if post.categories.count %}
+  <p>
+    <small><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;{{ post|render_post_categories|safe }}</small>
+  </p>
+  {% endif %}
+  <p class="social">
+    <div class="facebook">
+      <div class="fb-share-button" data-href="{{ request.build_absolute_uri }}" data-layout="button"></div>
+    </div>
+    <div class="linked-in">
+      <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+      <script type="IN/Share" data-url="{{ request.build_absolute_uri }}"></script>
+    </div>
+    <div class="twitter">
+      <a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+      <script>
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+        if(!d.getElementById(id)){js=d.createElement(s);
+          js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+          fjs.parentNode.insertBefore(js,fjs);
+        }}(document, 'script', 'twitter-wjs');
+      </script>
+      </script>
+    </div>
+    <div class="reddit">
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false">
+        <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" />
+      </a>
+    </div>
+  </p>
+  <hr>
+  <div class="bottom-box">
+    {% if post.allow_comments %}
+    {% render_disqus_comments %}
+    {% else %}
+    <p>Comments are disabled.</p>
+    {% endif %}
+  </div>
+{% endblock blog_page_body %}

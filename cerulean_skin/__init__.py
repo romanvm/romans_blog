@@ -4,5 +4,5 @@
 # Author: Roman Miroshnychenko aka Roman V.M.
 # E-mail: romanvm@yandex.ua
 """
-Paper skin is based on 'Paper' design from Bootswatch <http://bootswatch.com>
+Cerulean skin is based on 'Cerulean' design from Bootswatch <http://bootswatch.com>
 """
