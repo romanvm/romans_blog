@@ -28,7 +28,7 @@
         </a>&nbsp;
         {% if post.allow_comments %}
         <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }}#disqus_thread">
-          {% trans "Comment" %}&nbsp;<span class="glyphicon glyphicon-comment"></span>
+          {% trans "0 comments" %}
         </a>&nbsp;
         {% endif %}
         {% if post.categories.count %}
