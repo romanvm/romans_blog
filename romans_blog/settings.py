@@ -158,7 +158,7 @@ TINYMCE_DEFAULT_CONFIG = {
 
 # Skin settings
 
-CURRENT_SKIN = 'bootstrap_skin'
+CURRENT_SKIN = 'paper_skin'
 TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/'
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 try:
@@ -189,6 +189,7 @@ BLOG_POSTS_PAGINATE_BY = 5
 BLOG_SIDEBAR_POSTS_COUNT = 3
 BLOG_SIDEBAR_MONTHS_COUNT = 5
 DISQUS_SHORTNAME = 'romanvm'
+GOOGLE_ANALYTICS_ID = 'UA-71938437-1'
 
 # ============================
 

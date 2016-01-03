@@ -27,10 +27,17 @@ def get_site_name():
 
 @register.simple_tag
 def get_disqus_shortname():
-    """
-    Get Disqus shortname
-    """
     return settings.DISQUS_SHORTNAME
+
+
+@register.inclusion_tag('blog/disqus_comments.html', takes_context=True)
+def render_disqus_comments(context):
+    """
+    Render Disqus comments code
+    """
+    return {'request': context['request'],
+            'post': context['post'],
+            'disqus_shortname': settings.DISQUS_SHORTNAME}
 
 
 @register.assignment_tag
@@ -127,3 +134,11 @@ def paginator(context, adjacent_pages=2):
         'request': context['request'],
         'query': quote_plus(context['query']),
     }
+
+
+@register.inclusion_tag('blog/google_analytics.html', takes_context=False)
+def render_google_analytics():
+    """
+    Renders Google Analytics JS code
+    """
+    return {'google_analytics_id': settings.GOOGLE_ANALYTICS_ID}
