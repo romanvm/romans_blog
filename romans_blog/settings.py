@@ -158,7 +158,7 @@ TINYMCE_DEFAULT_CONFIG = {
 
 # Skin settings
 
-CURRENT_SKIN = 'paper_skin'
+CURRENT_SKIN = 'bootstrap_skin'
 TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/'
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 try:

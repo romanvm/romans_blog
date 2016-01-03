@@ -2,7 +2,7 @@
   text-align: justify;
 }
 
-h1,h2,.panel-title {
+h1,h2,.panel-title,.panel-footer {
   text-transform: uppercase;
 }
 
@@ -38,6 +38,16 @@ h1,h2,.panel-title {
   margin-bottom: 15px;
 }
 
+.search-results {
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+.pages {
+  margin-bottom: 15px;
+}
+
+/* Needed to correctly place social bunntons in line */
 .facebook,.linked-in,.twitter,.reddit {
   display: inline-block;
   vertical-align: top;
@@ -51,12 +61,4 @@ h1,h2,.panel-title {
   vertical-align: inherit !important;
   height: 20px;
 }
-
-.search-results {
-  margin-top: 40px;
-  margin-bottom: 15px;
-}
-
-.pages {
-  margin-bottom: 15px;
-}
+/*************/
