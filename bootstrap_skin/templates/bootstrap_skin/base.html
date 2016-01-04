@@ -34,6 +34,19 @@
   <script src="{% static "bootstrap_skin/js/bootstrap.js" %}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="{% static "bootstrap_skin/js/ie10-viewport-bug-workaround.js" %}"></script>
+  <script type="text/javascript">
+  $(function(){
+    // Make embedded Youtube videos responsive
+    $('iframe').each(function()
+    {
+      if ($(this).attr('src').indexOf('youtube') > -1)
+      {
+        $(this).attr('class', 'embed-responsive-item');
+        $(this).wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
+      }
+    }); // end iframe.each
+  }); // end document.ready
+  </script>
   {% endblock js %}
 </head>
 <body>
