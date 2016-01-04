@@ -191,7 +191,7 @@ BLOG_POSTS_PAGINATE_BY = 5
 BLOG_SIDEBAR_POSTS_COUNT = 3
 BLOG_SIDEBAR_MONTHS_COUNT = 5
 # Provide a Disqus shortname to enable post comments
-DISQUS_SHORTNAME = ''
+DISQUS_SHORTNAME = 'romanvm'
 # Provide a Google Analytics ID to enable your web-site usage tracking
 GOOGLE_ANALYTICS_ID = ''
 
