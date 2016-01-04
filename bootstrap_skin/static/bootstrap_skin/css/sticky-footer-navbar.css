@@ -18,10 +18,34 @@ body {
   border: 1px solid transparent;
 }
 
-@media (min-width: 768px) {
+/* Media queries for responsive behaviour */
+@media (min-width: 100px) {
+  body {
+    margin-bottom: 150px;
+  }
   .footer {
+    height: 150px;
+  }
+}
+
+@media (min-width: 325px) {
+  body {
+    margin-bottom: 130px;
+  }
+  .footer {
+    height: 130px;
+  }
+}
+
+@media (min-width: 750px) {
+  body {
+    margin-bottom: 60px;
+  }
+  .footer {
+    height: 60px;
     border-radius: 4px;
   }
+}
 
 /* Custom page CSS
 -------------------------------------------------- */
@@ -30,14 +54,25 @@ body {
 body > .container {
   padding: 0 15px 0;
 }
-.footer > .container > .text-muted {
-  margin: 20px 0;
-}
 
 .footer > .container {
-  padding: 15px;
+  padding-top: 5px;
 }
 
+.footer .footer-text {
+   font-size: 10px;
+}
+
+.social-profiles {
+  padding-top: 10px;
+}
+
+.django-logo {
+  padding-top: 13px;
+}
+
+/*
 code {
   font-size: 80%;
 }
+*/

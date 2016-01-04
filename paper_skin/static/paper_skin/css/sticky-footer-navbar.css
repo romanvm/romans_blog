@@ -23,9 +23,27 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 751px) {
   .footer {
     border-radius: 3px;
+  }
+}
+/* Media queries for responsive behaviour */
+@media (max-width: 770px) {
+  body {
+    margin-bottom: 150px
+  }
+  .footer {
+    height: 150px;
+  }
+}
+
+@media (max-width: 410px) {
+  body {
+    margin-bottom: 200px
+  }
+  .footer {
+    height: 200px;
   }
 }
 
@@ -62,6 +80,10 @@ body > .container {
 
 .social-profiles {
   padding-top: 10px;
+}
+
+.django-logo {
+  padding-top: 13px;
 }
 
 /*
