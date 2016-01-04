@@ -149,6 +149,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_font_sizes': '4pt,6pt,8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
     'relative_urls': False,
     'remove_linebreaks': False,
+    'accessibility_warnings': False,
     'autoresize_min_height': 400,
     'extended_valid_elements': 'img[!src|border:0|alt|title|width|height|style]a[name|href|target|title|onclick],'
                                'textarea[cols|rows|disabled|name|readonly|class]'
