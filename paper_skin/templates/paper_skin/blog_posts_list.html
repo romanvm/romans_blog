@@ -63,6 +63,7 @@
 {% endblock blog_page_body %}
 {% block footer %}
   {{ block.super }}
+  {% get_disqus_shortname as disqus_shortname %}
   {% if disqus_shortname %}
   <script id="dsq-count-scr" src="//{{ disqus_shortname }}.disqus.com/count.js" async></script>
   {% endif %}
