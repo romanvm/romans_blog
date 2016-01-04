@@ -3,6 +3,9 @@
 # Module: populate_db.py
 # Created on: 24.11.2015
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
+"""
+Populates the project's database with test data
+"""
 
 import os
 from datetime import date
