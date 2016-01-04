@@ -23,3 +23,4 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     save_on_top = True
     list_per_page = 25
+    ordering = ('-last_updated', '-date_published')
