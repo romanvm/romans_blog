@@ -189,8 +189,10 @@ SITE_NAME = 'Roman\'s Blog'
 BLOG_POSTS_PAGINATE_BY = 5
 BLOG_SIDEBAR_POSTS_COUNT = 3
 BLOG_SIDEBAR_MONTHS_COUNT = 5
-DISQUS_SHORTNAME = 'romanvm'
-GOOGLE_ANALYTICS_ID = 'UA-71938437-1'
+# Provide a Disqus shortname to enable post comments
+DISQUS_SHORTNAME = ''
+# Provide a Google Analytics ID to enable your web-site usage tracking
+GOOGLE_ANALYTICS_ID = ''
 
 # ============================
 

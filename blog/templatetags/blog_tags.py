@@ -25,7 +25,7 @@ def get_site_name():
     return settings.SITE_NAME
 
 
-@register.simple_tag
+@register.assignment_tag
 def get_disqus_shortname():
     return settings.DISQUS_SHORTNAME
 

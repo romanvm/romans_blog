@@ -26,7 +26,8 @@
         <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }}">
           {% trans "Read post" %}&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>
         </a>&nbsp;
-        {% if post.allow_comments %}
+        {% get_disqus_shortname as disqus_shortname %}
+        {% if post.allow_comments and disqus_shortname %}
         <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }}#disqus_thread">
           {% trans "0 comments" %}
         </a>&nbsp;
@@ -62,5 +63,7 @@
 {% endblock blog_page_body %}
 {% block footer %}
   {{ block.super }}
-  <script id="dsq-count-scr" src="//{% get_disqus_shortname %}.disqus.com/count.js" async></script>
+  {% if disqus_shortname %}
+  <script id="dsq-count-scr" src="//{{ disqus_shortname }}.disqus.com/count.js" async></script>
+  {% endif %}
 {% endblock footer %}
