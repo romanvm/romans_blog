@@ -48,6 +48,7 @@
   }); // end document.ready
   </script>
   {% endblock js %}
+  {% render_google_analytics %}
 </head>
 <body>
   {% block navbar %}
@@ -123,6 +124,5 @@
   </footer>
   {% endblock footer %}
   {% include "tinymce/codehighlighting.html" %}
-  {% render_google_analytics %}
 </body>
 </html>
