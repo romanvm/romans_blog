@@ -2,7 +2,7 @@
 {% load blog_tags %}
 {% get_url "blog:home" as home_url %}
 {% if user.is_authenticated %}
-  <div class="panel panel-primary">
+  <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
         <span class="fa fa-cogs"></span>&nbsp;{% trans "Blog Admin" %}
@@ -18,7 +18,7 @@
 {% endif %}
 {% get_posts_digest False as latest_posts %}
 {% if latest_posts.objects and request.path != home_url %}
-  <div class="panel panel-primary">
+  <div class="panel panel-default">
     <div class="panel-heading"><h4 class="panel-title"><span class="fa fa-newspaper-o"></span>&nbsp;{% trans "Latest Posts" %}</h4></div>
     <div class="panel-body">
       {% for post in latest_posts.objects  %}
@@ -33,7 +33,7 @@
 {% endif %}
 {% get_posts_digest True as featured_posts %}
 {% if featured_posts.objects %}
-<div class="panel panel-primary">
+<div class="panel panel-default">
   <div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{% trans "Featured Posts" %}</h4></div>
   <div class="panel-body">
     {% for post in featured_posts.objects  %}
@@ -49,7 +49,7 @@
 {% get_url "blog:archive" as archive_url %}
 {% get_archive_digest as months %}
 {% if months and request.path != archive_url %}
-<div class="panel panel-primary">
+<div class="panel panel-default">
   <div class="panel-heading"><h4 class="panel-title"><span class="fa fa-archive"></span>&nbsp;{% trans "Archive" %}</h4></div>
   <div class="panel-body">
     {% for month in months.objects %}
@@ -63,7 +63,7 @@
 {% endif %}
 {% get_categories as categories %}
 {% if categories %}
-<div class="panel panel-primary">
+<div class="panel panel-default">
   <div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;{% trans "Categories" %}</h4></div>
   <div class="panel-body">
     {% for category in categories  %}
