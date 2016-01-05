@@ -23,6 +23,7 @@ Main Features:
 - **Full-text site search** with `django-haystack`_ and `Whoosh`_.
 - **Google Analytics support**.
 - **sitemap.xml and robots.txt**.
+- **Localization-ready**: all interface strings, both in Python and templates, are marked as translatable.
 
 You can see my blog CMS in action `here`_.
 
