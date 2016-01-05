@@ -27,7 +27,14 @@
   {% load bootstrap_skin_tags %}
   <h1>{{ post.title }}</h1>
   <p>
-    <small class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published}}</em></small>
+    <small class="text-muted">
+      <span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published}}</em>
+    </small>&nbsp;
+    {% if user.is_authenticated %}
+    <a class="btn btn-default btn-xs" href="/admin/blog/post/{{ post.pk }}/">
+      <span class="fa fa-pencil-square"></span>&nbsp;{% trans "Edit post" %}
+    </a>
+    {% endif %}
   </p>
   <hr>
   <div class="post-body">
