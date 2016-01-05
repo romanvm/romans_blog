@@ -142,7 +142,7 @@ TINYMCE_DEFAULT_CONFIG = {
                              'sup,sub,|,hr,|,blockquote,|,syntaxhl,|,help',
     'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
                              'image,youtubeIframe,|,emotions,|,removeformat,cleanup,|,code,preview',
-    'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,tablecontrols',
+    'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,charmap,|,tablecontrols',
     'browser_spellcheck': True,
     'plugin_preview_width': 1024,
     'plugin_preview_height': 640,
