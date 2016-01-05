@@ -135,14 +135,15 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'mode': 'textareas',
     'width': 800,
-    'plugins': 'preview,table,autoresize,advimage,emotions,syntaxhl,youtubeIframe',
+    'plugins': 'preview,table,autoresize,advimage,emotions,syntaxhl,youtubeIframe,contextmenu,searchreplace,'
+               'pagebreak,autolink,visualchars',
     'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
                              'justifyleft,justifycenter,justifyright,justifyfull,|,'
                              'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
                              'sup,sub,|,hr,|,blockquote,|,syntaxhl,|,help',
     'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
                              'image,youtubeIframe,|,emotions,|,removeformat,cleanup,|,code,preview',
-    'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,charmap,|,tablecontrols',
+    'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,charmap,visualchars,|,tablecontrols,|,search,replace,|,pagebreak',
     'browser_spellcheck': True,
     'plugin_preview_width': 1024,
     'plugin_preview_height': 640,
@@ -151,6 +152,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'remove_linebreaks': False,
     'accessibility_warnings': False,
     'autoresize_min_height': 400,
+    'pagebreak_separator': '<!-- ***BLOG CUT*** -->',
     'extended_valid_elements': 'img[!src|border:0|alt|title|width|height|style]a[name|href|target|title|onclick],'
                                'textarea[cols|rows|disabled|name|readonly|class]'
                                'iframe[src|title|width|height|allowfullscreen|frameborder|class|id],'
