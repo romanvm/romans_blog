@@ -10,6 +10,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext
 from django.core.paginator import EmptyPage
+from django.db.models import Count
 from ..models import Category, Post
 
 _ = ugettext
@@ -42,7 +43,11 @@ def render_disqus_comments(context):
 
 @register.assignment_tag
 def get_categories():
-    return Category.objects.all()
+    """
+    Get the list of non-empty categories ordered by post count in desc. order
+    """
+    return Category.objects.filter(posts__isnull=False).annotate(
+            posts_count=Count('posts')).order_by('-posts_count', 'name')
 
 
 @register.assignment_tag
