@@ -4,7 +4,9 @@ from .models import Page, MenuLink
 
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'keywords')
+    list_display = ('title', 'keywords', 'last_updated')
+    fields = ('title', 'keywords', 'last_updated', 'content')
+    readonly_fields = ('last_updated',)
     search_fields = ('title',)
     save_on_top = True
 

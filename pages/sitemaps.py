@@ -14,3 +14,6 @@ class PagesSiteMap(Sitemap):
 
     def items(self):
         return MenuLink.objects.filter(page__isnull=False)
+
+    def lastmod(self, obj):
+        return obj.page.last_updated
