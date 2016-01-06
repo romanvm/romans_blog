@@ -21,6 +21,7 @@ Main Features:
   The skin also provides a customised preview template for TinyMCE to preview the authored content with the skin's
   styles applied.
 - **Full-text site search** with `django-haystack`_ and `Whoosh`_.
+- **RSS and Atom feeds** for recent blog posts.
 - **Google Analytics support**.
 - **sitemap.xml and robots.txt**.
 - **Localization-ready**: all interface strings, both in Python and templates, are marked as translatable.
