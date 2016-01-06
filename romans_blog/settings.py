@@ -51,8 +51,6 @@ INSTALLED_APPS = (
     'haystack',
     'blog',
     'pages',
-    'bootstrap_skin',
-    'paper_skin',
     'cerulean_skin',
 )
 
