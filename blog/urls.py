@@ -4,6 +4,7 @@
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
 from django.conf.urls import url
+from .feeds import RecentPostsRSSFeed, RecentPostsAtomFeed
 from .views import (BlogHomeView, BlogPostView, BlogFeaturedPostsView,
                     BlogCategoryView, BlogCategoriesListView,
                     BlogArhiveView, BlogMonthArchiveView, BlogPostSearchView)
@@ -16,5 +17,7 @@ urlpatterns = [
     url(r'^archive/(?P<year>\d{4})-(?P<month>\d{1,2})/$', BlogMonthArchiveView.as_view(), name='month_archive'),
     url(r'^archive/$', BlogArhiveView.as_view(), name='archive'),
     url(r'^search/', BlogPostSearchView.as_view(), name='search'),
+    url(r'^feed/rss/$', RecentPostsRSSFeed(), name='rss_feed'),
+    url(r'^feed/atom/$', RecentPostsAtomFeed(), name='atom_feed'),
     url(r'^$', BlogHomeView.as_view(), name='home'),
 ]
