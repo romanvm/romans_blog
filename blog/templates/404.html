@@ -1,0 +1,58 @@
+{% load i18n %}
+{% load blog_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>{% trans "404 Page Not Found!" %} - {% get_site_name %}</title>
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Custom CSS and JS -->
+    <style type="text/css">
+    body {
+      margin-top: 50px;
+    }
+    .error {
+      color: #FF7F7F;
+    }
+    .error-text {
+      margin-top: 30px;
+    }
+    </style>
+    <script>
+      function goBack()
+      {
+        window.history.back();
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="jumbotron">
+            <h3><a href="/">{% get_site_name %}</a></h3>
+            <h1><small class="error">{% trans "Error 404" %}</small><br>{% trans "Page Not Found!" %}</h1>
+            <p class="error-text">
+              {% trans "Sorry, but the requested page was not found on this site." %}
+              {% trans "Click the buttons below to return back or go to the site Home page." %}
+            </p>
+            <p class="btn-group" role="group">
+              <button class="btn btn-primary btn-lg" onclick="goBack()">
+                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;{% trans "Back" %}
+              </button>
+              <a href="/" class="btn btn-primary btn-lg">
+              <span class="glyphicon glyphicon-home"></span>&nbsp;{% trans "Home" %}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+</html>
