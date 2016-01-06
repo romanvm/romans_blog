@@ -15,11 +15,11 @@ Main Features:
 - **WYSIWYG rich content authoring** with TinyMCE editor in admin interface. Youtube links and programming code syntax
   highlighting are supported.
 - **Pluggable skins**: the frond-end layer is completely separated from the core code, allowing to quickly and simply
-  change the site design by switching to another skin. Skins are Django apps that contain all the necessary templates with
-  static files (CSS, JS, fonts etc.) and (optionally) the necessary template tags to render content within
+  change the site design by switching to another skin. A skin is a Django app that contains all necessary templates
+  with static files (CSS, JS, fonts etc.) and (optionally) necessary template tags to render content within
   the skin context. Basically, any html site template with 1-level navigation menu can be turned into a skin.
-  Skins also provide customised preview templates for TinyMCE to preview the authored content with the skin's
-  styles applied. The CMS comes with 3 skins based on `Bootstrap`_ and `Bootswatch`_.
+  The skin also provides a customised preview template for TinyMCE to preview the authored content with the skin's
+  styles applied.
 - **Full-text site search** with `django-haystack`_ and `Whoosh`_.
 - **Google Analytics support**.
 - **sitemap.xml and robots.txt**.
@@ -30,8 +30,6 @@ You can see my blog CMS in action `here`_.
 **License**: `GPL v.3`_
 
 .. _Django: https://www.djangoproject.com/
-.. _Bootstrap: http://getbootstrap.com/
-.. _Bootswatch: http://bootswatch.com/
 .. _django-haystack: http://haystacksearch.org/
 .. _Whoosh: https://pypi.python.org/pypi/Whoosh/
 .. _here: http://romanvm.pythonanywhere.com/
