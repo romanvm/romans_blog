@@ -46,8 +46,9 @@ def get_categories():
     """
     Get the list of non-empty categories ordered by post count in desc. order
     """
-    return Category.objects.filter(posts__isnull=False).annotate(
+    queryset = Category.objects.filter(posts__isnull=False).annotate(
             posts_count=Count('posts')).order_by('-posts_count', 'name')
+    return [category for category in queryset if category.get_published_posts_count()]
 
 
 @register.assignment_tag

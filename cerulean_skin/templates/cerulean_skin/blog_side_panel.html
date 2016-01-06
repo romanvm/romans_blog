@@ -67,7 +67,7 @@
   <div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;{% trans "Categories" %}</h4></div>
   <div class="panel-body">
     {% for category in categories  %}
-    <div><a href="{{ category.get_absolute_url }}">{{ category.name }}&nbsp;<span class="badge">{{ category.posts.count }}</span></a></div>
+    <div><a href="{{ category.get_absolute_url }}">{{ category.name }}&nbsp;<span class="badge">{{ category.get_published_posts_count }}</span></a></div>
     {% endfor %}
   </div>
 </div>

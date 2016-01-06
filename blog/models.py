@@ -15,6 +15,11 @@ class Category(models.Model):
     # Translators: The last part of a web-page URL, usually derives from the page title, e.g. about-us
     slug = models.SlugField(verbose_name=_('Slug'), max_length=100, unique=True)
 
+    def get_published_posts_count(self):
+        return self.posts.filter(is_published=True).count()
+
+    get_published_posts_count.short_description = _('Published Posts Count')
+
     def __str__(self):
         return self.name
 

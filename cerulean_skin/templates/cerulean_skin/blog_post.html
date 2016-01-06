@@ -45,6 +45,7 @@
     <small><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;{{ post|render_post_categories|safe }}</small>
   </p>
   {% endif %}
+  {% if post.is_published %}
   <p class="social">
     <div class="facebook">
       <div class="fb-share-button" data-href="{{ request.build_absolute_uri }}" data-layout="button"></div>
@@ -78,4 +79,5 @@
     <p>Comments are disabled.</p>
     {% endif %}
   </div>
+{% endif %}
 {% endblock blog_page_body %}
