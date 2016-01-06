@@ -133,7 +133,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'mode': 'textareas',
     'width': 800,
-    'plugins': 'preview,table,autoresize,advimage,emotions,syntaxhl,youtubeIframe,contextmenu,searchreplace,'
+    'plugins': 'preview,table,autoresize,advimage,emotions,syntaxhl,youtubeIframe,searchreplace,'
                'pagebreak,autolink,visualchars',
     'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
                              'justifyleft,justifycenter,justifyright,justifyfull,|,'
