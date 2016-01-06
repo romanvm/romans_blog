@@ -141,9 +141,10 @@ TINYMCE_DEFAULT_CONFIG = {
                              'justifyleft,justifycenter,justifyright,justifyfull,|,'
                              'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
                              'sup,sub,|,hr,|,blockquote,|,syntaxhl,|,help',
-    'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,|,link,unlink,anchor,|,'
+    'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,styleselect,|,link,unlink,anchor,|,'
                              'image,youtubeIframe,|,emotions,|,removeformat,cleanup,|,code,preview',
-    'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,charmap,visualchars,|,tablecontrols,|,search,replace,|,pagebreak',
+    'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,charmap,visualchars,|,tablecontrols,|,search,replace,|,'
+                               'pagebreak',
     'browser_spellcheck': True,
     'plugin_preview_width': 1024,
     'plugin_preview_height': 640,
@@ -153,11 +154,15 @@ TINYMCE_DEFAULT_CONFIG = {
     'accessibility_warnings': False,
     'autoresize_min_height': 400,
     'pagebreak_separator': '<!-- ***BLOG CUT*** -->',
+    'style_formats': [{'title': 'Small text', 'inline': 'small'},
+                      {'title': 'Inline code', 'inline': 'code'},
+                      {'title': 'Keyboard input', 'inline': 'kbd'},
+                      {'title': 'Sample output', 'inline': 'samp'}],
     'extended_valid_elements': 'img[!src|border:0|alt|title|width|height|style]a[name|href|target|title|onclick],'
                                'textarea[cols|rows|disabled|name|readonly|class]'
                                'iframe[src|title|width|height|allowfullscreen|frameborder|class|id],'
                                'object[classid|width|height|codebase|*],param[name|value|_value|*],'
-                               'embed[type|width|height|src|*]',
+                               'embed[type|width|height|src|*],small,code,kbd,samp',
                           }
 
 # Skin settings
