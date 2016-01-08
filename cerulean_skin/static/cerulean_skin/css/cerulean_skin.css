@@ -85,3 +85,9 @@ h1,h2,.panel-title,.panel-footer {
     width: 1024px;
   }
 }
+
+/* Fixes syntaxhihgligter code placement with Bootstrap styles */
+.syntaxhighlighter table td.code .container:before {
+    content: "";
+    display: inherit !important;
+}
