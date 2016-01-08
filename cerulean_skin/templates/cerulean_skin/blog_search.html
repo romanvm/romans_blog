@@ -18,7 +18,7 @@
 {% if query %}
   {% if object_list %}
     <h3>{% trans "Search results for" %} "<em>{{ query }}</em>"</h3>
-    <h4>{% trans "Posts found:" %} <strong>{{ paginator.count }}</strong></h4>
+    <h4>{% trans "Items found:" %} <strong>{{ paginator.count }}</strong></h4>
     <div class="search-results">
       {% for result in object_list %}
       <p>
