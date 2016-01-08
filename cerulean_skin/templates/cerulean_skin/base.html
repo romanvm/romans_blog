@@ -23,10 +23,11 @@
   <!-- Font Awesome CSS -->
   <link href="{% static "cerulean_skin/css/font-awesome.min.css" %}" rel="stylesheet">
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-  <link href="{% static "cerulean_skin/css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
+  <!-- <link href="{% static "cerulean_skin/css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet"> -->
   <!-- Custom styles for this template -->
   <link href="{% static "cerulean_skin/css/sticky-footer-navbar.css" %}" rel="stylesheet">
   <link href="{% static "cerulean_skin/css/cerulean_skin.css" %}" rel="stylesheet">
+  <link href="{% static "cerulean_skin/css/code_fix.css" %}" rel="stylesheet">
   {% endblock css %}
   {% block js %}
   <!-- Bootstrap core JavaScript -->
@@ -124,5 +125,6 @@
   </footer>
   {% endblock footer %}
   {% include "tinymce/codehighlighting.html" %}
+  
 </body>
 </html>

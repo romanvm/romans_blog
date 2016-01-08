@@ -7,7 +7,7 @@ h1,h2,.panel-title,.panel-footer {
 }
 
 .blog-sidebar {
-  margin-top: 25px
+  margin-top: 40px
 }
 
 .blog-sidebar-module {
@@ -29,7 +29,7 @@ h1,h2,.panel-title,.panel-footer {
   margin-bottom: 15px;
 }
 
-.page-body {
+.page-content {
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -61,4 +61,27 @@ h1,h2,.panel-title,.panel-footer {
   vertical-align: inherit !important;
   height: 20px;
 }
-/*************/
+
+@media (min-width: 768px) {
+  .container {
+    width: 640px;
+  }
+  .page_body {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 800px;
+  }
+  .page_body {
+    margin-left: 75px;
+    margin-right: 75px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1024px;
+  }
+}

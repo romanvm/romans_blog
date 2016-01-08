@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load blog_tags %}
-{% get_url "blog:home" as home_url %}
 {% if user.is_authenticated %}
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -17,6 +16,7 @@
   </div>
 {% endif %}
 {% get_posts_digest False as latest_posts %}
+{% get_url "blog:home" as home_url %}
 {% if latest_posts.objects and request.path != home_url %}
   <div class="panel panel-default">
     <div class="panel-heading"><h4 class="panel-title"><span class="fa fa-newspaper-o"></span>&nbsp;{% trans "Latest Posts" %}</h4></div>
@@ -75,7 +75,9 @@
 <div class="panel panel-default">
   <div class="panel-heading"><h4 class="panel-title"><span class="fa fa-rss"></span>&nbsp;{% trans "Feeds" %}</h4></div>
   <div class="panel-body">
-    <a href="{% url "blog:rss_feed" %}">RSS</a><br>
-    <a href="{% url "blog:atom_feed" %}">Atom</a>
+  <ul class="list-inline">
+    <li><a href="{% url "blog:rss_feed" %}">RSS</a></li>
+    <li><a href="{% url "blog:atom_feed" %}">Atom</a></li>
+  </ul>
   </div>
 </div>
