@@ -13,8 +13,8 @@ class CategoryAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'date_published', 'last_updated', 'is_published', 'is_featured',
                     'allow_comments')
-    fields = ('title', 'slug', 'date_published', 'last_updated', 'is_published', 'is_featured', 'allow_comments',
-              'content', 'categories')
+    fields = ('title', 'slug', 'date_published', 'last_updated', 'content', 'is_published',
+              'is_featured', 'allow_comments', 'categories')
     readonly_fields = ('last_updated',)
     search_fields = ('title', 'date_published', 'categories')
     list_filter = ('date_published', 'is_published', 'is_featured', 'allow_comments')

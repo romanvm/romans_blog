@@ -129,8 +129,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'mode': 'textareas',
-    'width': 800,
-    'plugins': 'preview,table,autoresize,advimage,emotions,syntaxhl,youtubeIframe,searchreplace,'
+    'width': 830,
+    'height': 500,
+    'plugins': 'preview,table,advimage,emotions,syntaxhl,youtubeIframe,searchreplace,'
                'pagebreak,autolink,visualchars',
     'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
                              'justifyleft,justifycenter,justifyright,justifyfull,|,'
@@ -147,7 +148,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'relative_urls': False,
     'remove_linebreaks': False,
     'accessibility_warnings': False,
-    'autoresize_min_height': 400,
     'pagebreak_separator': '<!-- ***BLOG CUT*** -->',
     'style_formats': [{'title': 'Small text', 'inline': 'small'},
                       {'title': 'Inline code', 'inline': 'code'},
