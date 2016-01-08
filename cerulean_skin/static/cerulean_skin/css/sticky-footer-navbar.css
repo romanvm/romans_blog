@@ -57,7 +57,17 @@ body {
   }
 }
 
-@media (min-width: 750px) {
+@media (min-width: 770px) {
+  body {
+    margin-bottom: 70px;
+  }
+  .footer {
+    height: 70px;
+    border-radius: 4px;
+  }
+}
+
+@media (min-width: 990px) {
   body {
     margin-bottom: 60px;
   }
