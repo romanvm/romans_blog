@@ -86,7 +86,7 @@ h1,h2,.panel-title,.panel-footer {
   }
 }
 
-/* Fixes syntaxhihgligter code placement with Bootstrap styles */
+/* Fixes syntaxhihgligter code placement with Bootstrap styles in Firefox */
 .syntaxhighlighter table td.code .container:before {
     content: "";
     display: inherit !important;
