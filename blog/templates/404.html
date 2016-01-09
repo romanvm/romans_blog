@@ -17,6 +17,7 @@
     <style type="text/css">
     body {
       margin-top: 50px;
+      text-align: center;
     }
     .error {
       color: #FF7F7F;
@@ -40,8 +41,8 @@
             <h3><a href="/">{% get_site_name %}</a></h3>
             <h1><small class="error">{% trans "Error 404" %}</small><br>{% trans "Page Not Found!" %}</h1>
             <p class="error-text">
-              {% trans "Sorry, but the requested page was not found on this site." %}
-              {% trans "Click the buttons below to return back or go to the site Home page." %}
+              {% trans "Sorry, but the requested page was not found on this site." %}<br>
+              {% trans "Click one of the buttons below to return back or go to the site Home page." %}
             </p>
             <p class="btn-group" role="group">
               <button class="btn btn-primary btn-lg" onclick="goBack()">
