@@ -13,7 +13,10 @@ register = template.Library()
 @register.filter
 def render_post_categories(post):
     """
-    Render the list of post categories as as <a> tags
+    Filter
+
+    :param post: blog post
+    :return: rendered comma-separated list of post categories enclosed in as <a> tags
     """
     categories = []
     for category in post.categories.all():
@@ -24,10 +27,16 @@ def render_post_categories(post):
 @register.filter
 def truncate_post(post, words):
     """
+    Filter
+
     Truncate a Post text to a given number of words.
 
     It takes into account the case when a truncated fragment may contain
     code snippets in ``<pre>`` blocks and properly terminates such fragment.
+
+    :param post: blog post
+    :param words: the number of words to truncate the post to
+    :return: properly terminated truncated post
     """
     MARKER = '%{-#$*$#-}%'
     truncated = Truncator(post.content).words(words, truncate=MARKER, html=True)

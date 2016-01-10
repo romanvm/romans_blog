@@ -2,6 +2,9 @@
 # Module: settings
 # Created on: 20.12.2015
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
+"""
+Contains the variables defining specific style classes for TinyMCE editor
+"""
 
 # Table style classes for TinyMCE table plugin
 TABLE_STYLES = 'Bootstrap simple=table;Bootstrap striped=table table-striped;Bootstrap bordered=table table-bordered'
