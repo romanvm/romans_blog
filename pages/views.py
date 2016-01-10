@@ -9,9 +9,7 @@ class PageView(DetailView):
 
     Template: ``page.html``
 
-    Specific context variables:
-
-    - ``menu_link``
+    Specific context variable: ``menu_link``
     """
     template_name = '{0}/page.html'.format(settings.CURRENT_SKIN)
     queryset = MenuLink.objects.filter(page__isnull=False)
