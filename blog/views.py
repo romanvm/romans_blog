@@ -129,7 +129,7 @@ class BlogArhiveView(_PageTitleMixIn, ListView):
 
     Specific context variables:
 
-    - ``months`` the list of class:`datetime.data` objects representing months
+    - ``months`` -- the list of class:`datetime.data` objects representing months
     - ``page_title``
     """
     template_name = '{0}/blog_archive.html'.format(settings.CURRENT_SKIN)

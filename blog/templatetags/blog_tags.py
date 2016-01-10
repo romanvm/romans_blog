@@ -76,7 +76,7 @@ def get_posts_digest(featured=False):
 
     :param featured: if ``True`` featured posts digest is returned
     :return: the digest of recent posts and "More" link
-    :rtype: namedtuple
+    :rtype: :class:`SideBarObjects`
     """
     posts = Post.objects.filter(is_published=True)
     if featured:
@@ -94,7 +94,7 @@ def get_archive_digest():
     Assignment tag
 
     :return: the list of the most recent months from the blog archive for the blog sidebar
-    :rtype: namedtuple
+    :rtype: :class:`SideBarObjects`
     """
     months = Post.objects.filter(is_published=True).dates('date_published', 'month', order='DESC')
     more = reverse('blog:archive') if months.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
