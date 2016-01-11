@@ -6,11 +6,18 @@
 Welcome to Roman's Blog documentation!
 ======================================
 
+**Roman's Blog** is a mini-CMS for a blog-oriented web-site that I've developed myself as my `Django`_ learning project.
+You can see it in action `here`_.
+
+.. _Django: https://www.djangoproject.com/
+.. _here: https://romanvm.pythonanywhere.com/
+
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   deploy
    apps
 
 Indices and tables
