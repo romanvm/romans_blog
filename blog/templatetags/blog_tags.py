@@ -132,7 +132,7 @@ def get_url(url_name, *args, **kwargs):
 
 
 @register.inclusion_tag('{0}/paginator.html'.format(settings.CURRENT_SKIN), takes_context=True)
-def paginator(context, adjacent_pages=2):
+def render_paginator(context, adjacent_pages=2):
     """
     Inclusion tag
 
