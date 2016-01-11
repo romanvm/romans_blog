@@ -3,11 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Roman's Blog documentation!
-======================================
+Roman's Blog Brief Manual
+=========================
 
-**Roman's Blog** is a mini-CMS for a blog-oriented web-site that I've developed myself as my `Django`_ learning project.
-You can see it in action `here`_.
+**Roman's Blog** is a mini-CMS for a blog-oriented web-site that I've developed myself as my `Django`_
+learning project. You can see it in action `here`_.
 
 .. _Django: https://www.djangoproject.com/
 .. _here: https://romanvm.pythonanywhere.com/
@@ -18,6 +18,8 @@ Contents:
    :maxdepth: 2
 
    deploy
+   usage
+   skins
    apps
 
 Indices and tables

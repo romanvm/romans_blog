@@ -1,6 +1,8 @@
 Blog Application
 ================
 
+This app provides the core blog functionality.
+
 .. autosummary::
     :toctree: autosummary
 

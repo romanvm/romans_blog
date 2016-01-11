@@ -1,6 +1,11 @@
 Cerulean Skin Application
 =========================
 
+This is a skin for **Roman's Blog** based on `Bootstrap`_ and `Bootswatch`_ design elements.
+
+.. _Bootstrap: http://getbootstrap.com/
+.. _Bootswatch: http://bootswatch.com/
+
 .. autosummary::
     :toctree: autosummary
 
