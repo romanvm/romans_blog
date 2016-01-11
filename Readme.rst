@@ -28,6 +28,8 @@ Main Features:
 
 You can see my blog CMS in action `here`_.
 
+`Roman's Blog brief manual`_.
+
 **License**: `GPL v.3`_
 
 .. _Django: https://www.djangoproject.com/
@@ -35,3 +37,4 @@ You can see my blog CMS in action `here`_.
 .. _Whoosh: https://pypi.python.org/pypi/Whoosh/
 .. _here: http://romanvm.pythonanywhere.com/
 .. _GPL v.3: http://www.gnu.org/licenses/gpl-3.0.en.html
+.. _Roman's Blog brief manual: http://romanvm.github.io/romans_blog/manual/
