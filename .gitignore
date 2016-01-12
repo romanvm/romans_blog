@@ -114,3 +114,4 @@ venv/
 media/
 /static/
 whoosh_index/
+git_push.py
