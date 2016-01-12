@@ -63,6 +63,11 @@ Also set **Domain name** in the admin panel (see above) to your site's actual do
 To enable `Disqus`_ comments for posts and Google Analytics tracking define ``DISQUS_SHORTNAME``
 and ``GOOGLE_ANALYTICS_ID`` variables in the project's ``settings.py`` respectively.
 
+To update ``django-haystack`` search index you need either to define
+``HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'`` in the project's ``settings.py``
+(if your server has enough CPU power to run indexing on every save) or to schedule
+``python manage.py update_index`` command to run at regular intervals.
+
 .. _Django Secret Key Generator: http://www.miniwebtool.com/django-secret-key-generator/
 .. _Two Scoops of Django: http://www.amazon.com/Two-Scoops-Django-Best-Practices/dp/0981467342
 .. _Disqus: https://disqus.com/
