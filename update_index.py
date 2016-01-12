@@ -11,12 +11,13 @@ import os
 import sys
 import subprocess
 
+home = os.path.expandvars('$HOME')
 # Change this to your actual virtual environment
-VENV = os.path.join(os.path.expandvars('$HOME'), 'venv')
-activate = os.path.join(VENV, 'bin', 'activate_this.py')
+venv = os.path.join(home, 'venv')
+activate = os.path.join(venv, 'bin', 'activate_this.py')
 with open(activate, 'r') as fo:
     exec(fo.read(), dict(__file__=activate))
-path = os.path.join(os.path.expandvars('$HOME'), 'romans_blog')
+path = os.path.join(home, 'romans_blog')
 if path not in sys.path:
     sys.path.insert(0, path)
 subprocess.call(['python', 'manage.py', 'update_index'])
