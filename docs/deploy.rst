@@ -60,5 +60,9 @@ need to be kept secret.
 Don't forget to set ``DEBUG = False`` and define ``ALLOWED_HOSTS`` for your site.
 Also set **Domain name** in the admin panel (see above) to your site's actual domain name.
 
+To enable `Disqus`_ comments for posts and Google Analytics tracking define ``DISQUS_SHORTNAME``
+and ``GOOGLE_ANALYTICS_ID`` variables in the project's ``settings.py`` respectively.
+
 .. _Django Secret Key Generator: http://www.miniwebtool.com/django-secret-key-generator/
 .. _Two Scoops of Django: http://www.amazon.com/Two-Scoops-Django-Best-Practices/dp/0981467342
+.. _Disqus: https://disqus.com/
