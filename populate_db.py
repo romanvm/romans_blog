@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # coding: utf-8
 # Module: populate_db.py
 # Created on: 24.11.2015
