@@ -22,7 +22,7 @@
     <div class="panel-heading"><h4 class="panel-title"><span class="fa fa-newspaper-o"></span>&nbsp;{% trans "Latest Posts" %}</h4></div>
     <div class="panel-body">
       {% for post in latest_posts.objects  %}
-      <div><a href="{{ post.get_absolute_url }}">{{ post.title }}</a><br>
+      <div class="sidebar-post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a><br>
       <small class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small></div>
       {% endfor %}
     </div>
@@ -37,7 +37,7 @@
   <div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{% trans "Featured Posts" %}</h4></div>
   <div class="panel-body">
     {% for post in featured_posts.objects  %}
-    <div><a href="{{ post.get_absolute_url }}">{{ post.title }}</a><br>
+    <div class="sidebar-post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a><br>
     <small class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em></small></div>
     {% endfor %}
   </div>

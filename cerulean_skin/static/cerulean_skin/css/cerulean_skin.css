@@ -14,6 +14,14 @@ h1,h2,.panel-title,.panel-footer {
   margin-bottom: 40px;
 }
 
+.sidebar-post-title {
+  margin-bottom: 5px;
+}
+
+.panel-body > :last-child {
+  margin-bottom: 0px;
+}
+
 .btn-circle {
   width: 30px;
   height: 30px;
