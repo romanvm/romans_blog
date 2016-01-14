@@ -11,7 +11,11 @@ cerulean_skin.templatetags.cerulean_skin_tags
    
       render_post_categories
       truncate_post
+   
+   
 
+   
+   
    
 
    

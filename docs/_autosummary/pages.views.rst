@@ -1,7 +1,10 @@
-blog.models
+pages.views
 ===========
 
-.. automodule:: blog.models
+.. automodule:: pages.views
+
+   
+   
    
 
    
@@ -10,8 +13,7 @@ blog.models
 
    .. autosummary::
    
-      Category
-      Post
+      PageView
    
    
 

@@ -5,7 +5,7 @@ This app allows to create "plain" web-pages that are not part of the blog and ac
 links in the site's main navigation menu.
 
 .. autosummary::
-    :toctree: autosummary
+    :toctree: _autosummary
 
     pages.models
     pages.views

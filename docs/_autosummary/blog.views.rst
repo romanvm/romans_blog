@@ -5,6 +5,7 @@ blog.views
 
    
    
+   
 
    
    
@@ -20,3 +21,9 @@ blog.views
       BlogMonthArchiveView
       BlogPostSearchView
       BlogPostView
+   
+   
+
+   
+   
+   

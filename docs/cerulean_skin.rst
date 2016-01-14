@@ -7,6 +7,6 @@ This is a skin for **Roman's Blog** based on `Bootstrap`_ and `Bootswatch`_ desi
 .. _Bootswatch: http://bootswatch.com/
 
 .. autosummary::
-    :toctree: autosummary
+    :toctree: _autosummary
 
     cerulean_skin.templatetags.cerulean_skin_tags

@@ -16,6 +16,22 @@ blog.templatetags.blog_tags
       get_posts_digest
       get_site_name
       get_url
-      paginator
       render_disqus_comments
       render_google_analytics
+      render_paginator
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      SideBarObjects
+   
+   
+
+   
+   
+   
