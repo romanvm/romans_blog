@@ -137,14 +137,15 @@ html_theme_options = {
     'github_user': 'romanvm',
     'github_repo': 'romans_blog',
     'github_banner': True,
+    'show_related': False,
 }
 
 html_sidebars = {
     '**': [
         'about.html',
         'navigation.html',
-        'relations.html',
         'searchbox.html',
+        'relations.html',
     ]
 }
 
