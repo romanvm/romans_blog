@@ -28,6 +28,6 @@ Despite being a learning project, I've tried to make this CMS suitable for real-
 
 You can see my blog CMS in action [here](http://romanvm.pythonanywhere.com/).
 
-[Roman's Blog brief manual](http://romanvm.github.io/romans_blog/manual/).
+[Roman's Blog brief documentation](http://romanvm.github.io/romans_blog/).
 
 **License**: [GPL v.3](http://www.gnu.org/licenses/gpl-3.0.en.html)
