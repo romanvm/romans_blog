@@ -15,7 +15,6 @@
 
 import sys
 import os
-import shlex
 import django
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
@@ -47,6 +46,10 @@ extensions = [
 autodoc_member_order = 'bysource'
 autodoc_default_flags = ['members', 'show-inheritance']
 autosummary_generate = True
+intersphinx_mapping = {
+    'https://docs.python.org/3.4': None,
+    'https://docs.djangoproject.com/en/1.8/': 'http://docs.djangoproject.com/en/1.8/_objects/',
+                       }
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -316,8 +319,3 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
-
-
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/3.4': None,
-                       'http://django.readthedocs.org/en/1.8.x/': None}
