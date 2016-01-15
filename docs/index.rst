@@ -35,7 +35,7 @@ Main Features
 .. _here: https://romanvm.pythonanywhere.com/
 .. _django-haystack: http://haystacksearch.org/
 .. _Whoosh: https://pypi.python.org/pypi/Whoosh/
-.. _GPL v.3: (http://www.gnu.org/licenses/gpl-3.0.en.html
+.. _GPL v.3: http://www.gnu.org/licenses/gpl-3.0.en.html
 
 Contents:
 
