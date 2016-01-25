@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3.4
 # coding: utf-8
 # Module: update_index
 # Created on: 12.01.2016
@@ -20,4 +20,5 @@ with open(activate, 'r') as fo:
 path = os.path.join(home, 'romans_blog')
 if path not in sys.path:
     sys.path.insert(0, path)
+os.chdir(path)
 subprocess.call(['python', 'manage.py', 'update_index'])
