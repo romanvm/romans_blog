@@ -1,5 +1,7 @@
 # Roman's Blog
 
+[![Build Status](https://travis-ci.org/romanvm/romans_blog.svg?branch=master)](https://travis-ci.org/romanvm/romans_blog)
+
 This is a simple CMS for a blog-oriented web-site that I've developed to learn
 [Django](https://www.djangoproject.com/) web-framework.
 Despite being a learning project, I've tried to make this CMS suitable for real-life usage.
