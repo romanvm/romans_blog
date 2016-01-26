@@ -47,6 +47,7 @@ class Post(models.Model):
     is_featured = models.BooleanField(verbose_name=_('Featured'), default=False)
     allow_comments = models.BooleanField(verbose_name=_('Allow comments'), default=True)
     content = HTMLField(verbose_name=_('Post Content'))
+    meta_description = models.TextField(verbose_name=_('Description'), max_length=160, blank=True)
 
     def __str__(self):
         return self.title

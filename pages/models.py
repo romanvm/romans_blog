@@ -14,6 +14,7 @@ class Page(models.Model):
     keywords = models.CharField(verbose_name=_('Keywords'), max_length=200, blank=True)
     content = tinymce.HTMLField(verbose_name=_('Page Content'))
     last_updated = models.DateTimeField(verbose_name=_('Last Updated'), auto_now=True)
+    meta_description = models.TextField(verbose_name=_('Description'), max_length=160, blank=True)
 
     def __str__(self):
         return self.title

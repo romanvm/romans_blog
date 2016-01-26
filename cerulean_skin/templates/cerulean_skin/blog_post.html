@@ -5,12 +5,15 @@
 {% block title %}
   <title>{{ post.title }} - {% get_site_name %}</title>
 {% endblock title %}
-{% if post.categories.count %}
-  {% block meta %}
+{% block meta %}
   {{ block.super }}
+  {% if post.categories.count %}
   <meta name="keywords" content="{{ post.categories.all|join:"," }}">
-  {% endblock meta %}
-{% endif %}
+  {% endif %}
+  {% if post.meta_description %}
+  <meta name="description" content="{{ post.meta_description }}">
+  {% endif %}
+{% endblock meta %}
 {% block navbar %}
   <div id="fb-root"></div>
   <script>(function(d, s, id) {

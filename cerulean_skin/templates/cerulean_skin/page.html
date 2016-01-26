@@ -1,11 +1,14 @@
 {% extends "cerulean_skin/base.html" %}
 {% load blog_tags %}
-{% if page.keywords %}
-  {% block meta %}
+{% block meta %}
   {{ block.super }}
-  <meta name="keywords" content="{{ page.keywords }}">
-  {% endblock meta %}
-{% endif %}
+  {% if menu_link.page.keywords %}
+  <meta name="keywords" content="{{ menu_link.page.keywords }}">
+  {% endif %}
+  {% if menu_link.page.meta_descripiton %}
+  <meta name="description" content="{{ menu_link.page.meta_descripiton }}">
+  {% endif %}
+{% endblock meta %}
 {% block title %}
   <title>{{ menu_link.page.title }} - {% get_site_name %}</title>
 {% endblock title %}
