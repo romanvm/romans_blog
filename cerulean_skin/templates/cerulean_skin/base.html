@@ -22,6 +22,8 @@
   <link href="{% static "cerulean_skin/css/bootstrap.min.css" %}" rel="stylesheet">
   <!-- Font Awesome CSS -->
   <link href="{% static "cerulean_skin/css/font-awesome.min.css" %}" rel="stylesheet">
+  <!-- Prism CSS -->
+  <link href="{% static "prism/prism.css" %}" rel="stylesheet">
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <!-- <link href="{% static "cerulean_skin/css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet"> -->
   <!-- Custom styles for this template -->
@@ -34,6 +36,8 @@
   <script src="{% static "cerulean_skin/js/bootstrap.js" %}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="{% static "cerulean_skin/js/ie10-viewport-bug-workaround.js" %}"></script>
+  <!-- Prism JS -->
+  <script src="{% static "prism/prism.js" %}"></script>
   <script type="text/javascript">
   $(function(){
     // Make embedded Youtube videos responsive
@@ -125,6 +129,5 @@
     </div>
   </footer>
   {% endblock footer %}
-  {% include "tinymce/codehighlighting.html" %}  
 </body>
 </html>
