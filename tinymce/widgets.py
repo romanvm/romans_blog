@@ -29,6 +29,7 @@ except ImportError:
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language, ugettext as _
+from django.template.loader import render_to_string
 import tinymce.settings
 from tinymce.profiles import DEFAULT as DEFAULT_PROFILE
 
@@ -81,7 +82,7 @@ class TinyMCE(forms.Textarea):
             #if k in mce_config:
                #js_functions[k] = mce_config[k]
                #del mce_config[k]
-        mce_json = json.dumps(mce_config)
+        mce_json = json.dumps(mce_config, indent=2)
 
         #for k in js_functions:
             #index = mce_json.rfind('}')
@@ -91,8 +92,8 @@ class TinyMCE(forms.Textarea):
             html = [u'<div%s>%s</div>' % (flatatt(final_attrs), escape(value))]
         else:
             html = [u'<textarea%s>%s</textarea>' % (flatatt(final_attrs), escape(value))]
-        html.append(u'<script type="text/javascript">tinyMCE.init(%s)</script>' % mce_json)
-
+        html.append(render_to_string('tinymce/tinymce_init.html', context={'callbacks': tinymce.settings.CALLBACKS,
+                                                                           'tinymce_config': mce_json[1:-1]}))
         return mark_safe(u'\n'.join(html))
 
     def _media(self):

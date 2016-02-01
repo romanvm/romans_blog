@@ -160,7 +160,8 @@ TINYMCE_DEFAULT_CONFIG = {
                                'embed[type|width|height|src|*],small,code,kbd,samp',
                           }
 '''
-TINYMCE_USE_CODESAMPLE = True
+TINYMCE_CODESAMPLE = True
+TINYMCE_FILEBROWSER = True
 # Skin settings
 
 CURRENT_SKIN = 'cerulean_skin'

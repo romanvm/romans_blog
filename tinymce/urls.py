@@ -10,7 +10,7 @@ except:
 urlpatterns = [
     url(r'^js/textareas/(?P<name>.+)/$', textareas_js, name='tinymce-js'),
     url(r'^js/textareas/(?P<name>.+)/(?P<lang>.*)$', textareas_js, name='tinymce-js-lang'),
-    url(r'^spellchecker/$', spell_check),
+    url(r'^spellchecker/$', spell_check, name='tinymce-spellchecker'),
     url(r'^flatpages_link_list/$', flatpages_link_list),
     url(r'^compressor/$', compressor, name='tinymce-compressor'),
     url(r'^filebrowser/$', filebrowser, name='tinymce-filebrowser'),
