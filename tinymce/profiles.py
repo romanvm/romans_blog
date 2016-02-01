@@ -1,3 +1,5 @@
+from tinymce import settings
+
 DEFAULT = {
     'theme': 'modern',
     'plugins': 'compat3x advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker '
@@ -7,6 +9,7 @@ DEFAULT = {
                'bullist numlist outdent indent | link image | print preview media fullpage | '
                'forecolor backcolor emoticons',
 }
+
 SIMPLE = {
     'theme': 'modern',
     'plugins': '',
@@ -17,3 +20,6 @@ SIMPLE = {
     'schema': 'html5',
     'statusbar': True,
 }
+
+if settings.USE_CODESAMPLE:
+    DEFAULT['toolbar'] += ' | codesample'

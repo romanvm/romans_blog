@@ -1,4 +1,3 @@
-import os
 import warnings
 from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -25,3 +24,5 @@ USE_COMPRESSOR = False
 if getattr(settings, 'TINYMCE_FILEBROWSER', False):
     raise RuntimeError("TINYMCE_FILEBROWSER is not supported anymore, check docs for instructions.")
 USE_FILEBROWSER = False
+
+USE_CODESAMPLE = getattr(settings, 'TINYMCE_USE_CODESAMPLE', False)
