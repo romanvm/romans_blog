@@ -4,8 +4,8 @@ function djangoFileBrowser(field_name, url, type, win) {
     tinyMCE.activeEditor.windowManager.open(
         {
             'file': url,
-            'width': 820,
-            'height': 500,
+            'width': 840,
+            'height': 600,
             'resizable': "yes",
             'scrollbars': "yes",
             'inline': "no",
