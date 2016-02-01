@@ -92,8 +92,14 @@ class TinyMCE(forms.Textarea):
             html = [u'<div%s>%s</div>' % (flatatt(final_attrs), escape(value))]
         else:
             html = [u'<textarea%s>%s</textarea>' % (flatatt(final_attrs), escape(value))]
-        html.append(render_to_string('tinymce/tinymce_init.html', context={'callbacks': tinymce.settings.CALLBACKS,
-                                                                           'tinymce_config': mce_json[1:-1]}))
+        callbacks = tinymce.settings.CALLBACKS
+        if tinymce.settings.USE_FILEBROWSER and 'file_browser_callback' not in callbacks:
+            callbacks['file_browser_callback'] = 'djangoFileBrowser'
+        if tinymce.settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
+            callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
+        html.append('<script type="text/javascript">{0}</script>'.format(
+            render_to_string('tinymce/tinymce_init.js', context={'callbacks': callbacks,
+                                                                   'tinymce_config': mce_json[1:-1]})))
         return mark_safe(u'\n'.join(html))
 
     def _media(self):
