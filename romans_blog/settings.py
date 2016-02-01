@@ -125,7 +125,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # TinyMCE settings
-
+'''
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'mode': 'textareas',
@@ -159,21 +159,21 @@ TINYMCE_DEFAULT_CONFIG = {
                                'object[classid|width|height|codebase|*],param[name|value|_value|*],'
                                'embed[type|width|height|src|*],small,code,kbd,samp',
                           }
-
+'''
 # Skin settings
 
 CURRENT_SKIN = 'cerulean_skin'
-TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/'
-skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
-try:
-    table_styles = skin_settings.TABLE_STYLES
-    table_row_styles = skin_settings.TABLE_ROW_STYLES
-    theme_advanced_styles = skin_settings.IMG_STYLES
-except AttributeError:
-    table_styles = table_row_styles = theme_advanced_styles = ''
-TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
-TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
-TINYMCE_DEFAULT_CONFIG['theme_advanced_styles'] = theme_advanced_styles
+# TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/'
+# skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
+# try:
+#     table_styles = skin_settings.TABLE_STYLES
+#     table_row_styles = skin_settings.TABLE_ROW_STYLES
+#     theme_advanced_styles = skin_settings.IMG_STYLES
+# except AttributeError:
+#     table_styles = table_row_styles = theme_advanced_styles = ''
+# TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
+# TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
+# TINYMCE_DEFAULT_CONFIG['theme_advanced_styles'] = theme_advanced_styles
 
 # Haystack search settings
 
