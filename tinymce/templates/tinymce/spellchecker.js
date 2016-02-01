@@ -12,7 +12,7 @@ function(method, text, success, failure) {
       success(result);
     }, // end success
     error: function(error, xhr) {
-      failure('Spellcheck error:' + error);
+      failure('Spellcheck error: ' + error);
     } // end error
   }); // End sendRPC
 } // end spellchecker_callback

@@ -1,12 +1,14 @@
 # Copyright (c) 2008 Joost Cassee
 # Licensed under the terms of the MIT License (see LICENSE.txt)
 
+from traceback import format_exc
 import logging
 from django.core import urlresolvers
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
 from django.utils.translation import ugettext as _
+from django.utils.html import strip_tags
 from tinymce.compressor import gzip_compressor
 from tinymce.widgets import get_language_config
 
@@ -19,6 +21,8 @@ try:
     import json
 except ImportError:
     import simplejson as json
+
+logger = logging.getLogger(__name__)
 
 
 def textareas_js(request, name, lang=None):
@@ -41,47 +45,43 @@ def textareas_js(request, name, lang=None):
     return HttpResponse(template.render(context),
             content_type="application/x-javascript")
 
+
 def spell_check(request):
     """
     Returns a HttpResponse that implements the TinyMCE spellchecker protocol.
     """
+    data = json.loads(request.body.decode('utf-8'))
+    output = {'jsonrpc': '2.0', 'id': data['id']}
+    error = None
     try:
         import enchant
-
-        raw = request.raw_post_data
-        input = json.loads(raw)
-        id = input['id']
-        method = input['method']
-        params = input['params']
-        lang = params[0]
-        arg = params[1]
-
-        if not enchant.dict_exists(str(lang)):
-            raise RuntimeError("dictionary not found for language '%s'" % lang)
-
-        checker = enchant.Dict(str(lang))
-
-        if method == 'checkWords':
-            result = [word for word in arg if word and not checker.check(word)]
-        elif method == 'getSuggestions':
-            result = checker.suggest(arg)
-        else:
-            raise RuntimeError("Unkown spellcheck method: '%s'" % method)
-        output = {
-            'id': id,
-            'result': result,
-            'error': None,
-        }
+        from enchant.checker import SpellChecker
+        if data['params']['lang'] not in enchant.list_languages():
+            raise RuntimeError
+        output['result'] = {}
+        checker = SpellChecker(data['params']['lang'])
+        checker.set_text(strip_tags(data['params']['text']))
+        for err in checker:
+            output['result'][checker.word] = checker.suggest()
+    except ImportError:
+        error = 'pyenchant package is not installed!'
+        logging.exception(format_exc())
+    except RuntimeError:
+        error = 'Missing dictionary {0}!'.format(data['params']['lang'])
+        logging.exception(format_exc())
     except Exception:
-        logging.exception("Error running spellchecker")
-        return HttpResponse(_("Error running spellchecker"))
-    return HttpResponse(json.dumps(output),
-            content_type='application/json')
+        error = 'Unknown error!'
+        logging.exception(format_exc())
+    if error is not None:
+        output['error'] = error
+    return HttpResponse(json.dumps(output), content_type='application/json')
+
 
 try:
     spell_check = csrf_exempt(spell_check)
 except NameError:
     pass
+
 
 def preview(request, name):
     """
@@ -123,6 +123,7 @@ def render_to_link_list(link_list):
     """
     return render_to_js_vardef('tinyMCELinkList', link_list)
 
+
 def render_to_image_list(image_list):
     """
     Returns a HttpResponse whose content is a Javscript file representing a
@@ -134,6 +135,7 @@ def render_to_image_list(image_list):
 def render_to_js_vardef(var_name, var_value):
     output = "var %s = %s" % (var_name, json.dumps(var_value))
     return HttpResponse(output, content_type='application/x-javascript')
+
 
 def filebrowser(request):
     try:
