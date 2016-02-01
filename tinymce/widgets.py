@@ -31,7 +31,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import get_language, ugettext as _
 from django.template.loader import render_to_string
 import tinymce.settings
-from tinymce.profiles import DEFAULT as DEFAULT_PROFILE
+from tinymce.profiles import DEFAULT, SIMPLE
 
 
 class TinyMCE(forms.Textarea):
@@ -60,7 +60,15 @@ class TinyMCE(forms.Textarea):
         if content_language is None:
             content_language = mce_attrs.get('language', None)
         self.content_language = content_language
-        self.profile = profile or DEFAULT_PROFILE
+        if tinymce.settings.PROFILE == 'default':
+            DEFAULT.update(tinymce.settings.CONFIG)
+            default_profile = DEFAULT
+        elif tinymce.settings.PROFILE == 'simple':
+            SIMPLE.update(tinymce.settings.CONFIG)
+            default_profile = SIMPLE
+        else:
+            default_profile = tinymce.settings.CONFIG or DEFAULT
+        self.profile = profile or default_profile
 
     def render(self, name, value, attrs=None):
         if value is None: value = ''
@@ -68,26 +76,10 @@ class TinyMCE(forms.Textarea):
         final_attrs = self.build_attrs(attrs)
         final_attrs['name'] = name
         assert 'id' in final_attrs, "TinyMCE widget attributes must contain 'id'"
-
         mce_config = self.profile.copy()
-        #mce_config.update(get_language_config(self.content_language))
-        #if tinymce.settings.USE_FILEBROWSER:
-            #mce_config['file_browser_callback'] = "djangoFileBrowser"
         mce_config.update(self.mce_attrs)
         mce_config['selector'] = '#%s' % final_attrs['id']
-        
-        # Fix for js functions
-        #js_functions = {}
-        #for k in ('paste_preprocess','paste_postprocess'):
-            #if k in mce_config:
-               #js_functions[k] = mce_config[k]
-               #del mce_config[k]
         mce_json = json.dumps(mce_config, indent=2)
-
-        #for k in js_functions:
-            #index = mce_json.rfind('}')
-            #mce_json = mce_json[:index]+', '+k+':'+js_functions[k].strip()+mce_json[index:]
-
         if mce_config.get('inline', False):
             html = [u'<div%s>%s</div>' % (flatatt(final_attrs), escape(value))]
         else:

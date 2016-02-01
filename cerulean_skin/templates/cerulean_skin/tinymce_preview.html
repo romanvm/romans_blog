@@ -5,6 +5,14 @@
  {# Translators: "Preview" as a noun #}
   <title>{% trans "Preview" %}</title>
 {% endblock title %}
+{% block css %}
+  {{ block.super }}
+  <style type="text/css">
+  .container {
+    width: 800px;
+  }
+  </style>
+{% endblock css %}
 {% block js %}
   {{ block.super }}
   {% tinymce_preview "preview-content" %}
