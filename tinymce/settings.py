@@ -18,7 +18,6 @@ USE_SPELLCHECKER = getattr(settings, 'TINYMCE_SPELLCHECKER', False)
 if getattr(settings, 'TINYMCE_COMPRESSOR', False):
     raise NotImplementedError('TINYMCE_COMPRESSOR is not implemented yet.')
 USE_COMPRESSOR = False
-
 USE_FILEBROWSER = getattr(settings, 'TINYMCE_FILEBROWSER', False)
-
 USE_CODESAMPLE = getattr(settings, 'TINYMCE_CODESAMPLE', False)
+USE_OLD_PREVIEW = getattr(settings, 'TINYMCE_OLD_PREVIEW', False)
