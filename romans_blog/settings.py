@@ -160,13 +160,39 @@ TINYMCE_DEFAULT_CONFIG = {
                                'embed[type|width|height|src|*],small,code,kbd,samp',
                           }
 '''
-TINYMCE_CODESAMPLE = True
 TINYMCE_FILEBROWSER = True
 TINYMCE_SPELLCHECKER = True
+TINYMCE_PROFILE = 'custom'
+TINYMCE_CONFIG = {
+    'theme': 'modern',
+    'plugins': 'compat3x advlist autolink link image imagetools lists charmap print preview hr anchor pagebreak '
+               'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media '
+               'nonbreaking save table contextmenu directionality emoticons template paste textcolor '
+               'preview3 codesample spellchecker autosave',
+    'toolbar1': 'undo redo | cut copy paste | styleselect removeformat | fontselect fontsizeselect | forecolor '
+                'backcolor | code preview | spellchecker',
+    'toolbar2': 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify '
+                '| bullist numlist outdent indent | blockquote hr charmap '
+                '| link image media emoticons | codesample',
+    'contextmenu': 'formats | link image inserttable | cut copy paste',
+    'style_formats': [{'title': 'Small text', 'inline': 'small'},
+                      {'title': 'Inline code', 'inline': 'code'},
+                      {'title': 'Keyboard input', 'inline': 'kbd'},
+                      {'title': 'Sample output', 'inline': 'samp'}],
+    'style_formats_merge': True,
+    'width': 960,
+    'height': 480,
+    'spellchecker_languages': 'English (US)=en_US,Russian=ru_RU,Ukrainian=uk_UA',
+    'spellchecker_language': 'en_US',
+    'plugin_preview_width': 840,
+    'plugin_preview_height': 600,
+    'plugin_preview_pageurl': '/tinymce-preview/',
+    'image_advtab': True,
+}
+
 # Skin settings
 
 CURRENT_SKIN = 'cerulean_skin'
-# TINYMCE_DEFAULT_CONFIG['plugin_preview_pageurl'] = '/tinymce-preview/'
 # skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 # try:
 #     table_styles = skin_settings.TABLE_STYLES
