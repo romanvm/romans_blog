@@ -12,6 +12,7 @@ from django.conf import settings
 from django.contrib.admin import widgets as admin_widgets
 from django.core.urlresolvers import reverse
 from django.forms.widgets import flatatt
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 try:
     from collections import OrderedDict as SortedDict
@@ -101,7 +102,8 @@ class TinyMCE(forms.Textarea):
             js = [tinymce.settings.JS_URL]
         if tinymce.settings.USE_FILEBROWSER:
             js.append(reverse('tinymce-filebrowser'))
-        return forms.Media(js=js)
+        css = {'all': [staticfiles_storage.url('tiny_mce/css/tinymce4.css')]}
+        return forms.Media(js=js, css=css)
     media = property(_media)
 
 
