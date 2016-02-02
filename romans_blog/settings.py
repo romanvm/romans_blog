@@ -182,7 +182,7 @@ TINYMCE_CONFIG = {
     'style_formats_merge': True,
     'width': 960,
     'height': 480,
-    'spellchecker_languages': 'English (US)=en_US,Russian=ru_RU,Ukrainian=uk_UA',
+    'spellchecker_languages': 'English (US)=en_US,Russian=ru,Ukrainian=uk',
     'spellchecker_language': 'en_US',
     'plugin_preview_width': 840,
     'plugin_preview_height': 600,
