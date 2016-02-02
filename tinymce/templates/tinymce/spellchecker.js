@@ -8,7 +8,6 @@ function(method, text, success, failure) {
       text: text
     }, // end params
     success: function(result) {
-      console.log(result);
       success(result);
     }, // end success
     error: function(error, xhr) {
