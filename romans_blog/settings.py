@@ -172,7 +172,7 @@ TINYMCE_CONFIG = {
     'toolbar1': 'undo redo | cut copy paste | styleselect removeformat | fontselect fontsizeselect | forecolor '
                 'backcolor | code preview | spellchecker',
     'toolbar2': 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify '
-                '| bullist numlist outdent indent | blockquote hr charmap '
+                '| bullist numlist outdent indent | blockquote hr charmap nonbreaking '
                 '| link image media emoticons | codesample',
     'contextmenu': 'formats | link image inserttable | cut copy paste',
     'style_formats': [{'title': 'Small text', 'inline': 'small'},
