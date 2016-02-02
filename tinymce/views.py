@@ -1,7 +1,6 @@
 # Copyright (c) 2008 Joost Cassee
 # Licensed under the terms of the MIT License (see LICENSE.txt)
 
-from traceback import format_exc
 import logging
 from django.core import urlresolvers
 from django.http import HttpResponse
@@ -51,27 +50,25 @@ def spell_check(request):
     Returns a HttpResponse that implements the TinyMCE spellchecker protocol.
     """
     data = json.loads(request.body.decode('utf-8'))
-    output = {'jsonrpc': '2.0', 'id': data['id']}
+    output = {'id': data['id']}
     error = None
     try:
         import enchant
         from enchant.checker import SpellChecker
         if data['params']['lang'] not in enchant.list_languages():
             raise RuntimeError
-        output['result'] = {}
         checker = SpellChecker(data['params']['lang'])
         checker.set_text(strip_tags(data['params']['text']))
-        for err in checker:
-            output['result'][checker.word] = checker.suggest()
+        output['result'] = {checker.word: checker.suggest() for err in checker}
     except ImportError:
         error = 'pyenchant package is not installed!'
-        logging.exception(format_exc())
+        logging.exception(error)
     except RuntimeError:
         error = 'Missing dictionary {0}!'.format(data['params']['lang'])
-        logging.exception(format_exc())
+        logging.exception(error)
     except Exception:
         error = 'Unknown error!'
-        logging.exception(format_exc())
+        logging.exception(error)
     if error is not None:
         output['error'] = error
     return HttpResponse(json.dumps(output), content_type='application/json')

@@ -91,7 +91,7 @@ class TinyMCE(forms.Textarea):
             callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
         html.append('<script type="text/javascript">{0}</script>'.format(
             render_to_string('tinymce/tinymce_init.js', context={'callbacks': callbacks,
-                                                                   'tinymce_config': mce_json[1:-1]})))
+                                                                 'tinymce_config': mce_json[1:-1]})))
         return mark_safe(u'\n'.join(html))
 
     def _media(self):
