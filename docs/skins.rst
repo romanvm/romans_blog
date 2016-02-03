@@ -2,7 +2,8 @@ Skins
 =====
 
 Blog and Pages applications do not have any visual elements of their own, except for a 404 page
-that is standalone. The site's visal appearance is completely defined by a skin.
+that is standalone and takes all CSS/JS elements from a CDN.
+The site's visual appearance is completely defined by a skin.
 
 Skin is a Django app that contains the necessary templates and (if needed) template tags.
 Almost any html web-site template with 1-level navigation menu can be turned into a skin.

@@ -7,7 +7,7 @@ Publishing Posts
 After deploying the site login to the admin panel and start writing your posts in **Posts** section.
 Optionally you can create categories to assign to your posts.
 
-Posts and Pages are created and edited using a rich text WYSIWYG editor (TinyMCE).
+Posts and Pages are created and edited using a rich text WYSIWYG editor (TinyMCE 4).
 
 .. figure:: _static/writing_post.jpg
 
@@ -15,8 +15,7 @@ Posts and Pages are created and edited using a rich text WYSIWYG editor (TinyMCE
 
 Embedding Youtube videos and programming code syntax highlighting are supported.
 
-.. note:: In editor's preview window code is shown without highlighting in
-    plain ``<pre>`` blocks.
+.. note:: In editor's preview window code is shown without highlighting.
 
 To publish a post check **Published** box.
 Authorized users can view unpublished posts on the site by clicking "**View on site >**" button.

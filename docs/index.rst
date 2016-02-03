@@ -15,13 +15,12 @@ Main Features
 - **Disqus-powered comments and social share links** (Facebook, Linked-In, Twitter and Reddit).
 - **Pages application** for creating "plain" pages that are not part of the blog and accessible via
   their own links in the site navigation menu, e.g. "About Us", "Contacts", etc.
-- **WYSIWYG rich content authoring** with TinyMCE editor in admin interface. Youtube links and programming code syntax
-  highlighting are supported.
+- **WYSIWYG rich content authoring** with TinyMCE 4 editor in admin interface.
 - **Pluggable skins**: the frond-end layer is completely separated from the core code, allowing to quickly and simply
   change the site design by switching to another skin. A skin is a Django app that contains all necessary templates
   with static files (CSS, JS, fonts etc.) and (optionally) necessary template tags to render content within
   the skin context. Basically, any html site template with 1-level navigation menu can be turned into a skin.
-  The skin also provides a customised preview template for TinyMCE to preview the authored content with the skin's
+  The skin also provides a customised preview template for TinyMCE editor to preview the authored content with the skin's
   styles applied.
 - **Full-text site search** with `django-haystack`_ and `Whoosh`_.
 - **RSS and Atom feeds** for recent blog posts.
