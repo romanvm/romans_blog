@@ -6,10 +6,24 @@
 Contains the variables defining specific style classes for TinyMCE editor
 """
 
-# Table style classes for TinyMCE table plugin
-TABLE_STYLES = 'Bootstrap simple=table;Bootstrap striped=table table-striped;Bootstrap bordered=table table-bordered'
-# Table row style classes for TinyMCE table plugin
-TABLE_ROW_STYLES = 'Bootstrap green=success;Bootstrap red=danger;Bootstrap blue=info'
-# Image styles for TinyMCE advimage plugin
-IMG_STYLES = 'Bootstrap responsive=img-responsive;Bootstrap rounded=img-responsive img-rounded;' \
-             'Bootstrap circle=img-responsive img-circle; Bootstrap thumbnail=img-responsive img-thumbnail'
+# Image styles for TinyMCE 4
+IMAGE_CLASS_LIST = [
+    {'title': 'Responsive', 'value': 'img-responsive'},
+    {'title': 'Rounded', 'value': 'img-responsive img-rounded'},
+    {'title': 'Thumbnail', 'value': 'img-responsive img-thumbnail'},
+    {'title': 'Circle', 'value': 'img-responsive img-circle'},
+]
+# Table styles for TinyMCE 4
+TABLE_CLASS_LIST = [
+    {'title': 'Simple', 'value': 'table'},
+    {'title': 'Bordered', 'value': 'table table-bordered'},
+    {'title': 'Striped', 'value': 'table table-striped'},
+    {'title': 'Condensed', 'value': 'table table-condensed'},
+]
+# Table row styles for TinyMCE 4
+TABLE_ROW_CLASS_LIST = [
+    {'title': 'None', 'value': ''},
+    {'title': 'Green', 'value': 'success'},
+    {'title': 'Red', 'value': 'danger'},
+    {'title': 'Blue', 'value': 'info'},
+]
