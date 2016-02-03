@@ -153,7 +153,7 @@ def render_paginator(context, adjacent_pages=2):
     end_page = context['page_obj'].number + adjacent_pages + 1
     if end_page >= context['paginator'].num_pages - 1:
         end_page = context['paginator'].num_pages + 1
-    page_numbers = [n for n in range(start_page, end_page) if n > 0 and n <= context['paginator'].num_pages]
+    page_numbers = [n for n in range(start_page, end_page) if n in range(1, context['paginator'].num_pages + 1)]
     page_obj = context['page_obj']
     paginator = context['paginator']
     try:
