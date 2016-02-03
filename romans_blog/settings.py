@@ -125,84 +125,58 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # TinyMCE settings
-'''
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': 'advanced',
-    'mode': 'textareas',
-    'width': 830,
-    'height': 500,
-    'plugins': 'preview,table,advimage,emotions,syntaxhl,youtubeIframe,searchreplace,'
-               'pagebreak,autolink,visualchars',
-    'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,'
-                             'justifyleft,justifycenter,justifyright,justifyfull,|,'
-                             'bullist,numlist,|,outdent,indent,|,forecolor,backcolor,|,'
-                             'sup,sub,|,hr,|,blockquote,|,syntaxhl,|,help',
-    'theme_advanced_buttons2': 'fontselect,fontsizeselect,formatselect,styleselect,|,link,unlink,anchor,|,'
-                             'image,youtubeIframe,|,emotions,|,removeformat,cleanup,|,code,preview',
-    'theme_advanced_buttons3': 'cut,copy,paste,|,undo,redo,|,charmap,visualchars,|,tablecontrols,|,search,replace,|,'
-                               'pagebreak',
-    'browser_spellcheck': True,
-    'plugin_preview_width': 1024,
-    'plugin_preview_height': 640,
-    'theme_advanced_font_sizes': '4pt,6pt,8pt,10pt,12pxt,14pxt,16pt,18pt,24pt,36pt,48pt',
-    'relative_urls': False,
-    'remove_linebreaks': False,
-    'accessibility_warnings': False,
-    'pagebreak_separator': '<!-- ***BLOG CUT*** -->',
-    'style_formats': [{'title': 'Small text', 'inline': 'small'},
-                      {'title': 'Inline code', 'inline': 'code'},
-                      {'title': 'Keyboard input', 'inline': 'kbd'},
-                      {'title': 'Sample output', 'inline': 'samp'}],
-    'extended_valid_elements': 'img[!src|border:0|alt|title|width|height|style]a[name|href|target|title|onclick],'
-                               'textarea[cols|rows|disabled|name|readonly|class]'
-                               'iframe[src|title|width|height|allowfullscreen|frameborder|class|id],'
-                               'object[classid|width|height|codebase|*],param[name|value|_value|*],'
-                               'embed[type|width|height|src|*],small,code,kbd,samp',
-                          }
-'''
-TINYMCE_FILEBROWSER = True
-TINYMCE_SPELLCHECKER = True
+
 TINYMCE_PROFILE = 'custom'
-TINYMCE_CONFIG = {
+TINYMCE_DEFAULT_CONFIG = {
     'theme': 'modern',
     'plugins': 'compat3x advlist autolink link image imagetools lists charmap print preview hr anchor pagebreak '
                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media '
                'nonbreaking save table contextmenu directionality emoticons template paste textcolor '
-               'preview3 codesample spellchecker autosave',
-    'toolbar1': 'undo redo | cut copy paste | styleselect removeformat | fontselect fontsizeselect | forecolor '
-                'backcolor | code preview | spellchecker',
+               'preview3 codesample spellchecker autosave autoresize django_saveandcontinue',
+    'toolbar1': 'django_saveandcontinue | undo redo | cut copy paste | searchreplace | styleselect removeformat | '
+                'fontselect fontsizeselect | forecolor backcolor | code preview | spellchecker | fullscreen',
     'toolbar2': 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify '
                 '| bullist numlist outdent indent | blockquote hr charmap nonbreaking '
-                '| link image media emoticons | codesample',
-    'contextmenu': 'formats | link image inserttable | cut copy paste',
-    'style_formats': [{'title': 'Small text', 'inline': 'small'},
-                      {'title': 'Inline code', 'inline': 'code'},
-                      {'title': 'Keyboard input', 'inline': 'kbd'},
-                      {'title': 'Sample output', 'inline': 'samp'}],
+                '| link anchor | image media emoticons | table | codesample',
+    'contextmenu': 'formats | cut copy paste | link image | inserttable row cell',
+    'style_formats': [
+        {'title': 'Special', 'items': [
+            {'title': 'Small text', 'inline': 'small'},
+            {'title': 'Inline code', 'inline': 'code'},
+            {'title': 'Keyboard input', 'inline': 'kbd'},
+            {'title': 'Sample output', 'inline': 'samp'},
+        ]},
+        {'title': 'Image', 'items': [
+            {'title': 'Image Left', 'selector': 'img', 'styles': {'float': 'left', 'margin': '10px'}},
+            {'title': 'Image Right', 'selector': 'img', 'styles': {'float': 'right', 'margin': '10px'}}
+        ]},
+    ],
     'style_formats_merge': True,
     'width': 960,
-    'height': 480,
+    # 'height': 480,
+    'autoresize_max_height': 960,
+    'autoresize_bottom_margin': 30,
     'spellchecker_languages': 'English (US)=en_US,Russian=ru,Ukrainian=uk',
     'spellchecker_language': 'en_US',
     'plugin_preview_width': 840,
     'plugin_preview_height': 600,
     'plugin_preview_pageurl': '/tinymce-preview/',
     'image_advtab': True,
+    'default_link_target': '_blank',
 }
+TINYMCE_FILEBROWSER = True
+TINYMCE_SPELLCHECKER = True
 
 # Skin settings
 
 CURRENT_SKIN = 'cerulean_skin'
-# skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
-# try:
-#     table_styles = skin_settings.TABLE_STYLES
-#     table_row_styles = skin_settings.TABLE_ROW_STYLES
-#     theme_advanced_styles = skin_settings.IMG_STYLES
-# except AttributeError:
-#     table_styles = table_row_styles = theme_advanced_styles = ''
-# TINYMCE_DEFAULT_CONFIG['table_styles'] = table_styles
-# TINYMCE_DEFAULT_CONFIG['table_row_styles'] = table_row_styles
-# TINYMCE_DEFAULT_CONFIG['theme_advanced_styles'] = theme_advanced_styles
+skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
+image_class_list = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
+TINYMCE_DEFAULT_CONFIG['image_class_list'] = image_class_list
+table_class_list = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
+TINYMCE_DEFAULT_CONFIG['table_class_list'] = table_class_list
+table_row_class_list = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
+TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = table_row_class_list
 
 # Haystack search settings
 
