@@ -35,8 +35,9 @@ SIMPLE = {
     'plugins': '',
     'toolbar': 'bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link', 
     'menubar': False,
-    'inline': True,
+    'inline': False,
     'add_unload_trigger': False,
     'schema': 'html5',
     'statusbar': True,
+    'height': 360,
 }
