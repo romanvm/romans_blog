@@ -12,7 +12,6 @@ from django.conf import settings
 from django.contrib.admin import widgets as admin_widgets
 from django.core.urlresolvers import reverse
 from django.forms.widgets import flatatt
-from django.contrib.staticfiles.storage import staticfiles_storage
 
 try:
     from collections import OrderedDict as SortedDict
@@ -68,7 +67,7 @@ class TinyMCE(forms.Textarea):
             SIMPLE.update(tinymce.settings.CONFIG)
             default_profile = SIMPLE
         else:
-            default_profile = tinymce.settings.CONFIG or DEFAULT
+            default_profile = tinymce.settings.CONFIG or SIMPLE
         self.profile = profile or default_profile
 
     def render(self, name, value, attrs=None):
@@ -102,7 +101,7 @@ class TinyMCE(forms.Textarea):
             js = [tinymce.settings.JS_URL]
         if tinymce.settings.USE_FILEBROWSER:
             js.append(reverse('tinymce-filebrowser'))
-        css = {'all': [staticfiles_storage.url('tiny_mce/css/tinymce4.css')]}
+        css = {'all': [tinymce.settings.CSS_URL]}
         return forms.Media(js=js, css=css)
     media = property(_media)
 
