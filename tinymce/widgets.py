@@ -89,7 +89,7 @@ class TinyMCE(forms.Textarea):
             callbacks['file_browser_callback'] = 'djangoFileBrowser'
         if tinymce.settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
             callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
-        html.append('<script type="text/javascript">{0}</script>'.format(
+        html.append('<script type="text/javascript">%s</script>' % (
             render_to_string('tinymce/tinymce_init.js', context={'callbacks': callbacks,
                                                                  'tinymce_config': mce_json[1:-1]})))
         return mark_safe(u'\n'.join(html))

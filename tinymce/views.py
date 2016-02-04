@@ -64,7 +64,7 @@ def spell_check(request):
         error = 'pyenchant package is not installed!'
         logging.exception(error)
     except RuntimeError:
-        error = 'Missing dictionary {0}!'.format(data['params']['lang'])
+        error = 'Missing dictionary %s!' % data['params']['lang']
         logging.exception(error)
     except Exception:
         error = 'Unknown error!'
@@ -128,6 +128,7 @@ def render_to_image_list(image_list):
     configuration option. The image_list parameter must be a list of 2-tuples.
     """
     return render_to_js_vardef('tinyMCEImageList', image_list)
+
 
 def render_to_js_vardef(var_name, var_value):
     output = "var %s = %s" % (var_name, json.dumps(var_value))
