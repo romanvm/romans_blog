@@ -142,7 +142,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'style_formats': [
         {'title': 'Special', 'items': [
             {'title': 'Small text', 'inline': 'small'},
-            {'title': 'Inline code', 'inline': 'code'},
             {'title': 'Keyboard input', 'inline': 'kbd'},
             {'title': 'Sample output', 'inline': 'samp'},
         ]},
@@ -169,12 +168,11 @@ TINYMCE_SPELLCHECKER = True
 
 CURRENT_SKIN = 'cerulean_skin'
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
-image_class_list = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['image_class_list'] = image_class_list
-table_class_list = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['table_class_list'] = table_class_list
-table_row_class_list = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = table_row_class_list
+TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
+TINYMCE_DEFAULT_CONFIG['table_class_list'] = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
+TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
+# 'content_style' works more correctly than 'content_css'
+TINYMCE_DEFAULT_CONFIG['content_style'] = getattr(skin_settings, 'content_style', '')
 
 # Haystack search settings
 

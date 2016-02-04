@@ -6,6 +6,10 @@
 Contains the variables defining specific style classes for TinyMCE editor
 """
 
+import os
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
 # Image styles for TinyMCE 4
 IMAGE_CLASS_LIST = [
     {'title': 'Responsive', 'value': 'img-responsive'},
@@ -27,3 +31,14 @@ TABLE_ROW_CLASS_LIST = [
     {'title': 'Red', 'value': 'danger'},
     {'title': 'Blue', 'value': 'info'},
 ]
+
+if settings.DEBUG:
+    storage = FileSystemStorage(location=os.path.join(os.path.dirname(__file__), 'static'))
+else:
+    storage = FileSystemStorage(location=settings.STATIC_ROOT)
+# Content styles for TinyMCE 4
+CSS = ('cerulean_skin/css/bootstrap.min.css', 'cerulean_skin/css/cerulean_skin.css')
+content_style = ''
+for css in CSS:
+    with storage.open(css) as file_obj:
+        content_style += file_obj.read().decode('utf-8')
