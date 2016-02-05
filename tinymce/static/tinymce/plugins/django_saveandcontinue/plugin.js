@@ -17,7 +17,7 @@ tinymce.PluginManager.add('django_saveandcontinue', function(editor, url) {
   
   editor.addButton('django_saveandcontinue', {
     tooltip: 'Save and continue editing',
-    icon: 'save',
+    image: url + '/img/cloud-upload.png',
     onclick: saveAndContinue
   });
 
