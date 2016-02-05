@@ -34,12 +34,14 @@
 				});
 			});
 
-			ed.addButton('preview', {title : 'preview.preview_desc', cmd : 'mcePreview'});
+			ed.addButton('preview3', {title : 'Preview',
+                                cmd : 'mcePreview',
+                                image: url + '/img/eye.png'});
 		},
 
 		getInfo : function() {
 			return {
-				longname : 'Preview',
+				longname : 'Preview3',
 				author : 'Moxiecode Systems AB',
 				authorurl : 'http://tinymce.moxiecode.com',
 				infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/preview',
@@ -49,5 +51,5 @@
 	});
 
 	// Register plugin
-	tinymce.PluginManager.add('preview', tinymce.plugins.Preview);
+	tinymce.PluginManager.add('preview3', tinymce.plugins.Preview);
 })();
