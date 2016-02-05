@@ -7,7 +7,7 @@ DEFAULT = {
                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media '
                'nonbreaking save table contextmenu directionality emoticons template paste textcolor',
     'toolbar1': 'undo redo | styleselect removeformat | fontselect fontsizeselect | forecolor backcolor '
-                '| code preview',
+                '| code',
     'toolbar2': 'bold italic underline | alignleft aligncenter alignright alignjustify '
                 '| bullist numlist outdent indent | blockquote hr charmap '
                 '| link image media emoticons',
@@ -26,9 +26,11 @@ if settings.USE_SPELLCHECKER:
     DEFAULT['spellchecker_language'] = 'en_US'
 if settings.USE_OLD_PREVIEW:
     DEFAULT['plugins'] += ' preview3'
+    DEFAULT['toolbar1'] += ' | preview3'
     DEFAULT['plugin_preview_pageurl'] = staticfiles_storage.url('tiny_mce/preview3.html')
 else:
     DEFAULT['plugins'] += ' preview'
+    DEFAULT['toolbar1'] += ' | preview'
 
 SIMPLE = {
     'theme': 'modern',
