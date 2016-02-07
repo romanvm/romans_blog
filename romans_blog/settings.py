@@ -99,6 +99,7 @@ DATABASES = {
 
 LANGUAGES = [
     ('en-us', 'US English'),
+    ('ru', 'Русский'),
     ('uk', 'Українська'),
 ]
 
@@ -126,18 +127,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # TinyMCE settings
 
-TINYMCE_PROFILE = 'custom'
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'modern',
-    'plugins': 'compat3x preview3 advlist autolink link image imagetools lists charmap print hr anchor pagebreak '
+    'plugins': 'compat3x preview advlist autolink link image imagetools lists charmap print hr anchor pagebreak '
                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media '
                'nonbreaking save table contextmenu directionality emoticons template paste textcolor '
-               'codesample spellchecker autosave django_saveandcontinue',
+               'codesample spellchecker autosave noneditable django_saveandcontinue spoiler',
     'toolbar1': 'django_saveandcontinue | undo redo | cut copy paste | searchreplace | styleselect removeformat | '
-                'fontselect fontsizeselect | forecolor backcolor | code preview3 | spellchecker | fullscreen',
+                'fontselect fontsizeselect | forecolor backcolor | code preview | spellchecker | fullscreen',
     'toolbar2': 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify '
                 '| bullist numlist outdent indent | blockquote hr charmap nonbreaking '
-                '| link anchor | image media emoticons | table | codesample',
+                '| link anchor | image media emoticons | table | codesample | spoiler-add spoiler-remove',
     'contextmenu': 'formats | cut copy paste | link image | inserttable row cell',
     'style_formats': [
         {'title': 'Special', 'items': [
@@ -151,7 +151,7 @@ TINYMCE_DEFAULT_CONFIG = {
         ]},
     ],
     'style_formats_merge': True,
-    'width': 960,
+    'width': 1024,
     'height': 480,
     'spellchecker_languages': 'English (US)=en_US,Russian=ru,Ukrainian=uk',
     'spellchecker_language': 'en_US',
@@ -160,9 +160,14 @@ TINYMCE_DEFAULT_CONFIG = {
     'plugin_preview_pageurl': '/tinymce-preview/',
     'image_advtab': True,
     'default_link_target': '_blank',
+    'extended_valid_elements': 'span[class]',
+    'spoiler_caption': '<span class="fa fa-plus-square-o"></span>&nbsp;Spoiler!',
 }
+TINYMCE_PROFILE = 'custom'
 TINYMCE_FILEBROWSER = True
 TINYMCE_SPELLCHECKER = True
+TINYMCE_CODESAMPLE = True
+TINYMCE_OLD_PREVIEW = True
 
 # Skin settings
 
@@ -171,8 +176,7 @@ skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
 TINYMCE_DEFAULT_CONFIG['table_class_list'] = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
 TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
-# 'content_style' works more correctly than 'content_css'
-TINYMCE_DEFAULT_CONFIG['content_style'] = getattr(skin_settings, 'content_style', '')
+TINYMCE_DEFAULT_CONFIG['content_css'] = getattr(skin_settings, 'CONTENT_CSS', [])
 
 # Haystack search settings
 
