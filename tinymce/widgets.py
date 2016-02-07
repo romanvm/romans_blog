@@ -5,8 +5,11 @@
 This TinyMCE widget was copied and extended from this code by John D'Agostino:
 http://code.djangoproject.com/wiki/CustomWidgetsTinyMCE
 """
-
-import json
+import sys
+if sys.version_info[0] == 2 and sys.version_info[1] < 7:
+    import simplejson as json
+else:
+    import json
 from django import forms
 from django.conf import settings
 from django.contrib.admin import widgets as admin_widgets
@@ -31,7 +34,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import get_language, ugettext as _
 from django.template.loader import render_to_string
 import tinymce.settings
-from tinymce.profiles import DEFAULT, SIMPLE
 
 
 class TinyMCE(forms.Textarea):
@@ -54,20 +56,9 @@ class TinyMCE(forms.Textarea):
 
     def __init__(self, content_language=None, attrs=None, mce_attrs=None, profile=None):
         super(TinyMCE, self).__init__(attrs)
-        if mce_attrs is None:
-            mce_attrs = {}
-        self.mce_attrs = mce_attrs
-        if content_language is None:
-            content_language = mce_attrs.get('language', None)
-        self.content_language = content_language
-        if tinymce.settings.PROFILE == 'default':
-            DEFAULT.update(tinymce.settings.CONFIG)
-            default_profile = DEFAULT
-        elif tinymce.settings.PROFILE == 'simple':
-            SIMPLE.update(tinymce.settings.CONFIG)
-            default_profile = SIMPLE
-        else:
-            default_profile = tinymce.settings.CONFIG or SIMPLE
+        self.mce_attrs = mce_attrs or {}
+        self.content_language = content_language or self.mce_attrs.get('language', None)
+        default_profile = tinymce.settings.CONFIG or tinymce.settings.SIMPLE
         self.profile = profile or default_profile
 
     def render(self, name, value, attrs=None):
@@ -94,7 +85,8 @@ class TinyMCE(forms.Textarea):
                                                                  'tinymce_config': mce_json[1:-1]})))
         return mark_safe(u'\n'.join(html))
 
-    def _media(self):
+    @property
+    def media(self):
         if tinymce.settings.USE_COMPRESSOR:
             js = [reverse('tinymce-compressor')]
         else:
@@ -103,7 +95,6 @@ class TinyMCE(forms.Textarea):
             js.append(reverse('tinymce-filebrowser'))
         css = {'all': [tinymce.settings.CSS_URL]}
         return forms.Media(js=js, css=css)
-    media = property(_media)
 
 
 class AdminTinyMCE(TinyMCE, admin_widgets.AdminTextareaWidget):

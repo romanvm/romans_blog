@@ -1,6 +1,7 @@
 # Copyright (c) 2008 Joost Cassee
 # Licensed under the terms of the MIT License (see LICENSE.txt)
 
+import sys
 import logging
 from django.core import urlresolvers
 from django.http import HttpResponse
@@ -16,12 +17,10 @@ try:
 except ImportError:
     pass
 
-try:
-    import json
-except ImportError:
+if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     import simplejson as json
-
-logger = logging.getLogger(__name__)
+else:
+    import json
 
 
 def textareas_js(request, name, lang=None):
