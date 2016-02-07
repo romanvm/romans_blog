@@ -55,7 +55,7 @@ h1,h2,.panel-title,.panel-footer {
   margin-bottom: 15px;
 }
 
-/* Needed to correctly place social bunntons in line */
+/* Needed to correctly place social buttons in line */
 .facebook,.linked-in,.twitter,.reddit {
   display: inline-block;
   vertical-align: top;
@@ -93,9 +93,30 @@ h1,h2,.panel-title,.panel-footer {
     width: 1024px;
   }
 }
+/* Fixes .container width inside TinyMCE preview3 window */
+.forceColors .container {
+  width: 840px;
+}
+/* Fixes .container padding inside TinyMCE preview window */
+body.mce-content-body {
+  padding: 5px;
+}
+/* Spoiler styles */
+.spoiler {
+  border: 1px solid #ff0000;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
-/* Fixes syntaxhihgligter code placement with Bootstrap styles in Firefox */
-.syntaxhighlighter table td.code .container:before {
-    content: "";
-    display: inherit !important;
+.spoiler-toggle {
+  font-weight: bold;
+  cursor: default;
+  padding: 5px;
+  font-size: 11px;
+}
+
+.spoiler-text {
+  padding: 5px;
 }
