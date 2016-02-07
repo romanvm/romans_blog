@@ -4,8 +4,8 @@ Save and continue plugin for TinyMCE 4 to use with Django
 It adds 'Save and continue editing' command to 'File' menu and 
 the respective button for TinyMCE toolbar.
 
-(c) Roman Miroshnychenko, romanvm@yandex.ua, 2016
-License: LGPL
+(c) Roman Miroshnychenko, <romanvm@yandex.ua>, 2016
+License: LGPL <http://www.gnu.org/licenses/lgpl-3.0.en.html>
 */
 tinymce.PluginManager.add('django_saveandcontinue', function(editor, url) {
 
