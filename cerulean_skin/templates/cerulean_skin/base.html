@@ -28,16 +28,16 @@
   <link href="{% static "cerulean_skin/css/sticky-footer-navbar.css" %}" rel="stylesheet">
   <link href="{% static "cerulean_skin/css/cerulean_skin.css" %}" rel="stylesheet">
   <!-- Prism CSS -->
-  <link href="{% static "cerulean_skin/css/prism.css" %}" rel="stylesheet">
+  <link href="{% static "prism/prism.css" %}" rel="stylesheet">
   {% endblock css %}
   {% block js %}
   <!-- Bootstrap core JavaScript -->
-  <script src="{% static "cerulean_skin/js/jquery.js" %}"></script>
+  <script src="{% static "cerulean_skin/js/jquery.min.js" %}"></script>
   <script src="{% static "cerulean_skin/js/bootstrap.js" %}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="{% static "cerulean_skin/js/ie10-viewport-bug-workaround.js" %}"></script>
   <!-- Prism JS -->
-  <script src="{% static "cerulean_skin/js/prism.js" %}"></script>
+  <script src="{% static "prism/prism.js" %}"></script>
   <script type="text/javascript" src="{% static "cerulean_skin/js/cerulean_skin.js" %}"></script>
   {% endblock js %}
   {% if not user.is_authenticated %}
