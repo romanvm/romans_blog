@@ -12,12 +12,12 @@ $(function(){
   // Toggle spoiler
   $('.spoiler-toggle').click(function()
   {
-    if ($(this).html() == '<span class="fa fa-plus-square-o"></span>&nbsp;Spoiler!') {
-      $(this).html('<span class="fa fa-minus-square-o"></span>&nbsp;Spoiler!');
+    if ($(this).html() == '<span class="fa fa-plus-square-o"></span>&nbsp;Click to show') {
+      $(this).html('<span class="fa fa-minus-square-o"></span>&nbsp;Click to hide');
     }
     else {
-      $(this).html('<span class="fa fa-plus-square-o"></span>&nbsp;Spoiler!');
+      $(this).html('<span class="fa fa-plus-square-o"></span>&nbsp;Click to show');
     }
-    $(this).next().animate({height: 'toggle'});
+    $(this).next().toggle();
   }); // end spoiler-toggle
 }); // end document.ready
