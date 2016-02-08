@@ -103,7 +103,7 @@ body.mce-content-body {
 }
 /* Spoiler styles */
 .spoiler {
-  border: 1px solid #ff0000;
+  border: 1px solid #e7e7e7;
   background-color: #f5f5f5;
   border-radius: 6px;
   margin-top: 5px;
