@@ -5,11 +5,13 @@
 This TinyMCE widget was copied and extended from this code by John D'Agostino:
 http://code.djangoproject.com/wiki/CustomWidgetsTinyMCE
 """
+from __future__ import unicode_literals
 import sys
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     import simplejson as json
 else:
     import json
+import enchant
 from django import forms
 from django.conf import settings
 from django.contrib.admin import widgets as admin_widgets
@@ -59,7 +61,9 @@ class TinyMCE(forms.Textarea):
         self.mce_attrs = mce_attrs or {}
         self.content_language = content_language or self.mce_attrs.get('language', None)
         default_profile = tinymce.settings.CONFIG or tinymce.settings.SIMPLE
-        self.profile = profile or default_profile
+        self.profile = get_language_config(content_language)
+        self.profile.update(profile or default_profile)
+        print(self.profile)
 
     def render(self, name, value, attrs=None):
         if value is None: value = ''
@@ -72,18 +76,14 @@ class TinyMCE(forms.Textarea):
         mce_config['selector'] = '#%s' % final_attrs['id']
         mce_json = json.dumps(mce_config, indent=2)
         if mce_config.get('inline', False):
-            html = [u'<div%s>%s</div>' % (flatatt(final_attrs), escape(value))]
+            html = ['<div%s>%s</div>' % (flatatt(final_attrs), escape(value))]
         else:
-            html = [u'<textarea%s>%s</textarea>' % (flatatt(final_attrs), escape(value))]
-        callbacks = tinymce.settings.CALLBACKS
-        if tinymce.settings.USE_FILEBROWSER and 'file_browser_callback' not in callbacks:
-            callbacks['file_browser_callback'] = 'djangoFileBrowser'
-        if tinymce.settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
-            callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
+            html = ['<textarea%s>%s</textarea>' % (flatatt(final_attrs), escape(value))]
         html.append('<script type="text/javascript">%s</script>' % (
-            render_to_string('tinymce/tinymce_init.js', context={'callbacks': callbacks,
-                                                                 'tinymce_config': mce_json[1:-1]})))
-        return mark_safe(u'\n'.join(html))
+            render_to_string('tinymce/default_tinymce_init.js',
+                             context={'callbacks': get_tinymce_callbacks(),
+                             'tinymce_config': mce_json[1:-1]})))
+        return mark_safe('\n'.join(html))
 
     @property
     def media(self):
@@ -102,35 +102,57 @@ class AdminTinyMCE(TinyMCE, admin_widgets.AdminTextareaWidget):
 
 
 def get_language_config(content_language=None):
-    language = get_language()[:2]
-    if content_language:
-        content_language = content_language[:2]
-    else:
-        content_language = language
+    """
+    Creates a language configuration for TinyMCE4 based on Django settings
 
-    config = {}
-    config['language'] = language
-
-    lang_names = SortedDict()
+    :param content_language:
+    :return: config
+    """
+    language = (content_language or get_language())[:2]
+    config = {'language': language, 'spellchecker_language': ''}
+    enchant_languages = enchant.list_languages()
+    lang_names = []
     for lang, name in settings.LANGUAGES:
-        if lang[:2] not in lang_names: lang_names[lang[:2]] = []
-        lang_names[lang[:2]].append(_(name))
-    sp_langs = []
-    for lang, names in lang_names.items():
-        if lang == content_language:
-            default = '+'
-        else:
-            default = ''
-        sp_langs.append(u'%s%s=%s' % (default, ' / '.join(names), lang))
-
-    config['spellchecker_languages'] = ','.join(sp_langs)
-
-    if content_language in settings.LANGUAGES_BIDI:
+        lang = convert_language_code(lang)
+        if lang not in enchant_languages:
+            lang = lang[:2]
+        if not config['spellchecker_language']:
+            config['spellchecker_language'] = lang
+        lang_names.append('%s=%s' % (name, lang))
+    config['spellchecker_languages'] = ','.join(lang_names)
+    if language[:2] in settings.LANGUAGES_BIDI:
         config['directionality'] = 'rtl'
     else:
         config['directionality'] = 'ltr'
-
-    if tinymce.settings.USE_SPELLCHECKER:
-        config['spellchecker_rpc_url'] = reverse('tinymce.views.spell_check')
-
     return config
+
+
+def convert_language_code(django_lang):
+    """
+    Converts Django language codes "ll-cc" into ISO codes "ll_CC" or "ll"
+
+    :param django_lang:
+    :return: iso_lang
+    """
+    lang_n_country = django_lang.split('-')
+    try:
+        country = lang_n_country[1].upper()
+        return '_'.join((lang_n_country[0], country))
+    except IndexError:
+        return lang_n_country[0]
+
+
+def get_tinymce_callbacks():
+    """
+    Get TinyMCE JS callbacks
+
+    :return: callbacks
+    """
+    callbacks = tinymce.settings.CALLBACKS
+    if (tinymce.settings.USE_FILEBROWSER and
+                'file_browser_callback' not in callbacks):
+        callbacks['file_browser_callback'] = 'djangoFileBrowser'
+    if (tinymce.settings.USE_SPELLCHECKER and
+                'spellchecker_callback' not in callbacks):
+        callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
+    return callbacks

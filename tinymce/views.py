@@ -10,7 +10,8 @@ from django.template import RequestContext, loader
 from django.utils.translation import ugettext as _
 from django.utils.html import strip_tags
 from tinymce.compressor import gzip_compressor
-from tinymce.widgets import get_language_config
+from tinymce.settings import CONFIG
+from tinymce.widgets import get_tinymce_callbacks, get_language_config
 
 try:
     from django.views.decorators.csrf import csrf_exempt
@@ -23,25 +24,27 @@ else:
     import json
 
 
-def textareas_js(request, name, lang=None):
+def textareas_js(request, name='default', lang=None):
     """
     Returns a HttpResponse whose content is a Javscript file. The template
-    is loaded from 'tinymce/<name>_textareas.js' or
-    '<name>/tinymce_textareas.js'. Optionally, the lang argument sets the
+    is loaded from 'tinymce/<name>_tinymce_init.js' or
+    '<name>/tinymce_init.js'. Optionally, the lang argument sets the
     content language.
     """
     template_files = (
-        'tinymce/%s_textareas.js' % name,
-        '%s/tinymce_textareas.js' % name,
+        'tinymce/%s_tinymce_init.js',
+        '%s/tinymce_init.js' % name,
     )
     template = loader.select_template(template_files)
-
-    vars = get_language_config(lang)
-    vars['content_language'] = lang
+    config = get_language_config(lang)
+    config.update(CONFIG)
+    config['selector'] = 'textarea'
+    vars = {'tinymce_config': json.dumps(config, indent=2)[1:-1],
+            'tinymce_callbacks': get_tinymce_callbacks(),
+            'content_language': lang}
     context = RequestContext(request, vars)
-
     return HttpResponse(template.render(context),
-            content_type="application/x-javascript")
+                        content_type='application/x-javascript')
 
 
 def spell_check(request):
@@ -60,13 +63,13 @@ def spell_check(request):
         checker.set_text(strip_tags(data['params']['text']))
         output['result'] = {checker.word: checker.suggest() for err in checker}
     except ImportError:
-        error = 'pyenchant package is not installed!'
+        error = _('pyenchant package is not installed!')
         logging.exception(error)
     except RuntimeError:
-        error = 'Missing dictionary %s!' % data['params']['lang']
+        error = _('Missing dictionary %s!') % data['params']['lang']
         logging.exception(error)
     except Exception:
-        error = 'Unknown error!'
+        error = _('Unknown error!')
         logging.exception(error)
     if error is not None:
         output['error'] = error
@@ -77,21 +80,6 @@ try:
     spell_check = csrf_exempt(spell_check)
 except NameError:
     pass
-
-
-def preview(request, name):
-    """
-    Returns a HttpResponse whose content is an HTML file that is used
-    by the TinyMCE preview plugin. The template is loaded from
-    'tinymce/<name>_preview.html' or '<name>/tinymce_preview.html'.
-    """
-    template_files = (
-        'tinymce/%s_preview.html' % name,
-        '%s/tinymce_preview.html' % name,
-    )
-    template = loader.select_template(template_files)
-    return HttpResponse(template.render(RequestContext(request)),
-            content_type="text/html")
 
 
 def flatpages_link_list(request):

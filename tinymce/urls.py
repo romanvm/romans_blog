@@ -1,6 +1,6 @@
 # Copyright (c) 2008 Joost Cassee
 # Licensed under the terms of the MIT License (see LICENSE.txt)
-from tinymce.views import textareas_js, spell_check, flatpages_link_list, compressor, filebrowser, preview
+from tinymce.views import textareas_js, spell_check, flatpages_link_list, compressor, filebrowser
 
 try:
     from django.conf.urls import url
@@ -14,5 +14,4 @@ urlpatterns = [
     url(r'^flatpages_link_list/$', flatpages_link_list),
     url(r'^compressor/$', compressor, name='tinymce-compressor'),
     url(r'^filebrowser/$', filebrowser, name='tinymce-filebrowser'),
-    url(r'^preview/(?P<name>.+)/$', preview, name='tinymce-preview'),
 ]
