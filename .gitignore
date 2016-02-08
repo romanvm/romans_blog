@@ -111,7 +111,7 @@ venv/
 *.cmd
 *local_settings.py
 *.sqlite3
-media/
+/media/
 /static/
 whoosh_index/
 git_push.py
