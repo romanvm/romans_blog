@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse
-from django.views.generic.base import TemplateView
 from filebrowser.sites import site
 from blog.sitemaps import BlogPostsSiteMap
 from pages.sitemaps import PagesSiteMap
@@ -32,9 +31,6 @@ sitemaps = {
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^tinymce-preview/$',
-        TemplateView.as_view(template_name='{0}/tinymce_preview.html'.format(settings.CURRENT_SKIN)),
-        name='tinymce_preview'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots.txt$', lambda r: HttpResponse(robots_txt, content_type='text/plain'), name='robots'),
     url(r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='sitemap'),
