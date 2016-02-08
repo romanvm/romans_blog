@@ -63,7 +63,6 @@ class TinyMCE(forms.Textarea):
         default_profile = tinymce.settings.CONFIG or tinymce.settings.SIMPLE
         self.profile = get_language_config(content_language)
         self.profile.update(profile or default_profile)
-        print(self.profile)
 
     def render(self, name, value, attrs=None):
         if value is None: value = ''
