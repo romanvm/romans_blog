@@ -161,13 +161,12 @@ TINYMCE_DEFAULT_CONFIG = {
     'image_advtab': True,
     'default_link_target': '_blank',
     'extended_valid_elements': 'span[class]',
-    'spoiler_caption': '<span class="fa fa-plus-square-o"></span>&nbsp;Spoiler!',
+    'spoiler_caption': '<span class="fa fa-plus-square-o"></span>&nbsp;Click to show',
 }
 TINYMCE_PROFILE = 'custom'
 TINYMCE_FILEBROWSER = True
 TINYMCE_SPELLCHECKER = True
 TINYMCE_CODESAMPLE = True
-TINYMCE_OLD_PREVIEW = True
 
 # Skin settings
 
