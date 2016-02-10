@@ -12,10 +12,12 @@ $(function(){
   // Toggle spoiler
   $('.spoiler-toggle').click(function()
   {
-    if ($(this).html() == '<span class="fa fa-plus-square"></span>&nbsp;Click to show') {
+    if ($(this).html() == '<span class="fa fa-plus-square"></span>&nbsp;Click to show')
+    {
       $(this).html('<span class="fa fa-minus-square"></span>&nbsp;Click to hide');
     }
-    else {
+    else
+    {
       $(this).html('<span class="fa fa-plus-square"></span>&nbsp;Click to show');
     }
     $(this).next().toggle();
