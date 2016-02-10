@@ -36,8 +36,6 @@
   <script src="{% static "cerulean_skin/js/bootstrap.js" %}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="{% static "cerulean_skin/js/ie10-viewport-bug-workaround.js" %}"></script>
-  <!-- Prism JS -->
-  <script src="{% static "prism/prism.js" %}"></script>
   <script type="text/javascript" src="{% static "cerulean_skin/js/cerulean_skin.js" %}"></script>
   {% endblock js %}
   {% if not user.is_authenticated %}
@@ -117,5 +115,7 @@
     </div>
   </footer>
   {% endblock footer %}
+  <!-- Prism JS -->
+  <script src="{% static "prism/prism.js" %}"></script>
 </body>
 </html>
