@@ -10,7 +10,7 @@ from __future__ import print_function
 import os
 import sys
 
-if os.environ['TRAVIS_BRANCH'] != 'master' and os.environ['TRAVIS_PULL_REQUEST'] != 'false':
+if os.environ['TRAVIS_BRANCH'] != 'master' or os.environ['TRAVIS_PULL_REQUEST'] != 'false':
     print('This is not a master branch. Exiting...')
     sys.exit(0)
 
@@ -20,8 +20,6 @@ sys.path.insert(0, os.path.join(basedir, 'foo'))
 import romans_blog
 
 gh_token = os.environ['GH_TOKEN']
-if not gh_token:
-    raise RuntimeError('GH_TOKEN is not defined!')
 gh_repo = 'https://{gh_token}@github.com/{repo_slug}.git'.format(gh_token=gh_token,
                                                                  repo_slug=os.environ['TRAVIS_REPO_SLUG'])
 docs = os.path.join(basedir, 'docs')
