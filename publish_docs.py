@@ -9,19 +9,16 @@ Build and publish Sphinx documentation via Travis CI
 from __future__ import print_function
 import os
 import sys
+import romans_blog
 
 if os.environ['TRAVIS_BRANCH'] != 'master' or os.environ['TRAVIS_PULL_REQUEST'] != 'false':
     print('This is not a master branch. Exiting...')
     sys.exit(0)
 
-basedir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(basedir, 'foo'))
-
-import romans_blog
-
 gh_token = os.environ['GH_TOKEN']
 gh_repo = 'https://{gh_token}@github.com/{repo_slug}.git'.format(gh_token=gh_token,
                                                                  repo_slug=os.environ['TRAVIS_REPO_SLUG'])
+basedir = os.path.dirname(os.path.abspath(__file__))
 docs = os.path.join(basedir, 'docs')
 html = os.path.join(docs, '_build', 'html')
 os.chdir(docs)
