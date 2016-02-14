@@ -1,0 +1,5 @@
+tinymce/*
+**/tests*
+manage.py
+populate_db.py
+update_index.py
