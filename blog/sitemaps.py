@@ -13,7 +13,7 @@ class BlogPostsSiteMap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return Post.objects.filter(is_published=True)
+        return Post.objects.published()
 
     def lastmod(self, obj):
         return obj.last_updated

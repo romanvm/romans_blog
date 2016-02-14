@@ -16,4 +16,4 @@ def get_pages_menu_links():
 
     :return: menu links that have attached pages
     """
-    return MenuLink.objects.filter(page__isnull=False)
+    return MenuLink.objects.have_pages()

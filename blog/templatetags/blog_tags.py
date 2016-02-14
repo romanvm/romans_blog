@@ -8,12 +8,10 @@ from urllib.parse import quote_plus
 from django import template
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext as _
 from django.core.paginator import EmptyPage
-from django.db.models import Count
 from ..models import Category, Post
 
-_ = ugettext
 register = template.Library()
 SideBarObjects = namedtuple('SideBarObjects', ['objects', 'more'])
 
@@ -62,9 +60,7 @@ def get_categories():
 
     :return: list of non-empty categories ordered by post count in desc. order
     """
-    queryset = Category.objects.filter(posts__isnull=False).annotate(
-            posts_count=Count('posts')).order_by('-posts_count', 'name')
-    return [category for category in queryset if category.get_published_posts_count()]
+    return Category.objects.ordered_by_post_count()
 
 
 @register.assignment_tag
@@ -78,11 +74,11 @@ def get_posts_digest(featured=False):
     :return: the digest of recent posts and "More" link
     :rtype: :class:`SideBarObjects`
     """
-    posts = Post.objects.filter(is_published=True)
     if featured:
-        posts = posts.filter(is_featured=True)
+        posts = Post.objects.featured()
         more_link = reverse('blog:featured_posts')
     else:
+        posts = Post.objects.published()
         more_link = reverse('blog:home')
     more = more_link if posts.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
     return SideBarObjects(posts[:settings.BLOG_SIDEBAR_POSTS_COUNT], more)
@@ -96,7 +92,7 @@ def get_archive_digest():
     :return: the list of the most recent months from the blog archive for the blog sidebar
     :rtype: :class:`SideBarObjects`
     """
-    months = Post.objects.filter(is_published=True).dates('date_published', 'month', order='DESC')
+    months = Post.objects.published().dates('date_published', 'month', order='DESC')
     more = reverse('blog:archive') if months.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
     return SideBarObjects(months[:settings.BLOG_SIDEBAR_MONTHS_COUNT], more)
 
@@ -109,7 +105,7 @@ def get_blog_menu_links():
     :return: blog menu links for the site main menu.
     """
     MenuLink = namedtuple('MenuLink', ['caption', 'url'])
-    featured = Post.objects.filter(is_featured=True)
+    featured = Post.objects.featured()
     featured_link = reverse('blog:featured_posts') if featured.count() else None
     return (
         MenuLink(_('Home'), reverse('blog:home')),

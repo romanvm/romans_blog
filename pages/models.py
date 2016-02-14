@@ -1,9 +1,7 @@
 from django.db import models
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from tinymce import models as tinymce
-
-_ = ugettext
 
 
 class Page(models.Model):
@@ -26,6 +24,13 @@ class Page(models.Model):
         ordering = ['title']
 
 
+class MenuLinkQuerySet(models.QuerySet):
+    """Custom QuerySet for MenuLinks"""
+    def have_pages(self):
+        """Get MenuLinks that have attached pages"""
+        return self.filter(page__isnull=False)
+
+
 class MenuLink(models.Model):
     """
     Represents a link in the site navigation menu
@@ -34,6 +39,7 @@ class MenuLink(models.Model):
     slug = models.SlugField(verbose_name=_('Slug'), max_length=200, unique=True)
     page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True, null=True)
     show_side_panel = models.BooleanField(verbose_name=_('Show side Panel'), default=False)
+    objects = MenuLinkQuerySet.as_manager()
 
     def get_absolute_url(self):
         return reverse('pages:page', kwargs={'slug': self.slug})

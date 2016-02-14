@@ -2,14 +2,12 @@ from datetime import date
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.conf import settings
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext as _
 from django.utils.dateformat import format as format_date
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from haystack.generic_views import SearchView
 from .models import Post, Category
-
-_ = ugettext
 
 
 class _PostsListView(ListView):
@@ -41,7 +39,7 @@ class BlogHomeView(_PostsListView):
 
     Specific context variable: ``posts``
     """
-    queryset = Post.objects.filter(is_published=True)
+    queryset = Post.objects.published()
 
 
 class BlogFeaturedPostsView(_PageTitleMixIn, _PostsListView):
@@ -55,7 +53,7 @@ class BlogFeaturedPostsView(_PageTitleMixIn, _PostsListView):
     - ``posts``
     - ``page_title``
     """
-    queryset = Post.objects.filter(is_published=True, is_featured=True)
+    queryset = Post.objects.featured()
     page_title = _('Featured Posts')
 
 
@@ -74,7 +72,7 @@ class BlogCategoryView(_PageTitleMixIn, _PostsListView):
     def get_queryset(self):
         category = get_object_or_404(Category, slug=self.kwargs['slug'])
         self.page_title = _('Posts in "{0}" category'.format(category.name))
-        return Post.objects.filter(is_published=True, categories__pk=category.pk)
+        return Post.objects.published().filter(categories__pk=category.pk)
 
 
 class BlogCategoriesListView(_PageTitleMixIn, ListView):
@@ -89,7 +87,7 @@ class BlogCategoriesListView(_PageTitleMixIn, ListView):
     - ``page_title``
     """
     template_name = '{0}/blog_categories_list.html'.format(settings.CURRENT_SKIN)
-    queryset = Category.objects.exclude(posts=None)
+    queryset = Category.objects.non_empty()
     page_title = _('Categories')
     context_object_name = 'categories'
 
@@ -133,7 +131,7 @@ class BlogArhiveView(_PageTitleMixIn, ListView):
     - ``page_title``
     """
     template_name = '{0}/blog_archive.html'.format(settings.CURRENT_SKIN)
-    queryset = Post.objects.filter(is_published=True).dates('date_published', 'month', order='DESC')
+    queryset = Post.objects.published().dates('date_published', 'month', order='DESC')
     context_object_name = 'months'
     page_title = _('Blog Archive')
 
@@ -153,7 +151,7 @@ class BlogMonthArchiveView(_PageTitleMixIn, _PostsListView):
         year = int(self.kwargs['year'])
         month = int(self.kwargs['month'])
         self.page_title = _('Blog Archive, {0}').format(format_date(date(year=year, month=month, day=1), 'F Y'))
-        return Post.objects.filter(is_published=True, date_published__year=year, date_published__month=month)
+        return Post.objects.published().filter(date_published__year=year, date_published__month=month)
 
 
 class BlogPostSearchView(SearchView):

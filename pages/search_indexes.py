@@ -18,4 +18,4 @@ class MenuLinkIndex(indexes.SearchIndex, indexes.Indexable):
         return MenuLink
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(page__isnull=False)
+        return self.get_model().objects.have_pages()

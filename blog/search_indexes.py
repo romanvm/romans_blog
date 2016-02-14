@@ -20,4 +20,4 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
         return Post
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(is_published=True)
+        return self.get_model().objects.published()

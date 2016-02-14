@@ -9,11 +9,9 @@ Provides RSS and Atom feeds for recent Posts
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 from django.conf import settings
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext as _
 from django.utils.text import Truncator
 from .models import Post
-
-_ = ugettext
 
 
 class RecentPostsRSSFeed(Feed):
@@ -22,7 +20,7 @@ class RecentPostsRSSFeed(Feed):
     description = _('Recent posts from {0}').format(settings.SITE_NAME)
 
     def items(self):
-        return Post.objects.filter(is_published=True)[:10]
+        return Post.objects.published()[:10]
 
     def item_title(self, item):
         return item.title
