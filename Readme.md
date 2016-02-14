@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/romanvm/romans_blog.svg?branch=master)](https://travis-ci.org/romanvm/romans_blog)
 [![codecov.io](https://codecov.io/github/romanvm/romans_blog/coverage.svg?branch=master)](https://codecov.io/github/romanvm/romans_blog?branch=master)
+[![Code Issues](https://www.quantifiedcode.com/api/v1/project/d5fa73efacd040a796a1c833aeffe208/badge.svg)](https://www.quantifiedcode.com/app/project/d5fa73efacd040a796a1c833aeffe208)
 
 This is a simple CMS for a blog-oriented web-site that I've developed to learn
 [Django](https://www.djangoproject.com/) web-framework.
