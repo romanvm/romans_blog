@@ -115,7 +115,7 @@ def get_blog_menu_links():
 
 
 @register.assignment_tag
-def get_url(url_name, *args, **kwargs):
+def get_url(url_name, **kwargs):
     """
     Assignment tag
 
@@ -124,7 +124,7 @@ def get_url(url_name, *args, **kwargs):
     :param url_name: the name of a path from urls
     :return: relative URL path
     """
-    return reverse(url_name, args=args, kwargs=kwargs)
+    return reverse(url_name, kwargs=kwargs)
 
 
 @register.inclusion_tag('{0}/paginator.html'.format(settings.CURRENT_SKIN), takes_context=True)
