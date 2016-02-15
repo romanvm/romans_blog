@@ -5,3 +5,4 @@ Pillow>=3.0.0
 Whoosh>=2.7.0
 pyenchant>=1.6.6
 sphinx>=1.3.5
+git+https://github.com/romanvm/django-tinymce4.git#egg=django-tinymce4
