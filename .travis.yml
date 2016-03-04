@@ -13,6 +13,12 @@ addons:
 before_install: pip install codecov
 install: pip install -r requirements.txt
 script: coverage run manage.py test blog pages
-after_success:
- - python publish_docs.py
- - codecov
+after_success: codecov
+before_deploy: wget https://raw.githubusercontent.com/romanvm/travis_scripts/master/publish_docs.py
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: python publish_docs.py
+  on:
+    python: "3.5"
+    branch: master
