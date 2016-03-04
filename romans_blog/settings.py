@@ -163,19 +163,16 @@ TINYMCE_DEFAULT_CONFIG = {
     'extended_valid_elements': 'span[class]',
     'spoiler_caption': '<span class="fa fa-plus-square"></span>&nbsp;Click to show',
 }
-TINYMCE_PROFILE = 'custom'
-TINYMCE_FILEBROWSER = True
 TINYMCE_SPELLCHECKER = True
-TINYMCE_CODESAMPLE = True
 
 # Skin settings
 
 CURRENT_SKIN = 'cerulean_skin'
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
-TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['table_class_list'] = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['content_css'] = getattr(skin_settings, 'CONTENT_CSS', [])
+# TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
+# TINYMCE_DEFAULT_CONFIG['table_class_list'] = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
+# TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
+# TINYMCE_DEFAULT_CONFIG['content_css'] = getattr(skin_settings, 'CONTENT_CSS', [])
 
 # Haystack search settings
 
