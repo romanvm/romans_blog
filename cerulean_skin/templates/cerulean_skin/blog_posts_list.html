@@ -28,7 +28,7 @@
         </a>
         {% endif %}
       </p>
-      <div class="text-just">{{ post|truncate_post:40|safe }}</div>
+      <div class="text-just">{{ post|truncate_post|safe }}</div>
       <p>
         <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }}">
           {% trans "Read post" %}&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>

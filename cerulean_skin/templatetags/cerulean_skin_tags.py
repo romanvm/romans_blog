@@ -4,8 +4,10 @@
 # Author: Roman Miroshnychenko aka Roman V.M.
 # E-mail: romanvm@yandex.ua
 
+import re
+from bs4 import BeautifulSoup
 from django import template
-from django.utils.text import Truncator
+from django.conf import settings
 
 register = template.Library()
 
@@ -25,29 +27,30 @@ def render_post_categories(post):
 
 
 @register.filter
-def truncate_post(post, words):
+def truncate_post(post):
     """
     Filter
 
-    Truncate a Post text to a given number of words.
+    Truncate a Post text to a page separator.
+    The separator is inserted by TinyMCE ``pagebreak`` plugin
+    that is used to emulate "blog post cut" feature.
 
-    It takes into account the case when a truncated fragment may contain
-    code snippets in ``<pre>`` blocks and properly terminates such fragment.
+    Only the 1st separator is taken into account, other separators, if any,
+    are ignored.
 
     :param post: blog post
-    :param words: the number of words to truncate the post to
     :return: properly terminated truncated post
     """
-    MARKER = '%{-#$*$#-}%'
-    truncated = Truncator(post.content).words(words, truncate=MARKER, html=True)
-    if MARKER in truncated:
-        terminator = '&nbsp;(<strong><a href="{0}">...</a></strong>)'.format(post.get_absolute_url())
+    separator = settings.TINYMCE_DEFAULT_CONFIG['pagebreak_separator']
+    terminator = '&nbsp;(<strong><a href="{0}">...</a></strong>)'.format(post.get_absolute_url())
+    post_parts = post.content.split(separator)
+    if len(post_parts) > 1:
+        truncated_html = post_parts[0]
+        post_digest = BeautifulSoup(truncated_html).prettify()
+        end_tag = re.search(r'</\w+?>$', post_digest, re.UNICODE | re.IGNORECASE).group(0)
+        if end_tag.lower() == '</p>':
+            return post_digest[:-4] + terminator + '</p>'
+        else:
+            return post_digest + '<p>' + terminator + '</p>'
     else:
-        terminator = ''
-    truncated = truncated.replace(MARKER, '')
-    if truncated[-6:] == '</pre>':
-        tag = '<p>'
-    else:
-        truncated = truncated[:-4]
-        tag = ''
-    return '{trunc}{tag}{term}</p>'.format(trunc=truncated, tag=tag, term=terminator)
+        return post.content
