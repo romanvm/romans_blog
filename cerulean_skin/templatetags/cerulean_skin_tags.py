@@ -4,10 +4,8 @@
 # Author: Roman Miroshnychenko aka Roman V.M.
 # E-mail: romanvm@yandex.ua
 
-import re
-from bs4 import BeautifulSoup
 from django import template
-from django.conf import settings
+from blog.utils import post_truncator
 
 register = template.Library()
 
@@ -41,16 +39,4 @@ def truncate_post(post):
     :param post: blog post
     :return: properly terminated truncated post
     """
-    separator = settings.TINYMCE_DEFAULT_CONFIG['pagebreak_separator']
-    terminator = '(<strong><a href="{0}">...</a></strong>)'.format(post.get_absolute_url())
-    post_parts = post.content.split(separator)
-    if len(post_parts) > 1:
-        truncated_html = post_parts[0]
-        post_digest = BeautifulSoup(truncated_html, 'html.parser').prettify()
-        end_tag = re.search(r'</\w+?>$', post_digest, re.UNICODE | re.IGNORECASE).group(0)
-        if end_tag.lower() == '</p>':
-            return post_digest[:-4] + terminator + '</p>'
-        else:
-            return post_digest + '<p>' + terminator + '</p>'
-    else:
-        return post.content
+    return post_truncator(post, '(<strong><a href="{0}">...</a></strong>)'.format(post.get_absolute_url()))

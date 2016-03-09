@@ -10,12 +10,12 @@ from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 from django.conf import settings
 from django.utils.translation import ugettext as _
-from django.utils.text import Truncator
+from .utils import post_truncator
 from .models import Post
 
 
 class RecentPostsRSSFeed(Feed):
-    title = _('{0} - Recent Posts').format(settings.SITE_NAME)
+    title = ' - '.join((settings.SITE_NAME, _('Recent Posts')))
     link = '/'
     description = _('Recent posts from {0}').format(settings.SITE_NAME)
 
@@ -26,7 +26,8 @@ class RecentPostsRSSFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return Truncator(item.content).words(50, html=True)
+        return post_truncator(item, '<em><a href="{0}">{1}</a></em>'.format(item.get_absolute_url(),
+                                                                            _('Read more...')))
 
 
 class RecentPostsAtomFeed(RecentPostsRSSFeed):
