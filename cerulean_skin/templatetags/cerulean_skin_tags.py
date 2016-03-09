@@ -42,7 +42,7 @@ def truncate_post(post):
     :return: properly terminated truncated post
     """
     separator = settings.TINYMCE_DEFAULT_CONFIG['pagebreak_separator']
-    terminator = '&nbsp;(<strong><a href="{0}">...</a></strong>)'.format(post.get_absolute_url())
+    terminator = '(<strong><a href="{0}">...</a></strong>)'.format(post.get_absolute_url())
     post_parts = post.content.split(separator)
     if len(post_parts) > 1:
         truncated_html = post_parts[0]
