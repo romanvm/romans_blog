@@ -6,3 +6,4 @@ Whoosh>=2.7.0
 pyenchant
 Sphinx
 django-tinymce4-lite
+bs4
