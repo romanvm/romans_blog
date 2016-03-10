@@ -20,8 +20,13 @@
       <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
       <p>
         <small class="text-muted">
-          <span class="glyphicon glyphicon-calendar"></span>&nbsp;<em>{{ post.date_published }}</em>
-        </small>&nbsp;
+          <span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ post.date_published }}&nbsp;
+          {% get_disqus_shortname as disqus_shortname %}
+          {% if post.allow_comments and disqus_shortname %}
+          <span class="glyphicon glyphicon-comment"></span>&nbsp;
+          <a href="{{ post.get_absolute_url }}#disqus_thread">{% trans "0 comments" %}</a>&nbsp;
+          {% endif %}
+        </small>
         {% if user.is_authenticated %}
         <a class="btn btn-default btn-xs" href="/admin/blog/post/{{ post.pk }}/">
           <span class="fa fa-pencil-square"></span>&nbsp;{% trans "Edit post" %}
@@ -29,22 +34,13 @@
         {% endif %}
       </p>
       <div class="text-just">{{ post|truncate_post|safe }}</div>
-      <p>
-        <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }}">
-          {% trans "Read post" %}&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>
-        </a>&nbsp;
-        {% get_disqus_shortname as disqus_shortname %}
-        {% if post.allow_comments and disqus_shortname %}
-        <a class="btn btn-primary btn-sm" href="{{ post.get_absolute_url }}#disqus_thread">
-          {% trans "0 comments" %}
-        </a>&nbsp;
-        {% endif %}
-        {% if post.categories.count %}
+      {% if post.categories.count %}
+      <p>        
         <small><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;
           {{ post|render_post_categories|safe }}
         </small>
-        {% endif %}
       </p>
+      {% endif %}
       <hr>
     </div>
     {% empty %}

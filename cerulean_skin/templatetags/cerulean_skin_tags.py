@@ -5,6 +5,7 @@
 # E-mail: romanvm@yandex.ua
 
 from django import template
+from django.utils.translation import ugettext as _
 from blog.utils import post_truncator
 
 register = template.Library()
@@ -39,4 +40,4 @@ def truncate_post(post):
     :param post: blog post
     :return: properly terminated truncated post
     """
-    return post_truncator(post, '(<strong><a href="{0}">...</a></strong>)'.format(post.get_absolute_url()))
+    return post_truncator(post, '(<em><a href="{0}">{1}</a></em>)'.format(post.get_absolute_url(), _('Read more...')))
