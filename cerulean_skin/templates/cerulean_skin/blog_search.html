@@ -31,7 +31,7 @@
         {% endif %}
       </p>  
       <p class="search-summary">{% autoescape off %}{{ result.highlighted.text|join:"... " }}{% endautoescape %}&nbsp;
-      <a href="{{ result.object.get_absolute_url }}"><strong><i>{% trans "Read more..." %}</i></strong></a></p>
+      (<a href="{{ result.object.get_absolute_url }}"><i>{% trans "Read more..." %}</i></a>)</p>
       <hr>
       {% endfor %}
       {% if is_paginated %}
