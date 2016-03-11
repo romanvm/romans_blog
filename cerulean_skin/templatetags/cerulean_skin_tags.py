@@ -40,4 +40,5 @@ def truncate_post(post):
     :param post: blog post
     :return: properly terminated truncated post
     """
-    return post_truncator(post, '(<em><a href="{0}">{1}</a></em>)'.format(post.get_absolute_url(), _('Read more...')))
+    return post_truncator(post, '&nbsp;(<em><a href="{0}">{1}</a></em>)'.format(post.get_absolute_url(),
+                                                                                _('Read more...')))

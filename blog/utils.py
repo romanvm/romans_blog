@@ -25,7 +25,7 @@ def post_truncator(post, terminator):
     post_parts = post.content.split(settings.TINYMCE_DEFAULT_CONFIG['pagebreak_separator'])
     if len(post_parts) > 1:
         truncated_html = post_parts[0]
-        post_digest = BeautifulSoup(truncated_html, 'html.parser').prettify()
+        post_digest = str(BeautifulSoup(truncated_html, 'html.parser'))
         end_tag = re.search(r'</\w+?>$', post_digest, re.UNICODE | re.IGNORECASE).group(0)
         if end_tag.lower() == '</p>':
             return post_digest[:-4] + terminator + '</p>'
