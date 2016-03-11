@@ -4,14 +4,6 @@
 {% block title %}
   <title>{% trans "Site Search" %} - {% get_site_name %}</title>
 {% endblock title %}
-{% block css %}
-  {{ block.super}}
-  <style type="text/css">
-  .search-summary em {
-    background: yellow;
-  }
-  </style>
-{% endblock css %}
 {% block blog_page_body %}
   <h1>{% trans "Site Search" %}</h1>
   <hr>

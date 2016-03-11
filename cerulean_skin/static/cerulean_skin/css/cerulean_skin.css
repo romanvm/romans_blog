@@ -47,8 +47,12 @@ h1,h2,.panel-title,.panel-footer {
 }
 
 .search-results {
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 15px;
+}
+
+.search-summary em {
+  background: yellow;
 }
 
 .pages {
@@ -70,6 +74,7 @@ h1,h2,.panel-title,.panel-footer {
   height: 20px;
 }
 
+/* Responsive design */
 @media (min-width: 768px) {
   .container {
     width: 640px;
@@ -79,6 +84,7 @@ h1,h2,.panel-title,.panel-footer {
     margin-right: 50px;
   }
 }
+
 @media (min-width: 992px) {
   .container {
     width: 800px;
@@ -88,19 +94,18 @@ h1,h2,.panel-title,.panel-footer {
     margin-right: 75px;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     width: 1024px;
   }
 }
-/* Fixes .container width inside TinyMCE preview3 window */
-.forceColors .container {
-  width: 840px;
-}
+
 /* Fixes .container padding inside TinyMCE preview window */
 body.mce-content-body {
   padding: 5px;
 }
+
 /* Spoiler styles */
 .spoiler {
   border: 1px solid #e7e7e7;
