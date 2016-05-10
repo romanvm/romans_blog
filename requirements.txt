@@ -1,9 +1,8 @@
-Django==1.8.10
+Django==1.8.13
 django-filebrowser-no-grappelli>=3.6.1
 django-haystack>=2.4.1
 Pillow>=3.0.0
 Whoosh>=2.7.0
 pyenchant
-Sphinx
 django-tinymce4-lite
 bs4

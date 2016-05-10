@@ -10,7 +10,9 @@ addons:
   apt:
     packages:
      - enchant
-before_install: pip install codecov
+before_install:
+  - pip install codecov
+  - pip install Sphinx
 install: pip install -r requirements.txt
 script: coverage run manage.py test blog pages
 after_success: codecov
