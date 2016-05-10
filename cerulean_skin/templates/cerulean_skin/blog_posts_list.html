@@ -33,7 +33,7 @@
         </a>
         {% endif %}
       </p>
-      <div class="text-just">{{ post|truncate_post|safe }}</div>
+      <div class="post-cut">{{ post|truncate_post|safe }}</div>
       {% if post.categories.count %}
       <p>        
         <small><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;

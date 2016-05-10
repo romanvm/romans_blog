@@ -32,6 +32,11 @@ h1,h2,.panel-title,.panel-footer {
   border-radius: 15px;
 }
 
+.post-cut {
+  text-align: justify;
+  margin-top: 15px;
+}
+
 .post-body {
   margin-top: 15px;
   margin-bottom: 15px;
