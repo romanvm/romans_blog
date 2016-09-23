@@ -36,5 +36,5 @@ CONTENT_CSS = [
     staticfiles_storage.url('cerulean_skin/css/bootstrap.min.css'),
     staticfiles_storage.url('cerulean_skin/css/font-awesome.min.css'),
     staticfiles_storage.url('cerulean_skin/css/cerulean_skin.css'),
-    staticfiles_storage.url('prism/prism.css'),
+    staticfiles_storage.url('tinymce/css/prism.css'),
 ]
