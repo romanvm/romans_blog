@@ -130,10 +130,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'modern',
-    'plugins': 'preview advlist autolink link image imagetools lists charmap print hr anchor pagebreak '
+    'plugins': 'advlist autolink link image imagetools lists charmap print hr anchor pagebreak '
                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media '
                'nonbreaking save table contextmenu directionality emoticons template paste textcolor '
-               'codesample spellchecker autosave noneditable django_saveandcontinue spoiler',
+               'spellchecker autosave noneditable',
     'toolbar1': 'django_saveandcontinue | undo redo | cut copy paste | searchreplace | styleselect removeformat | '
                 'fontselect fontsizeselect | forecolor backcolor | code preview | spellchecker | fullscreen',
     'toolbar2': 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify '
