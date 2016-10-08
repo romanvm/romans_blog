@@ -128,6 +128,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # TinyMCE settings
 
+common_content = import_module('common_content')
+
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'modern',
     'plugins': 'advlist autolink link image imagetools lists charmap print hr anchor pagebreak '
@@ -158,14 +160,36 @@ TINYMCE_DEFAULT_CONFIG = {
     'spellchecker_language': 'en_US',
     'plugin_preview_width': 840,
     'plugin_preview_height': 600,
-    'plugin_preview_pageurl': '/tinymce-preview/',
     'image_advtab': True,
     'default_link_target': '_blank',
     'extended_valid_elements': 'span[class]',
     'spoiler_caption': '<span class="fa fa-plus-square"></span>&nbsp;Click to show',
     'pagebreak_separator': '<!-- ***Blog Cut*** -->',
+    'external_plugins': {
+        'spoiler': '../../../common_content/js/spoiler/plugin.min.js',
+        'django_saveandcontinue': '../../../common_content/js/django_saveandcontinue/plugin.min.js',
+        'codesample': '../../../common_content/js/codesample/plugin.min.js',
+        'preview': '../../../common_content/js/preview/plugin.min.js'
+    },
+    'codesample_languages': [
+        {'text': 'Python', 'value': 'python'},
+        {'text': 'HTML/XML', 'value': 'markup'},
+        {'text': 'CSS', 'value': 'css'},
+        {'text': 'JavaScript', 'value': 'javascript'},
+        {'text': 'C++', 'value': 'cpp'},
+        {'text': 'C', 'value': 'c'},
+        {'text': 'C#', 'value': 'csharp'},
+        {'text': 'Windows BAT', 'value': 'batch'},
+        {'text': 'Bash', 'value': 'bash'},
+        {'text': 'YAML', 'value': 'yaml'},
+        {'text': 'SQL', 'value': 'sql'},
+        {'text': 'reStructuredText', 'value': 'rest'},
+        {'text': 'Plain Text', 'value': 'none'}
+    ],
+    'codesample_css': common_content.base_url + 'css/prism.css'
 }
 TINYMCE_SPELLCHECKER = True
+TINYMCE_ADDITIONAL_JS_URLS = [common_content.base_url + 'js/prism.js']
 
 # Skin settings
 
