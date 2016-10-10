@@ -16,16 +16,6 @@ register = template.Library()
 SideBarObjects = namedtuple('SideBarObjects', ['objects', 'more'])
 
 
-@register.simple_tag
-def get_site_name():
-    """
-    Simple tag
-
-    :return: site name from settings
-    """
-    return settings.SITE_NAME
-
-
 @register.assignment_tag
 def get_disqus_shortname():
     """
@@ -114,19 +104,6 @@ def get_blog_menu_links():
     )
 
 
-@register.assignment_tag
-def get_url(url_name, **kwargs):
-    """
-    Assignment tag
-
-    Get reverse URL as a template variable
-
-    :param url_name: the name of a path from urls
-    :return: relative URL path
-    """
-    return reverse(url_name, kwargs=kwargs)
-
-
 @register.inclusion_tag('{0}/paginator.html'.format(settings.CURRENT_SKIN), takes_context=True)
 def render_paginator(context, adjacent_pages=2):
     """
@@ -175,17 +152,3 @@ def render_paginator(context, adjacent_pages=2):
         'request': context['request'],
         'query': quote_plus(context['query']),
     }
-
-
-@register.inclusion_tag('blog/google_analytics.html', takes_context=False)
-def render_google_analytics():
-    """
-    Inclusion tag
-
-    Renders Google Analytics JS code
-
-    If ``settings.GOOGLE_ANALYTICS_ID`` is empty, no code will be rendered.
-
-    :return: rendered GA html code.
-    """
-    return {'google_analytics_id': settings.GOOGLE_ANALYTICS_ID}

@@ -1,5 +1,5 @@
 {% extends "cerulean_skin/base.html" %}
-{% load blog_tags %}
+{% load common_content_tags %}
 {% block meta %}
   {{ block.super }}
   {% if menu_link.page.keywords %}
@@ -31,3 +31,5 @@
   {% endif %}
   </div>
 {% endblock content %}
+
+

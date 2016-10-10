@@ -46,10 +46,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'haystack',
+    'common_content',
     'blog',
     'pages',
     'cerulean_skin',
-    'common_content'
 )
 
 MIDDLEWARE_CLASSES = (
