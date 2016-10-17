@@ -60,16 +60,16 @@ tinymce.PluginManager.add('preview', function(editor) {
 
 				var dirAttr = editor.settings.directionality ? ' dir="' + editor.settings.directionality + '"' : '';
 
-				var body = editor.getBody();
-				var code_samples = body.getElementsByTagName('pre');
-				var i;
-				for (i = 0; i < code_samples.length; i++) {
-					if (code_samples[i].className.match(/language-(\w+)/) != null) {
-						Prism.highlightElement(code_samples[i].getElementsByTagName('code')[0]);
-					}
-				}
-
-				var html_content = body.innerHTML;
+				// Higlight code samples with Prism
+        var div = document.createElement('div');
+        div.innerHTML = editor.getContent();
+        var code_samples = div.getElementsByTagName('pre');
+        var i;
+        for (i = 0; i < code_samples.length; i++) {
+          if (code_samples[i].className.match(/language-(\w+)/) != null) {
+            Prism.highlightElement(code_samples[i].getElementsByTagName('code')[0]);
+          }
+        }
 
 				previewHtml = (
 					'<!DOCTYPE html>' +
@@ -79,7 +79,7 @@ tinymce.PluginManager.add('preview', function(editor) {
 					'</head>' +
 					'<body id="' + bodyId + '" class="mce-content-body ' + bodyClass + '"' + dirAttr + '>' +
 						// editor.getContent() +
-						html_content +
+						div.innerHTML + // Extract html with higlighted code samples, if any.
 						preventClicksOnLinksScript +
 					'</body>' +
 					'</html>'
