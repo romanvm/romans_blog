@@ -1,6 +1,4 @@
 var DOM = tinymce.dom.DOMUtils.DOM;
-var addedCss;
-var addedInlineCss;
 
 function wrapCode(element) {
 	element.innerHTML = '<code>' + element.innerHTML + '</code>';
@@ -148,32 +146,6 @@ function openDialog(editor) {
 tinymce.PluginManager.add('codesample', function(editor, pluginUrl) {
   var $ = editor.$;
 
-	function loadCss() {
-
-		if (editor.inline && addedInlineCss) {
-			return;
-		}
-
-		if (!editor.inline && addedCss) {
-			return;
-		}
-
-		if (editor.inline) {
-			addedInlineCss = true;
-		} else {
-			addedCss = true;
-		}
-
-    var linkElm = editor.dom.create('link', {
-        rel: 'stylesheet',
-        href: pluginUrl + '/css/prism.css'
-      });
-
-    // Insert as the 1st link element to allow style modfications via content_css
-    var head = editor.getDoc().getElementsByTagName('head')[0];
-    head.insertBefore(linkElm, head.getElementsByTagName('link')[0]);
-	}
-
 	editor.on('PreProcess', function(e) {
 		$('pre[contenteditable=false]', e.node).
 			filter(trimArg(isCodeSample)).
@@ -189,7 +161,9 @@ tinymce.PluginManager.add('codesample', function(editor, pluginUrl) {
 	});
 
 	editor.on('SetContent', function() {
-		var unprocessedCodeSamples = $('pre').filter(trimArg(isCodeSample)).filter(function(idx, elm) {
+    var pre_tags = $('pre');
+
+		var unprocessedCodeSamples = pre_tags.filter(trimArg(isCodeSample)).filter(function(idx, elm) {
 			return elm.contentEditable !== "false";
 		});
 
@@ -201,12 +175,17 @@ tinymce.PluginManager.add('codesample', function(editor, pluginUrl) {
 					});
 					elm.contentEditable = false;
 					elm.innerHTML = editor.dom.encode(elm.textContent);
-				 	wrapCode(elm);
-					Prism.highlightElement(elm.firstChild);
 					elm.className = $.trim(elm.className);
 				});
 			});
 		}
+
+    pre_tags.each(function(idx, elm) {
+      if (!elm.getElementsByTagName('code').length) {
+        wrapCode(elm);
+      }
+      Prism.highlightElement(elm.firstChild);
+    });
 	});
 
 	editor.addCommand('codesample', function() {
@@ -218,5 +197,4 @@ tinymce.PluginManager.add('codesample', function(editor, pluginUrl) {
 		title: 'Insert/Edit code sample'
 	});
 
-	editor.on('init', loadCss);
 });
