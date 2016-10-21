@@ -60,16 +60,25 @@ tinymce.PluginManager.add('preview', function(editor) {
 
 				var dirAttr = editor.settings.directionality ? ' dir="' + editor.settings.directionality + '"' : '';
 
-				// Higlight code samples with Prism
-        var div = document.createElement('div');
-        div.innerHTML = editor.getContent();
-        var code_samples = div.getElementsByTagName('pre');
-        var i;
-        for (i = 0; i < code_samples.length; i++) {
-          if (code_samples[i].className.match(/language-(\w+)/) != null) {
-            Prism.highlightElement(code_samples[i].getElementsByTagName('code')[0]);
+        var htmlContent;
+        if (typeof Prism != 'undefined') {
+          // Higlight code samples with Prism
+          var div = document.createElement('div');
+          div.innerHTML = editor.getContent();
+          var code_samples = div.getElementsByTagName('pre');
+          var i;
+          for (i = 0; i < code_samples.length; i++) {
+            if (code_samples[i].className.match(/language-(\w+)/) != null) {
+              Prism.highlightElement(code_samples[i].getElementsByTagName('code')[0]);
+            }
+          htmlContent = div.innerHTML;
           }
         }
+        else {
+          htmlContent = editor.getContent();
+        }
+
+        // htmlContent = editor.getContent();
 
 				previewHtml = (
 					'<!DOCTYPE html>' +
@@ -79,7 +88,7 @@ tinymce.PluginManager.add('preview', function(editor) {
 					'</head>' +
 					'<body id="' + bodyId + '" class="mce-content-body ' + bodyClass + '"' + dirAttr + '>' +
 						// editor.getContent() +
-						div.innerHTML + // Extract html with higlighted code samples, if any.
+            htmlContent +
 						preventClicksOnLinksScript +
 					'</body>' +
 					'</html>'

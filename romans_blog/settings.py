@@ -174,6 +174,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'codesample_languages': [
         {'text': 'Python', 'value': 'python'},
         {'text': 'HTML/XML', 'value': 'markup'},
+        {'text': 'Django/Jinja2', 'value': 'django'},
         {'text': 'CSS', 'value': 'css'},
         {'text': 'JavaScript', 'value': 'javascript'},
         {'text': 'C++', 'value': 'cpp'},
@@ -184,12 +185,15 @@ TINYMCE_DEFAULT_CONFIG = {
         {'text': 'YAML', 'value': 'yaml'},
         {'text': 'SQL', 'value': 'sql'},
         {'text': 'reStructuredText', 'value': 'rest'},
-        {'text': 'Plain Text', 'value': 'none'}
+        {'text': 'Plain Text', 'value': 'none'},
     ],
-    'codesample_css': common_content.base_url + 'css/prism.css'
+    'content_css': [common_content.base_url + 'css/prism.css'],
 }
 TINYMCE_SPELLCHECKER = True
-TINYMCE_ADDITIONAL_JS_URLS = [common_content.base_url + 'js/prism.js']
+TINYMCE_ADDITIONAL_JS_URLS = [
+    common_content.base_url + 'js/prism.min.js',
+    common_content.base_url + 'js/prism-django.min.js'
+]
 
 # Skin settings
 
@@ -198,7 +202,7 @@ skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
 TINYMCE_DEFAULT_CONFIG['table_class_list'] = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
 TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['content_css'] = getattr(skin_settings, 'CONTENT_CSS', [])
+TINYMCE_DEFAULT_CONFIG['content_css'] += getattr(skin_settings, 'CONTENT_CSS', [])
 
 # Haystack search settings
 
