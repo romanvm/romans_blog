@@ -1,10 +1,9 @@
 // Django/Jinja2 syntax definition for Prism.js <http://prismjs.com> syntax highlighter.
 // Mostly it works OK but can paint code incorrectly on complex html/template tag combinations.
 
-var django = {
+var django_template = {
   'property': {
     pattern: /(?:{{|{%)[\w\W]*?(?:%}|}})/g,
-    // greedy: true, // This is buggy at some code and multiplies the 1st line throughout the code
     inside: {
       'string': {
         pattern: /("|')(?:\\\\|\\?[^\\\r\n])*?\1/,
@@ -23,18 +22,18 @@ var django = {
 Prism.languages.django = Prism.languages.extend('markup', {'comment': /(?:<!--|{#)[\w\W]*?(?:#}|-->)/});
 // Updated html tag pattern to allow template tags inside html tags
 Prism.languages.django.tag.pattern = /<\/?(?!\d)[^\s>\/=$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^>=]+))?)*\s*\/?>/i;
-Prism.languages.insertBefore('django', 'entity', django);
-Prism.languages.insertBefore('inside', 'tag', django, Prism.languages.django.tag);
+Prism.languages.insertBefore('django', 'entity', django_template);
+Prism.languages.insertBefore('inside', 'tag', django_template, Prism.languages.django.tag);
 
 if (Prism.languages.javascript) {
   // Combine js code and template tags painting inside <script> blocks
-  Prism.languages.insertBefore('inside', 'string', django, Prism.languages.django.script);
+  Prism.languages.insertBefore('inside', 'string', django_template, Prism.languages.django.script);
   Prism.languages.django.script.inside.string.inside = django;
 }
 if (Prism.languages.css) {
   // Combine css code and template tags painting inside <style> blocks
-  Prism.languages.insertBefore('inside', 'atrule', {'tag': django.property}, Prism.languages.django.style);
-  Prism.languages.django.style.inside.string.inside = django;
+  Prism.languages.insertBefore('inside', 'atrule', {'tag': django_template.property}, Prism.languages.django.style);
+  Prism.languages.django.style.inside.string.inside = django_template;
 }
 
 // Add an Jinja2 alias
