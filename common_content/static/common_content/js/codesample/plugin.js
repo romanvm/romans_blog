@@ -1,3 +1,8 @@
+/*
+Customized version of TinyMCE 4 codesample plugin.
+
+It uses external Prism.js js/css components and supports all languages supported by Prism.
+*/
 var DOM = tinymce.dom.DOMUtils.DOM;
 
 function wrapCode(element) {

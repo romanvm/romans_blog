@@ -8,6 +8,11 @@
  * Contributing: http://www.tinymce.com/contributing
  */
 
+/*
+Customized version of TinyMCE 4 preview plugin.
+It supports code syntax highlighting with Prism.
+*/
+
 /*global tinymce:true */
 
 tinymce.PluginManager.add('preview', function(editor) {
