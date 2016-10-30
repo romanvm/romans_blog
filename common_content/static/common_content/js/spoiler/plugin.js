@@ -9,8 +9,8 @@ An example of a site-side script: https://jsfiddle.net/romanvm/7w9shc27/
 License: LGPL <http://www.gnu.org/licenses/lgpl-3.0.en.html>
 */
 tinymce.PluginManager.add('spoiler', function(editor, url)
-{
-
+{  
+  var $ = editor.$;
   editor.contentCSS.push(url + '/css/spoiler.css');
   var spoilerCaption = editor.getParam('spoiler_caption', 'Spoiler!');
 
@@ -24,11 +24,9 @@ tinymce.PluginManager.add('spoiler', function(editor, url)
       if (!content) {
         content = 'Spoiler text.';
       }
-      selection.setContent('<div class="spoiler" contenteditable="false">' +
-                      '<div class="spoiler-toggle">' + spoilerCaption + ' </div>' +
-                      '<div class="spoiler-text" contenteditable="true">' +
-                      content +
-                      '</div></div>');
+      selection.setContent('<div class="spoiler">' +
+                           '<div class="spoiler-toggle">' + spoilerCaption + ' </div>' +
+                           '<div class="spoiler-text">' + content + '</div></div>');
       });
       editor.nodeChanged();
     }
@@ -49,6 +47,28 @@ tinymce.PluginManager.add('spoiler', function(editor, url)
       editor.nodeChanged();
     }
   }
+
+  editor.on('PreProcess', function(e) {
+    $('div[class*="spoiler"]', e.node).each(function(index, elem) {
+      if (elem.hasAttribute('contenteditable')) {
+        elem.removeAttribute('contentEditable');
+      }
+    });
+  });
+
+  editor.on('SetContent', function() {
+    $('div[class*="spoiler"]').each(function(index, elem) {
+      if (!elem.hasAttribute('contenteditable')) {
+        var $elem = $(elem);
+        if ($elem.hasClass('spoiler')) {
+          elem.contentEditable = false;
+        }
+        else if ($elem.hasClass('spoiler-text')) {
+          elem.contentEditable = true;
+        }
+      }
+    });
+  });
 
   editor.addButton('spoiler-add',
   {
