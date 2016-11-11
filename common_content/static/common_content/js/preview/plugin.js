@@ -76,8 +76,8 @@ tinymce.PluginManager.add('preview', function(editor) {
             if (code_samples[i].className.match(/language-(\w+)/) != null) {
               Prism.highlightElement(code_samples[i].getElementsByTagName('code')[0]);
             }
-          htmlContent = div.innerHTML;
           }
+          htmlContent = div.innerHTML;
         }
         else {
           htmlContent = editor.getContent();
