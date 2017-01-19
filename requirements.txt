@@ -1,5 +1,5 @@
-Django==1.8.16
-django-filebrowser-no-grappelli>=3.6.1
+Django==1.8.17
+django-filebrowser-no-grappelli==3.6.2
 django-haystack>=2.4.1
 Pillow>=3.0.0
 Whoosh>=2.7.0
