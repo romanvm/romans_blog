@@ -28,7 +28,7 @@ def post_truncator(post, terminator):
         post_digest = str(BeautifulSoup(truncated_html, 'html.parser'))
         end_tag = re.search(r'</\w+?>$', post_digest, re.UNICODE | re.IGNORECASE).group(0)
         if end_tag.lower() == '</p>':
-            return post_digest[:-4] + terminator + '</p>'
+            return post_digest[:-4] + ' ' + terminator + '</p>'
         else:
             return post_digest + '<p>' + terminator + '</p>'
     else:
