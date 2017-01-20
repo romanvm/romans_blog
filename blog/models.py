@@ -15,9 +15,7 @@ class CategoryQuerySet(models.QuerySet):
     def ordered_by_post_count(self):
         """Get the generator of Categories ordered by their post count"""
         queryset = self.non_empty().annotate(posts_count=Count('posts')).order_by('-posts_count', 'name')
-        for category in queryset:
-            if category.get_published_posts_count():
-                yield category
+        return (category for category in queryset if category.get_published_posts_count())
 
 
 class Category(models.Model):
