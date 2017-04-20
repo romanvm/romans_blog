@@ -19,10 +19,10 @@ def get_site_name():
     return settings.SITE_NAME
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_url(url_name, **kwargs):
     """
-    Assignment tag
+    Simple tag
 
     Get reverse URL as a template variable
 

@@ -16,10 +16,10 @@ register = template.Library()
 SideBarObjects = namedtuple('SideBarObjects', ['objects', 'more'])
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_disqus_shortname():
     """
-    Assignment tag
+    Simple tag
 
     :return: Disqus short name
     """
@@ -43,20 +43,20 @@ def render_disqus_comments(context):
             'disqus_shortname': settings.DISQUS_SHORTNAME}
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_categories():
     """
-    Assignment tag
+    Simple tag
 
     :return: list of non-empty categories ordered by post count in desc. order
     """
     return Category.objects.ordered_by_post_count()
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_posts_digest(featured=False):
     """
-    Assignment tag
+    Simple tag
 
     Get the lists of the latest posts (general of featured) for the blog sidebar
 
@@ -74,10 +74,10 @@ def get_posts_digest(featured=False):
     return SideBarObjects(posts[:settings.BLOG_SIDEBAR_POSTS_COUNT], more)
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_archive_digest():
     """
-    Assignment tag
+    Simple tag
 
     :return: the list of the most recent months from the blog archive for the blog sidebar
     :rtype: :class:`SideBarObjects`
@@ -87,10 +87,10 @@ def get_archive_digest():
     return SideBarObjects(months[:settings.BLOG_SIDEBAR_MONTHS_COUNT], more)
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_blog_menu_links():
     """
-    Assignment tag
+    Simple tag
 
     :return: blog menu links for the site main menu.
     """

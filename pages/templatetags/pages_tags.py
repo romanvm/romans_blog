@@ -9,10 +9,10 @@ from ..models import MenuLink
 register = template.Library()
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_pages_menu_links():
     """
-    Assignment tag
+    Simple tag
 
     :return: menu links that have attached pages
     """
