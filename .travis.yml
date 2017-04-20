@@ -22,7 +22,7 @@ deploy:
   skip_cleanup: true
   script: python publish_docs.py
   on:
-    python: "3.5"
+    python: "3.6"
     branch: master
 notifications:
   email: false
