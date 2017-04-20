@@ -12,7 +12,7 @@ register = template.Library()
 @register.simple_tag
 def get_pages_menu_links():
     """
-    Assignment tag
+    Simple tag
 
     :return: menu links that have attached pages
     """
