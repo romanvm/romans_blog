@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse
+from django.contrib.sitemaps.views import sitemap
 from filebrowser.sites import site
 from blog.sitemaps import BlogPostsSiteMap
 from pages.sitemaps import PagesSiteMap
@@ -33,7 +34,7 @@ urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots.txt$', lambda r: HttpResponse(robots_txt, content_type='text/plain'), name='robots'),
-    url(r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='sitemap'),
+    url(r'^sitemap.xml$', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     url(r'^pages/', include('pages.urls', namespace='pages')),
     url(r'', include('blog.urls', namespace='blog')),
 ]
