@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse
 from django.contrib.sitemaps.views import sitemap
+from django.utils.translation import ugettext as _
 from filebrowser.sites import site
 from blog.sitemaps import BlogPostsSiteMap
 from pages.sitemaps import PagesSiteMap
@@ -28,6 +29,8 @@ sitemaps = {
     'blog': BlogPostsSiteMap,
     'pages': PagesSiteMap,
             }
+# Translators: The placeholder represents a site's name
+admin.site.site_header = _('{0} Administration').format(settings.SITE_NAME)
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
