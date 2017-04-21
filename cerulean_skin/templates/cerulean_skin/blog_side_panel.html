@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load common_content_tags %}
 {% load blog_tags %}
 {% if user.is_authenticated %}
   <div class="panel panel-default">
@@ -17,7 +16,7 @@
   </div>
 {% endif %}
 {% get_posts_digest False as latest_posts %}
-{% get_url "blog:home" as home_url %}
+{% url "blog:home" as home_url %}
 {% if latest_posts.objects and request.path != home_url %}
   <div class="panel panel-default">
     <div class="panel-heading"><h4 class="panel-title"><span class="fa fa-newspaper-o"></span>&nbsp;{% trans "Latest Posts" %}</h4></div>
@@ -47,7 +46,7 @@
   {% endif %}
 </div>
 {% endif %}
-{% get_url "blog:archive" as archive_url %}
+{% url "blog:archive" as archive_url %}
 {% get_archive_digest as months %}
 {% if months and request.path != archive_url %}
 <div class="panel panel-default">
