@@ -1,4 +1,4 @@
-Django==1.11
+Django==1.11.5
 django-filebrowser-no-grappelli==3.7.0
 django-haystack>=2.4.1
 Pillow>=3.0.0
