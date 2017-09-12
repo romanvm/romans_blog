@@ -42,7 +42,7 @@ class Category(models.Model):
         verbose_name = _('Category')
         # Translators: General plural without a number
         verbose_name_plural = _('Categories')
-        ordering = ['name']
+        ordering = ('name',)
 
 
 class PostQuerySet(models.QuerySet):
@@ -89,4 +89,4 @@ class Post(models.Model):
         verbose_name = _('Post')
         # Translators: General plural without a number
         verbose_name_plural = _('Posts')
-        ordering = ['-date_published', '-pk']
+        ordering = ('-date_published', '-pk')

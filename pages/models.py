@@ -21,7 +21,7 @@ class Page(models.Model):
         verbose_name = _('Page')
         #Translators: General plural without a number
         verbose_name_plural = _('Pages')
-        ordering = ['title']
+        ordering = ('title',)
 
 
 class MenuLinkQuerySet(models.QuerySet):
@@ -50,4 +50,4 @@ class MenuLink(models.Model):
     class Meta:
         verbose_name = _('Menu Link')
         verbose_name_plural = _('Menu Links')
-        ordering = ['pk']
+        ordering = ('pk',)
