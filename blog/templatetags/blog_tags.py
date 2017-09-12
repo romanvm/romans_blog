@@ -54,13 +54,14 @@ def get_categories():
 
 
 @register.simple_tag
-def get_posts_digest(featured=False):
+def get_posts_digest(featured=False, posts_count=5):
     """
     Simple tag
 
     Get the lists of the latest posts (general of featured) for the blog sidebar
 
     :param featured: if ``True`` featured posts digest is returned
+    :param posts_count: the number of posts to include in a digest
     :return: the digest of recent posts and "More" link
     :rtype: :class:`SideBarObjects`
     """
@@ -70,21 +71,22 @@ def get_posts_digest(featured=False):
     else:
         posts = Post.objects.published()
         more_link = reverse('blog:home')
-    more = more_link if posts.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
-    return SideBarObjects(posts[:settings.BLOG_SIDEBAR_POSTS_COUNT], more)
+    more = more_link if posts.count() > posts_count else None
+    return SideBarObjects(posts[:posts_count], more)
 
 
 @register.simple_tag
-def get_archive_digest():
+def get_archive_digest(months_count=6):
     """
     Simple tag
 
+    :param months_count: the number of month to include in a digest
     :return: the list of the most recent months from the blog archive for the blog sidebar
     :rtype: :class:`SideBarObjects`
     """
     months = Post.objects.published().dates('date_published', 'month', order='DESC')
-    more = reverse('blog:archive') if months.count() > settings.BLOG_SIDEBAR_POSTS_COUNT else None
-    return SideBarObjects(months[:settings.BLOG_SIDEBAR_MONTHS_COUNT], more)
+    more = reverse('blog:archive') if months.count() > months_count else None
+    return SideBarObjects(months[:months_count], more)
 
 
 @register.simple_tag

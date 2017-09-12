@@ -221,8 +221,6 @@ HAYSTACK_CONNECTIONS = {
 
 SITE_ID = 1
 SITE_NAME = 'Roman\'s Blog'
-BLOG_SIDEBAR_POSTS_COUNT = 3
-BLOG_SIDEBAR_MONTHS_COUNT = 5
 # Provide a Disqus shortname to enable post comments
 DISQUS_SHORTNAME = ''
 # Provide a Google Analytics ID to enable your web-site usage tracking
