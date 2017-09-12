@@ -54,7 +54,7 @@ def get_categories():
 
 
 @register.simple_tag
-def get_posts_digest(featured=False, posts_count=5):
+def get_posts_digest(featured=False, posts_count=3):
     """
     Simple tag
 
