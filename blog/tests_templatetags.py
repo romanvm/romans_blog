@@ -22,51 +22,49 @@ class TemplateTagsTestCase(TestCase):
                                 date_published=date(year=2015, month=1, day=i),
                                 slug='post-{}'.format(i),
                                 content='<p>Lorem ipsum<p>')
-        with self.settings(BLOG_SIDEBAR_POSTS_COUNT=3):
-            latest_posts = get_posts_digest(False)
-            self.assertEqual(len(latest_posts.objects), 0)
-            posts = Post.objects.all()
-            for post in posts[:3]:
-                post.is_published = True
-                post.save()
-            latest_posts = get_posts_digest(False)
-            self.assertEqual(len(latest_posts.objects), 3)
-            self.assertIs(latest_posts.more, None)
-            for post in posts[3:]:
-                post.is_published = True
-                post.save()
-            latest_posts = get_posts_digest(False)
-            self.assertEqual(len(latest_posts.objects), 3)
-            self.assertEqual(latest_posts.more, reverse('blog:home'))
-            for post in posts:
-                post.is_featured = True
-                post.save()
-            featured_posts = get_posts_digest(True)
-            self.assertEqual(len(featured_posts.objects), 3)
-            self.assertEqual(featured_posts.more, reverse('blog:featured_posts'))
+        latest_posts = get_posts_digest(False, 5)
+        self.assertEqual(len(latest_posts.objects), 0)
+        posts = Post.objects.all()
+        for post in posts[:5]:
+            post.is_published = True
+            post.save()
+        latest_posts = get_posts_digest(False, 5)
+        self.assertEqual(len(latest_posts.objects), 5)
+        self.assertIs(latest_posts.more, None)
+        for post in posts[5:]:
+            post.is_published = True
+            post.save()
+        latest_posts = get_posts_digest(False, 5)
+        self.assertEqual(len(latest_posts.objects), 5)
+        self.assertEqual(latest_posts.more, reverse('blog:home'))
+        for post in posts:
+            post.is_featured = True
+            post.save()
+        featured_posts = get_posts_digest(True, 5)
+        self.assertEqual(len(featured_posts.objects), 5)
+        self.assertEqual(featured_posts.more, reverse('blog:featured_posts'))
 
     def test_get_archive_digest(self):
-        for m in range(1, 4):
+        for m in range(1, 6):
             Post.objects.create(title='Post {}'.format(m),
                                 date_published=date(year=2015, month=m, day=1),
                                 slug='post-{}'.format(m),
                                 content='<p>Lorem ipsum<p>')
-        with self.settings(BLOG_SIDEBAR_MONTHS_COUNT=6):
-            months = get_archive_digest()
-            self.assertEqual(len(months.objects), 0)
-            self.assertIs(months.more, None)
-            for post in Post.objects.all():
-                post.is_published = True
-                post.save()
-            months = get_archive_digest()
-            self.assertEqual(len(months.objects), 3)
-            self.assertIs(months.more, None)
-            for m in range(4, 13):
-                Post.objects.create(title='Post {}'.format(m),
-                                date_published=date(year=2015, month=m, day=1),
-                                slug='post-{}'.format(m),
-                                content='<p>Lorem ipsum<p>',
-                                is_published=True)
-            months = get_archive_digest()
-            self.assertEqual(len(months.objects), 6)
-            self.assertEqual(months.more, reverse('blog:archive'))
+        months = get_archive_digest(5)
+        self.assertEqual(len(months.objects), 0)
+        self.assertIs(months.more, None)
+        for post in Post.objects.all():
+            post.is_published = True
+            post.save()
+        months = get_archive_digest(5)
+        self.assertEqual(len(months.objects), 5)
+        self.assertIs(months.more, None)
+        for m in range(6, 13):
+            Post.objects.create(title='Post {}'.format(m),
+                            date_published=date(year=2015, month=m, day=1),
+                            slug='post-{}'.format(m),
+                            content='<p>Lorem ipsum<p>',
+                            is_published=True)
+        months = get_archive_digest(7)
+        self.assertEqual(len(months.objects), 7)
+        self.assertEqual(months.more, reverse('blog:archive'))
