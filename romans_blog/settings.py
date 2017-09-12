@@ -199,6 +199,7 @@ TINYMCE_ADDITIONAL_JS_URLS = [
 
 CURRENT_SKIN = 'cerulean_skin'
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
+BLOG_POSTS_PAGINATE_BY = getattr(skin_settings, 'BLOG_POSTS_PAGINATE_BY', 5)
 TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
 TINYMCE_DEFAULT_CONFIG['table_class_list'] = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
 TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
@@ -220,7 +221,6 @@ HAYSTACK_CONNECTIONS = {
 
 SITE_ID = 1
 SITE_NAME = 'Roman\'s Blog'
-BLOG_POSTS_PAGINATE_BY = 5
 BLOG_SIDEBAR_POSTS_COUNT = 3
 BLOG_SIDEBAR_MONTHS_COUNT = 5
 # Provide a Disqus shortname to enable post comments
