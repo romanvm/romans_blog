@@ -13,6 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'date_published', 'last_updated', 'is_published', 'is_featured',
                     'allow_comments', 'meta_description')
+    list_editable = ('is_featured', 'allow_comments')
     fields = ('title', 'slug', 'date_published', 'last_updated', 'content', 'is_published',
               'is_featured', 'allow_comments', 'categories', 'meta_description')
     readonly_fields = ('last_updated',)
