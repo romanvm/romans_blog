@@ -98,10 +98,10 @@ def get_blog_menu_links():
     """
     MenuLink = namedtuple('MenuLink', ['caption', 'url'])
     featured = Post.objects.featured()
-    featured_link = reverse('blog:featured_posts') if featured.count() else None
+    featured_link = reverse('blog:featured_posts') if featured.exists() else None
     return (
-        MenuLink(_('Home'), reverse('blog:home')),
-        MenuLink(_('Featured'), featured_link),
+        MenuLink(_('Recent Posts'), reverse('blog:home')),
+        MenuLink(_('Featured Posts'), featured_link),
         MenuLink(_('Archive'), reverse('blog:archive'))
     )
 

@@ -4,6 +4,7 @@
 {% load blog_tags %}
 {% load pages_tags %}
 {% get_current_language as LANGUAGE_CODE %}
+{% url "blog:home" as home_url %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -49,19 +50,25 @@
   <nav class="navbar navbar-inverse">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{% url "blog:home" %}"><span class="fa fa-desktop">&nbsp;</span>{% get_site_name %}</a>
+        <a class="navbar-brand" href="{{ home_url }}"><span class="fa fa-desktop">&nbsp;</span>{% get_site_name %}</a>
       </div>
       <div>
         <ul class="nav navbar-nav">
           {# Blog menu links #}
           {% get_blog_menu_links as blog_menu_links %}
-          {% for menu_link in blog_menu_links  %}
-          {% if menu_link.url %}
-          <li class="{% if request.path == menu_link.url %}active{% endif %}">
-            <a href="{{ menu_link.url }}">{{ menu_link.caption }}</a>
+          <li class="dropdown {% if request.path == blog_menu_links.0.url or request.path == blog_menu_links.1.url or request.path == blog_menu_links.2.url %}active{% endif %}">
+            <a href="{{ home_url }}" class="dropdown-toggle"
+                data-toggle="dropdown" role="button" aria-expanded="false">
+              {% trans "Blog" %} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              {% for blog_link in blog_menu_links  %}
+              {% if blog_link.url %}
+              <li><a href="{{ blog_link.url }}">{{ blog_link.caption }}</a></a></li>
+              {% endif %}
+              {% endfor %}
+            </ul>
           </li>
-          {% endif %}
-          {% endfor %}
           {# Pages menu links #}
           {% get_pages_menu_links as pages_menu_links %}
           {% for menu_link in pages_menu_links %}
