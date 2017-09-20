@@ -1,4 +1,5 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
 from .models import Page, MenuLink
 
 
@@ -12,10 +13,10 @@ class PageAdmin(admin.ModelAdmin):
 
 
 @admin.register(MenuLink)
-class MenuLinkAdmin(admin.ModelAdmin):
+class MenuLinkAdmin(SortableAdminMixin, admin.ModelAdmin):
     """
     Admin for Menu Links
     """
-    list_display = ('caption', 'slug', 'show_side_panel', 'page')
-    list_editable = ('page',)
+    list_display = ('caption', 'slug', 'page', 'show_side_panel')
+    list_editable = ('page', 'show_side_panel')
     prepopulated_fields = {'slug': ('caption',)}

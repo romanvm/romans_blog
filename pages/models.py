@@ -39,6 +39,7 @@ class MenuLink(models.Model):
     slug = models.SlugField(verbose_name=_('Slug'), max_length=200, unique=True)
     page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True, null=True)
     show_side_panel = models.BooleanField(verbose_name=_('Show side Panel'), default=False)
+    position = models.PositiveIntegerField(verbose_name=_('Position'), default=0, blank=False, null=False)
     objects = MenuLinkQuerySet.as_manager()
 
     def get_absolute_url(self):
@@ -50,4 +51,4 @@ class MenuLink(models.Model):
     class Meta:
         verbose_name = _('Menu Link')
         verbose_name_plural = _('Menu Links')
-        ordering = ('pk',)
+        ordering = ('position',)

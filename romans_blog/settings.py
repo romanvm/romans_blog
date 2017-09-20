@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'adminsortable2',
     'haystack',
     'common_content',
     'blog',
