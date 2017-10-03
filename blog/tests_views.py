@@ -106,18 +106,26 @@ class BlogCategoryViewTestCase(TestCase):
 
 class BlogCategoriesListViewTestCase(TestCase):
     def test_opening_categories_list(self):
-        post = Post(title='Lorem Ipsum',
-                    date_published=date(2015, 4, 28),
-                    slug='lorem-ipsum',
-                    is_published=True,
-                    content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
-        post.save()
+        post1 = Post(title='Lorem Ipsum 1',
+                     date_published=date(2015, 4, 28),
+                     slug='lorem-ipsum-1',
+                     is_published=True,
+                     content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
+        post1.save()
+        post2 = Post(title='Lorem Ipsum 2',
+                     date_published=date(2015, 4, 28),
+                     slug='lorem-ipsum-2',
+                     is_published=True,
+                     content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
+        post2.save()
         for i in range(7):
             category = Category.objects.create(name='Category {0}'.format(i), slug='category-{0}'.format(i))
             category.save()
             if i % 2 != 0:
-                post.categories.add(category)
-                post.save()
+                post1.categories.add(category)
+                post1.save()
+                post2.categories.add(category)
+                post2.save()
         response = self.client.get(reverse('blog:categories_list'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['categories']), 3)

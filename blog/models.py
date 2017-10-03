@@ -10,7 +10,7 @@ class CategoryQuerySet(models.QuerySet):
     """Custom QuerySet for Categories"""
     def non_empty(self):
         """Get Categories that have posts"""
-        return self.filter(posts__isnull=False)
+        return self.filter(posts__isnull=False).distinct()
 
     def ordered_by_post_count(self):
         """Get the generator of Categories ordered by their post count"""
