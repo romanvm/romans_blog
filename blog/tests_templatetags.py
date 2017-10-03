@@ -7,8 +7,8 @@ from datetime import date
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from .models import Post
-from .templatetags.blog_tags import get_posts_digest, get_archive_digest
+from .models import Post, Category
+from .templatetags.blog_tags import get_posts_digest, get_archive_digest, get_categories
 
 
 class TemplateTagsTestCase(TestCase):
@@ -68,3 +68,23 @@ class TemplateTagsTestCase(TestCase):
         months = get_archive_digest(7)
         self.assertEqual(len(months.objects), 7)
         self.assertEqual(months.more, reverse('blog:archive'))
+
+    def test_get_categories(self):
+        cat_list = []
+        for i in range(7):
+            category = Category.objects.create(name='Category {0}'.format(i), slug='category-{0}'.format(i))
+            category.save()
+            cat_list.append(category)
+        for i in range(7):
+            post = Post(title='Lorem Ipsum {0}'.format(i),
+                        date_published=date(2015, 4, 28),
+                        slug='lorem-ipsum-{0}'.format(i),
+                        is_published=True,
+                        content='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>')
+            post.save()
+            for cat in cat_list[i:]:
+                post.categories.add(cat)
+        categories = list(get_categories())
+        self.assertEqual(len(categories), 7)
+        self.assertEqual(categories[0], cat_list[6])
+        self.assertEqual(categories[6], cat_list[0])
