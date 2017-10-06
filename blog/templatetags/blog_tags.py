@@ -102,6 +102,7 @@ def get_blog_menu_links():
     return (
         MenuLink(_('Recent Posts'), reverse('blog:home')),
         MenuLink(_('Featured Posts'), featured_link),
+        MenuLink(_('Categories'), reverse('blog:categories_list')),
         MenuLink(_('Archive'), reverse('blog:archive'))
     )
 

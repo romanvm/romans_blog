@@ -8,7 +8,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from .models import Post, Category
-from .templatetags.blog_tags import get_posts_digest, get_archive_digest, get_categories
+from .templatetags.blog_tags import (get_posts_digest, get_archive_digest,
+                                     get_categories, get_blog_menu_links)
 
 
 class TemplateTagsTestCase(TestCase):
@@ -88,3 +89,6 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(len(categories), 7)
         self.assertEqual(categories[0], cat_list[6])
         self.assertEqual(categories[6], cat_list[0])
+
+    def test_get_blog_menu_links(self):
+        self.assertEqual(len(get_blog_menu_links()), 4)
