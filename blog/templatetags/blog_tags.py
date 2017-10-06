@@ -14,6 +14,7 @@ from ..models import Category, Post
 
 register = template.Library()
 SideBarObjects = namedtuple('SideBarObjects', ['objects', 'more'])
+MenuLink = namedtuple('MenuLink', ['caption', 'url'])
 
 
 @register.simple_tag
@@ -96,7 +97,6 @@ def get_blog_menu_links():
 
     :return: blog menu links for the site main menu.
     """
-    MenuLink = namedtuple('MenuLink', ['caption', 'url'])
     featured = Post.objects.featured()
     featured_link = reverse('blog:featured_posts') if featured.exists() else None
     return (
