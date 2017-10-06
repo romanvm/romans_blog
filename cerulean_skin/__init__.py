@@ -6,3 +6,5 @@
 """
 Cerulean skin is based on 'Cerulean' design from Bootswatch <http://bootswatch.com>
 """
+
+default_app_config = 'cerulean_skin.apps.CeruleanSkinAppConfig'
