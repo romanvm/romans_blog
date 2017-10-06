@@ -1,0 +1,32 @@
+.badge {
+  background: #f56a6a;
+  border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  color: #f5f6f7;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-right: 5px;
+  text-align: center;
+  width: 1.6em; 
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pager li {
+  display: inline;
+}
+
+.page-header {
+  font-size: 1.4em;
+}
+
+.months {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
