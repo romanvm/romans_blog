@@ -155,3 +155,16 @@ def render_paginator(context, adjacent_pages=2):
         'request': context['request'],
         'query': quote_plus(context['query']),
     }
+
+
+@register.simple_tag(takes_context=True)
+def check_blog_url(context):
+    """
+    Check if a current URL belong to blog application
+
+    :param context: template context
+    :type context: dict
+    :return: check result
+    :rtype: bool
+    """
+    return context['request'].path in [item.url for item in get_blog_menu_links()]

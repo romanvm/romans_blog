@@ -56,7 +56,8 @@
         <ul class="nav navbar-nav">
           {# Blog menu links #}
           {% get_blog_menu_links as blog_menu_links %}
-          <li class="dropdown {% if request.path == blog_menu_links.0.url or request.path == blog_menu_links.1.url or request.path == blog_menu_links.2.url %}active{% endif %}">
+          {% check_blog_url as is_blog_url %}
+          <li class="dropdown {% if is_blog_url %}active{% endif %}">
             <a href="{{ home_url }}" class="dropdown-toggle"
                 data-toggle="dropdown" role="button" aria-expanded="false">
               {% trans "Blog" %} <span class="caret"></span>

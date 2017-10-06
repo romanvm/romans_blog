@@ -34,6 +34,13 @@
 		<div id="wrapper">
 			<div id="main">
 				<div class="inner">
+          <header id="header">
+            <div class="page-header"><a href="{{ home_url }}" class="logo"><strong><span class="fa fa-desktop"></span></strong>&nbsp;{% get_site_name %}</a></div>
+            <ul class="icons">
+              <li><a href="https://www.facebook.com/romanvm1972" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+              <li><a href="https://github.com/romanvm" target="_blank" class="icon fa-github"><span class="label">GutHub</span></a></li>
+            </ul>
+          </header>
         {% block content %}              
         {% endblock content %}
 				</div>
