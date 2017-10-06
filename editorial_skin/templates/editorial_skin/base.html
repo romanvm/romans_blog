@@ -1,0 +1,104 @@
+{% load i18n %}
+{% load static from staticfiles %}
+{% load common_content_tags %}
+{% load blog_tags %}
+{% load pages_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+{% url "blog:home" as home_url %}
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="{{ LANGUAGE_CODE }}">
+	<head>
+    {% block meta %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="robots" content="index,follow">
+    {% endblock meta %}
+    {% block title %}      
+    {% endblock title %}
+    {% block css %}
+    <link href="{% static "common_content/css/prism.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "editorial_skin/css/main.css" %}">
+    <link rel="stylesheet" href="{% static "editorial_skin/css/editorial-skin.css" %}">
+    {% endblock css %}
+    <link title="{% get_site_name %} - {% trans "Recent Posts" %}" rel="alternate" type="application/rss+xml" href="{% url "blog:rss_feed" %}">
+    {% if not user.is_authenticated %}
+    {% render_google_analytics %}
+    {% endif %}
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="main">
+				<div class="inner">
+        {% block content %}              
+        {% endblock content %}
+				</div>
+			</div>
+			<div id="sidebar">
+				<div class="inner">
+					<!-- Search -->
+					<section id="search" class="alt">
+						<form method="get" action="{% url "blog:search" %}">
+							<input type="text" name="q" id="query" value="{{ query }}" placeholder="{% trans "Search" %}">
+						</form>
+					</section>
+          {% block menu %}
+          <nav id="menu">
+            <header class="major">
+              <h2>{% trans "Menu" %}</h2>
+            </header>
+            <ul>
+              <li>
+                <span class="opener">{% trans "Blog" %}</span>
+                <ul>
+                  {# Blog menu links #}
+                  {% get_blog_menu_links as blog_menu_links %}
+                  {% for blog_link in blog_menu_links %}
+                  {% if blog_link.url %}
+                  <li><a href="{{ blog_link.url }}">{{ blog_link.caption }}</a></li>
+                  {% endif %}
+                  {% endfor %}
+                </ul>
+              </li>
+              {# Pages menu links #}
+              {% get_pages_menu_links as pages_menu_links %}
+              {% for menu_link in pages_menu_links %}
+              <li><a href="{{ menu_link.get_absolute_url }}">{{ menu_link.caption }}</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+          {% endblock menu %}
+          {% block sidebar %}         
+          {% endblock sidebar %}
+					{% block footer %}
+          <footer id="footer">
+            <p class="copyright">
+              &copy; Roman Miroshnychenko. All rights reserved.<br>
+              Design: <a href="https://html5up.net/editorial">Editorial</a> by <a href="https://html5up.net">HTML5 UP</a>.
+            </p>
+            <p class="copyright">
+              <a href="http://www.djangoproject.com/">
+                <img src="https://www.djangoproject.com/m/img/badges/djangosite100x25_grey.gif" border="0" alt="A Django site." title="A Django site." />
+              </a>
+            </p>
+          </footer>
+          {% endblock footer %}
+			</div>
+			</div>
+		</div>
+    {% block js %}
+    <script src="{% static "editorial_skin/js/jquery.min.js" %}"></script>
+    <script src="{% static "editorial_skin/js/skel.min.js" %}"></script>
+    <script src="{% static "editorial_skin/js/util.js" %}"></script>
+    <script src="{% static "editorial_skin/js/main.js" %}"></script>
+    <script src="{% static "editorial_skin/js/editorial-skin.js" %}"></script>
+    <!-- Prism JS -->
+    <script src="{% static "common_content/js/prism.min.js" %}"></script>
+    <script src="{% static "common_content/js/prism-django.min.js" %}"></script>
+    {% endblock js %}
+	</body>
+</html>
