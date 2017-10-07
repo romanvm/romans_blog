@@ -79,7 +79,50 @@
             </ul>
           </nav>
           {% endblock menu %}
-          {% block sidebar %}         
+          {% if user.is_authenticated %}
+          <section>
+            <header class="major">
+              <h3><span class="fa fa-cogs"></span>&nbsp;{% trans "Blog Admin" %}</h3>
+            </header>
+            <div><a href="/admin/blog/post/add"><span class="fa fa-pencil-square-o"></span>&nbsp;{% trans "New Post" %}</a></div>
+            <div><a href="/admin/blog/post"><span class="fa fa-files-o"></span>&nbsp;{% trans "Manage Posts" %}</a></div>
+            <div><a href="/admin"><span class="fa fa-bars"></span>&nbsp;{% trans "Admin Panel" %}</a></div>
+            <div><a href="/admin/logout"><span class="fa fa-sign-out"></span>&nbsp;{% trans "Logout" %}</a></div>
+          </section>
+          {% endif %}
+          {% block sidebar %}
+          {% check_blog_url as is_blog_url %}
+          {% get_posts_digest True 3 as featured_posts %}
+          {% if is_blog_url %}
+            {% if request.path == home_url and featured_posts.objects %}
+            <section>
+              <header class="major"><h3><span class="fa fa-star-o"></span>&nbsp;{% trans "Featured Posts" %}</h3></header>
+              <div class="mini-posts">
+              {% for post in featured_posts.objects %}
+              <article>
+                <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                <div><span class="fa fa-calendar"></span>&nbsp;{{ post.date_published }}</div>
+              </article>
+              {% endfor %}
+              </div>
+              {% if featured_posts.more %}
+              <hr>
+              <p><a class="button special small" href="{{ featured_posts.more }}">{% trans "More..." %}</a></p>
+              {% endif %}
+            </section>
+            {% endif %}
+          {% endif %}
+          {% get_categories as categories %}
+          {% if categories %}
+          <section>
+            <header class="major"><h3><span class="fa fa-tags"></span>&nbsp;{% trans "Categories" %}</h3></header>
+            <ul>
+            {% for category in categories %}
+            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a>&nbsp;&nbsp;<span class="badge">{{ category.get_published_posts_count }}</span></li>
+            {% endfor %}
+            </ul>
+          </section>
+          {% endif %}
           {% endblock sidebar %}
 					{% block footer %}
           <footer id="footer">

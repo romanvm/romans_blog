@@ -6,10 +6,10 @@
   color: #f5f6f7;
   display: inline-block;
   font-weight: bold;
-  line-height: 1.6em;
+  line-height: 1.5em;
   margin-right: 5px;
   text-align: center;
-  width: 1.6em; 
+  width: 1.8em;
 }
 
 .pager {
@@ -30,3 +30,34 @@
   padding-left: 0;
   margin-left: 0;
 }
+
+/* Spoiler styles */
+.spoiler {
+  border: 1px solid #e7e7e7;
+  background-color: #f5f6f7;
+  border-radius: 6px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.spoiler-toggle {
+  font-weight: bold;
+  cursor: default;
+  padding: 5px;
+  font-size: 11px;
+}
+
+.spoiler-text {
+  padding: 5px;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #f5f6f7;
+}
+
+/* Fixes .container padding inside TinyMCE preview window */
+body.mce-content-body {
+  padding: 10px;
+}
+
