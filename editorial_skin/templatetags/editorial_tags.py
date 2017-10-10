@@ -21,7 +21,8 @@ def render_post_categories(post):
     """
     categories = []
     for category in post.categories.all():
-        categories.append('<a href="{url}">{name}</a>'.format(url=category.get_absolute_url(), name=category.name))
+        categories.append('<a href="{url}">{name}</a>'.format(
+            url=category.get_absolute_url(), name=category.name))
     return ',&nbsp;'.join(categories)
 
 
@@ -41,6 +42,5 @@ def truncate_post(post):
     :param post: blog post
     :return: properly terminated truncated post
     """
-    return post_truncator(post, '&nbsp;(<em><a href="{0}">{1}</a></em>)'.format(post.get_absolute_url(),
-                                                                                _('Read more...')))
-
+    return post_truncator(post, '&nbsp;(<em><a href="{0}">{1}</a></em>)'.format(
+        post.get_absolute_url(), _('Read more...')))
