@@ -6,17 +6,12 @@
 from datetime import date
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.conf import settings
 from .models import Post, Category
 from .templatetags.blog_tags import (get_posts_digest, get_archive_digest,
                                      get_categories, get_blog_menu_links)
 
 
 class TemplateTagsTestCase(TestCase):
-    def test_get_site_name(self):
-        response = self.client.get(reverse('blog:home'))
-        self.assertIn(settings.SITE_NAME, response.rendered_content)
-
     def test_get_posts_digest(self):
         for i in range(1, 7):
             Post.objects.create(title='Post {}'.format(i),
