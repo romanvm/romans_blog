@@ -101,7 +101,7 @@
               {% for post in featured_posts.objects %}
               <article>
                 <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
-                <div><span class="fa fa-calendar"></span>&nbsp;{{ post.date_published }}</div>
+                <div><small><span class="fa fa-calendar"></span>&nbsp;{{ post.date_published }}</small></div>
               </article>
               {% endfor %}
               </div>
