@@ -11,12 +11,11 @@
   {% endif %}
 {% endblock title %}
 {% block content %}
-  <section>
   {% if page_title %}
-  <header class="major"><h1>{{ page_title }}</h1></header>
+  <header class="major title"><h1>{{ page_title }}</h1></header>
   {% endif %}
   {% for post in posts %}
-  <div class="post-summary">
+  <section>
     <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
     <p><small>
       <span class="fa fa-calendar"></span>&nbsp;{{ post.date_published }}
@@ -36,12 +35,12 @@
     {% if post.categories.exists %}
     <p><small><span class="fa fa-tags"></span>&nbsp;&nbsp;{{ post|render_post_categories }}</small></p>
     {% endif %}
-    <hr class="major">
-  </div>
+  </section>
   {% empty %}
   <p class="text-danger">{% trans "This section has no posts." %}</p>
   {% endfor %}
   {% if is_paginated %}
+  <section>
   <ul class="pager">
     <li><a class="button {% if not page_obj.has_next %}disabled{% endif %}"
       href="{{ request.path }}{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
@@ -52,8 +51,8 @@
       {% trans "Newer" %}&nbsp;<span class="fa fa-arrow-right"></span></a>
     </li>
   </ul>
-  {% endif %}
   </section>
+  {% endif %}
 {% endblock content %}
 {% block js %}
 {{ block.super }}

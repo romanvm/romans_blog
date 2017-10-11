@@ -13,12 +13,10 @@
   <title>{{ menu_link.page.title }} - {% get_site_name %}</title>
 {% endblock title %}
 {% block content %}
-<section>
-  <header class="major">
+  <header class="major title">
     <h1>{{ menu_link.page.title }}</h1>
   </header>
-  <div class="page-content">
+  <section>
     {{ menu_link.page.content|safe }}
-  </div>
-</section>
+  </section>
 {% endblock content %}

@@ -5,10 +5,10 @@
   <title>{{ page_title }} - {% get_site_name %}</title>
 {% endblock title %}
 {% block content %}
-<section>
-  <header class="major">
+  <header class="major title">
     <h1>{{ page_title }}</h1>
   </header>
+  <section>
   {% if months %}
   <div class="row">
     {% regroup months by year as months_list %}
@@ -26,5 +26,5 @@
   {% else %}
   <p class="text-danger">{% trans "This blog has no posts." %}</p>
   {% endif %}
-</section>
+  </section>
 {% endblock content %}

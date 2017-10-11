@@ -5,21 +5,20 @@
   <title>{{ page_title }} - {% get_site_name %}</title>
 {% endblock title %}
 {% block content %}
-<section>
-  <header class="major">
+  <header class="major title">
     <h1>{{ page_title }}</h1>
   </header>
-  <br>
+  <section>
   {% if categories %}
     <ul>
       {% for category in categories %}
         <li>
-          <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>&nbsp;<span class="badge">{{ category.posts.count }}</span>
+          <h4><a href="{{ category.get_absolute_url }}">{{ category.name }}</a><span class="badge">{{ category.posts.count }}</span></h4>
         </li>
       {% endfor %}
     </ul>
   {% else %}
     <p class="text-danger">{% trans "No categories defined!" %}</p>
   {% endif %}
-</section>
+  </section>
 {% endblock content %}

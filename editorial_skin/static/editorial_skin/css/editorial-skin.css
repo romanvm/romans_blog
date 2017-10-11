@@ -8,6 +8,7 @@
   font-weight: bold;
   line-height: 1.5em;
   margin-right: 5px;
+  margin-left: 6px;
   text-align: center;
   width: 1.8em;
 }
@@ -67,4 +68,27 @@ body.mce-content-body {
 
 small {
   font-size: 0.8em;
+}
+
+/* Needed to correctly place social buttons in line */
+.facebook,.linked-in,.twitter,.reddit {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.fb-share-button > span {
+  vertical-align: inherit !important;
+}
+
+.reddit > a > img {
+  vertical-align: inherit !important;
+  height: 20px;
+}
+
+header.title {
+  padding-top: 4em;
+}
+
+header.title > :last-child {
+  margin-bottom: 0;
 }
