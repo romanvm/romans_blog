@@ -1,0 +1,27 @@
+<ul class="pagination">
+   {% if has_previous %}
+      <li><a class="button small" href="{{ request.path }}?q={{ query }}&page={{ previous }}"><span class="fa fa-angle-left"></span></a></li>
+   {% else %}
+      <li><span class="button small disabled"><span class="fa fa-angle-left"></span></span></li>
+   {% endif %}
+   {% if show_first %}
+      <li><a class="page" href="{{ request.path }}?q={{ query }}&page=1">1</a></li>
+      <li><span>&hellip;</span></li>
+   {% endif %}
+   {% for linkpage in page_numbers %}
+   {% ifequal linkpage page %}
+      <li><span class="page active" >{{ page }}</span></li>
+   {% else %}
+      <li><a class="page" href="{{ request.path }}?q={{ query }}&page={{ linkpage }}">{{ linkpage }}</a></li>
+   {% endifequal %}
+   {% endfor %}
+   {% if show_last %}
+      <li><span>&hellip;</span></li>
+      <li><a class="page" href="{{ request.path }}?q={{ query }}&page=last">{{ pages }}</a></li>
+   {% endif %}
+   {% if has_next %}
+      <li><a class="button small" href="{{ request.path }}?q={{ query }}&page={{ next }}"><span class="fa fa-angle-right"></span></a></li>
+   {% else %}
+      <li><span class="button small disabled"><span class="fa fa-angle-right"></span></span></li>
+   {% endif %}
+</ul>

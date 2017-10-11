@@ -61,3 +61,10 @@ body.mce-content-body {
   padding: 10px;
 }
 
+.search-summary em {
+  background: yellow;
+}
+
+small {
+  font-size: 0.8em;
+}
