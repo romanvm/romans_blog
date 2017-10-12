@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'blog',
     'pages',
     'cerulean_skin',
-    'editorial_skin',
+    # 'editorial_skin',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -199,7 +199,7 @@ TINYMCE_ADDITIONAL_JS_URLS = [
 
 # Skin settings
 
-CURRENT_SKIN = 'editorial_skin'
+CURRENT_SKIN = 'cerulean_skin'
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 BLOG_POSTS_PAGINATE_BY = getattr(skin_settings, 'BLOG_POSTS_PAGINATE_BY', 5)
 TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
