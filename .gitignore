@@ -108,6 +108,8 @@ crashlytics-build.properties
 
 ### Custom ignores
 venv/
+.venv/
+.env
 *.cmd
 *local_settings.py
 *.sqlite3
