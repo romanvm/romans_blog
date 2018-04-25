@@ -18,3 +18,8 @@ Pillow = ">=3.0.0"
 Whoosh = ">=2.7.0"
 
 [dev-packages]
+
+[scripts]
+
+server = "pipenv run python manage.py runserver"
+test = "pipenv run python manage.py test"
