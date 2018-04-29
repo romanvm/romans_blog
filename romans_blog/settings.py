@@ -51,7 +51,6 @@ INSTALLED_APPS = (
     'blog',
     'pages',
     'cerulean_skin',
-    # 'editorial_skin',
 )
 
 MIDDLEWARE_CLASSES = (
