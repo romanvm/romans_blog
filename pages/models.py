@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from tinymce import models as tinymce
+from filebrowser.fields import FileBrowseField
 
 
 class Page(models.Model):
@@ -12,6 +13,8 @@ class Page(models.Model):
     keywords = models.CharField(verbose_name=_('Keywords'), max_length=200, blank=True)
     content = tinymce.HTMLField(verbose_name=_('Page Content'))
     last_updated = models.DateTimeField(verbose_name=_('Last Updated'), auto_now=True)
+    featured_image = FileBrowseField(verbose_name=_('Featured Image'), max_length=1024,
+                                     extensions=['.jpg', '.jpeg', '.png'], blank=True)
     meta_description = models.TextField(verbose_name=_('Description'), max_length=160, blank=True)
 
     def __str__(self):

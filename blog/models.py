@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.db.models import Count
 from tinymce.models import HTMLField
+from filebrowser.fields import FileBrowseField
 
 
 class CategoryQuerySet(models.QuerySet):
@@ -70,6 +71,8 @@ class Post(models.Model):
     is_featured = models.BooleanField(verbose_name=_('Featured'), default=False)
     allow_comments = models.BooleanField(verbose_name=_('Allow comments'), default=True)
     content = HTMLField(verbose_name=_('Post Content'))
+    featured_image = FileBrowseField(verbose_name=_('Featured Image'), max_length=1024,
+                                     extensions=['.jpg', '.jpeg', '.png'], blank=True)
     meta_description = models.TextField(verbose_name=_('Description'), max_length=160, blank=True)
     objects = PostQuerySet.as_manager()
 
