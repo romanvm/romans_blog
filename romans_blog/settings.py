@@ -50,7 +50,8 @@ INSTALLED_APPS = (
     'common_content',
     'blog',
     'pages',
-    'cerulean_skin',
+    # 'cerulean_skin',
+    'bootstrap4_skin',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -198,7 +199,7 @@ TINYMCE_ADDITIONAL_JS_URLS = [
 
 # Skin settings
 
-CURRENT_SKIN = 'cerulean_skin'
+CURRENT_SKIN = 'bootstrap4_skin'
 skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
 BLOG_POSTS_PAGINATE_BY = getattr(skin_settings, 'BLOG_POSTS_PAGINATE_BY', 5)
 TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
@@ -222,6 +223,7 @@ HAYSTACK_CONNECTIONS = {
 
 SITE_ID = 1
 SITE_NAME = 'Roman\'s Blog'
+SITE_TAGLINE = 'Random notes of a Python enthusiast'
 # Provide a Disqus shortname to enable post comments
 DISQUS_SHORTNAME = ''
 # Provide a Google Analytics ID to enable your web-site usage tracking

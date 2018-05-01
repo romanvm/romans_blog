@@ -1,0 +1,134 @@
+{% extends "bootstrap4_skin/base.html" %}
+{% load i18n %}
+{% load static from staticfiles %}
+{% load common_tags %}
+{% load blog_tags %}
+{% load bootstrap4_skin_tags %}
+{% block title %}
+<title>{% trans "Home" %} - {% get_site_name %}</title>
+{% endblock title %}
+{% block css %}
+{{ block.super }}
+<style>
+  header {
+    background-image: url('{% static "bootstrap4_skin/img/header-default.jpg" %}');
+  }
+</style>
+{% endblock css %}
+{% block header %}
+<h1 class="display-1">{% get_site_name %}</h1>
+<h2>{% get_site_tagline %}</h2>
+{% endblock header %}
+{% block content %}
+{% get_disqus_shortname as disqus_shortname %}
+  {# Posts list #}
+  <div class="col-md-8 col-lg-7 offset-lg-1">
+    {% for post in posts %}
+    <div class="card mb-3">
+      <a href="{{ post.get_absolute_url }}">
+        {% if post.featured_image %}
+        <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{% trans "Featured Image" %}">
+        {% else %}
+        <img class="card-img-top" src="{% static "bootstrap4_skin/img/featured-default.jpg" %}" alt="{% trans "Featured Image" %}">
+        {% endif %}
+      </a>
+      <div class="card-body">
+        <h3 class="card-title text-uppercase">
+          <a href="{{ post.get_absolute_url }}" class="text-secondary">{{ post.title }}</a>
+        </h3>
+        <p><small class="text-muted">
+          <i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published }}&nbsp;&nbsp;
+          {% if post.allow_comments and disqus_shortname %}
+          <i class="far fa-comment"></i>&nbsp;
+          <a href="{{ post.get_absolute_url }}#disqus_thread" class="text-secondary">{% trans "0 comments" %}</a>
+          {% endif %}
+        </small></p>
+        <div class="post-cut">{{ post|truncate_post|safe }}</div>
+        <p><a href="{{ post.get_absolute_url }}" class="btn btn-secondary">{% trans "Read more" %}</a></p>
+        {% if post.categories.count %}
+        <p>
+          <small>
+            <i class="fas fa-tags"></i>&nbsp;{{ post|render_post_categories|safe }}
+          </small>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+    {% empty %}
+      <h3 class="text-danger">{% trans "This section has no posts." %}</h3>
+    {% endfor %}
+
+    {% if is_paginated %}
+    <nav class="pager d-flex justify-content-between mb-3">
+      <a href="{{ request.path }}{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}"
+          class="btn btn-secondary {% if not page_obj.has_next %}disabled{% endif %}">
+        <i class="fas fa-arrow-left"></i>&nbsp;{% trans "Older" %}
+      </a>
+      <a href="{{ request.path }}{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"
+          class="btn btn-secondary {% if not page_obj.has_previous %}disabled{% endif %}">
+        {% trans "Newer" %}&nbsp;<i class="fas fa-arrow-right"></i>
+      </a>
+    </nav>
+    {% endif %}
+  </div>
+  {# End posts list #}
+  {# Side panel #}
+  <div class="col-md-4 col-lg-3">
+
+    <form class="form-inline mb-3" method="get" action="{% url "blog:search" %}">
+      <div class="input-group">
+        <input class="form-control" type="search" name="q" value="{{ query }}" placeholder="{% trans "Search" %}">
+        <div class="input-group-append">
+          <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+
+    {% get_categories as categories %}
+    {% if categories %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title text-uppercase"><i class="fas fa-tags"></i>&nbsp;{% trans "Categories" %}</h5>
+        <hr>
+        <ul class="list-unstyled ml-2">
+          {% for category in categories %}
+          <li>
+            <a href="{{ category.get_absolute_url }}" class="text-secondary">
+              {{ category.name }}&nbsp;<span class="badge badge-secondary">{{ category.get_published_posts_count }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+    {% get_archive_digest 6 as months %}
+    {% if months %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title text-uppercase"><i class="fas fa-archive"></i>&nbsp;{% trans "Archive" %}</h5>
+        <hr>
+        <ul class="list-unstyled ml-2">
+          {% for month in months.objects %}
+          <li>
+            <a href="{% url "blog:month_archive" year=month.year month=month.month %}" class="text-secondary">{{ month|date:"F Y" }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if months.more %}
+        <a href="{% url "blog:archive" %}" class="card-link text-secondary">{% trans "More..." %}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {# End side panel #}
+{% endblock content %}
+{% block footer %}
+  {{ block.super }}
+  {% get_disqus_shortname as disqus_shortname %}
+  {% if disqus_shortname %}
+  <script id="dsq-count-scr" src="//{{ disqus_shortname }}.disqus.com/count.js" async></script>
+  {% endif %}
+{% endblock footer %}

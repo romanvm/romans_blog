@@ -1,0 +1,139 @@
+{% load i18n %}
+{% load static from staticfiles %}
+{% load common_tags %}
+{% load blog_tags %}
+{% load pages_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+{% url "blog:home" as home_url %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    {% block meta %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="index,follow">
+    {% endblock meta %}
+
+    {% block title %}
+    {% endblock title %}
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static "bootstrap4_skin/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap4_skin/css/fontawesome-all.min.css" %}">
+    <link rel="stylesheet" href="{% static "common_content/css/prism.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap4_skin/css/styles.css" %}">
+    {% endblock css %}
+
+    {% block js %}
+    <script src="{% static "bootstrap4_skin/js/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "bootstrap4_skin/js/popper.min.js" %}"></script>
+    <script src="{% static "bootstrap4_skin/js/skin.js" %}"></script>
+    {% endblock js %}
+
+    {% if not user.is_authenticated %}
+    {% render_google_analytics %}
+    {% endif %}
+    <link title="{% get_site_name %} - {% trans "Recent Posts" %}" rel="alternate"
+        type="application/rss+xml" href="{% url "blog:rss_feed" %}">
+  </head>
+  <body>
+    <header>
+      {% block navbar %}
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="{{ home_url }}"><i class="fas fa-desktop"></i>&nbsp;{% get_site_name %}</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+              {# Blog menu links #}
+              {% get_blog_menu_links as blog_menu_links %}
+              {% check_blog_url as is_blog_url %}
+              <li class="nav-item dropdown {% if is_blog_url %}active{% endif %}">
+                <a class="nav-link dropdown-toggle" href="{{ home_url }}" id="navbarDropdown"
+                    role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  {% trans "Blog" %}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% for blog_link in blog_menu_links %}
+                  {% if blog_link.url %}
+                  <a class="dropdown-item" href="{{ blog_link.url }}">{{ blog_link.caption }}</a>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+              </li>
+              {# Pages menu links #}
+              {% get_pages_menu_links as pages_menu_links %}
+              {% for menu_link in pages_menu_links %}
+              <li class="nav-item {% if request.path == menu_link.get_absolute_url %}active{% endif %}">
+                <a class="nav-link" href="{{ menu_link.get_absolute_url }}">{{ menu_link.caption }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+            <div>
+              <a href="https://github.com/romanvm" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-github"></i></a>
+              <a href="https://stackoverflow.com/users/4819775/roman-miroshnychenko" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-stack-overflow"></i></a>
+              <a href="https://www.facebook.com/romanvm1972" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-facebook"></i></a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      {% endblock navbar %}
+
+      <div class="header-background d-flex align-items-center justify-content-center">
+        <div class="header-content text-white text-center">
+
+          {% block header %}
+          {% endblock header %}
+
+        </div>
+      </div>
+
+    </header>
+
+    <main>
+      <div class="container mt-3">
+        <div class="row">
+
+        {% block content %}
+        {% endblock content %}
+
+        </div>
+      </div>
+    </main>
+
+    {% block footer %}
+    <footer class="bg-dark d-flex align-items-center">
+      <div class="container">
+        <div class="row text-white">
+          <div class="col-md-7 offset-md-1 mt-2 mb-1">
+            <p>
+              <small>
+                Boostrap 4 skin for Roman&apos;s blog,
+                &copy; <a href="https://github.com/romanvm" class="text-light">Roman Miroshnychenko</a>.<br>
+                Design elements by <a href="http://getbootstrap.com/" target="_blank" class="text-light">Bootstrap</a> and
+                <a href="https://fortawesome.github.io/Font-Awesome/" target="_blank" class="text-light">Font Awesome</a>.
+            </small>
+            </p>
+          </div>
+          <div class="col-md-3 mt-2 mb-1">
+            <p class="mt-2">
+              <a href="http://www.djangoproject.com/">
+                <img src="https://www.djangoproject.com/m/img/badges/djangosite100x25_grey.gif"
+                  border="0" alt="A Django site." title="A Django site." />
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    {% endblock footer %}
+
+    <script src="{% static "bootstrap4_skin/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "common_content/js/prism.min.js" %}"></script>
+    <script src="{% static "common_content/js/prism-django.min.js" %}"></script>
+  </body>
+</html>

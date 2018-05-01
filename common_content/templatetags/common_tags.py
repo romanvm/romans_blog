@@ -18,6 +18,16 @@ def get_site_name():
     return settings.SITE_NAME
 
 
+@register.simple_tag
+def get_site_tagline():
+    """
+    Simple tag
+
+    :return: site tagline from settings
+    """
+    return settings.SITE_TAGLINE
+
+
 @register.inclusion_tag('common_content/google_analytics.html', takes_context=False)
 def render_google_analytics():
     """

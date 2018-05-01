@@ -1,0 +1,34 @@
+.navbar {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+header {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+  padding: 0px;
+}
+
+.header-background {
+  width: 100%;
+  min-height: 448px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+img.card-img {
+  object-fit: cover;
+}
+
+footer {
+  min-height: 40px;
+}
+
+footer a {
+  text-decoration: underline;
+}
+
+.btn-social {
+  border-radius: 50%;
+}

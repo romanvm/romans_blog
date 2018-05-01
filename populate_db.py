@@ -29,7 +29,9 @@ print('Creating menu links...')
 for i in range(1, 4):
     MenuLink.objects.create(caption='Page {}'.format(i),
                             slug='page-{}'.format(i),
-                            page=page)
+                            page=page,
+                            position=i
+                            )
 # Create blog posts
 print('Creating categories...')
 category1 = Category.objects.create(name='Python', slug='python')
@@ -45,7 +47,8 @@ for y in range(start_year, end_year + 1):
                         date_published=date(y, month=m, day=d),
                         slug='lorem-ipsum',
                         is_published=True,
-                        content=lorem_ipsum)
+                        content=lorem_ipsum
+                        )
             post.save()
             post.categories.add(category1, category2)
 print('Models created successfully.')
