@@ -4,21 +4,16 @@
 {% load common_tags %}
 {% load blog_tags %}
 {% load bootstrap4_skin_tags %}
+
 {% block title %}
 <title>{% trans "Home" %} - {% get_site_name %}</title>
 {% endblock title %}
-{% block css %}
-{{ block.super }}
-<style>
-  header {
-    background-image: url('{% static "bootstrap4_skin/img/header-default.jpg" %}');
-  }
-</style>
-{% endblock css %}
+
 {% block header %}
 <h1 class="display-1">{% get_site_name %}</h1>
 <h2>{% get_site_tagline %}</h2>
 {% endblock header %}
+
 {% block content %}
 {% get_disqus_shortname as disqus_shortname %}
   {# Posts list #}
@@ -84,6 +79,52 @@
       </div>
     </form>
 
+    {% if user.is_authenticated %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title text-uppercase"><i class="fas fa-cogs"></i></i>&nbsp;{% trans "Blog Admin" %}</h5>
+        <hr>
+        <ul class="list-unstyled ml-2">
+          <li>
+            <a href="/admin/blog/post/add" class="text-secondary"><i class="fas fa-pen-square"></i>&nbsp;{% trans "New Post" %}</a>
+          </li>
+          <li>
+            <a href="/admin/blog/post" class="text-secondary"><i class="far fa-copy"></i>&nbsp;{% trans "Manage Posts" %}</a>
+          </li>
+          <li>
+            <a href="/admin" class="text-secondary"><i class="fas fa-bars"></i>&nbsp;{% trans "Admin Panel" %}</a>
+          </li>
+          <li>
+            <a href="/admin/logout" class="text-secondary"><i class="fas fa-sign-out-alt"></i>&nbsp;{% trans "Logout" %}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+    {% get_posts_digest True 3 as featured_posts %}
+    {% if featured_posts.objects %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title text-uppercase"><i class="far fa-star"></i>&nbsp;{% trans "Featured Posts" %}</h5>
+        <hr>
+        <ul class="list-unstyled ml-2">
+          {% for post in featured_posts.objects %}
+          <li>
+            <p>
+              <a href="{{ post.get_absolute_url }}" class="text-secondary">{{ post.title }}</a><br>
+              <small class="text-muted"><i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published }}</small>
+          </p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if featured_posts.more %}
+        <a href="{{ featured_posts.more }}" class="card-link text-secondary">{% trans "More..." %}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
     {% get_categories as categories %}
     {% if categories %}
     <div class="card mb-3">
@@ -125,6 +166,7 @@
   </div>
   {# End side panel #}
 {% endblock content %}
+
 {% block footer %}
   {{ block.super }}
   {% get_disqus_shortname as disqus_shortname %}

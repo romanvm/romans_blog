@@ -24,6 +24,14 @@
     <link rel="stylesheet" href="{% static "bootstrap4_skin/css/styles.css" %}">
     {% endblock css %}
 
+    {% block featured_image %}
+    <style>
+      header {
+        background-image: url('{% static "bootstrap4_skin/img/header-default.jpg" %}');
+      }
+    </style>
+    {% endblock featured_image %}
+
     {% block js %}
     <script src="{% static "bootstrap4_skin/js/jquery-3.3.1.min.js" %}"></script>
     <script src="{% static "bootstrap4_skin/js/popper.min.js" %}"></script>
