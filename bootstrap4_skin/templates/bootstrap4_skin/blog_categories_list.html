@@ -1,0 +1,38 @@
+{% extends "bootstrap4_skin/blog_posts_list.html" %}
+{% load i18n %}
+{% load static from staticfiles %}
+{% load common_tags %}
+
+{% block title %}
+  <title>{{ page_title }} - {% get_site_name %}</title>
+{% endblock title %}
+
+{% block featured_image %}
+<style>
+  header {
+    background-image: url('{% static "bootstrap4_skin/img/featured/categories.jpg" %}');
+  }
+</style>
+{% endblock featured_image %}
+
+{% block header %}
+<h1 class="display-1">{{ page_title }}</h1>
+{% endblock header %}
+
+{% block blog_list %}
+  <div class="categories-list">
+  {% if categories %}
+    <ul>
+      {% for category in categories %}
+        <li>
+          <a href="{{ category.get_absolute_url }}" class="text-secondary">{{ category.name }}&nbsp;
+            <span class="badge badge-secondary">{{ category.posts.count }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-danger">{% trans "No categories defined!" %}</p>
+  {% endif %}
+  </div>
+{% endblock blog_list %}

@@ -6,25 +6,51 @@
 {% load bootstrap4_skin_tags %}
 
 {% block title %}
-<title>{% trans "Home" %} - {% get_site_name %}</title>
+{% if page_title %}
+  <title>{{ page_title }} - {% get_site_name %}</title>
+{% else %}
+  <title>{% trans "Home" %} - {% get_site_name %}</title>
+{% endif %}
 {% endblock title %}
 
+{% block featured_image %}
+<style>
+  header {
+    {% if "featured" in request.path %}
+    background-image: url('{% static "bootstrap4_skin/img/featured/featured.jpg" %}');
+    {% elif "categories" in request.path %}
+    background-image: url('{% static "bootstrap4_skin/img/featured/categories.jpg" %}');
+    {% elif "archive" in request.path %}
+    background-image: url('{% static "bootstrap4_skin/img/featured/archive.jpg" %}');
+    {% else %}
+    background-image: url('{% static "bootstrap4_skin/img/featured/home.jpg" %}');
+    {% endif %}
+  }
+  </style>
+{% endblock featured_image %}
+
+
 {% block header %}
-<h1 class="display-1">{% get_site_name %}</h1>
-<h2>{% get_site_tagline %}</h2>
+{% if page_title %}
+  <h1 class="display-1">{{ page_title }}</h1>
+{% else %}
+  <h1 class="display-1">{% get_site_name %}</h1>
+  <h2>{% get_site_tagline %}</h2>
+{% endif %}
 {% endblock header %}
 
 {% block content %}
-{% get_disqus_shortname as disqus_shortname %}
-  {# Posts list #}
+
   <div class="col-md-8 col-lg-7 offset-lg-1">
+    {% block blog_list %}
+    {% get_disqus_shortname as disqus_shortname %}
     {% for post in posts %}
     <div class="card mb-3">
       <a href="{{ post.get_absolute_url }}">
         {% if post.featured_image %}
         <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{% trans "Featured Image" %}">
         {% else %}
-        <img class="card-img-top" src="{% static "bootstrap4_skin/img/featured-default.jpg" %}" alt="{% trans "Featured Image" %}">
+        <img class="card-img-top" src="{% static "bootstrap4_skin/img/featured/default.jpg" %}" alt="{% trans "Featured Image" %}">
         {% endif %}
       </a>
       <div class="card-body">
@@ -65,6 +91,8 @@
       </a>
     </nav>
     {% endif %}
+    {% endblock blog_list %}
+
   </div>
   {# End posts list #}
   {# Side panel #}
