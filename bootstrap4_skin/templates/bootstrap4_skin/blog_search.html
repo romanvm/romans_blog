@@ -1,0 +1,54 @@
+{% extends "bootstrap4_skin/blog_posts_list.html" %}
+{% load i18n %}
+{% load static from staticfiles %}
+{% load common_tags %}
+{% load blog_tags %}
+
+{% block title %}
+  <title>{% trans "Site Search" %} - {% get_site_name %}</title>
+{% endblock title %}
+
+{% block featured_image %}
+<style>
+  header {
+    background-image: url('{% static "bootstrap4_skin/img/featured/search.jpg" %}');
+  }
+</style>
+{% endblock featured_image %}
+
+{% block header %}
+<h1 class="display-1">{% trans "Site Search" %}</h1>
+{% endblock header %}
+
+{% block blog_list %}
+{% if query %}
+  {% if object_list %}
+    <h2>{% trans "Search results for" %} "<em>{{ query }}</em>"</h2>
+    <h3>{% trans "Items found:" %} <strong>{{ paginator.count }}</strong></h3>
+    <div class="search-results">
+      {% for result in object_list %}
+      <p>
+        <a href="{{ result.object.get_absolute_url }}" class="text-secondary"><strong>{{ result.object.title }}</strong></a>
+        {% if result.object.date_published %}
+        <br>
+        <span class="text-muted">
+          <small><i class="far fa-calendar-alt"></i>&nbsp;{{ result.object.date_published }}</small>
+        </span>
+        {% endif %}
+      </p>  
+      <p class="search-summary">{% autoescape off %}{{ result.highlighted.text|join:"... " }}{% endautoescape %}&nbsp;
+      (<a href="{{ result.object.get_absolute_url }}" class="text-secondary"><i>{% trans "Read more..." %}</i></a>)</p>
+      <hr>
+      {% endfor %}
+      {% if is_paginated %}
+        <div class="pages mb-3">{% render_paginator 3 %}</div>
+      {% endif %}
+    </div>
+  {% else %}
+    <p class="text-danger"><strong>{% trans "No results found!" %}</strong></p>
+    <p>{% trans "Please refine you search criteria and try again." %}</p>
+  {% endif %}
+{% else %}
+  <p><strong>{% trans "Please enter a search query in the field on the right and click the search button." %}</strong></p>
+{% endif %}
+{% endblock blog_list %}

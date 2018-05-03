@@ -36,3 +36,7 @@ footer a {
 .categories-list {
   font-size: 1.5rem;
 }
+
+.search-summary em {
+  background: yellow;
+}
