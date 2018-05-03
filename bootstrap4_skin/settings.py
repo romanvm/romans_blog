@@ -9,30 +9,29 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 # Image styles for TinyMCE 4
 IMAGE_CLASS_LIST = [
-    {'title': 'Responsive', 'value': 'img-responsive'},
-    {'title': 'Rounded', 'value': 'img-responsive img-rounded'},
-    {'title': 'Thumbnail', 'value': 'img-responsive img-thumbnail'},
-    {'title': 'Circle', 'value': 'img-responsive img-circle'},
+    {'title': 'Responsive', 'value': 'img-fluid'},
+    {'title': 'Rounded', 'value': 'img-fluid rounded'},
+    {'title': 'Thumbnail', 'value': 'img-fluid img-thumbnail'},
 ]
 # Table styles for TinyMCE 4
 TABLE_CLASS_LIST = [
     {'title': 'Simple', 'value': 'table'},
     {'title': 'Bordered', 'value': 'table table-bordered'},
     {'title': 'Striped', 'value': 'table table-striped'},
-    {'title': 'Condensed', 'value': 'table table-condensed'},
+    {'title': 'Small', 'value': 'table table-sm'},
 ]
 # Table row styles for TinyMCE 4
 TABLE_ROW_CLASS_LIST = [
     # Translators: "None" means no styles for a table
     {'title': 'None', 'value': ''},
-    {'title': 'Green', 'value': 'success'},
-    {'title': 'Red', 'value': 'danger'},
-    {'title': 'Blue', 'value': 'info'},
+    {'title': 'Green', 'value': 'table-success'},
+    {'title': 'Red', 'value': 'table-danger'},
+    {'title': 'Blue', 'value': 'table-primary'},
 ]
 
 # Content styles for TinyMCE 4
 CONTENT_CSS = [
-    staticfiles_storage.url('cerulean_skin/css/bootstrap.min.css'),
-    staticfiles_storage.url('cerulean_skin/css/font-awesome.min.css'),
-    staticfiles_storage.url('cerulean_skin/css/cerulean_skin.css'),
+    staticfiles_storage.url('bootstrap4_skin/css/bootstrap.min.css'),
+    staticfiles_storage.url('bootstrap4_skin/css/font-awesome-all.min.css'),
+    staticfiles_storage.url('bootstrap4_skin/css/styles.css'),
 ]

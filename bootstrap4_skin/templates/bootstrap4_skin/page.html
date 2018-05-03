@@ -22,20 +22,20 @@
   {% if menu_link.page.featured_image %}
     background-image: url('{{ menu_link.page.featured_image.url }}');
   {% else %}
-    background-image: url('{% static "bootstrap4_skin/img/featured-default.jpg" %}');
+    background-image: url('{% static "bootstrap4_skin/img/featured/page.jpg" %}');
   {% endif %}
   }
 </style>
 {% endblock featured_image %}
 
 {% block header %}
- <h1 class="display-1">{{ menu_link.page.title }}</h1>
+<h1 class="display-1">{{ menu_link.page.title }}</h1>
 {% endblock header %}
 
 {% block content %}
-  <div class="col-md col-lg-10 offset-lg-1">
-    <article>
-      {{ menu_link.page.content|safe }}
-    </article>
-  </div>
+<div class="col-md col-lg-10 offset-lg-1">
+  <article>
+    {{ menu_link.page.content|safe }}
+  </article>
+</div>
 {% endblock content %}

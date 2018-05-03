@@ -160,7 +160,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': 600,
     'spellchecker_languages': 'English (US)=en_US,Russian=ru,Ukrainian=uk',
     'spellchecker_language': 'en_US',
-    'plugin_preview_width': 840,
+    'plugin_preview_width': 1024,
     'plugin_preview_height': 600,
     'image_advtab': True,
     'default_link_target': '_blank',

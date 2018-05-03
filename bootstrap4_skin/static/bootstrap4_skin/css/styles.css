@@ -1,5 +1,4 @@
 .navbar {
-  font-weight: bold;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -39,4 +38,44 @@ footer a {
 
 .search-summary em {
   background: yellow;
+}
+
+/* Needed to correctly place social buttons in line */
+.facebook,.linked-in,.twitter,.reddit {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.fb-share-button > span {
+  vertical-align: inherit !important;
+}
+
+.reddit > a > img {
+  vertical-align: inherit !important;
+  height: 20px;
+}
+
+/* Spoiler styles */
+.spoiler {
+  border: 1px solid #e7e7e7;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.spoiler-toggle {
+  font-weight: bold;
+  cursor: default;
+  padding: 5px;
+  font-size: 11px;
+}
+
+.spoiler-text {
+  padding: 5px;
+}
+
+/* Fix .container padding inside TinyMCE editor */
+body.mce-content-body {
+  padding: 5px;
 }
