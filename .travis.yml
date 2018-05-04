@@ -14,7 +14,7 @@ before_install:
   - pip install codecov
   - pip install Sphinx
 install: pip install -r requirements.txt
-script: coverage run manage.py test blog pages
+script: coverage run manage.py test blog pages common_content
 after_success: codecov
 before_deploy: wget https://raw.githubusercontent.com/romanvm/travis_scripts/master/publish_docs.py
 deploy:
