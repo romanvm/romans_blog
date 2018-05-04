@@ -57,13 +57,20 @@
         <h3 class="card-title text-uppercase">
           <a href="{{ post.get_absolute_url }}" class="text-secondary">{{ post.title }}</a>
         </h3>
-        <p><small class="text-muted">
-          <i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published }}&nbsp;&nbsp;
-          {% if post.allow_comments and disqus_shortname %}
-          <i class="far fa-comment"></i>&nbsp;
-          <a href="{{ post.get_absolute_url }}#disqus_thread" class="text-secondary">{% trans "0 comments" %}</a>
-          {% endif %}
-        </small></p>
+        <p>
+          <small class="text-muted">
+            <i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published }}&nbsp;
+            {% if post.allow_comments and disqus_shortname %}
+            <i class="far fa-comment"></i>&nbsp;
+            <a href="{{ post.get_absolute_url }}#disqus_thread" class="text-secondary">{% trans "0 comments" %}</a>&nbsp;
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a class="btn btn-light btn-sm" href="/admin/blog/post/{{ post.pk }}/">
+              <i class="fas fa-pen-square"></i>&nbsp;{% trans "Edit post" %}
+            </a>
+            {% endif %}
+          </small>
+        </p>
         <div class="post-cut">{{ post|truncate_post|safe }}</div>
         <p><a href="{{ post.get_absolute_url }}" class="btn btn-secondary">{% trans "Read more" %}</a></p>
         {% if post.categories.count %}

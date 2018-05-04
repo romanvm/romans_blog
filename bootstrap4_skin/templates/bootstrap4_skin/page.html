@@ -1,4 +1,5 @@
 {% extends "bootstrap4_skin/base.html" %}
+{% load i18n %}
 {% load static from staticfiles %}
 {% load common_tags %}
 
@@ -35,6 +36,13 @@
 {% block content %}
 <div class="col-md col-lg-10 offset-lg-1">
   <article>
+    {% if user.is_authenticated %}
+    <p>
+      <a class="btn btn-light btn-sm" href="/admin/pages/page/{{ menu_link.page.pk }}/">
+        <i class="fas fa-pen-square"></i>&nbsp;{% trans "Edit page" %}
+      </a>
+    </p>
+    {% endif %}
     {{ menu_link.page.content|safe }}
   </article>
 </div>

@@ -3,6 +3,7 @@
 {% load static %}
 {% load common_tags %}
 {% load blog_tags %}
+{% get_disqus_shortname as disqus_shortname %}
 
 {% block meta %}
   {{ block.super }}
@@ -44,7 +45,6 @@
 {% endblock navbar %}
 
 {% block header %}
-{% get_disqus_shortname as disqus_shortname %}
 <h1 class="display-1">{{ post.title }}</h1>
 <p class="font-weight-bold">
   <i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published}}&nbsp;&nbsp;
@@ -59,6 +59,13 @@
 {% load bootstrap4_skin_tags %}
 <div class="col-md col-lg-10 offset-lg-1">
   <article>
+    {% if user.is_authenticated %}
+    <p>
+      <a class="btn btn-light btn-sm" href="/admin/blog/post/{{ post.pk }}/">
+        <i class="fas fa-pen-square"></i>&nbsp;{% trans "Edit post" %}
+      </a>
+    </p>
+    {% endif %}
     {{ post.content|safe }}
   </article>
   {% if post.categories.count %}
@@ -103,3 +110,10 @@
 </div>
 {% endif %}
 {% endblock content %}
+
+{% block footer %}
+  {{ block.super }}
+  {% if disqus_shortname %}
+  <script id="dsq-count-scr" src="//{{ disqus_shortname }}.disqus.com/count.js" async></script>
+  {% endif %}
+{% endblock footer %}
