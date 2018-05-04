@@ -4,12 +4,13 @@
 {% load common_tags %}
 {% load blog_tags %}
 {% load bootstrap4_skin_tags %}
+{% get_site_config as site_config %}
 
 {% block title %}
 {% if page_title %}
-  <title>{{ page_title }} - {% get_site_name %}</title>
+  <title>{{ page_title }} - {{ site_config.site_name }}</title>
 {% else %}
-  <title>{% trans "Home" %} - {% get_site_name %}</title>
+  <title>{% trans "Home" %} - {{ site_config.site_name }}</title>
 {% endif %}
 {% endblock title %}
 
@@ -22,6 +23,8 @@
     background-image: url('{% static "bootstrap4_skin/img/featured/categories.jpg" %}');
     {% elif "archive" in request.path %}
     background-image: url('{% static "bootstrap4_skin/img/featured/archive.jpg" %}');
+    {% elif site_config.featured_image %}
+    background-image: url('{{ site_config.featured_image.url }}');
     {% else %}
     background-image: url('{% static "bootstrap4_skin/img/featured/home.jpg" %}');
     {% endif %}
@@ -34,8 +37,8 @@
 {% if page_title %}
   <h1 class="display-1">{{ page_title }}</h1>
 {% else %}
-  <h1 class="display-1">{% get_site_name %}</h1>
-  <h2>{% get_site_tagline %}</h2>
+  <h1 class="display-1">{{ site_config.site_name }}</h1>
+  <h2>{{ site_config.site_tagline }}</h2>
 {% endif %}
 {% endblock header %}
 
@@ -43,7 +46,6 @@
 
   <div class="col-md-8 col-lg-7 offset-lg-1">
     {% block blog_list %}
-    {% get_disqus_shortname as disqus_shortname %}
     {% for post in posts %}
     <div class="card mb-3">
       <a href="{{ post.get_absolute_url }}">
@@ -60,7 +62,7 @@
         <p>
           <small class="text-muted">
             <i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published }}&nbsp;
-            {% if post.allow_comments and disqus_shortname %}
+            {% if post.allow_comments and site_config.disqus_shortname %}
             <i class="far fa-comment"></i>&nbsp;
             <a href="{{ post.get_absolute_url }}#disqus_thread" class="text-secondary">{% trans "0 comments" %}</a>&nbsp;
             {% endif %}
@@ -204,8 +206,7 @@
 
 {% block footer %}
   {{ block.super }}
-  {% get_disqus_shortname as disqus_shortname %}
-  {% if disqus_shortname %}
-  <script id="dsq-count-scr" src="//{{ disqus_shortname }}.disqus.com/count.js" async></script>
+  {% if site_config.disqus_shortname %}
+  <script id="dsq-count-scr" src="//{{ site_config.disqus_shortname }}.disqus.com/count.js" async></script>
   {% endif %}
 {% endblock footer %}

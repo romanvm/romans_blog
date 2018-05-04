@@ -23,6 +23,7 @@ from django.utils.translation import ugettext as _
 from filebrowser.sites import site
 from blog.sitemaps import BlogPostsSiteMap
 from pages.sitemaps import PagesSiteMap
+from common_content.utils import get_site_config
 
 robots_txt = 'User-agent: *\nDisallow: /admin\nDisallow: /search'
 sitemaps = {
@@ -30,7 +31,7 @@ sitemaps = {
     'pages': PagesSiteMap,
             }
 # Translators: The placeholder represents a site's name
-admin.site.site_header = _('{0} Administration').format(settings.SITE_NAME)
+admin.site.site_header = _('{0} Administration').format(get_site_config().site_name)
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),

@@ -31,6 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+SITE_ID = 1
+
 
 # Application definition
 
@@ -47,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'adminsortable2',
     'haystack',
+    'solo',
     'common_content',
     'blog',
     'pages',
@@ -218,18 +221,6 @@ HAYSTACK_CONNECTIONS = {
 
 # Enable this if your server has enough power to update index on every save
 # HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-
-# === Custom site settings ===
-
-SITE_ID = 1
-SITE_NAME = 'Roman\'s Blog'
-SITE_TAGLINE = 'Random notes of a Python enthusiast'
-# Provide a Disqus shortname to enable post comments
-DISQUS_SHORTNAME = ''
-# Provide a Google Analytics ID to enable your web-site usage tracking
-GOOGLE_ANALYTICS_ID = ''
-
-# ============================
 
 # Load production settings if any
 try:

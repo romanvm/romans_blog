@@ -18,33 +18,6 @@ MenuLink = namedtuple('MenuLink', ['caption', 'url'])
 
 
 @register.simple_tag
-def get_disqus_shortname():
-    """
-    Simple tag
-
-    :return: Disqus short name
-    """
-    return settings.DISQUS_SHORTNAME
-
-
-@register.inclusion_tag('blog/disqus_comments.html', takes_context=True)
-def render_disqus_comments(context):
-    """
-    Inclusion tag
-
-    Render Disqus comments code
-
-    If ``settings.DISQUS_SHORTNAME`` is empty, comments won't be rendered
-
-    :param context: parent template context
-    :return: rendered Disqus html/JS code.
-    """
-    return {'request': context['request'],
-            'post': context['post'],
-            'disqus_shortname': settings.DISQUS_SHORTNAME}
-
-
-@register.simple_tag
 def get_categories():
     """
     Simple tag

@@ -3,7 +3,7 @@
 {% load static %}
 {% load common_tags %}
 {% load blog_tags %}
-{% get_disqus_shortname as disqus_shortname %}
+{% get_site_config as site_config %}
 
 {% block meta %}
   {{ block.super }}
@@ -16,7 +16,7 @@
 {% endblock meta %}
 
 {% block title %}
-<title>{{ post.title }} - {% get_site_name %}</title>
+<title>{{ post.title }} - {{ site_config.site_name }}</title>
 {% endblock title %}
 
 {% block featured_image %}
@@ -48,7 +48,7 @@
 <h1 class="display-1">{{ post.title }}</h1>
 <p class="font-weight-bold">
   <i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published}}&nbsp;&nbsp;
-  {% if post.allow_comments and disqus_shortname %}
+  {% if post.allow_comments and site_config.disqus_shortname %}
   <i class="far fa-comment"></i>&nbsp;
   <a href="{{ post.get_absolute_url }}#disqus_thread" class="text-light">{% trans "0 comments" %}</a>
   {% endif %}
@@ -102,7 +102,7 @@
   <hr>
   <div class="bottom-box">
     {% if post.allow_comments %}
-    {% render_disqus_comments %}
+    {% include "blog/disqus_comments.html" %}
     {% else %}
     <p>Comments are disabled.</p>
     {% endif %}
@@ -113,7 +113,7 @@
 
 {% block footer %}
   {{ block.super }}
-  {% if disqus_shortname %}
-  <script id="dsq-count-scr" src="//{{ disqus_shortname }}.disqus.com/count.js" async></script>
+  {% if site_config.disqus_shortname %}
+  <script id="dsq-count-scr" src="//{{ site.config.disqus_shortname }}.disqus.com/count.js" async></script>
   {% endif %}
 {% endblock footer %}

@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load static from staticfiles %}
 {% load common_tags %}
+{% get_site_config as site_config %}
 
 {% block meta %}
   {{ block.super }}
@@ -14,7 +15,7 @@
 {% endblock meta %}
 
 {% block title %}
-  <title>{{ menu_link.page.title }} - {% get_site_name %}</title>
+  <title>{{ menu_link.page.title }} - {{ site_config.site_name }</title>
 {% endblock title %}
 
 {% block featured_image %}

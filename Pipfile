@@ -16,11 +16,11 @@ pyenchant = "*"
 Django = "==1.11.12"
 Pillow = ">=3.0.0"
 Whoosh = ">=2.7.0"
+django-solo = "*"
 
 [dev-packages]
 
 [scripts]
-
 server = "pipenv run python manage.py runserver"
 test = "pipenv run python manage.py test"
 collectstatic = "pipenv run python manage.py collectstatic"

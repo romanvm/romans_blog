@@ -3,9 +3,10 @@
 {% load static from staticfiles %}
 {% load common_tags %}
 {% load blog_tags %}
+{% get_site_config as site_config %}
 
 {% block title %}
-  <title>{% trans "Site Search" %} - {% get_site_name %}</title>
+  <title>{% trans "Site Search" %} - {{ site_config.site_name }}</title>
 {% endblock title %}
 
 {% block featured_image %}
