@@ -19,9 +19,17 @@ img.card-img {
   object-fit: cover;
 }
 
+/* fix for footer height in Chrome that computes it to 0 by default */
 footer {
-  min-height: 40px;
+  min-height: 77px;
 }
+
+@media (max-width: 768px) {
+  footer {
+    min-height: 135px;
+  }
+}
+/* end fix */
 
 footer a {
   text-decoration: underline;
