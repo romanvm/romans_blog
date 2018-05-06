@@ -12,7 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'date_published', 'last_updated', 'is_published', 'is_featured',
-                    'allow_comments', 'meta_description')
+                    'allow_comments', 'meta_description', 'image_thumbnail')
     list_editable = ('is_featured', 'allow_comments')
     fields = ('title', 'slug', 'date_published', 'last_updated', 'content', 'is_published',
               'is_featured', 'allow_comments', 'featured_image', 'categories', 'meta_description')
@@ -25,3 +25,14 @@ class PostAdmin(admin.ModelAdmin):
     save_on_top = True
     list_per_page = 25
     ordering = ('is_published', '-date_published', '-last_updated')
+
+    def image_thumbnail(self, obj):
+        if obj.featured_image:
+            return '<img src="{0}" width="105" height="45">'.format(
+                obj.featured_image.url
+            )
+        else:
+            return ''
+
+    image_thumbnail.allow_tags = True
+    image_thumbnail.short_description = 'Featured Image'
