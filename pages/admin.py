@@ -1,5 +1,5 @@
 from django.contrib import admin
-from filebrowser.settings import ADMIN_THUMBNAIL
+from django.utils.translation import ugettext as _
 from adminsortable2.admin import SortableAdminMixin
 from .models import Page, MenuLink
 
@@ -21,7 +21,7 @@ class PageAdmin(admin.ModelAdmin):
             return ''
 
     image_thumbnail.allow_tags = True
-    image_thumbnail.short_description = 'Featured Image'
+    image_thumbnail.short_description = _('Featured Image')
 
 
 @admin.register(MenuLink)

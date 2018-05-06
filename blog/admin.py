@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import ugettext as _
 from .models import Category, Post
 
 
@@ -35,4 +36,4 @@ class PostAdmin(admin.ModelAdmin):
             return ''
 
     image_thumbnail.allow_tags = True
-    image_thumbnail.short_description = 'Featured Image'
+    image_thumbnail.short_description = _('Featured Image')
