@@ -74,7 +74,7 @@
           </small>
         </p>
         <div class="post-cut">{{ post|truncate_post|safe }}</div>
-        <p><a href="{{ post.get_absolute_url }}" class="btn btn-secondary">{% trans "Read more" %}</a></p>
+        <p><a href="{{ post.get_absolute_url }}" class="btn btn-secondary">{% trans "Read post" %}</a></p>
         {% if post.categories.count %}
         <p>
           <small>
