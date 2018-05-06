@@ -57,14 +57,14 @@
       </a>
       <div class="card-body">
         <h3 class="card-title text-uppercase">
-          <a href="{{ post.get_absolute_url }}" class="text-secondary">{{ post.title }}</a>
+          <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
         </h3>
         <p>
           <small class="text-muted">
             <i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published }}&nbsp;
             {% if post.allow_comments and site_config.disqus_shortname %}
             <i class="far fa-comment"></i>&nbsp;
-            <a href="{{ post.get_absolute_url }}#disqus_thread" class="text-secondary">{% trans "0 comments" %}</a>&nbsp;
+            <a href="{{ post.get_absolute_url }}#disqus_thread">{% trans "0 comments" %}</a>&nbsp;
             {% endif %}
             {% if user.is_authenticated %}
             <a class="btn btn-light btn-sm" href="/admin/blog/post/{{ post.pk }}/">
@@ -123,16 +123,16 @@
         <hr>
         <ul class="list-unstyled ml-2">
           <li>
-            <a href="/admin/blog/post/add" class="text-secondary"><i class="fas fa-pen-square"></i>&nbsp;{% trans "New Post" %}</a>
+            <a href="/admin/blog/post/add"><i class="fas fa-pen-square"></i>&nbsp;{% trans "New Post" %}</a>
           </li>
           <li>
-            <a href="/admin/blog/post" class="text-secondary"><i class="far fa-copy"></i>&nbsp;{% trans "Manage Posts" %}</a>
+            <a href="/admin/blog/post"><i class="far fa-copy"></i>&nbsp;{% trans "Manage Posts" %}</a>
           </li>
           <li>
-            <a href="/admin" class="text-secondary"><i class="fas fa-bars"></i>&nbsp;{% trans "Admin Panel" %}</a>
+            <a href="/admin"><i class="fas fa-bars"></i>&nbsp;{% trans "Admin Panel" %}</a>
           </li>
           <li>
-            <a href="/admin/logout" class="text-secondary"><i class="fas fa-sign-out-alt"></i>&nbsp;{% trans "Logout" %}</a>
+            <a href="/admin/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;{% trans "Logout" %}</a>
           </li>
         </ul>
       </div>
@@ -149,14 +149,14 @@
           {% for post in featured_posts.objects %}
           <li>
             <p>
-              <a href="{{ post.get_absolute_url }}" class="text-secondary">{{ post.title }}</a><br>
+              <a href="{{ post.get_absolute_url }}">{{ post.title }}</a><br>
               <small class="text-muted"><i class="far fa-calendar-alt"></i>&nbsp;{{ post.date_published }}</small>
           </p>
           </li>
           {% endfor %}
         </ul>
         {% if featured_posts.more %}
-        <a href="{{ featured_posts.more }}" class="card-link text-secondary">{% trans "More..." %}</a>
+        <a href="{{ featured_posts.more }}" class="card-link">{% trans "More..." %}</a>
         {% endif %}
       </div>
     </div>
@@ -171,7 +171,7 @@
         <ul class="list-unstyled ml-2">
           {% for category in categories %}
           <li>
-            <a href="{{ category.get_absolute_url }}" class="text-secondary">
+            <a href="{{ category.get_absolute_url }}">
               {{ category.name }}&nbsp;<span class="badge badge-secondary">{{ category.get_published_posts_count }}</span>
             </a>
           </li>
@@ -190,12 +190,12 @@
         <ul class="list-unstyled ml-2">
           {% for month in months.objects %}
           <li>
-            <a href="{% url "blog:month_archive" year=month.year month=month.month %}" class="text-secondary">{{ month|date:"F Y" }}</a>
+            <a href="{% url "blog:month_archive" year=month.year month=month.month %}">{{ month|date:"F Y" }}</a>
           </li>
           {% endfor %}
         </ul>
         {% if months.more %}
-        <a href="{% url "blog:archive" %}" class="card-link text-secondary">{% trans "More..." %}</a>
+        <a href="{% url "blog:archive" %}" class="card-link">{% trans "More..." %}</a>
         {% endif %}
       </div>
     </div>

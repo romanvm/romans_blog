@@ -14,7 +14,7 @@ def render_post_categories(post):
     """
     categories = []
     for category in post.categories.all():
-        categories.append('<a href="{url}" class="text-secondary">{name}</a>'.format(
+        categories.append('<a href="{url}">{name}</a>'.format(
             url=category.get_absolute_url(), name=category.name)
         )
     return ',&nbsp;'.join(categories)
@@ -37,7 +37,7 @@ def truncate_post(post):
     """
     return post_truncator(
         post,
-        '<span class="text-secondary">(<a href="{0}" class="text-secondary">{1}</a>)</span>'.format(
+        '<span class="text-secondary">(<a href="{0}">{1}</a>)</span>'.format(
             post.get_absolute_url(), '...'
         )
     )

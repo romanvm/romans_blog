@@ -20,7 +20,7 @@
     <ul>
       {% for category in categories %}
         <li>
-          <a href="{{ category.get_absolute_url }}" class="text-secondary">{{ category.name }}&nbsp;
+          <a href="{{ category.get_absolute_url }}">{{ category.name }}&nbsp;
             <span class="badge badge-secondary">{{ category.posts.count }}</span>
           </a>
         </li>

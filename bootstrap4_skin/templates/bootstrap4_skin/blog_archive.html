@@ -24,7 +24,7 @@
         <h3>{{ month.grouper }}</h3>
         {% for item in month.list %}
         <p>
-          <a href="{% url "blog:month_archive" year=item.year month=item.month %}" class="text-secondary">
+          <a href="{% url "blog:month_archive" year=item.year month=item.month %}">
             {{ item|date:"F" }}
           </a>
         </p>
