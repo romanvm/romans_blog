@@ -25,15 +25,8 @@ img.card-img {
 
 /* fix for footer height in Chrome that computes it to 0 by default */
 footer {
-  min-height: 77px;
+  min-height: 80px;
 }
-
-@media (max-width: 768px) {
-  footer {
-    min-height: 135px;
-  }
-}
-/* end fix */
 
 footer a {
   text-decoration: underline;
@@ -89,4 +82,36 @@ footer a {
 /* Fix .container padding inside TinyMCE editor */
 body.mce-content-body {
   padding: 5px;
+}
+
+@media (max-width: 768px) {
+  .header-content h1 {
+    font-size: 4rem;
+  }
+
+  .header-content h2 {
+    font-size: 1.75rem;
+  }
+
+  footer {
+    min-height: 140px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-content h1 {
+    font-size: 3.5rem;
+  }
+
+  .header-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .header-content p {
+    font-size: 0.75rem;
+  }
+
+  footer {
+    min-height: 170px;
+  }
 }
