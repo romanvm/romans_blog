@@ -23,5 +23,5 @@ django-solo = "*"
 [scripts]
 server = "pipenv run python manage.py runserver"
 test = "pipenv run python manage.py test"
-collectstatic = "pipenv run python manage.py collectstatic"
+collectstatic = "pipenv run python manage.py collectstatic --noinput"
 update_index = "python manage.py update_index"
