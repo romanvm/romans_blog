@@ -1,8 +1,8 @@
 <div class="btn-group" role="group">
   {% if has_previous %}
-     <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page={{ previous }}"><i class="fas fa-angle-left"></i></span></a>
+     <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page={{ previous }}"><i class="fas fa-angle-left"></i></a>
   {% else %}
-     <button type="button" class="btn btn-secondary" disabled="disabled"><span class="fa fa-angle-left"></span></button>
+     <button type="button" class="btn btn-secondary" disabled="disabled"><i class="fas fa-angle-left"></i></button>
   {% endif %}
 
   {% if show_first %}
@@ -24,7 +24,7 @@
   {% endif %}
 
   {% if has_next %}
-     <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page={{ next }}"><span class="fa fa-angle-right"></span></a>
+     <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page={{ next }}"><i class="fas fa-angle-right"></i></a>
   {% else %}
      <button type="button" class="btn btn-secondary" disabled="disabled"><i class="fas fa-angle-right"></i></button>
   {% endif %}
