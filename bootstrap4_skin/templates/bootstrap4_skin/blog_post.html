@@ -114,6 +114,6 @@
 {% block footer %}
   {{ block.super }}
   {% if site_config.disqus_shortname %}
-  <script id="dsq-count-scr" src="//{{ site.config.disqus_shortname }}.disqus.com/count.js" async></script>
+  <script id="dsq-count-scr" src="//{{ site_config.disqus_shortname }}.disqus.com/count.js" async></script>
   {% endif %}
 {% endblock footer %}
