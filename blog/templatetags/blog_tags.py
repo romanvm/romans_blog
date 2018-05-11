@@ -98,7 +98,8 @@ def render_paginator(context, adjacent_pages=2):
     :return: rendered paginator html code
     """
     start_page = max(context['page_obj'].number - adjacent_pages, 1)
-    if start_page <= 3: start_page = 1
+    if start_page <= 3:
+        start_page = 1
     end_page = context['page_obj'].number + adjacent_pages + 1
     if end_page >= context['paginator'].num_pages - 1:
         end_page = context['paginator'].num_pages + 1

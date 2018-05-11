@@ -4,21 +4,25 @@
   {% else %}
      <button type="button" class="btn btn-secondary" disabled="disabled"><span class="fa fa-angle-left"></span></button>
   {% endif %}
+
   {% if show_first %}
      <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page=1">1</a>
      <button type="button" class="btn btn-secondary" disabled="disabled">...</button>  
   {% endif %}
+
   {% for linkpage in page_numbers %}
-  {% ifequal linkpage page %}
-     <button type="button" class="btn btn-secondary active" >{{ page }}</button>
-  {% else %}
-     <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page={{ linkpage }}">{{ linkpage }}</a>
-  {% endifequal %}
+    {% ifequal linkpage page %}
+       <button type="button" class="btn btn-secondary active" >{{ page }}</button>
+    {% else %}
+       <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page={{ linkpage }}">{{ linkpage }}</a>
+    {% endifequal %}
   {% endfor %}
+
   {% if show_last %}
      <button type="button" class="btn btn-secondary" disabled="disabled">...</button>
      <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page=last">{{ pages }}</a>
   {% endif %}
+
   {% if has_next %}
      <a class="btn btn-secondary" href="{{ request.path }}?q={{ query }}&page={{ next }}"><span class="fa fa-angle-right"></span></a>
   {% else %}
