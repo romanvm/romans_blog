@@ -132,6 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+FILEBROWSER_ADMIN_THUMBNAIL = 'small'
+
 # TinyMCE settings
 
 common_content = import_module('common_content')
