@@ -12,6 +12,8 @@ class SiteConfiguration(SingletonModel):
     disqus_shortname = models.CharField(_('Disqus Shortname'), max_length=64, blank=True)
     google_analytics_id = models.CharField(_('Google Analytics ID'), max_length=64, blank=True)
     maintenance_mode = models.BooleanField(default=False)
+    robots_txt = models.TextField('robots.txt', blank=True,
+                                  default='User-agent: *\nDisallow: /admin\nDisallow: /search')
 
     def __str__(self):
         return _('Site Configuration')

@@ -17,31 +17,30 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.http import HttpResponse
 from django.contrib.sitemaps.views import sitemap
 from django.utils.translation import ugettext as _
-from django.db.utils import ProgrammingError
+from django.db.utils import DatabaseError
 from filebrowser.sites import site
 from blog.sitemaps import BlogPostsSiteMap
 from pages.sitemaps import PagesSiteMap
 from common_content.utils import get_site_config
+from common_content.views import robots_txt
 
-robots_txt = 'User-agent: *\nDisallow: /admin\nDisallow: /search'
 sitemaps = {
     'blog': BlogPostsSiteMap,
     'pages': PagesSiteMap,
             }
-# Translators: The placeholder represents a site's name
 try:
+    # Translators: The placeholder represents a site's name
     admin.site.site_header = _('{0} Administration').format(get_site_config().site_name)
-except ProgrammingError:  # This is to run migrate when site_conig table has not been created yet.
+except DatabaseError:  # This is to run migrate when site_config table has not been created yet.
     pass
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^robots.txt$', lambda r: HttpResponse(robots_txt, content_type='text/plain'), name='robots'),
+    url(r'^robots.txt$', robots_txt, name='robots'),
     url(r'^sitemap.xml$', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     url(r'^pages/', include('pages.urls', namespace='pages')),
     url(r'', include('blog.urls', namespace='blog')),
