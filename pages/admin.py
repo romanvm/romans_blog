@@ -15,7 +15,7 @@ class PageAdmin(admin.ModelAdmin):
     def image_thumbnail(self, obj):
         if obj.featured_image:
             return '<img src="{0}">'.format(
-                obj.featured_image.version_generate('small', extra_options={'width'}).url
+                obj.featured_image.version_generate('small').url
             )
         else:
             return ''
