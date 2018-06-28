@@ -11,7 +11,15 @@
   {% endif %}
   {% if menu_link.page.meta_descripiton %}
     <meta name="description" content="{{ menu_link.page.meta_descripiton }}">
+    <meta property="og:description" content="{{ menu_link.page.meta_description }}">
   {% endif %}
+  <meta property="og:title" content="{{ menu_link.page.title }}">
+  {% if menu_link.page.featured_image %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ menu_link.page.featured_image.url }}">
+  {% endif %}
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:site_name" content="{{ site_config.site_name }}">
+  <meta name="twitter:card" content="summary_large_image">
 {% endblock meta %}
 
 {% block title %}

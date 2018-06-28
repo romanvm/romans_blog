@@ -12,7 +12,15 @@
   {% endif %}
   {% if post.meta_description %}
   <meta name="description" content="{{ post.meta_description }}">
+  <meta property="og:description" content="{{ post.meta_description }}">
   {% endif %}
+  <meta property="og:title" content="{{ post.title }}">
+  {% if post.featured_image %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ post.featured_image.url }}">
+  {% endif %}
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:site_name" content="{{ site_config.site_name }}">
+  <meta name="twitter:card" content="summary_large_image">
 {% endblock meta %}
 
 {% block title %}
