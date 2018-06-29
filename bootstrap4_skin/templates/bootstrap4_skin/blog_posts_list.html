@@ -6,6 +6,33 @@
 {% load bootstrap4_skin_tags %}
 {% get_site_config as site_config %}
 
+{% block meta %}
+{{ block.super }}
+{% if page_title %}
+  <meta property="og:title" content="{{ page_title }} - {{ site_config.site_name }}">
+{% else %}
+  <meta property="og:title" content="{% trans "Home" %} - {{ site_config.site_name }}">
+{% endif %}
+{% if site_config.featured_image %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_config.featured_image.url }}">
+  <meta property="og:image:width" content="{{ site_config.featured_image.width }}">
+  <meta property="og:image:height" content="{{ site_config.featured_image.height }}">
+{% else %}
+  <meta property="og:image"
+    content="{{ request.scheme }}://{{ request.get_host }}{% static "bootstrap4_skin/img/featured/home.jpg" %}">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="548">
+{% endif %}
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+{% if site_config.site_tagline %}
+  <meta property="og:description" content="{{ site_config.site_tagline }}">
+{% endif %}
+  <meta property="og:site_name" content="{{ site_config.site_name }}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock meta %}
+{% endblock meta %}
+
 {% block title %}
 {% if page_title %}
   <title>{{ page_title }} - {{ site_config.site_name }}</title>
