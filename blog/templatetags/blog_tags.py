@@ -3,6 +3,7 @@
 # Created on: 25.11.2015
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
+import json
 from collections import namedtuple
 from urllib.parse import quote_plus
 from django import template
@@ -142,3 +143,35 @@ def check_blog_url(context):
     :rtype: bool
     """
     return context['request'].path in [item.url for item in get_blog_menu_links()]
+
+
+@register.inclusion_tag('common_content/json-ld.html', takes_context=True)
+def blog_json_ld(context):
+    """
+    Renders JSON-LD for the blog
+
+    :param context: parent template context
+    :type context: dict
+    :return: context for json-ld template
+    :rtype: dict
+    """
+    site_url = '{}://{}'.format(
+        context['request'].scheme,
+        context['request'].get_host()
+    )
+    json_ld = {
+        '@context': 'http://schema.org',
+        '@type': 'Blog',
+        'name': context['site_config'].site_name,
+        'url': site_url,
+        'description': context['site_config'].site_tagline,
+        'publisher': {
+            '@type': 'Organization',
+            'name': context['site_config'].site_name,
+            'logo': {
+                '@type': 'imageObject',
+                'url': site_url + context['site_config'].site_logo.url
+            }
+        }
+    }
+    return {'json_ld': json.dumps(json_ld, indent=2)}
