@@ -11,7 +11,7 @@ class SiteConfiguration(SingletonModel):
                                      extensions=['.jpg', '.jpeg', '.png'], blank=True)
     disqus_shortname = models.CharField(_('Disqus Shortname'), max_length=64, blank=True)
     google_analytics_id = models.CharField(_('Google Analytics ID'), max_length=64, blank=True)
-    maintenance_mode = models.BooleanField(default=False)
+    maintenance_mode = models.BooleanField(_('Maintenance Mode'), default=False)
     robots_txt = models.TextField('robots.txt', blank=True,
                                   default='User-agent: *\nDisallow: /admin\nDisallow: /search')
 
