@@ -18,7 +18,12 @@
     {% block title %}
     {% endblock title %}
 
-    <link rel="icon" href="{% static "bootstrap4_skin/favicon.ico" %}">
+    {% if site_config.site_logo %}
+    <link rel="icon" type="image/png" href="{{ site_config.site_logo.url }}">
+    {% else %}
+    <link rel="icon" type="image/png" href="{% static "bootstrap4_skin/img/favicon.png" %}">
+    <link rel="icon" type="image/x-icon" href="{% static "bootstrap4_skin/img/favicon.ico" %}">
+    {% endif %}
     {% block css %}
     <link rel="stylesheet" href="{% static "bootstrap4_skin/css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "bootstrap4_skin/css/fontawesome-all.min.css" %}">
