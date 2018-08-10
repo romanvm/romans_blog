@@ -84,9 +84,21 @@
               {% endfor %}
             </ul>
             <div>
-              <a href="https://github.com/romanvm" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-github"></i></a>
-              <a href="https://stackoverflow.com/users/4819775/roman-miroshnychenko" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-stack-overflow"></i></a>
-              <a href="https://www.facebook.com/romanvm1972" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-facebook"></i></a>
+              {% if site_config.facebook %}
+              <a href="{{ site_config.facebook }}" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-facebook"></i></a>
+              {% endif %}
+              {% if site_config.twitter %}
+              <a href="{{ site_config.twitter }}" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-twitter"></i></a>
+              {% endif %}
+              {% if site_config.linkedin %}
+              <a href="{{ site_config.linkedin }}" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-linkedin"></i></a>
+              {% endif %}
+              {% if site_config.github %}
+              <a href="{{ site_config.github }}" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-github"></i></a>
+              {% endif %}
+              {% if site_config.stackoverflow %}
+              <a href="{{ site_config.stackoverflow }}" class="btn btn-secondary btn-sm btn-social"><i class="fab fa-stack-overflow"></i></a>
+              {% endif %}
             </div>
           </div>
         </div>
