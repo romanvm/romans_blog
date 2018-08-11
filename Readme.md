@@ -3,11 +3,11 @@
 [![Build Status](https://travis-ci.org/romanvm/romans_blog.svg?branch=master)](https://travis-ci.org/romanvm/romans_blog)
 [![codecov.io](https://codecov.io/github/romanvm/romans_blog/coverage.svg?branch=master)](https://codecov.io/github/romanvm/romans_blog?branch=master)
 
-This is a simple CMS for a blog-oriented web-site that I've developed to learn
-[Django](https://www.djangoproject.com/) web-framework.
-Despite being a learning project, I've tried to make this CMS suitable for real-life usage.
+This is a simple CMS for my blog website based on [Django](https://www.djangoproject.com/)
+web-framework. It started as a learning project but then I have made this CMS
+suitable for real usage.
 
-### Main Features:
+## Main Features:
 
 - **Post categories and "Featured" posts**: A post can (optionally) be assigned to multiple categories or marked as
   "Featured" to show it in a separate site section.
@@ -22,6 +22,7 @@ Despite being a learning project, I've tried to make this CMS suitable for real-
 - **Full-text site search** with [django-haystack]( http://haystacksearch.org/)
   and [Whoosh](https://pypi.python.org/pypi/Whoosh/).
 - **RSS and Atom feeds** for recent blog posts.
+- **SEO features**: meta description, Open Graph and schema.org metadata for posts and pages.
 - **Google Analytics support**.
 - **sitemap.xml and robots.txt**.
 - **Localization-ready**: all interface strings, both in Python and templates, are marked as translatable.
