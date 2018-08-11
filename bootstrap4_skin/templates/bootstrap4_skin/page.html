@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load static from staticfiles %}
 {% load common_tags %}
+{% load pages_tags %}
 {% get_site_config as site_config %}
 
 {% block meta %}
@@ -23,6 +24,7 @@
   <meta property="og:site_name" content="{{ site_config.site_name }}">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  {% page_json_ld %}
 {% endblock meta %}
 
 {% block title %}
