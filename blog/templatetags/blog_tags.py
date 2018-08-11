@@ -175,3 +175,49 @@ def blog_json_ld(context):
         }
     }
     return {'json_ld': json.dumps(json_ld, indent=2)}
+
+
+@register.inclusion_tag('common_content/json-ld.html', takes_context=True)
+def blog_post_json_ld(context):
+    """
+    Renders JSON-LD for the blog
+
+    :param context: parent template context
+    :type context: dict
+    :return: context for json-ld template
+    :rtype: dict
+    """
+    site_url = '{}://{}'.format(
+        context['request'].scheme,
+        context['request'].get_host()
+    )
+    json_ld = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        'headline': context['post'].title,
+        'description': context['post'].meta_description,
+        'datePublished': context['post'].date_published.strftime('%Y-%m-%d'),
+        'dateModified': context['post'].last_updated.strftime('%Y-%m-%d'),
+        'image': {
+            '@type': 'imageObject',
+            'url': site_url + context['post'].featured_image.url,
+            'height': context['post'].featured_image.height,
+            'width': context['post'].featured_image.width
+        },
+        'publisher': {
+            '@type': 'Organization',
+            'name': context['site_config'].site_name,
+            'logo': {
+                '@type': 'imageObject',
+                'url': site_url + context['site_config'].site_logo.url}
+
+        },
+        'author': {
+            '@type': 'Person',
+            'name': 'Roman Miroshnychenko'  # todo: implement Post.author field
+        },
+        'keywords': ', '.join([category.name for category in context['post'].categories.all()]),
+        'mainEntityOfPage': site_url + context['request'].path,
+        'articleBody': context['post'].content
+        }
+    return {'json_ld': json.dumps(json_ld, indent=2)}
