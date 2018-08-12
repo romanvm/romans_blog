@@ -1,0 +1,129 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Skins &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Roman’s Blog Applications" href="apps.html" />
+    <link rel="prev" title="Usage" href="usage.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="skins">
+<h1>Skins<a class="headerlink" href="#skins" title="Permalink to this headline">¶</a></h1>
+<p>Blog and Pages applications do not have any visual elements of their own, except for a 404 page
+that is standalone and takes all CSS/JS elements from a CDN.
+The site’s visual appearance is completely defined by a skin.</p>
+<p>Skin is a Django app that contains the necessary templates and (if needed) template tags.
+Almost any html web-site template with 1-level navigation menu can be turned into a skin.
+Roman’s Blog comes with a default Cerulean skin based on based on <a class="reference external" href="http://getbootstrap.com/">Bootstrap</a> and <a class="reference external" href="http://bootswatch.com/">Bootswatch</a> design elements.</p>
+<p>A skin must provide the following templates:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">blog_posts_list.html</span></code> – used for recent posts and filtered posts lists, e.g. “Featured”.</li>
+<li><code class="docutils literal notranslate"><span class="pre">blog_categories_list.html</span></code> – the list of post categories.</li>
+<li><code class="docutils literal notranslate"><span class="pre">blog_post.html</span></code> – a blog post with Disqus comments.</li>
+<li><code class="docutils literal notranslate"><span class="pre">blog_archive.html</span></code> – a blog archive by years and months.</li>
+<li><code class="docutils literal notranslate"><span class="pre">blog_search.html</span></code> – used for search results.</li>
+<li><code class="docutils literal notranslate"><span class="pre">page.html</span></code> – a “plain” page.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tinymce_preview.html</span></code> – preview edited text in TinyMCE with the current skin styles applied.</li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Skins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apps.html">Roman’s Blog Applications</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="usage.html" title="previous chapter">Usage</a></li>
+      <li>Next: <a href="apps.html" title="next chapter">Roman’s Blog Applications</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

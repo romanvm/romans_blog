@@ -1,0 +1,360 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>blog.templatetags.blog_tags &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pages Application" href="../pages.html" />
+    <link rel="prev" title="blog.views" href="blog.views.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-blog.templatetags.blog_tags">
+<span id="blog-templatetags-blog-tags"></span><h1>blog.templatetags.blog_tags<a class="headerlink" href="#module-blog.templatetags.blog_tags" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#blog.templatetags.blog_tags.get_archive_digest" title="blog.templatetags.blog_tags.get_archive_digest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_archive_digest</span></code></a>([months_count])</td>
+<td>Simple tag</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#blog.templatetags.blog_tags.get_blog_menu_links" title="blog.templatetags.blog_tags.get_blog_menu_links"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_blog_menu_links</span></code></a>()</td>
+<td>Simple tag</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#blog.templatetags.blog_tags.get_categories" title="blog.templatetags.blog_tags.get_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_categories</span></code></a>()</td>
+<td>Simple tag</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_disqus_shortname</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#blog.templatetags.blog_tags.get_posts_digest" title="blog.templatetags.blog_tags.get_posts_digest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_posts_digest</span></code></a>([featured,&nbsp;posts_count])</td>
+<td>Simple tag</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_site_name</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_url</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">render_disqus_comments</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">render_google_analytics</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#blog.templatetags.blog_tags.render_paginator" title="blog.templatetags.blog_tags.render_paginator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">render_paginator</span></code></a>(context[,&nbsp;adjacent_pages])</td>
+<td>Inclusion tag</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#blog.templatetags.blog_tags.SideBarObjects" title="blog.templatetags.blog_tags.SideBarObjects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SideBarObjects</span></code></a>(objects,&nbsp;more)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="blog.templatetags.blog_tags.SideBarObjects">
+<em class="property">class </em><code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">SideBarObjects</code><span class="sig-paren">(</span><em>objects</em>, <em>more</em><span class="sig-paren">)</span><a class="headerlink" href="#blog.templatetags.blog_tags.SideBarObjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#tuple" title="(in Python v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="attribute">
+<dt id="blog.templatetags.blog_tags.SideBarObjects.more">
+<code class="descname">more</code><a class="headerlink" href="#blog.templatetags.blog_tags.SideBarObjects.more" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="blog.templatetags.blog_tags.SideBarObjects.objects">
+<code class="descname">objects</code><a class="headerlink" href="#blog.templatetags.blog_tags.SideBarObjects.objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.templatetags.blog_tags.MenuLink">
+<em class="property">class </em><code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">MenuLink</code><span class="sig-paren">(</span><em>caption</em>, <em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#blog.templatetags.blog_tags.MenuLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#tuple" title="(in Python v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="attribute">
+<dt id="blog.templatetags.blog_tags.MenuLink.caption">
+<code class="descname">caption</code><a class="headerlink" href="#blog.templatetags.blog_tags.MenuLink.caption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="blog.templatetags.blog_tags.MenuLink.url">
+<code class="descname">url</code><a class="headerlink" href="#blog.templatetags.blog_tags.MenuLink.url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="blog.templatetags.blog_tags.get_categories">
+<code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">get_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/templatetags/blog_tags.html#get_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.templatetags.blog_tags.get_categories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple tag</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of non-empty categories ordered by post count in desc. order</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="blog.templatetags.blog_tags.get_posts_digest">
+<code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">get_posts_digest</code><span class="sig-paren">(</span><em>featured=False</em>, <em>posts_count=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/templatetags/blog_tags.html#get_posts_digest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.templatetags.blog_tags.get_posts_digest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple tag</p>
+<p>Get the lists of the latest posts (general of featured) for the blog sidebar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>featured</strong> – if <code class="docutils literal notranslate"><span class="pre">True</span></code> featured posts digest is returned</li>
+<li><strong>posts_count</strong> – the number of posts to include in a digest</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the digest of recent posts and “More” link</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#blog.templatetags.blog_tags.SideBarObjects" title="blog.templatetags.blog_tags.SideBarObjects"><code class="xref py py-class docutils literal notranslate"><span class="pre">SideBarObjects</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="blog.templatetags.blog_tags.get_archive_digest">
+<code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">get_archive_digest</code><span class="sig-paren">(</span><em>months_count=6</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/templatetags/blog_tags.html#get_archive_digest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.templatetags.blog_tags.get_archive_digest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple tag</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>months_count</strong> – the number of month to include in a digest</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the list of the most recent months from the blog archive for the blog sidebar</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#blog.templatetags.blog_tags.SideBarObjects" title="blog.templatetags.blog_tags.SideBarObjects"><code class="xref py py-class docutils literal notranslate"><span class="pre">SideBarObjects</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="blog.templatetags.blog_tags.get_blog_menu_links">
+<code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">get_blog_menu_links</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/templatetags/blog_tags.html#get_blog_menu_links"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.templatetags.blog_tags.get_blog_menu_links" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple tag</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">blog menu links for the site main menu.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="blog.templatetags.blog_tags.render_paginator">
+<code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">render_paginator</code><span class="sig-paren">(</span><em>context</em>, <em>adjacent_pages=2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/templatetags/blog_tags.html#render_paginator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.templatetags.blog_tags.render_paginator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inclusion tag</p>
+<p>Renders paginator for multi-page lists.</p>
+<p>A skin must provide the respective paginator template.</p>
+<p>Adds pagination context variables for use in displaying first, adjacent and
+last page links in addition to those created by the object_list generic
+view.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>context</strong> – parent template context</li>
+<li><strong>adjacent_pages</strong> – the number of pages adjacent to the current</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">rendered paginator html code</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="blog.templatetags.blog_tags.check_blog_url">
+<code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">check_blog_url</code><span class="sig-paren">(</span><em>context</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/templatetags/blog_tags.html#check_blog_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.templatetags.blog_tags.check_blog_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a current URL belong to blog application</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#dict" title="(in Python v3.4)"><em>dict</em></a>) – template context</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">check result</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.4/library/functions.html#bool" title="(in Python v3.4)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="blog.templatetags.blog_tags.blog_json_ld">
+<code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">blog_json_ld</code><span class="sig-paren">(</span><em>context</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/templatetags/blog_tags.html#blog_json_ld"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.templatetags.blog_tags.blog_json_ld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders JSON-LD for the blog</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#dict" title="(in Python v3.4)"><em>dict</em></a>) – parent template context</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">context for json-ld template</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#dict" title="(in Python v3.4)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="blog.templatetags.blog_tags.blog_post_json_ld">
+<code class="descclassname">blog.templatetags.blog_tags.</code><code class="descname">blog_post_json_ld</code><span class="sig-paren">(</span><em>context</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/templatetags/blog_tags.html#blog_post_json_ld"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.templatetags.blog_tags.blog_post_json_ld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders JSON-LD for the blog</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#dict" title="(in Python v3.4)"><em>dict</em></a>) – parent template context</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">context for json-ld template</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#dict" title="(in Python v3.4)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../skins.html">Skins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../apps.html">Roman’s Blog Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../blog.html">Blog Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages.html">Pages Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cerulean_skin.html">Cerulean Skin Application</a></li>
+</ul>
+</li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../apps.html">Roman’s Blog Applications</a><ul>
+  <li><a href="../blog.html">Blog Application</a><ul>
+      <li>Previous: <a href="blog.views.html" title="previous chapter">blog.views</a></li>
+      <li>Next: <a href="../pages.html" title="next chapter">Pages Application</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

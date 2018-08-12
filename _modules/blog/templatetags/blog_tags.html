@@ -1,0 +1,342 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>blog.templatetags.blog_tags &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for blog.templatetags.blog_tags</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding: utf-8</span>
+<span class="c1"># Module: blog_tags</span>
+<span class="c1"># Created on: 25.11.2015</span>
+<span class="c1"># Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="k">import</span> <span class="n">quote_plus</span>
+<span class="kn">from</span> <span class="nn">django</span> <span class="k">import</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="k">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="k">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="k">import</span> <span class="n">ugettext</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">django.core.paginator</span> <span class="k">import</span> <span class="n">EmptyPage</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="k">import</span> <span class="n">Category</span><span class="p">,</span> <span class="n">Post</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+<span class="n">SideBarObjects</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;SideBarObjects&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;objects&#39;</span><span class="p">,</span> <span class="s1">&#39;more&#39;</span><span class="p">])</span>
+<span class="n">MenuLink</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;MenuLink&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;caption&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="get_categories"><a class="viewcode-back" href="../../../_autosummary/blog.templatetags.blog_tags.html#blog.templatetags.blog_tags.get_categories">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<span class="k">def</span> <span class="nf">get_categories</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple tag</span>
+
+<span class="sd">    :return: list of non-empty categories ordered by post count in desc. order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">ordered_by_post_count</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="get_posts_digest"><a class="viewcode-back" href="../../../_autosummary/blog.templatetags.blog_tags.html#blog.templatetags.blog_tags.get_posts_digest">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<span class="k">def</span> <span class="nf">get_posts_digest</span><span class="p">(</span><span class="n">featured</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">posts_count</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple tag</span>
+
+<span class="sd">    Get the lists of the latest posts (general of featured) for the blog sidebar</span>
+
+<span class="sd">    :param featured: if ``True`` featured posts digest is returned</span>
+<span class="sd">    :param posts_count: the number of posts to include in a digest</span>
+<span class="sd">    :return: the digest of recent posts and &quot;More&quot; link</span>
+<span class="sd">    :rtype: :class:`SideBarObjects`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">featured</span><span class="p">:</span>
+        <span class="n">posts</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">featured</span><span class="p">()</span>
+        <span class="n">more_link</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;blog:featured_posts&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">posts</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">()</span>
+        <span class="n">more_link</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;blog:home&#39;</span><span class="p">)</span>
+    <span class="n">more</span> <span class="o">=</span> <span class="n">more_link</span> <span class="k">if</span> <span class="n">posts</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">posts_count</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">SideBarObjects</span><span class="p">(</span><span class="n">posts</span><span class="p">[:</span><span class="n">posts_count</span><span class="p">],</span> <span class="n">more</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_archive_digest"><a class="viewcode-back" href="../../../_autosummary/blog.templatetags.blog_tags.html#blog.templatetags.blog_tags.get_archive_digest">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<span class="k">def</span> <span class="nf">get_archive_digest</span><span class="p">(</span><span class="n">months_count</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple tag</span>
+
+<span class="sd">    :param months_count: the number of month to include in a digest</span>
+<span class="sd">    :return: the list of the most recent months from the blog archive for the blog sidebar</span>
+<span class="sd">    :rtype: :class:`SideBarObjects`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">months</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">()</span><span class="o">.</span><span class="n">dates</span><span class="p">(</span><span class="s1">&#39;date_published&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;DESC&#39;</span><span class="p">)</span>
+    <span class="n">more</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;blog:archive&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">months</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">months_count</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">SideBarObjects</span><span class="p">(</span><span class="n">months</span><span class="p">[:</span><span class="n">months_count</span><span class="p">],</span> <span class="n">more</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_blog_menu_links"><a class="viewcode-back" href="../../../_autosummary/blog.templatetags.blog_tags.html#blog.templatetags.blog_tags.get_blog_menu_links">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<span class="k">def</span> <span class="nf">get_blog_menu_links</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple tag</span>
+
+<span class="sd">    :return: blog menu links for the site main menu.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">featured</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">featured</span><span class="p">()</span>
+    <span class="n">featured_link</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;blog:featured_posts&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">featured</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">MenuLink</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Recent Posts&#39;</span><span class="p">),</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;blog:home&#39;</span><span class="p">)),</span>
+        <span class="n">MenuLink</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Featured Posts&#39;</span><span class="p">),</span> <span class="n">featured_link</span><span class="p">),</span>
+        <span class="n">MenuLink</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Categories&#39;</span><span class="p">),</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;blog:categories_list&#39;</span><span class="p">)),</span>
+        <span class="n">MenuLink</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Archive&#39;</span><span class="p">),</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;blog:archive&#39;</span><span class="p">))</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="render_paginator"><a class="viewcode-back" href="../../../_autosummary/blog.templatetags.blog_tags.html#blog.templatetags.blog_tags.render_paginator">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">inclusion_tag</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/paginator.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">CURRENT_SKIN</span><span class="p">),</span> <span class="n">takes_context</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">render_paginator</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">adjacent_pages</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inclusion tag</span>
+
+<span class="sd">    Renders paginator for multi-page lists.</span>
+
+<span class="sd">    A skin must provide the respective paginator template.</span>
+
+<span class="sd">    Adds pagination context variables for use in displaying first, adjacent and</span>
+<span class="sd">    last page links in addition to those created by the object_list generic</span>
+<span class="sd">    view.</span>
+
+<span class="sd">    :param context: parent template context</span>
+<span class="sd">    :param adjacent_pages: the number of pages adjacent to the current</span>
+<span class="sd">    :return: rendered paginator html code</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start_page</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_obj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">number</span> <span class="o">-</span> <span class="n">adjacent_pages</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">start_page</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">start_page</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">end_page</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_obj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">number</span> <span class="o">+</span> <span class="n">adjacent_pages</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">end_page</span> <span class="o">&gt;=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;paginator&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">end_page</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;paginator&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">page_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_page</span><span class="p">,</span> <span class="n">end_page</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;paginator&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="n">page_obj</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_obj&#39;</span><span class="p">]</span>
+    <span class="n">paginator</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;paginator&#39;</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">next_</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_obj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">next_page_number</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">EmptyPage</span><span class="p">:</span>
+        <span class="n">next_</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">previous</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_obj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">previous_page_number</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">EmptyPage</span><span class="p">:</span>
+        <span class="n">previous</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;page_obj&#39;</span><span class="p">:</span> <span class="n">page_obj</span><span class="p">,</span>
+        <span class="s1">&#39;paginator&#39;</span><span class="p">:</span> <span class="n">paginator</span><span class="p">,</span>
+        <span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_obj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
+        <span class="s1">&#39;pages&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;paginator&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_pages</span><span class="p">,</span>
+        <span class="s1">&#39;page_numbers&#39;</span><span class="p">:</span> <span class="n">page_numbers</span><span class="p">,</span>
+        <span class="s1">&#39;next&#39;</span><span class="p">:</span> <span class="n">next_</span><span class="p">,</span>
+        <span class="s1">&#39;previous&#39;</span><span class="p">:</span> <span class="n">previous</span><span class="p">,</span>
+        <span class="s1">&#39;has_next&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_obj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">has_next</span><span class="p">(),</span>
+        <span class="s1">&#39;has_previous&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_obj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">has_previous</span><span class="p">(),</span>
+        <span class="s1">&#39;show_first&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">page_numbers</span><span class="p">,</span>
+        <span class="s1">&#39;show_last&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;paginator&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_pages</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">page_numbers</span><span class="p">,</span>
+        <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">quote_plus</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">]),</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="check_blog_url"><a class="viewcode-back" href="../../../_autosummary/blog.templatetags.blog_tags.html#blog.templatetags.blog_tags.check_blog_url">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span><span class="p">(</span><span class="n">takes_context</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_blog_url</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if a current URL belong to blog application</span>
+
+<span class="sd">    :param context: template context</span>
+<span class="sd">    :type context: dict</span>
+<span class="sd">    :return: check result</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">path</span> <span class="ow">in</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">url</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">get_blog_menu_links</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="blog_json_ld"><a class="viewcode-back" href="../../../_autosummary/blog.templatetags.blog_tags.html#blog.templatetags.blog_tags.blog_json_ld">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">inclusion_tag</span><span class="p">(</span><span class="s1">&#39;common_content/json-ld.html&#39;</span><span class="p">,</span> <span class="n">takes_context</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">blog_json_ld</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders JSON-LD for the blog</span>
+
+<span class="sd">    :param context: parent template context</span>
+<span class="sd">    :type context: dict</span>
+<span class="sd">    :return: context for json-ld template</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">site_url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">://</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_host</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">site_logo_url</span> <span class="o">=</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;site_config&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">site_logo</span><span class="o">.</span><span class="n">url</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">site_logo_url</span> <span class="o">=</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">settings</span><span class="o">.</span><span class="n">DEFAULT_LOGO</span>
+    <span class="n">json_ld</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;@context&#39;</span><span class="p">:</span> <span class="s1">&#39;http://schema.org&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Blog&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;site_config&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">site_name</span><span class="p">,</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">site_url</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;site_config&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">site_tagline</span><span class="p">,</span>
+        <span class="s1">&#39;publisher&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Organization&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;site_config&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">site_name</span><span class="p">,</span>
+            <span class="s1">&#39;logo&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;imageObject&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">site_logo_url</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;json_ld&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_ld</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)}</span></div>
+
+
+<div class="viewcode-block" id="blog_post_json_ld"><a class="viewcode-back" href="../../../_autosummary/blog.templatetags.blog_tags.html#blog.templatetags.blog_tags.blog_post_json_ld">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">inclusion_tag</span><span class="p">(</span><span class="s1">&#39;common_content/json-ld.html&#39;</span><span class="p">,</span> <span class="n">takes_context</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">blog_post_json_ld</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders JSON-LD for the blog</span>
+
+<span class="sd">    :param context: parent template context</span>
+<span class="sd">    :type context: dict</span>
+<span class="sd">    :return: context for json-ld template</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">site_url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">://</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_host</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">featured_image_url</span> <span class="o">=</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">featured_image</span><span class="o">.</span><span class="n">url</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">featured_image_url</span> <span class="o">=</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">settings</span><span class="o">.</span><span class="n">DEFAULT_FEATURED_IMAGE</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">site_logo_url</span> <span class="o">=</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;site_config&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">site_logo</span><span class="o">.</span><span class="n">url</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">site_logo_url</span> <span class="o">=</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">settings</span><span class="o">.</span><span class="n">DEFAULT_LOGO</span>
+    <span class="n">json_ld</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;@context&#39;</span><span class="p">:</span> <span class="s1">&#39;https://schema.org&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;BlogPosting&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;headline&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">meta_description</span><span class="p">,</span>
+        <span class="s1">&#39;datePublished&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">date_published</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;dateModified&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">last_updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;imageObject&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">featured_image_url</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;publisher&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Organization&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;site_config&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">site_name</span><span class="p">,</span>
+            <span class="s1">&#39;logo&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;imageObject&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">site_logo_url</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Person&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Roman Miroshnychenko&#39;</span>  <span class="c1"># todo: implement Post.author field</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;keywords&#39;</span><span class="p">:</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">category</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">all</span><span class="p">()]),</span>
+        <span class="s1">&#39;mainEntityOfPage&#39;</span><span class="p">:</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+        <span class="s1">&#39;articleBody&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
+        <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;json_ld&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_ld</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)}</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../skins.html">Skins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apps.html">Roman’s Blog Applications</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

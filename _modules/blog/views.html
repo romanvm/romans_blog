@@ -1,0 +1,278 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>blog.views &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for blog.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">date</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.list</span> <span class="k">import</span> <span class="n">ListView</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.detail</span> <span class="k">import</span> <span class="n">DetailView</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="k">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="k">import</span> <span class="n">ugettext</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">django.utils.dateformat</span> <span class="k">import</span> <span class="nb">format</span> <span class="k">as</span> <span class="n">format_date</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="k">import</span> <span class="n">get_object_or_404</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="k">import</span> <span class="n">Http404</span>
+<span class="kn">from</span> <span class="nn">haystack.generic_views</span> <span class="k">import</span> <span class="n">SearchView</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Category</span>
+
+
+<span class="k">class</span> <span class="nc">_PostsListView</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for displaying post lists</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/blog_posts_list.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">CURRENT_SKIN</span><span class="p">)</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;posts&#39;</span>
+    <span class="n">paginate_by</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">BLOG_POSTS_PAGINATE_BY</span>
+
+
+<span class="k">class</span> <span class="nc">_PageTitleMixIn</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds page_title to ListView&#39;s context</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">page_title</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;page_title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_title</span>
+        <span class="k">return</span> <span class="n">context</span>
+
+
+<div class="viewcode-block" id="BlogHomeView"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogHomeView">[docs]</a><span class="k">class</span> <span class="nc">BlogHomeView</span><span class="p">(</span><span class="n">_PostsListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays the list of all published posts starting from the recent.</span>
+
+<span class="sd">    Template: ``blog_posts_list.html``</span>
+
+<span class="sd">    Specific context variable: ``posts``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BlogFeaturedPostsView"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogFeaturedPostsView">[docs]</a><span class="k">class</span> <span class="nc">BlogFeaturedPostsView</span><span class="p">(</span><span class="n">_PageTitleMixIn</span><span class="p">,</span> <span class="n">_PostsListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays the list of featured posts</span>
+
+<span class="sd">    Template: ``blog_posts_list.html``</span>
+
+<span class="sd">    Specific context variables:</span>
+
+<span class="sd">    - ``posts``</span>
+<span class="sd">    - ``page_title``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">featured</span><span class="p">()</span>
+    <span class="n">page_title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Featured Posts&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BlogCategoryView"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogCategoryView">[docs]</a><span class="k">class</span> <span class="nc">BlogCategoryView</span><span class="p">(</span><span class="n">_PageTitleMixIn</span><span class="p">,</span> <span class="n">_PostsListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays the list of posts in a given category</span>
+
+<span class="sd">    Template: ``blog_posts_list.html``</span>
+
+<span class="sd">    Specific context variables:</span>
+
+<span class="sd">    - ``posts``</span>
+<span class="sd">    - ``page_title``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="BlogCategoryView.get_queryset"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogCategoryView.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Category</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;slug&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Posts in &quot;</span><span class="si">{0}</span><span class="s1">&quot; category&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">category</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">categories__pk</span><span class="o">=</span><span class="n">category</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="BlogCategoriesListView"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogCategoriesListView">[docs]</a><span class="k">class</span> <span class="nc">BlogCategoriesListView</span><span class="p">(</span><span class="n">_PageTitleMixIn</span><span class="p">,</span> <span class="n">ListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays the list of categories that have posts in them</span>
+
+<span class="sd">    Template: ``blog_categories_list.html``</span>
+
+<span class="sd">    Specific context variables:</span>
+
+<span class="sd">    - ``categories``</span>
+<span class="sd">    - ``page_title``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/blog_categories_list.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">CURRENT_SKIN</span><span class="p">)</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">non_empty</span><span class="p">()</span>
+    <span class="n">page_title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Categories&#39;</span><span class="p">)</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;categories&#39;</span></div>
+
+
+<div class="viewcode-block" id="BlogPostView"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogPostView">[docs]</a><span class="k">class</span> <span class="nc">BlogPostView</span><span class="p">(</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays a blog post page</span>
+
+<span class="sd">    Template: ``blog_post.html``</span>
+
+<span class="sd">    Specific context variable: ``post``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/blog_post.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">CURRENT_SKIN</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;post&#39;</span>
+    <span class="n">query_pk_and_slug</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BlogPostView.get_object"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogPostView.get_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prevent non-authenticated users from viewing unpublished posts</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">queryset</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">is_published</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="n">Http404</span>
+        <span class="k">return</span> <span class="n">post</span></div></div>
+
+
+<div class="viewcode-block" id="BlogArhiveView"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogArhiveView">[docs]</a><span class="k">class</span> <span class="nc">BlogArhiveView</span><span class="p">(</span><span class="n">_PageTitleMixIn</span><span class="p">,</span> <span class="n">ListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays the blog archive by years and months</span>
+
+<span class="sd">    Template: ``blog_archive.html``</span>
+
+<span class="sd">    Specific context variables:</span>
+
+<span class="sd">    - ``months`` -- the list of class:`datetime.data` objects representing months</span>
+<span class="sd">    - ``page_title``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/blog_archive.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">CURRENT_SKIN</span><span class="p">)</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">()</span><span class="o">.</span><span class="n">dates</span><span class="p">(</span><span class="s1">&#39;date_published&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;DESC&#39;</span><span class="p">)</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;months&#39;</span>
+    <span class="n">page_title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Blog Archive&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BlogMonthArchiveView"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogMonthArchiveView">[docs]</a><span class="k">class</span> <span class="nc">BlogMonthArchiveView</span><span class="p">(</span><span class="n">_PageTitleMixIn</span><span class="p">,</span> <span class="n">_PostsListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays the list of posts by year and month</span>
+
+<span class="sd">    Template: ``blog_posts_list.html``</span>
+
+<span class="sd">    Specific context variables:</span>
+
+<span class="sd">    - ``posts``</span>
+<span class="sd">    - ``page_title``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="BlogMonthArchiveView.get_queryset"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogMonthArchiveView.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">])</span>
+        <span class="n">month</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Blog Archive, </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format_date</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;F Y&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">date_published__year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">date_published__month</span><span class="o">=</span><span class="n">month</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="BlogPostSearchView"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogPostSearchView">[docs]</a><span class="k">class</span> <span class="nc">BlogPostSearchView</span><span class="p">(</span><span class="n">SearchView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays the search page</span>
+
+<span class="sd">    Template: ``blog_search.html``</span>
+
+<span class="sd">    Specific context variables: none.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/blog_search.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">CURRENT_SKIN</span><span class="p">)</span>
+    <span class="n">paginate_by</span> <span class="o">=</span> <span class="mi">10</span>
+
+<div class="viewcode-block" id="BlogPostSearchView.get_queryset"><a class="viewcode-back" href="../../_autosummary/blog.views.html#blog.views.BlogPostSearchView.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_queryset</span><span class="p">()</span><span class="o">.</span><span class="n">highlight</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../skins.html">Skins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps.html">Roman’s Blog Applications</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

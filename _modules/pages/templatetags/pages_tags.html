@@ -1,0 +1,162 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pages.templatetags.pages_tags &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pages.templatetags.pages_tags</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding: utf-8</span>
+<span class="c1"># Module: page_tags</span>
+<span class="c1"># Created on: 19.11.2015</span>
+<span class="c1"># Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">django</span> <span class="k">import</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="k">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="k">import</span> <span class="n">MenuLink</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="get_pages_menu_links"><a class="viewcode-back" href="../../../_autosummary/pages.templatetags.pages_tags.html#pages.templatetags.pages_tags.get_pages_menu_links">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<span class="k">def</span> <span class="nf">get_pages_menu_links</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple tag</span>
+
+<span class="sd">    :return: menu links that have attached pages</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">MenuLink</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">have_pages</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="page_json_ld"><a class="viewcode-back" href="../../../_autosummary/pages.templatetags.pages_tags.html#pages.templatetags.pages_tags.page_json_ld">[docs]</a><span class="nd">@register</span><span class="o">.</span><span class="n">inclusion_tag</span><span class="p">(</span><span class="s1">&#39;common_content/json-ld.html&#39;</span><span class="p">,</span> <span class="n">takes_context</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">page_json_ld</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders JSON-LD for a page</span>
+
+<span class="sd">    :param context: parent template context</span>
+<span class="sd">    :type context: dict</span>
+<span class="sd">    :return: context for json-ld template</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">site_url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">://</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_host</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">featured_image_url</span> <span class="o">=</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;menu_link&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">featured_image</span><span class="o">.</span><span class="n">url</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">featured_image_url</span> <span class="o">=</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">settings</span><span class="o">.</span><span class="n">DEFAULT_FEATURED_IMAGE</span>
+    <span class="n">json_ld</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;@context&#39;</span><span class="p">:</span> <span class="s1">&#39;http://schema.org&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;WebPage&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;menu_link&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">site_url</span> <span class="o">+</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;menu_link&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">meta_description</span><span class="p">,</span>
+        <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;imageObject&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">featured_image_url</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;json_ld&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_ld</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)}</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../skins.html">Skins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apps.html">Roman’s Blog Applications</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

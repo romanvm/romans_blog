@@ -1,0 +1,223 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>blog.models &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="blog.views" href="blog.views.html" />
+    <link rel="prev" title="Blog Application" href="../blog.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-blog.models">
+<span id="blog-models"></span><h1>blog.models<a class="headerlink" href="#module-blog.models" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#blog.models.Category" title="blog.models.Category"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Category</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Represents a blog posts category</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#blog.models.Post" title="blog.models.Post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Post</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Represents a blog post</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="blog.models.CategoryQuerySet">
+<em class="property">class </em><code class="descclassname">blog.models.</code><code class="descname">CategoryQuerySet</code><span class="sig-paren">(</span><em>model=None</em>, <em>query=None</em>, <em>using=None</em>, <em>hints=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#CategoryQuerySet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.CategoryQuerySet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.query.QuerySet</span></code></a></p>
+<p>Custom QuerySet for Categories</p>
+<dl class="method">
+<dt id="blog.models.CategoryQuerySet.non_empty">
+<code class="descname">non_empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#CategoryQuerySet.non_empty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.CategoryQuerySet.non_empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Categories that have posts</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="blog.models.CategoryQuerySet.ordered_by_post_count">
+<code class="descname">ordered_by_post_count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#CategoryQuerySet.ordered_by_post_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.CategoryQuerySet.ordered_by_post_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the generator of Categories ordered by their post count</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.models.Category">
+<em class="property">class </em><code class="descclassname">blog.models.</code><code class="descname">Category</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#Category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.Category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Represents a blog posts category</p>
+<dl class="exception">
+<dt id="blog.models.Category.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#blog.models.Category.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="blog.models.Category.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#blog.models.Category.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.models.PostQuerySet">
+<em class="property">class </em><code class="descclassname">blog.models.</code><code class="descname">PostQuerySet</code><span class="sig-paren">(</span><em>model=None</em>, <em>query=None</em>, <em>using=None</em>, <em>hints=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#PostQuerySet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.PostQuerySet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.query.QuerySet</span></code></a></p>
+<p>Custom QuerySet for Posts</p>
+<dl class="method">
+<dt id="blog.models.PostQuerySet.published">
+<code class="descname">published</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#PostQuerySet.published"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.PostQuerySet.published" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get only published posts</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="blog.models.PostQuerySet.featured">
+<code class="descname">featured</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#PostQuerySet.featured"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.PostQuerySet.featured" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get only published featured posts</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.models.Post">
+<em class="property">class </em><code class="descclassname">blog.models.</code><code class="descname">Post</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#Post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.Post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Represents a blog post</p>
+<dl class="method">
+<dt id="blog.models.Post.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/models.html#Post.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.models.Post.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the current instance. Override this in a subclass if you want to
+control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="blog.models.Post.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#blog.models.Post.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="blog.models.Post.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#blog.models.Post.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../skins.html">Skins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../apps.html">Roman’s Blog Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../blog.html">Blog Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages.html">Pages Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cerulean_skin.html">Cerulean Skin Application</a></li>
+</ul>
+</li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../apps.html">Roman’s Blog Applications</a><ul>
+  <li><a href="../blog.html">Blog Application</a><ul>
+      <li>Previous: <a href="../blog.html" title="previous chapter">Blog Application</a></li>
+      <li>Next: <a href="blog.views.html" title="next chapter">blog.views</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

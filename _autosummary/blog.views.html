@@ -1,0 +1,283 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>blog.views &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="blog.templatetags.blog_tags" href="blog.templatetags.blog_tags.html" />
+    <link rel="prev" title="blog.models" href="blog.models.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-blog.views">
+<span id="blog-views"></span><h1>blog.views<a class="headerlink" href="#module-blog.views" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#blog.views.BlogArhiveView" title="blog.views.BlogArhiveView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlogArhiveView</span></code></a>(**kwargs)</td>
+<td>Displays the blog archive by years and months</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#blog.views.BlogCategoriesListView" title="blog.views.BlogCategoriesListView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlogCategoriesListView</span></code></a>(**kwargs)</td>
+<td>Displays the list of categories that have posts in them</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#blog.views.BlogCategoryView" title="blog.views.BlogCategoryView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlogCategoryView</span></code></a>(**kwargs)</td>
+<td>Displays the list of posts in a given category</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#blog.views.BlogFeaturedPostsView" title="blog.views.BlogFeaturedPostsView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlogFeaturedPostsView</span></code></a>(**kwargs)</td>
+<td>Displays the list of featured posts</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#blog.views.BlogHomeView" title="blog.views.BlogHomeView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlogHomeView</span></code></a>(**kwargs)</td>
+<td>Displays the list of all published posts starting from the recent.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#blog.views.BlogMonthArchiveView" title="blog.views.BlogMonthArchiveView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlogMonthArchiveView</span></code></a>(**kwargs)</td>
+<td>Displays the list of posts by year and month</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#blog.views.BlogPostSearchView" title="blog.views.BlogPostSearchView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlogPostSearchView</span></code></a>(**kwargs)</td>
+<td>Displays the search page</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#blog.views.BlogPostView" title="blog.views.BlogPostView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlogPostView</span></code></a>(**kwargs)</td>
+<td>Displays a blog post page</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="blog.views.BlogHomeView">
+<em class="property">class </em><code class="descclassname">blog.views.</code><code class="descname">BlogHomeView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogHomeView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogHomeView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PostsListView</span></code></p>
+<p>Displays the list of all published posts starting from the recent.</p>
+<p>Template: <code class="docutils literal notranslate"><span class="pre">blog_posts_list.html</span></code></p>
+<p>Specific context variable: <code class="docutils literal notranslate"><span class="pre">posts</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.views.BlogFeaturedPostsView">
+<em class="property">class </em><code class="descclassname">blog.views.</code><code class="descname">BlogFeaturedPostsView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogFeaturedPostsView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogFeaturedPostsView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PageTitleMixIn</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PostsListView</span></code></p>
+<p>Displays the list of featured posts</p>
+<p>Template: <code class="docutils literal notranslate"><span class="pre">blog_posts_list.html</span></code></p>
+<p>Specific context variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">posts</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">page_title</span></code></li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.views.BlogCategoryView">
+<em class="property">class </em><code class="descclassname">blog.views.</code><code class="descname">BlogCategoryView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogCategoryView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogCategoryView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PageTitleMixIn</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PostsListView</span></code></p>
+<p>Displays the list of posts in a given category</p>
+<p>Template: <code class="docutils literal notranslate"><span class="pre">blog_posts_list.html</span></code></p>
+<p>Specific context variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">posts</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">page_title</span></code></li>
+</ul>
+<dl class="method">
+<dt id="blog.views.BlogCategoryView.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogCategoryView.get_queryset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogCategoryView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of items for this view.</p>
+<p>The return value must be an iterable and may be an instance of
+<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.views.BlogCategoriesListView">
+<em class="property">class </em><code class="descclassname">blog.views.</code><code class="descname">BlogCategoriesListView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogCategoriesListView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogCategoriesListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PageTitleMixIn</span></code>, <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-display/#django.views.generic.list.ListView" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.list.ListView</span></code></a></p>
+<p>Displays the list of categories that have posts in them</p>
+<p>Template: <code class="docutils literal notranslate"><span class="pre">blog_categories_list.html</span></code></p>
+<p>Specific context variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">categories</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">page_title</span></code></li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.views.BlogPostView">
+<em class="property">class </em><code class="descclassname">blog.views.</code><code class="descname">BlogPostView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogPostView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogPostView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-display/#django.views.generic.detail.DetailView" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.detail.DetailView</span></code></a></p>
+<p>Displays a blog post page</p>
+<p>Template: <code class="docutils literal notranslate"><span class="pre">blog_post.html</span></code></p>
+<p>Specific context variable: <code class="docutils literal notranslate"><span class="pre">post</span></code></p>
+<dl class="attribute">
+<dt id="blog.views.BlogPostView.model">
+<code class="descname">model</code><a class="headerlink" href="#blog.views.BlogPostView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="blog.models.html#blog.models.Post" title="blog.models.Post"><code class="xref py py-class docutils literal notranslate"><span class="pre">blog.models.Post</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="blog.views.BlogPostView.get_object">
+<code class="descname">get_object</code><span class="sig-paren">(</span><em>queryset=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogPostView.get_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogPostView.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prevent non-authenticated users from viewing unpublished posts</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.views.BlogArhiveView">
+<em class="property">class </em><code class="descclassname">blog.views.</code><code class="descname">BlogArhiveView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogArhiveView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogArhiveView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PageTitleMixIn</span></code>, <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-display/#django.views.generic.list.ListView" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.list.ListView</span></code></a></p>
+<p>Displays the blog archive by years and months</p>
+<p>Template: <code class="docutils literal notranslate"><span class="pre">blog_archive.html</span></code></p>
+<p>Specific context variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">months</span></code> – the list of class:<cite>datetime.data</cite> objects representing months</li>
+<li><code class="docutils literal notranslate"><span class="pre">page_title</span></code></li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.views.BlogMonthArchiveView">
+<em class="property">class </em><code class="descclassname">blog.views.</code><code class="descname">BlogMonthArchiveView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogMonthArchiveView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogMonthArchiveView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PageTitleMixIn</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">blog.views._PostsListView</span></code></p>
+<p>Displays the list of posts by year and month</p>
+<p>Template: <code class="docutils literal notranslate"><span class="pre">blog_posts_list.html</span></code></p>
+<p>Specific context variables:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">posts</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">page_title</span></code></li>
+</ul>
+<dl class="method">
+<dt id="blog.views.BlogMonthArchiveView.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogMonthArchiveView.get_queryset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogMonthArchiveView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of items for this view.</p>
+<p>The return value must be an iterable and may be an instance of
+<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="blog.views.BlogPostSearchView">
+<em class="property">class </em><code class="descclassname">blog.views.</code><code class="descname">BlogPostSearchView</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogPostSearchView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogPostSearchView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">haystack.generic_views.SearchView</span></code></p>
+<p>Displays the search page</p>
+<p>Template: <code class="docutils literal notranslate"><span class="pre">blog_search.html</span></code></p>
+<p>Specific context variables: none.</p>
+<dl class="method">
+<dt id="blog.views.BlogPostSearchView.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/blog/views.html#BlogPostSearchView.get_queryset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blog.views.BlogPostSearchView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of items for this view.</p>
+<p>The return value must be an iterable and may be an instance of
+<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../skins.html">Skins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../apps.html">Roman’s Blog Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../blog.html">Blog Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages.html">Pages Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cerulean_skin.html">Cerulean Skin Application</a></li>
+</ul>
+</li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../apps.html">Roman’s Blog Applications</a><ul>
+  <li><a href="../blog.html">Blog Application</a><ul>
+      <li>Previous: <a href="blog.models.html" title="previous chapter">blog.models</a></li>
+      <li>Next: <a href="blog.templatetags.blog_tags.html" title="next chapter">blog.templatetags.blog_tags</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

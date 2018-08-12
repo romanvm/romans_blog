@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pages.models &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pages.views" href="pages.views.html" />
+    <link rel="prev" title="Pages Application" href="../pages.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pages.models">
+<span id="pages-models"></span><h1>pages.models<a class="headerlink" href="#module-pages.models" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#pages.models.MenuLink" title="pages.models.MenuLink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MenuLink</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Represents a link in the site navigation menu</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pages.models.Page" title="pages.models.Page"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Page</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Represents a rich-text page that is not a blog post, e.g ‘About me’</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pages.models.Page">
+<em class="property">class </em><code class="descclassname">pages.models.</code><code class="descname">Page</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pages/models.html#Page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pages.models.Page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Represents a rich-text page that is not a blog post, e.g ‘About me’</p>
+<dl class="exception">
+<dt id="pages.models.Page.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#pages.models.Page.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="pages.models.Page.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#pages.models.Page.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pages.models.MenuLinkQuerySet">
+<em class="property">class </em><code class="descclassname">pages.models.</code><code class="descname">MenuLinkQuerySet</code><span class="sig-paren">(</span><em>model=None</em>, <em>query=None</em>, <em>using=None</em>, <em>hints=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pages/models.html#MenuLinkQuerySet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pages.models.MenuLinkQuerySet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.query.QuerySet</span></code></a></p>
+<p>Custom QuerySet for MenuLinks</p>
+<dl class="method">
+<dt id="pages.models.MenuLinkQuerySet.have_pages">
+<code class="descname">have_pages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pages/models.html#MenuLinkQuerySet.have_pages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pages.models.MenuLinkQuerySet.have_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get MenuLinks that have attached pages</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pages.models.MenuLink">
+<em class="property">class </em><code class="descclassname">pages.models.</code><code class="descname">MenuLink</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pages/models.html#MenuLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pages.models.MenuLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Represents a link in the site navigation menu</p>
+<dl class="exception">
+<dt id="pages.models.MenuLink.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#pages.models.MenuLink.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ObjectDoesNotExist" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="pages.models.MenuLink.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#pages.models.MenuLink.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.MultipleObjectsReturned" title="(in Django v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../skins.html">Skins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../apps.html">Roman’s Blog Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blog.html">Blog Application</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pages.html">Pages Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cerulean_skin.html">Cerulean Skin Application</a></li>
+</ul>
+</li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../apps.html">Roman’s Blog Applications</a><ul>
+  <li><a href="../pages.html">Pages Application</a><ul>
+      <li>Previous: <a href="../pages.html" title="previous chapter">Pages Application</a></li>
+      <li>Next: <a href="pages.views.html" title="next chapter">pages.views</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

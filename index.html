@@ -1,0 +1,170 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Roman’s Blog &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deployment" href="deploy.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="roman-s-blog">
+<h1>Roman’s Blog<a class="headerlink" href="#roman-s-blog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-mini-cms-for-a-blog-oriented-web-site">
+<h2>A mini-CMS for a blog-oriented web-site<a class="headerlink" href="#a-mini-cms-for-a-blog-oriented-web-site" title="Permalink to this headline">¶</a></h2>
+<p><strong>Roman’s Blog</strong> is a mini-CMS for a blog-oriented web-site that I’ve developed myself as my <a class="reference external" href="https://www.djangoproject.com/">Django</a>
+learning project. Despite being a learning project, I’ve tried to make this CMS suitable for real-life usage.
+You can see it in action <a class="reference external" href="https://romanvm.pythonanywhere.com/">here</a>.</p>
+</div>
+<div class="section" id="main-features">
+<h2>Main Features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Post categories and “Featured” posts</strong>: A post can (optionally) be assigned to multiple categories or marked as
+“Featured” to show it in a separate site section.</li>
+<li><strong>Disqus-powered comments and social share links</strong> (Facebook, Linked-In, Twitter and Reddit).</li>
+<li><strong>Pages application</strong> for creating “plain” pages that are not part of the blog and accessible via
+their own links in the site navigation menu, e.g. “About Us”, “Contacts”, etc.</li>
+<li><strong>WYSIWYG rich content authoring</strong> with TinyMCE 4 editor in admin interface.</li>
+<li><strong>Pluggable skins</strong>: the frond-end layer is completely separated from the core code, allowing to quickly and simply
+change the site design by switching to another skin. A skin is a Django app that contains all necessary templates
+with static files (CSS, JS, fonts etc.) and (optionally) necessary template tags to render content within
+the skin context. Basically, any html site template with 1-level navigation menu can be turned into a skin.
+The skin also provides a customised preview template for TinyMCE editor to preview the authored content with the skin’s
+styles applied.</li>
+<li><strong>Full-text site search</strong> with <a class="reference external" href="http://haystacksearch.org/">django-haystack</a> and <a class="reference external" href="https://pypi.python.org/pypi/Whoosh/">Whoosh</a>.</li>
+<li><strong>RSS and Atom feeds</strong> for recent blog posts.</li>
+<li><strong>Google Analytics support</strong>.</li>
+<li><strong>sitemap.xml and robots.txt</strong>.</li>
+<li><strong>Localization-ready</strong>: all interface strings, both in Python and templates, are marked as translatable.</li>
+</ul>
+<p><strong>License</strong>: <a class="reference external" href="http://www.gnu.org/licenses/gpl-3.0.en.html">GPL v.3</a></p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#local-machine">Local Machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy.html#vps">VPS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#publishing-posts">Publishing Posts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#adding-pages">Adding Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="skins.html">Skins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apps.html">Roman’s Blog Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blog.html">Blog Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages.html">Pages Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cerulean_skin.html">Cerulean Skin Application</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skins.html">Skins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apps.html">Roman’s Blog Applications</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="deploy.html" title="next chapter">Deployment</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

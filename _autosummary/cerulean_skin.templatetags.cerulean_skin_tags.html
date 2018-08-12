@@ -1,0 +1,172 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>cerulean_skin.templatetags.cerulean_skin_tags &#8212; Roman&#39;s Blog 2.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Cerulean Skin Application" href="../cerulean_skin.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-cerulean_skin.templatetags.cerulean_skin_tags">
+<span id="cerulean-skin-templatetags-cerulean-skin-tags"></span><h1>cerulean_skin.templatetags.cerulean_skin_tags<a class="headerlink" href="#module-cerulean_skin.templatetags.cerulean_skin_tags" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#cerulean_skin.templatetags.cerulean_skin_tags.render_post_categories" title="cerulean_skin.templatetags.cerulean_skin_tags.render_post_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">render_post_categories</span></code></a>(post)</td>
+<td>Filter</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#cerulean_skin.templatetags.cerulean_skin_tags.truncate_post" title="cerulean_skin.templatetags.cerulean_skin_tags.truncate_post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">truncate_post</span></code></a>(post)</td>
+<td>Filter</td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="cerulean_skin.templatetags.cerulean_skin_tags.render_post_categories">
+<code class="descclassname">cerulean_skin.templatetags.cerulean_skin_tags.</code><code class="descname">render_post_categories</code><span class="sig-paren">(</span><em>post</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cerulean_skin/templatetags/cerulean_skin_tags.html#render_post_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cerulean_skin.templatetags.cerulean_skin_tags.render_post_categories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>post</strong> – blog post</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">rendered comma-separated list of post categories enclosed in as &lt;a&gt; tags</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cerulean_skin.templatetags.cerulean_skin_tags.truncate_post">
+<code class="descclassname">cerulean_skin.templatetags.cerulean_skin_tags.</code><code class="descname">truncate_post</code><span class="sig-paren">(</span><em>post</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cerulean_skin/templatetags/cerulean_skin_tags.html#truncate_post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cerulean_skin.templatetags.cerulean_skin_tags.truncate_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter</p>
+<p>Truncate a Post text to a page separator.
+The separator is inserted by TinyMCE <code class="docutils literal notranslate"><span class="pre">pagebreak</span></code> plugin
+that is used to emulate “blog post cut” feature.</p>
+<p>Only the 1st separator is taken into account, other separators, if any,
+are ignored.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>post</strong> – blog post</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">properly terminated truncated post</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Roman's Blog</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=romans_blog&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../skins.html">Skins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../apps.html">Roman’s Blog Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blog.html">Blog Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages.html">Pages Application</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../cerulean_skin.html">Cerulean Skin Application</a></li>
+</ul>
+</li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../apps.html">Roman’s Blog Applications</a><ul>
+  <li><a href="../cerulean_skin.html">Cerulean Skin Application</a><ul>
+      <li>Previous: <a href="../cerulean_skin.html" title="previous chapter">Cerulean Skin Application</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/romans_blog" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
