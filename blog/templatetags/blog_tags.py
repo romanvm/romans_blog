@@ -159,6 +159,10 @@ def blog_json_ld(context):
         context['request'].scheme,
         context['request'].get_host()
     )
+    try:
+        site_logo_url = site_url + context['site_config'].site_logo.url
+    except AttributeError:
+        site_logo_url = ''
     json_ld = {
         '@context': 'http://schema.org',
         '@type': 'Blog',
@@ -170,7 +174,7 @@ def blog_json_ld(context):
             'name': context['site_config'].site_name,
             'logo': {
                 '@type': 'imageObject',
-                'url': site_url + context['site_config'].site_logo.url
+                'url': site_logo_url
             }
         }
     }
@@ -191,6 +195,14 @@ def blog_post_json_ld(context):
         context['request'].scheme,
         context['request'].get_host()
     )
+    try:
+        featured_image_url = site_url + context['post'].featured_image.url
+    except AttributeError:
+        featured_image_url = ''
+    try:
+        site_logo_url = site_url + context['site_config'].site_logo.url
+    except AttributeError:
+        site_logo_url = ''
     json_ld = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -200,16 +212,15 @@ def blog_post_json_ld(context):
         'dateModified': context['post'].last_updated.strftime('%Y-%m-%d'),
         'image': {
             '@type': 'imageObject',
-            'url': site_url + context['post'].featured_image.url,
-            'height': context['post'].featured_image.height,
-            'width': context['post'].featured_image.width
+            'url': featured_image_url,
         },
         'publisher': {
             '@type': 'Organization',
             'name': context['site_config'].site_name,
             'logo': {
                 '@type': 'imageObject',
-                'url': site_url + context['site_config'].site_logo.url}
+                'url': site_logo_url
+            }
 
         },
         'author': {

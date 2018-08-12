@@ -34,6 +34,10 @@ def page_json_ld(context):
         context['request'].scheme,
         context['request'].get_host()
     )
+    try:
+        featured_image_url = site_url + context['menu_link'].page.featured_image.url
+    except AttributeError:
+        featured_image_url = ''
     json_ld = {
         '@context': 'http://schema.org',
         '@type': 'WebPage',
@@ -42,9 +46,7 @@ def page_json_ld(context):
         'description': context['menu_link'].page.meta_description,
         'image': {
             '@type': 'imageObject',
-            'url': site_url + context['menu_link'].page.featured_image.url,
-            'height': context['menu_link'].page.featured_image.height,
-            'width': context['menu_link'].page.featured_image.width
+            'url': featured_image_url
         },
     }
     return {'json_ld': json.dumps(json_ld, indent=2)}
