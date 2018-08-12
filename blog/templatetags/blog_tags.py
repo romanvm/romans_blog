@@ -162,7 +162,7 @@ def blog_json_ld(context):
     try:
         site_logo_url = site_url + context['site_config'].site_logo.url
     except AttributeError:
-        site_logo_url = settings.DEFAULT_LOGO
+        site_logo_url = site_url + settings.DEFAULT_LOGO
     json_ld = {
         '@context': 'http://schema.org',
         '@type': 'Blog',
@@ -198,11 +198,11 @@ def blog_post_json_ld(context):
     try:
         featured_image_url = site_url + context['post'].featured_image.url
     except AttributeError:
-        featured_image_url = settings.DEFAULT_FEATURED_IMAGE
+        featured_image_url = site_url + settings.DEFAULT_FEATURED_IMAGE
     try:
         site_logo_url = site_url + context['site_config'].site_logo.url
     except AttributeError:
-        site_logo_url = settings.DEFAULT_LOGO
+        site_logo_url = site_url + settings.DEFAULT_LOGO
     json_ld = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
