@@ -212,6 +212,8 @@ TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS
 TINYMCE_DEFAULT_CONFIG['table_class_list'] = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
 TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
 TINYMCE_DEFAULT_CONFIG['content_css'] += getattr(skin_settings, 'CONTENT_CSS', [])
+DEFAULT_LOGO = getattr(skin_settings, 'DEFAULT_LOGO')
+DEFAULT_FEATURED_IMAGE = getattr(skin_settings, 'DEFAULT_FEATURED_IMAGE')
 
 # Haystack search settings
 

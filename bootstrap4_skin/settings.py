@@ -35,3 +35,6 @@ CONTENT_CSS = [
     staticfiles_storage.url('bootstrap4_skin/css/font-awesome-all.min.css'),
     staticfiles_storage.url('bootstrap4_skin/css/styles.css'),
 ]
+
+DEFAULT_LOGO = staticfiles_storage.url('bootstrap4_skin/img/favicon.png')
+DEFAULT_FEATURED_IMAGE = staticfiles_storage.url('bootstrap4_skin/img/featured/home.jpg')

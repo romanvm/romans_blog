@@ -5,6 +5,7 @@
 
 import json
 from django import template
+from django.conf import settings
 from ..models import MenuLink
 
 register = template.Library()
@@ -37,7 +38,7 @@ def page_json_ld(context):
     try:
         featured_image_url = site_url + context['menu_link'].page.featured_image.url
     except AttributeError:
-        featured_image_url = ''
+        featured_image_url = settings.DEFAULT_FEATURED_IMAGE
     json_ld = {
         '@context': 'http://schema.org',
         '@type': 'WebPage',
