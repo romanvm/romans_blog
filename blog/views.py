@@ -18,6 +18,9 @@ class _PostsListView(ListView):
     context_object_name = 'posts'
     paginate_by = settings.BLOG_POSTS_PAGINATE_BY
 
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('categories')
+
 
 class _PageTitleMixIn:
     """
