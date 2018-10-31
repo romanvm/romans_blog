@@ -16,7 +16,9 @@ import os
 import sys
 from importlib import import_module
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+)
 sys.path.insert(0, BASE_DIR)
 
 
@@ -36,7 +38,7 @@ SITE_ID = 1
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'filebrowser',
     'tinymce',
     'django.contrib.admin',
@@ -55,9 +57,9 @@ INSTALLED_APPS = (
     'pages',
     # 'cerulean_skin',
     'bootstrap4_skin',
-)
+]
 
-MIDDLEWARE = (
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -67,7 +69,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'common_content.middleware.maintenance_mode_middleware',
-)
+]
 
 ROOT_URLCONF = 'romans_blog.urls'
 
@@ -226,9 +228,3 @@ HAYSTACK_CONNECTIONS = {
 
 # Enable this if your server has enough power to update index on every save
 # HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-
-# Load production settings if any
-try:
-    from .local_settings import *
-except ImportError:
-    pass
