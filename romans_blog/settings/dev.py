@@ -18,7 +18,7 @@ DATABASES = {
             'HOST': os.getenv('DB_HOST') or 'localhost',
             'OPTIONS': {
                 'charset': 'utf8mb4',
-                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES';",
                 'isolation_level': 'read committed'
             },
             'TEST': {
@@ -27,3 +27,11 @@ DATABASES = {
             }
         }
     }
+
+if os.getenv('CI'):
+    DATABASES['default']['OPTIONS']['init_command'] += \
+        "SET GLOBAL default_storage_engine = innodb," \
+        "innodb_file_format = Barracuda," \
+        "innodb_file_per_table = ON" \
+        "innodb_large_prefix = 1," \
+        "innodb_default_row_format = dynamic",

@@ -10,7 +10,7 @@ addons:
 services:
   - mysql
 env:
-  - DB_USER=travis
+  - DB_USER=root
 before_install:
   - pip install codecov
 install:
