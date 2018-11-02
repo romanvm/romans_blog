@@ -19,6 +19,8 @@ before_install:
 install:
   - pip install -q -r requirements-dev.txt
 script: coverage run manage.py test blog pages common_content --keepdb
-after_success: codecov
+after_success:
+  - coverage report
+  - codecov
 notifications:
   email: false
