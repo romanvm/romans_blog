@@ -1,0 +1,6 @@
+[run]
+include = blog/*
+          common_content/*
+          pages/*
+
+omit = */tests_*.py

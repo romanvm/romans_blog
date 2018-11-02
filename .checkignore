@@ -1,6 +1,0 @@
-tinymce/*
-**/tests*
-romans_blog/settings.py
-manage.py
-populate_db.py
-update_index.py
