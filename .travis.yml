@@ -12,7 +12,7 @@ services:
 env:
   - DB_USER=root
 before_install:
-  - pip install codecov
+  - pip install -q codecov
 install:
   - pip install -q -r requirements-dev.txt
 script: coverage run manage.py test blog pages common_content
