@@ -15,7 +15,7 @@ before_install:
   - pip install -q codecov
   - mysql -u root -e "SET GLOBAL default_storage_engine=innodb,innodb_file_format=Barracuda;"
   - mysql -u root -e "SET GLOBAL innodb_file_per_table=ON,innodb_large_prefix=1;"
-  - mysql -u root -e "CREATE DATABASE test_romans_blog ROW_FORMAT=DYNAMIC;"
+  - mysql -u root -e "CREATE DATABASE test_romans_blog CHARACTER SET utf8 COLLATE utf8_general_ci;"
 install:
   - pip install -q -r requirements-dev.txt
 script: coverage run manage.py test blog pages common_content --keepdb

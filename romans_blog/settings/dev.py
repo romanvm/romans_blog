@@ -17,13 +17,13 @@ DATABASES = {
             'PASSWORD': os.getenv('DB_PASS') or '',
             'HOST': os.getenv('DB_HOST') or 'localhost',
             'OPTIONS': {
-                'charset': 'utf8mb4',
+                'charset': 'utf8',
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
                 'isolation_level': 'read committed'
             },
             'TEST': {
-                'CHARSET': 'utf8mb4',
-                'COLLATION': 'utf8mb4_unicode_ci'
+                'CHARSET': 'utf8',
+                'COLLATION': 'utf8_general_ci;'
             }
         }
     }
