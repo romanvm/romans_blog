@@ -32,6 +32,6 @@ if os.getenv('CI'):
     DATABASES['default']['OPTIONS']['init_command'] += \
         "SET GLOBAL default_storage_engine = innodb," \
         "innodb_file_format = Barracuda," \
-        "innodb_file_per_table = ON" \
+        "innodb_file_per_table = ON," \
         "innodb_large_prefix = 1," \
-        "innodb_default_row_format = dynamic",
+        "innodb_default_row_format = dynamic"
