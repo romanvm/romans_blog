@@ -33,4 +33,4 @@ if os.getenv('CI'):
         "SET GLOBAL default_storage_engine = innodb," \
         "innodb_file_format = Barracuda," \
         "innodb_file_per_table = ON," \
-        "innodb_large_prefix = 1,"
+        "innodb_large_prefix = 1"
