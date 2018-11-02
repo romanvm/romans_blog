@@ -27,11 +27,3 @@ DATABASES = {
             }
         }
     }
-
-if os.getenv('CI'):
-    DATABASES['default']['OPTIONS']['init_command'] += \
-        ",row_format=DYNAMIC;" \
-        "SET GLOBAL default_storage_engine = innodb," \
-        "innodb_file_format = Barracuda," \
-        "innodb_file_per_table = ON," \
-        "innodb_large_prefix = 1"
