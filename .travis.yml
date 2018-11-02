@@ -1,7 +1,3 @@
-branches:
-  only:
-    - master
-    - develop
 language: python
 python:
   - "3.5"
@@ -11,19 +7,14 @@ addons:
   apt:
     packages:
      - enchant
+services:
+  - mysql
+env:
+  - DB_USER=travis
 before_install:
   - pip install codecov
-  - pip install Sphinx
-install: pip install -r requirements.txt
+install: pip install -q -r requirements.txt
 script: coverage run manage.py test blog pages common_content
 after_success: codecov
-before_deploy: wget https://raw.githubusercontent.com/romanvm/travis_scripts/master/publish_docs.py
-deploy:
-  provider: script
-  skip_cleanup: true
-  script: python publish_docs.py
-  on:
-    python: "3.6"
-    branch: master
 notifications:
   email: false
