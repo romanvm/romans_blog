@@ -61,7 +61,7 @@ class Post(models.Model):
     """
     Represents a blog post
     """
-    title = models.CharField(verbose_name=_('Title'), max_length=200, db_index=True)
+    title = models.CharField(verbose_name=_('Title'), max_length=200)
     date_published = models.DateField(verbose_name=_('Date Published'), blank=True, null=True)
     last_updated = models.DateTimeField(verbose_name=_('Last Updated'), auto_now=True)
     # Translators: The last part of a web-page URL, usually derives from the page title, e.g. /about-us/
