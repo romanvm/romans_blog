@@ -13,9 +13,9 @@ env:
   - DB_USER=root
 before_install:
   - pip install -q codecov
-  - mysql -u root -c "SET GLOBAL default_storage_engine=innodb,innodb_file_format=Barracuda;"
-  - mysql -u root -c "SET GLOBAL innodb_file_per_table=ON,innodb_large_prefix=1;"
-  - mysql -u root -c "CREATE DATABASE test_romans_blog ROW_FORMAT=DYNAMIC;"
+  - mysql -u root -e "SET GLOBAL default_storage_engine=innodb,innodb_file_format=Barracuda;"
+  - mysql -u root -e "SET GLOBAL innodb_file_per_table=ON,innodb_large_prefix=1;"
+  - mysql -u root -e "CREATE DATABASE test_romans_blog ROW_FORMAT=DYNAMIC;"
 install:
   - pip install -q -r requirements-dev.txt
 script: coverage run manage.py test blog pages common_content --keepdb
