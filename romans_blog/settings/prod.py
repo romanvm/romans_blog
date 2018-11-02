@@ -21,7 +21,7 @@ try:
             'PASSWORD': os.environ['DB_PASS'],
             'HOST': os.environ['DB_HOST'],
             'OPTIONS': {
-                'charset': 'utf8mb4',
+                'charset': 'utf8',
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
                 'isolation_level': 'read committed'
             },
