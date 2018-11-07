@@ -20,6 +20,7 @@ try:
             'USER': os.environ['DB_USER'],
             'PASSWORD': os.environ['DB_PASS'],
             'HOST': os.environ['DB_HOST'],
+            'CONN_MAX_AGE': 60,
             'OPTIONS': {
                 'charset': 'utf8',
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
