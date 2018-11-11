@@ -11,3 +11,4 @@ pyenchant==2.0.0
 pytz==2018.5
 Whoosh==2.7.4
 mysqlclient
+django-dotenv
