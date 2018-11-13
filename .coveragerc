@@ -2,5 +2,7 @@
 include = blog/*
           common_content/*
           pages/*
+          bootstrap4_skin/*
 
 omit = */tests_*.py
+       */migrations/*
