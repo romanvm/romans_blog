@@ -14,7 +14,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import sys
-from importlib import import_module
 
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -137,7 +136,7 @@ FILEBROWSER_ADMIN_THUMBNAIL = 'small'
 
 # TinyMCE settings
 
-common_content = import_module('common_content')
+common_content_base_url = STATIC_URL + 'common_content/'
 
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'modern',
@@ -196,25 +195,42 @@ TINYMCE_DEFAULT_CONFIG = {
         {'text': 'reStructuredText', 'value': 'rest'},
         {'text': 'Plain Text', 'value': 'none'},
     ],
-    'content_css': [common_content.base_url + 'css/prism.css'],
+    'content_css': [common_content_base_url + 'css/prism.css'],
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_ADDITIONAL_JS_URLS = [
-    common_content.base_url + 'js/prism.min.js',
-    common_content.base_url + 'js/prism-django.min.js'
+    common_content_base_url + 'js/prism.min.js',
+    common_content_base_url + 'js/prism-django.min.js'
 ]
 
-# Skin settings
+# Skin-specific settings
 
 CURRENT_SKIN = 'bootstrap4_skin'
-skin_settings = import_module('{0}.settings'.format(CURRENT_SKIN))
-BLOG_POSTS_PAGINATE_BY = getattr(skin_settings, 'BLOG_POSTS_PAGINATE_BY', 5)
-TINYMCE_DEFAULT_CONFIG['image_class_list'] = getattr(skin_settings, 'IMAGE_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['table_class_list'] = getattr(skin_settings, 'TABLE_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = getattr(skin_settings, 'TABLE_ROW_CLASS_LIST', None)
-TINYMCE_DEFAULT_CONFIG['content_css'] += getattr(skin_settings, 'CONTENT_CSS', [])
-DEFAULT_LOGO = getattr(skin_settings, 'DEFAULT_LOGO')
-DEFAULT_FEATURED_IMAGE = getattr(skin_settings, 'DEFAULT_FEATURED_IMAGE')
+BLOG_POSTS_PAGINATE_BY = 5
+TINYMCE_DEFAULT_CONFIG['image_class_list'] = [
+    {'title': 'Responsive', 'value': 'img-fluid'},
+    {'title': 'Rounded', 'value': 'img-fluid rounded'},
+    {'title': 'Thumbnail', 'value': 'img-fluid img-thumbnail'},
+]
+TINYMCE_DEFAULT_CONFIG['table_class_list'] = [
+    {'title': 'Simple', 'value': 'table'},
+    {'title': 'Bordered', 'value': 'table table-bordered'},
+    {'title': 'Striped', 'value': 'table table-striped'},
+    {'title': 'Small', 'value': 'table table-sm'},
+]
+TINYMCE_DEFAULT_CONFIG['table_row_class_list'] = [
+    {'title': 'None', 'value': ''},
+    {'title': 'Green', 'value': 'table-success'},
+    {'title': 'Red', 'value': 'table-danger'},
+    {'title': 'Blue', 'value': 'table-primary'},
+]
+TINYMCE_DEFAULT_CONFIG['content_css'] += [
+    STATIC_URL + 'bootstrap4_skin/css/bootstrap.min.css',
+    STATIC_URL + 'bootstrap4_skin/css/font-awesome-all.min.css',
+    STATIC_URL + 'bootstrap4_skin/css/styles.css',
+]
+DEFAULT_LOGO = STATIC_URL + 'bootstrap4_skin/img/favicon.png'
+DEFAULT_FEATURED_IMAGE = STATIC_URL + 'bootstrap4_skin/img/featured/home.jpg'
 
 # Haystack search settings
 
