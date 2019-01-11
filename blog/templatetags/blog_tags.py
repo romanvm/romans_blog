@@ -59,8 +59,9 @@ def get_archive_digest(months_count=6):
     :return: the list of the most recent months from the blog archive for the blog sidebar
     :rtype: :class:`SideBarObjects`
     """
-    months = Post.objects.published().dates('date_published', 'month', order='DESC')
-    more = reverse('blog:archive') if months.count() > months_count else None
+    months = Post.objects.published().dates(
+        'date_published', 'month', order='DESC')[:months_count + 1]
+    more = reverse('blog:archive') if len(months) > months_count else None
     return SideBarObjects(months[:months_count], more)
 
 
