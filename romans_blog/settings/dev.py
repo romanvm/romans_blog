@@ -23,7 +23,7 @@ DATABASES = {
             },
             'TEST': {
                 'CHARSET': 'utf8',
-                'COLLATION': 'utf8_general_ci;'
+                'COLLATION': 'utf8_general_ci'
             }
         }
     }
