@@ -2,10 +2,7 @@
 # License: GPL v.3
 
 from django.core.exceptions import ImproperlyConfigured
-from dotenv import read_dotenv
 from .base import *
-
-read_dotenv(os.path.join(BASE_DIR, '.env'))
 
 SECURE_SSL_REDIRECT = True
 

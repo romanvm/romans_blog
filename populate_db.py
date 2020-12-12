@@ -10,8 +10,13 @@ Populates the project's database with test data
 import os
 from datetime import date
 import django
+from dotenv import read_dotenv
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'romans_blog.settings')
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+
+read_dotenv(os.path.join(THIS_DIR, '.env'))
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'romans_blog.settings.dev')
 django.setup()
 
 from pages.models import MenuLink, Page
