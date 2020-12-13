@@ -209,8 +209,10 @@ def blog_post_json_ld(context):
         '@type': 'BlogPosting',
         'headline': context['post'].title,
         'description': context['post'].meta_description,
-        'datePublished': context['post'].date_published.strftime('%Y-%m-%d'),
-        'dateModified': context['post'].last_updated.strftime('%Y-%m-%d'),
+        'datePublished': (context['post'].date_published.strftime('%Y-%m-%d')
+                          if context['post'].date_published else None),
+        'dateModified': (context['post'].last_updated.strftime('%Y-%m-%d')
+                         if context['post'].last_updated else None),
         'image': {
             '@type': 'imageObject',
             'url': featured_image_url,
