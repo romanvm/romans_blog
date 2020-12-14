@@ -59,6 +59,10 @@ footer a {
   height: 20px;
 }
 
+.linked-in > span {
+  vertical-align: inherit !important;
+}
+
 /* Spoiler styles */
 .spoiler {
   border: 1px solid #e7e7e7;
