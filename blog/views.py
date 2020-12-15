@@ -122,7 +122,7 @@ class BlogPostView(DetailView):
         return post
 
 
-class BlogArhiveView(_PageTitleMixIn, ListView):
+class BlogArchiveView(_PageTitleMixIn, ListView):
     """
     Displays the blog archive by years and months
 
