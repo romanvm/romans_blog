@@ -16,6 +16,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 read_dotenv(os.path.join(BASE_DIR, '.env'))
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "romans_blog.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "romans_blog.settings.dev")
 
 application = get_wsgi_application()

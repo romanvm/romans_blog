@@ -9,7 +9,7 @@ THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 read_dotenv(os.path.join(THIS_DIR, '.env'))
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "romans_blog.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "romans_blog.settings.dev")
 
     from django.core.management import execute_from_command_line
 
