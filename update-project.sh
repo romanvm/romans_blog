@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /home/romanvm/venv35/bin/activate
+. /home/romanvm/venv36/bin/activate
 
 cd /home/romanvm/romans_blog
 
