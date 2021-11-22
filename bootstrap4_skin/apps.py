@@ -7,5 +7,5 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Bootstrap4SkinAppConfig(AppConfig):
-    name = 'boostrap4_skin'
+    name = 'bootstrap4_skin'
     verbose_name = _('Bootstrap 4 Skin')
