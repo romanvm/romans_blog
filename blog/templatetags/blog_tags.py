@@ -8,7 +8,7 @@ from collections import namedtuple
 from urllib.parse import quote_plus
 from django import template
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django.core.paginator import EmptyPage
 from ..models import Category, Post

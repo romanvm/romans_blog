@@ -4,8 +4,10 @@
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
 from datetime import date
+
 from django.test import TestCase
-from django.core.urlresolvers import reverse
+from django.urls import reverse
+
 from .models import Post, Category
 from .templatetags.blog_tags import (get_posts_digest, get_archive_digest,
                                      get_categories, get_blog_menu_links)

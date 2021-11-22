@@ -42,6 +42,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='menulink',
             name='page',
-            field=models.ForeignKey(to='pages.Page', verbose_name='Page', null=True, blank=True),
+            field=models.ForeignKey(to='pages.Page', verbose_name='Page', null=True, blank=True,
+                                    on_delete=models.CASCADE),
         ),
     ]

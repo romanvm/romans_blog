@@ -3,8 +3,9 @@
 # Created on: 19.11.2015
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
-from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.urls import reverse
+
 from .models import Page, MenuLink
 
 

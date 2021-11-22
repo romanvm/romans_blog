@@ -4,10 +4,14 @@
 # Author: Roman Miroshnychenko aka Roman V.M. (romanvm@yandex.ua)
 
 from django.conf.urls import url
+
+from .apps import BlogAppConfig
 from .feeds import RecentPostsRSSFeed, RecentPostsAtomFeed
 from .views import (BlogHomeView, BlogPostView, BlogFeaturedPostsView,
                     BlogCategoryView, BlogCategoriesListView,
                     BlogArchiveView, BlogMonthArchiveView, BlogPostSearchView)
+
+app_name = BlogAppConfig.name
 
 urlpatterns = [
     url(r'^post/(?P<slug>[\w-]+)-(?P<pk>\d+)/$', BlogPostView.as_view(), name='post'),

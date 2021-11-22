@@ -37,9 +37,9 @@ except DatabaseError:  # This is to run migrate when site_config table has not b
     pass
 
 urlpatterns = [
-    url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^admin/filebrowser/', include(site.urls[:2])),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls[:2])),
     url(r'^robots.txt$', robots_txt, name='robots'),
     url(r'^sitemap.xml$', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     url(r'^pages/', include('pages.urls', namespace='pages')),

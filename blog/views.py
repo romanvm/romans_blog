@@ -117,7 +117,7 @@ class BlogPostView(DetailView):
         Prevent non-authenticated users from viewing unpublished posts
         """
         post = super().get_object(queryset)
-        if not(post.is_published or self.request.user.is_authenticated()):
+        if not(post.is_published or self.request.user.is_authenticated):
             raise Http404
         return post
 

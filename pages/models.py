@@ -1,8 +1,8 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext as _
-from django.core.urlresolvers import reverse
-from tinymce import models as tinymce
 from filebrowser.fields import FileBrowseField
+from tinymce import models as tinymce
 
 
 class Page(models.Model):
@@ -40,7 +40,8 @@ class MenuLink(models.Model):
     """
     caption = models.CharField(verbose_name=_('Caption'), max_length=200)
     slug = models.SlugField(verbose_name=_('Slug'), max_length=200, unique=True)
-    page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True, null=True)
+    page = models.ForeignKey(Page, verbose_name=_('Page'), blank=True, null=True,
+                             on_delete=models.CASCADE)
     show_side_panel = models.BooleanField(verbose_name=_('Show side Panel'), default=False)
     position = models.PositiveIntegerField(verbose_name=_('Position'), default=0, blank=False, null=False)
     objects = MenuLinkQuerySet.as_manager()
