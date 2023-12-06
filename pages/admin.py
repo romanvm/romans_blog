@@ -1,6 +1,8 @@
-from django.contrib import admin
-from django.utils.translation import ugettext as _
 from adminsortable2.admin import SortableAdminMixin
+from django.contrib import admin
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
+
 from .models import Page, MenuLink
 
 
@@ -12,6 +14,7 @@ class PageAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     save_on_top = True
 
+    @mark_safe
     def image_thumbnail(self, obj):
         if obj.featured_image:
             return '<img src="{0}">'.format(

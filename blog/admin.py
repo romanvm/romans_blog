@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
+
 from .models import Category, Post
 
 
@@ -27,6 +29,7 @@ class PostAdmin(admin.ModelAdmin):
     list_per_page = 25
     ordering = ('is_published', '-date_published', '-last_updated')
 
+    @mark_safe
     def image_thumbnail(self, obj):
         if obj.featured_image:
             return '<img src="{0}">'.format(
